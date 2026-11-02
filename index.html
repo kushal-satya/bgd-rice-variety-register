@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bangladesh Rice Variety Register</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="wrap">
+<header class="mast">
+  <h1 data-text="title" data-inline></h1>
+  <p class="tagline" data-text="tagline" data-inline></p>
+</header>
+<nav class="views" aria-label="Views">
+  <a href="#overview" data-view="overview">Overview</a>
+  <a href="#figures" data-view="figures">Figures</a>
+  <a href="#register" data-view="register">Register</a>
+  <a href="#surveys" data-view="surveys">Surveys</a>
+  <a href="#fish" data-view="fish">Fish</a>
+  <a href="#methods" data-view="methods">Methods</a>
+  <a href="#data" data-view="data">Data and references</a>
+  <a href="#board" data-view="board" class="internal" hidden>Board contacts</a>
+</nav>
+
+<main>
+<section id="overview" data-view="overview">
+  <div class="lede" data-text="lede"></div>
+  <dl class="dsmeta">
+    <dt>Coverage</dt><dd data-text="meta-coverage" data-inline></dd>
+    <dt>Completeness</dt><dd data-text="meta-completeness" data-inline></dd>
+    <dt>Data as of</dt><dd data-text="meta-asof" data-inline></dd>
+    <dt>Version</dt><dd data-text="meta-version" data-inline></dd>
+    <dt>Unit</dt><dd data-text="meta-unit" data-inline></dd>
+  </dl>
+  <h2 data-text="brief-title" data-inline></h2>
+  <div class="prose" data-text="brief"></div>
+  <h2 data-text="guide-title" data-inline></h2>
+  <div class="prose" data-text="guide"></div>
+</section>
+
+<section id="figures" data-view="figures">
+  <div class="grid2">
+    <figure>
+      <h2 data-text="fig1-title" data-inline></h2>
+      <div class="sub" data-text="fig1-sub"></div>
+      <div class="legend">
+        <span><i class="sw" style="background:var(--s-pub)"></i>Public inbred</span>
+        <span><i class="sw hp"></i>Public hybrid</span>
+        <span><i class="sw" style="background:var(--s-pvt)"></i>Private inbred</span>
+        <span><i class="sw hv"></i>Private hybrid</span>
+      </div>
+      <svg id="f1" viewBox="0 0 640 300" role="img" aria-label="Stacked bars of rice variety approvals per year by sector and type"></svg>
+      <figcaption data-text="fig1-caption"></figcaption>
+    </figure>
+    <figure>
+      <h2 data-text="fig2-title" data-inline></h2>
+      <div class="sub" data-text="fig2-sub"></div>
+      <div class="legend" id="lg2"></div>
+      <svg id="f2" viewBox="0 0 380 300" role="img" aria-label="Stacked horizontal bars: inbred approvals per five-year period by CGIAR link"></svg>
+      <figcaption data-text="fig2-caption"></figcaption>
+    </figure>
+  </div>
+  <figure class="block">
+    <h2 data-text="fig3-title" data-inline></h2>
+    <div class="sub" data-text="fig3-sub"></div>
+    <svg id="f3" viewBox="0 0 1040 360" role="img" aria-label="Grid of inbred varieties per stated trait and decade of approval"></svg>
+    <figcaption data-text="fig3-caption"></figcaption>
+  </figure>
+</section>
+
+<section id="register" data-view="register">
+  <h2 data-text="register-title" data-inline></h2>
+  <div class="sub" data-text="register-sub"></div>
+  <div class="controls">
+    <label for="q">Search name, line or pedigree<input id="q" type="search" placeholder="e.g. dhan29, IR64, Hira, ব্রি ধান"></label>
+    <label for="fs">Sector<select id="fs"><option value="">All</option><option value="public">Public</option><option value="private">Private (companies, NGOs)</option></select></label>
+    <label for="fg">Developer<select id="fg"></select></label>
+    <label for="ft">Type<select id="ft"><option value="">All</option><option>inbred</option><option>hybrid</option></select></label>
+    <label for="ff">Stated trait<select id="ff"><option value="">All</option></select></label>
+    <label for="fc">CGIAR link<select id="fc"><option value="">All</option></select></label>
+    <span class="count" id="cnt"></span><button id="csv" type="button">Download selection (CSV)</button>
+  </div>
+  <div class="tw"><table id="tb">
+    <thead><tr>
+      <th data-k="name" scope="col">Variety</th><th data-k="developer_group" scope="col">Developer</th>
+      <th data-k="approval_date" scope="col" aria-sort="ascending">Approved</th><th data-k="approval_reference" scope="col">NSB meeting</th>
+      <th scope="col">Stated traits</th><th data-k="cgiar_role" scope="col">CGIAR</th><th scope="col">Source</th>
+    </tr></thead><tbody></tbody></table></div>
+  <div class="pager"><button id="prev" type="button">Previous</button><span id="pg"></span><button id="next" type="button">Next</button></div>
+</section>
+
+<section id="surveys" data-view="surveys">
+  <h2 data-text="surveys-title" data-inline></h2>
+  <div class="prose" data-text="surveys-intro"></div>
+  <div class="tw"><table id="cwtb" style="min-width:760px"><thead><tr>
+    <th scope="col">Code list</th><th scope="col" class="r">Codes</th><th scope="col" class="r">One register variety</th><th scope="col" class="r">Brand family</th><th scope="col" class="r">Not an approved variety</th><th scope="col" class="r">Residual category</th><th scope="col" class="r">Unmatched</th>
+  </tr></thead><tbody></tbody></table></div>
+  <p class="note" data-text="surveys-note"></p>
+</section>
+
+<section id="board" data-view="board" class="internal" hidden>
+  <h2 data-text="board-title" data-inline></h2>
+  <div class="sub" data-text="board-sub"></div>
+  <div class="controls">
+    <label for="bq">Search name, post or organisation<input id="bq" type="search" placeholder="e.g. BRRI, Director General, Mannan"></label>
+    <label for="bo">Organisation<select id="bo"><option value="">All</option></select></label>
+    <label for="bm">Meeting<select id="bm"><option value="">All</option></select></label>
+    <span class="count" id="bcnt"></span>
+  </div>
+  <div class="tw"><table id="btb" style="min-width:980px"><thead><tr>
+    <th scope="col">Meeting</th><th scope="col">Name</th><th scope="col">Designation</th><th scope="col">Organisation</th><th scope="col">Phone</th><th scope="col">E-mail</th><th scope="col">Read</th><th scope="col">Source</th>
+  </tr></thead><tbody></tbody></table></div>
+</section>
+
+<section id="fish" data-view="fish">
+  <h2 data-text="fish-title" data-inline></h2>
+  <div class="prose" data-text="fish-intro"></div>
+  <div class="block">
+    <h3>Improved strains</h3>
+    <div class="sub" data-text="fish-strains-sub"></div>
+    <div class="tw"><table id="fishtb" style="min-width:820px"><thead><tr>
+      <th scope="col">Strain</th><th scope="col">Species</th><th scope="col">Release basis</th><th scope="col">Government act</th><th scope="col">Released</th><th scope="col">CGIAR</th>
+    </tr></thead><tbody></tbody></table></div>
+  </div>
+  <div class="block">
+    <h3>Germplasm transfers and planned releases</h3>
+    <div class="sub" data-text="fish-events-sub"></div>
+    <div class="tw"><table id="fishev" style="min-width:640px"><thead><tr>
+      <th scope="col">Event</th><th scope="col">Type</th><th scope="col">Date</th><th scope="col">Developer</th><th scope="col">Note</th>
+    </tr></thead><tbody></tbody></table></div>
+  </div>
+  <div class="block">
+    <h3>Government acts on fish species and strains</h3>
+    <div class="sub" data-text="fish-acts-sub"></div>
+    <div class="tw"><table id="fishg" style="min-width:640px"><thead><tr>
+      <th scope="col">Type of act</th><th scope="col" class="r">Acts</th><th scope="col">Body</th><th scope="col">Period</th>
+    </tr></thead><tbody></tbody></table></div>
+  </div>
+  <div class="block">
+    <h3>Key acts</h3>
+    <div class="tw"><table id="fishk" style="min-width:820px"><thead><tr>
+      <th scope="col">Date</th><th scope="col">Species or strain</th><th scope="col">Act</th><th scope="col">Body</th><th scope="col">Reference</th>
+    </tr></thead><tbody></tbody></table></div>
+  </div>
+</section>
+
+<section id="methods" data-view="methods">
+  <h2 data-text="methods-title" data-inline></h2>
+  <div class="prose" data-text="methods"></div>
+  <div class="block">
+    <h3 data-text="verify-title" data-inline></h3>
+    <div class="grid2">
+      <div class="tw" style="border-bottom:0"><table id="qa1"><thead><tr><th scope="col">OCR word confidence (Tesseract, 0–100)</th><th scope="col" class="r">Pages</th><th scope="col" class="r">Values read</th></tr></thead><tbody></tbody></table></div>
+      <div class="tw" style="border-bottom:0"><table id="qa2"><thead><tr><th scope="col">How values were checked</th><th scope="col" class="r">Evidence rows</th></tr></thead><tbody></tbody></table></div>
+    </div>
+    <p class="note" id="qanote"></p>
+  </div>
+  <div class="block">
+    <h3 data-text="compl-title" data-inline></h3>
+    <div class="sub" data-text="compl-sub"></div>
+    <div class="grid2">
+      <div class="tw" style="border-bottom:0"><table id="compl"><thead><tr><th scope="col">Field</th><th scope="col" class="r">Inbred</th><th scope="col" class="r">Hybrid</th></tr></thead><tbody></tbody></table></div>
+      <div class="tw" style="border-bottom:0"><table id="confl"><thead><tr><th scope="col">Field on which sources disagree</th><th scope="col" class="r">Varieties</th><th scope="col">Most common kind of disagreement</th></tr></thead><tbody></tbody></table></div>
+    </div>
+  </div>
+</section>
+
+<section id="data" data-view="data">
+  <h2 data-text="data-title" data-inline></h2>
+  <div class="block">
+    <h3>Suggested citation</h3>
+    <div class="citation" data-text="citation"></div>
+    <div class="prose" data-text="cite-variety"></div>
+  </div>
+  <div class="block">
+    <h3>Data availability</h3>
+    <div class="prose" data-text="availability"></div>
+  </div>
+  <div class="block">
+    <h3>Files</h3>
+    <div class="tw"><table id="filetb" style="min-width:760px"><thead><tr>
+      <th scope="col">File</th><th scope="col">Contents</th><th scope="col">Unit of observation</th><th scope="col" class="r">Rows</th><th scope="col" class="r">Columns</th><th scope="col" class="r">MB</th>
+    </tr></thead><tbody></tbody></table></div>
+  </div>
+  <div class="block">
+    <h3 data-text="references-title" data-inline></h3>
+    <div class="sub" data-text="references-sub"></div>
+    <div id="reflist"></div>
+  </div>
+</section>
+</main>
+
+<footer data-text="footer"></footer>
+</div>
+<div id="tip" hidden></div>
+<script src="assets/app.js"></script>
+</body>
+</html>
