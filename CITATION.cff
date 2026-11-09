@@ -1,0 +1,49 @@
+cff-version: 1.2.0
+message: "If you use this register, please cite it as below. To cite a single variety, also give its identifier, for example RICE-BRRI_DHAN29."
+type: dataset
+title: "Bangladesh Rice Variety Register: officially approved rice varieties, with improved fish strains"
+version: 1.2.0
+# date-released: YYYY-MM-DD   (to be set by the PI on the day of the release; uncomment then)
+authors:
+  - family-names: Kumar
+    given-names: Kushal
+    affiliation: Cornell University
+    orcid: "https://orcid.org/0000-0000-0000-0000"   # placeholder: replace with the PI's ORCID before release
+repository-code: "https://github.com/kushal-satya/bgd-rice-variety-register"
+url: "https://kushal-satya.github.io/bgd-rice-variety-register/"
+license: CC-BY-4.0
+abstract: >-
+  A register of every rice variety officially approved in Bangladesh, from the first meeting of the National Seed Board in
+  1974 to its 115th meeting on 5 February 2026, with the varieties recommended before the Board existed: identifiers,
+  names in English and Bangla, developer, approval route and Board decision, gazette notification, pedigree, traits,
+  documented CGIAR link, legal status in 2026 and quality flags. Every value is traced to a page of an archived source
+  document, and every competing value is kept. Companion tables cover the Board's decisions, official variety lists,
+  improved fish strains and government acts on fish, CGIAR and literature sources, and a crosswalk to survey variety codes.
+keywords:
+  - Bangladesh
+  - rice
+  - crop varieties
+  - variety release
+  - National Seed Board
+  - seed policy
+  - CGIAR
+  - IRRI
+  - BRRI
+  - plant breeding
+  - pedigree
+  - technology adoption
+  - aquaculture
+  - fish strains
+preferred-citation:
+  type: dataset
+  title: "Bangladesh Rice Variety Register: officially approved rice varieties, with improved fish strains"
+  version: 1.2.0
+  authors:
+    - family-names: Kumar
+      given-names: Kushal
+      affiliation: Cornell University
+  publisher:
+    name: Cornell University
+  url: "https://kushal-satya.github.io/bgd-rice-variety-register/"
+  repository-code: "https://github.com/kushal-satya/bgd-rice-variety-register"
+  license: CC-BY-4.0

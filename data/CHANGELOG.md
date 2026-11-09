@@ -1,5 +1,48 @@
 # Changes between versions
 
+## Version 1.2 (November 2026)
+
+Version 1.2 follows a second review by seven reviewers (an agricultural economist, a development economist, an archivist, a data auditor, a designer, a completeness reviewer and an editor of data publications). Every judgement is recorded, with its evidence, in `00_admin/decisions_log.md` under 10 November 2026; the reviewer corrections are in `04_working/evidence_corrections_rev2.csv` and `04_working/evidence_REV2.csv`, written by `scripts/rev2_corrections.py`.
+
+### Coverage and identity
+
+- **Iratom-38 is now in the register.** The 4th meeting of the Board (18 June 1975, agenda 08.8) allowed seed of the Atomic Energy Commission's 'Iratom' rice to be distributed, the 7th meeting records that Iratom had the Board's approval, and the 14th meeting (30 March 1981) continued Iratom-24 and suspended the cultivation of Iratom-38. Iratom-38 is therefore recorded as approved in 1975 and suspended in 1981, and Iratom-24 now carries the same approval date and reference. The register has 444 varieties again (160 releases, 276 registrations, 8 recommendations before the Board; 279 hybrids and 165 inbreds), and BINA's count of 28 varieties is matched inside the register.
+- **BU Aromatic dhan2 is BU dhan2.** The name used by SPIA and HarvestPlus for a 2016 BSMRAU variety with 22 mg/kg zinc is BU dhan2, approved at the 90th meeting; it is kept as an alias, the SPIA flags are attached to BU dhan2, and the unresolved row is gone.
+- **Board decisions linked to their varieties.** The decision on 'Loknath-503' (40th meeting) is the hybrid Loknath-505; the unnamed Nipa Trading hybrid of the 67th meeting is Bumper-3; the 'NERICA mutant' that BRRI proposed at the 89th meeting, and the 92nd meeting's instruction to proceed with it as a NERICA pure line, belong to BRRI dhan82, released at the 94th meeting. The generic Iratom approval of the 4th meeting is now one decision row for each of the two Iratom varieties, so the decision table has 579 rows.
+- **Names that were never approved.** Mallika Basmati-1 (conditional decision, 67th meeting) and six hybrids deferred at the 101st, 106th and 111th meetings and never registered (Supreme hybrid dhan23, National Agricare hybrid dhan3 and dhan9, Ispahani hybrid dhan11, Mitali hybrid dhan6, Giant Agro hybrid dhan3) are listed in `bgd_rice_not_approved_or_unresolved.csv` with the decision that left them there. The Jirashail row no longer carries the text of an unrelated hybrid decision.
+- **Aliases.** BR4 carries Bri-shail and Brishail, the names under which it was approved; Loknath-505 carries Loknath-503.
+- **BRRI dhan114.** Its duration (143 days) is taken from the 2024-25 SCA inbred list, whose sixth row prints the name as BRRI dhan113.
+
+### Traits
+
+- **False salt-tolerance tags removed.** BRRI dhan27, 44, 52 and 106 are described by BRRI and the Board as varieties for non-saline (অলবণাক্ত) tidal land; an English gloss had dropped the negation. The glosses are corrected and the tag is gone. For BRRI dhan106 the 2022-23 SCA list prints 'saline tidal areas', which the minutes, the gazette and BRRI contradict; the disagreement is recorded rather than tagged.
+- **No stress tag on a SPIA flag alone.** A salt, submergence or drought tag now needs a statement by an official or institute source. Where the SPIA Table 27 flag is the only evidence (Binadhan-7 and BRRI dhan44 for salinity, among others), `feature_evidence` says 'SPIA only' and no tag is given.
+- **Stricter resistance tags.** TRIVSA screening codes count only when they are R or HR; a resistance described as moderate or partial gives no tag; and a resistance tag is withheld when any source says the variety is susceptible to the same disease. BRRI dhan28 is no longer tagged blast resistant and BR11 no longer carries a blast tag. In all, 19 varieties lost one or more tags. A defect in the rule for English grain descriptions (a control character where a word boundary was meant) had kept 'slender' and 'fine' in English text from counting; with it repaired, five varieties gain the fine-grain tag (Binadhan-10, BRRI dhan28, 48, 80 and 84).
+
+### Status and seed
+
+- **legal_status_2026.** A new column states the legal position in words: active; active, withdrawal proposed 2021 and deferred (19 register varieties); time-limited registration, renewal not recorded; provisional, re-evaluation outcome not recorded; seed multiplication suspended (IR8, IR20); suspended (Iratom-38); recommended before the Board, no later decision. `status_as_of_2026` is kept for compatibility, and the old `status` column, which contradicted it, is no longer published in the register. Legal status says nothing about whether seed is produced or the variety grown.
+- **hybrid_seed_source.** Whether a hybrid's commercial seed is imported or produced in Bangladesh is recorded, with the Board meeting that says so, for the 11 hybrids where a decision states it; every other hybrid is 'unknown'. The value is never inferred from the country of origin or the company.
+
+### Coding
+
+- **CGIAR code 1 includes mutants and selections of a CGIAR line.** Iratom-24 (a mutant of IR8) and Binadhan-19 and -21 (mutants of NERICA-10) are now code 1, so that code 1 always has a CGIAR line at depth 0 and code 2 a CGIAR parent or earlier ancestor. BRRI dhan33, coded 3 on one sentence in an IRRI news item, is code 4: its pedigree (BG388/BG367-4) has no CGIAR element. A new column, `cgiar_derivation`, says whether the link is a direct line, a selection, a mutant, a cross with a CGIAR parent, an earlier ancestor or a collaboration.
+- **Trial numbers come from the Board's decision.** For yield, duration and the yield criterion the order of sources is now the Board's decision, then the SCA annual list, then the gazette. BRRI dhan107's yield is 8.19 t/ha, as in the 111th meeting and the SCA list, not the 7.00 t/ha printed in the gazette, which is the yield of the check variety; ACI dhan2's is 6.82 t/ha. A new column, `yield_basis`, says whether a yield is a Board trial mean, a list or gazette figure, or an institute's advertised figure, and `yield_source_id` names the source.
+- **yield_advantage_pct is renamed yield_criterion_pct.** The figure is the yield advantage over the check that the decision says was met, usually the registration criterion, not a measured gain.
+- **Regions.** `region_scope` is now an English summary in every row. A nationwide approval with a named exception is no longer flagged nationwide: BRRI dhan37 and 38 were approved at the 41st meeting for all regions except Khulna and Barishal. Region now follows the approving decision when it names one; Syngenta SJ 201 is recorded for Mymensingh and Jessore, as the four Ministry lists print it. Gazette sentences that cover several varieties are cut to the clause about the variety.
+- **Developers and sector.** IR5, IR8 and IR20 are coded to IRRI and Pajam and Purbachi as introductions from Malaysia and China, so BRRI's count by developer is 127, as on its website. Sector now follows the developer's type: BADC hybrid dhan1 (SL-8H) and RU dhan1 are public.
+- **Origin country.** IRRI is recorded as 'Philippines (IRRI)' and the correction notes of the 91st meeting are moved to the row notes.
+- **Smaller corrections.** Breeding lines of Binadhan-14 (RM(1)-200(C)-1-10) and Binadhan-21 (N10/350/P-5-4); Binadhan-14's pedigree (a carbon-ion mutant of Ashfal); approval references of Binashail (23rd meeting, agenda 5.03) and BR22 and BR23 (24th meeting, agenda 8.02 (গ), decision (1)); a season inferred from a duration printed for another season no longer sets a season flag (GAU dhan3); unit words removed from yields; the compendium's '135.140' days for IAHS 100001 read as 135-140; every published table in Unicode NFC.
+
+### Fish and literature
+
+- **Fish.** Improved rajputi (silver barb) is Barbonymus gonionotus; the BFRI list misprints Systomus sarana, the olive barb. Subarno Rui is recorded under the name the Ministry gave it on 11 April 2022, BFRI Subarno Rui, with the earlier naming of 4 August 2021; the strain is released, not superseded. Fish code 4 means documented parent stocks with no WorldFish germplasm, whether native stock or earlier imports.
+- **Publication years.** Thirty-five publications, mostly in Bangladesh Journals Online, carried the year 1970, a placeholder in the bibliographic databases; the year is now blank with a note, in both the publications and the literature tables.
+
+### Checks
+
+- **New integrity checks.** `scripts/qa_checks.py` now also tests the register count, the CGIAR code against pedigree depth, the vocabulary of legal status and region, the agreement of region flags with exceptions, season flags against the season column, unit text in numeric columns, Unicode normalisation, and that no salt tag rests on a non-saline text or a stress tag on a SPIA flag alone. `06_validation/count_reconciliation.md` is now generated by `scripts/phase3_count_reconciliation.py` on every rebuild.
+
 ## Version 1.1.1 (22 October 2026)
 
 A further pass over the web register after the reviews of version 1.1.

@@ -1,0 +1,52 @@
+Bangladesh Rice Variety Register
+Copyright (c) 2026 Kushal Kumar
+
+This repository contains two kinds of material under two licences. Third-party source documents are covered by
+neither licence; see NOTICE.md.
+
+
+1. Data and documentation: Creative Commons Attribution 4.0 International (CC BY 4.0)
+
+The data tables (data/*.csv, data/bgd_variety_archive.xlsx, data/site_data.json), the data dictionary, the changelog,
+the source catalogue and manifest of checksums, the citation and package metadata, and the text of the website
+(content/) are licensed under the Creative Commons Attribution 4.0 International License.
+
+You are free to share (copy and redistribute the material in any medium or format) and adapt (remix, transform and build
+upon the material) for any purpose, even commercially, under the following term: attribution. You must give appropriate
+credit, provide a link to the licence, and indicate if changes were made. You may do so in any reasonable manner, but not
+in any way that suggests the licensor endorses you or your use. No additional restrictions: you may not apply legal terms
+or technological measures that legally restrict others from doing anything the licence permits.
+
+This is a summary of, and not a substitute for, the licence. The full legal code is at
+https://creativecommons.org/licenses/by/4.0/legalcode
+(plain text: https://creativecommons.org/licenses/by/4.0/legalcode.txt).
+
+Suggested attribution: Kumar, K. (2026). Bangladesh Rice Variety Register (Version 1.2.0) [Data set].
+Cornell University. https://kushal-satya.github.io/bgd-rice-variety-register/
+
+
+2. Code: MIT License
+
+The scripts (scripts/) and the website code (assets/*.js, assets/*.css, index.html) are licensed as follows.
+
+MIT License
+
+Copyright (c) 2026 Kushal Kumar
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

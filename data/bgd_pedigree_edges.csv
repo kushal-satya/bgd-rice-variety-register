@@ -1,327 +1,327 @@
-﻿child_id,child_name,parent_label_as_printed,parent_id,parent_role,backcross_dose,parent_is_cgiar_line,parent_cgiar_center,source_column,source_file,note,generation
-RICE-BAU_DHAN2,BAU dhan2,Nizersail,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BAU_DHAN2,BAU dhan2,IR 578-175-2-2,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BINADHAN10,Binadhan-10,IR 42598-B-B-B-B-12,,female,,Y,IRRI,cgiar_spia_flags (SPIA 2025 Table 27 'IRRI/INGER entry used as parents'),05_output/final/bgd_rice_varieties.csv,,1
-RICE-BINADHAN10,Binadhan-10,NONA BOKRA,,male,,N,,cgiar_spia_flags (SPIA 2025 Table 27 'IRRI/INGER entry used as parents'),05_output/final/bgd_rice_varieties.csv,,1
-RICE-BINADHAN11,Binadhan-11,CIHERANG*2,,recurrent,2,N,,cgiar_spia_flags (SPIA 2025 Table 27 'IRRI/INGER entry used as parents'),05_output/final/bgd_rice_varieties.csv,,1
-RICE-BINADHAN11,Binadhan-11,IRRI 149,,donor,,Y,IRRI,cgiar_spia_flags (SPIA 2025 Table 27 'IRRI/INGER entry used as parents'),05_output/final/bgd_rice_varieties.csv,,1
-RICE-BINADHAN12,Binadhan-12,SAMBHA MAHSURI*4,,recurrent,4,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BINADHAN12,Binadhan-12,IR 49830-7-1-2-3,,donor,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BINADHAN13,Binadhan-13,Kalizira (local aromatic cultivar),,mutant_source,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,gamma ray 150 Gy + Datura extract,0
-RICE-BINADHAN14,Binadhan-14,Ashfal,,mutant_source,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,carbon-ion beam mutagenesis,0
-RICE-BINADHAN15,Binadhan-15,IR 2153-14-1-6-2,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,printed 'IR 2153-14-1-6-2/IR 2061-214-38 2/IR 2071-625-1-252'; order of crosses unclear,1
-RICE-BINADHAN15,Binadhan-15,IR 2061-214-38,,unknown,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BINADHAN15,Binadhan-15,IR 2071-625-1-252,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BINADHAN17,Binadhan-17,C418(ZHONG413)2,,female,,N,,cgiar_spia_flags (SPIA 2025 Table 27 'IRRI/INGER entry used as parents'),05_output/final/bgd_rice_varieties.csv,,1
-RICE-BINADHAN17,Binadhan-17,SH109,,female,,N,,cgiar_spia_flags (SPIA 2025 Table 27 'IRRI/INGER entry used as parents'),05_output/final/bgd_rice_varieties.csv,,2
-RICE-BINADHAN17,Binadhan-17,(ZHONG413)2,,male,,N,,cgiar_spia_flags (SPIA 2025 Table 27 'IRRI/INGER entry used as parents'),05_output/final/bgd_rice_varieties.csv,,2
-RICE-BINADHAN18,Binadhan-18,ব্রি ধান২৯ (BRRI dhan29),RICE-BRRI_DHAN29,mutant_source,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,carbon-ion irradiation of BRRI dhan29 seed; resolved by name (lib_keys.make_key),0
-RICE-BINADHAN19,Binadhan-19,NERICA-10,,mutant_source,,Y,AfricaRice,pedigree,05_output/final/bgd_rice_varieties.csv,carbon-ion irradiation 40 Gy,0
-RICE-BINADHAN20,Binadhan-20,বিনা ধান ৭ (Binadhan-7),RICE-BINADHAN7,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BINADHAN20,Binadhan-20,iron-rich breeding line from Vietnam (unnamed),,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BINADHAN21,Binadhan-21,NERICA-10,,mutant_source,,Y,AfricaRice,pedigree,05_output/final/bgd_rice_varieties.csv,gamma irradiation 350 Gy,0
-RICE-BINADHAN23,Binadhan-23,IRRI 149,,female,,Y,IRRI,cgiar_spia_flags (SPIA 2025 Table 27 'IRRI/INGER entry used as parents'),05_output/final/bgd_rice_varieties.csv,,1
-RICE-BINADHAN23,Binadhan-23,IRRI 128,,male,,Y,IRRI,cgiar_spia_flags (SPIA 2025 Table 27 'IRRI/INGER entry used as parents'),05_output/final/bgd_rice_varieties.csv,,1
-RICE-BINADHAN24,Binadhan-24,Tap Hanh (Vietnam),,mutant_source,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,gamma irradiation 250 Gy,0
-RICE-BINADHAN25,Binadhan-25,ব্রি ধান২৯ (BRRI dhan29),RICE-BRRI_DHAN29,mutant_source,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,carbon-ion irradiation mutant of BRRI dhan29; resolved by name (lib_keys.make_key),0
-RICE-BINADHAN4,Binadhan-4,BR 4,RICE-BR4,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BINADHAN4,Binadhan-4,Iratom 38,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BINADHAN5,Binadhan-5,Iratom-24,RICE-IRATOM24,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BINADHAN5,Binadhan-5,Dular,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BINADHAN6,Binadhan-6,Iratom-24,RICE-IRATOM24,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BINADHAN6,Binadhan-6,Dular,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BINADHAN7,Binadhan-7,"Tainguyen (Tai Nguyen, Vietnam; line TNDB-100)",,mutant_source,,N,,TRIVSA Releases row 65 col Parents; IAEA MVD item 3150 (via 04_working/evidence_F3I.csv),02_raw/asti_trivsa/TRIVSA-Rice-Data.xlsx; 03_extracted/tables/iaea_mvd_bgd.csv,"gamma-ray M3 lines from IAEA project RAS/5/037, selected at BINA; the register pedigree cell holds only the line TNDB100",0
-RICE-BINADHAN8,Binadhan-8,IR 29,,female,,Y,IRRI,cgiar_spia_flags (SPIA 2025 Table 27 'IRRI/INGER entry used as parents'),05_output/final/bgd_rice_varieties.csv,,1
-RICE-BINADHAN8,Binadhan-8,POKKALI B,,male,,N,,cgiar_spia_flags (SPIA 2025 Table 27 'IRRI/INGER entry used as parents'),05_output/final/bgd_rice_varieties.csv,,1
-RICE-BINADHAN9,Binadhan-9,"কালজিরা (Kalizira, local aromatic)",,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BINADHAN9,Binadhan-9,Y-1281 (high-yielding mutant line),,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BINASHAIL,Binashail,Nizersail,,mutant_source,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,0
-RICE-BR1,BR1,IR262-24-3,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BR1,BR1,TKM6,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BR10,BR10,IR20,RICE-IR20,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BR10,BR10,IR5-114-3-1,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BR11,BR11,IR20,RICE-IR20,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BR11,BR11,IR5-47-2,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BR12,BR12,BR1,RICE-BR1,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BR12,BR12,IR425-1-1-3-8-3,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BR14,BR14,IR5 (D),RICE-IR5,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BR14,BR14,BR3,RICE-BR3,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BR15,BR15,IR1561-228-1-2,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,2
-RICE-BR15,BR15,IR1737,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,2
-RICE-BR15,BR15,CR94-13,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BR16,BR16,IR1416-131-5,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,2
-RICE-BR16,BR16,IR1364-37-3-1,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,2
-RICE-BR16,BR16,IR1544A-E666,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BR17,BR17,Zerak,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BR17,BR17,IR8,RICE-IR8,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BR18,BR18,Pelita1-1,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BR18,BR18,IR1108-2,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BR19,BR19,IR2180-2,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BR19,BR19,IR2178,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BR2,BR2,CP-SLO,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BR2,BR2,Sigadis,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BR20,BR20,IR272-4-1-2-J1,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BR20,BR20,IR5,RICE-IR5,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BR21,BR21,C22,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BR21,BR21,IET1444,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BR22,BR22,Nizersail,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BR22,BR22,BR51-46-5,RICE-BR10,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by breeding line (exact or hyphen-bounded prefix),1
-RICE-BR23,BR23,DA29,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BR23,BR23,BR4,RICE-BR4,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BR24,BR24,C22,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BR24,BR24,IR9752-136-2,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BR25,BR25,Pajam,RICE-OLD_PAJAM,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by exact register name/alias,1
-RICE-BR25,BR25,IR26,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BR26,BR26,IR18348-36-3-3,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,2
-RICE-BR26,BR26,IR25863-61-3-2,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,2
-RICE-BR26,BR26,IR58,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BR3,BR3,IR506-1-133,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BR3,BR3,Latisail,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BR4,BR4,IR20,RICE-IR20,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BR4,BR4,IR5-114-3-1,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BR5,BR5,Badshabhog,,unknown,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,pedigree cell reads 'Badshabhog rice'; relation not stated,1
-RICE-BR6,BR6,IR833-6-2-1-1,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,2
-RICE-BR6,BR6,IR1561-149-1,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,2
-RICE-BR6,BR6,IR1737,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BR7,BR7,IR1416-131-5,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,2
-RICE-BR7,BR7,IR22,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,2
-RICE-BR7,BR7,C4-63,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BR8,BR8,IR272-4-1-2-J1,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BR8,BR8,IR305-3-17-1-3,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BR9,BR9,IR272-4-1-2-J1,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BR9,BR9,IR8,RICE-IR8,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BRAC_DHAN1,BRAC dhan1,বিআর১১,RICE-BR11,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BRAC_DHAN1,BRAC dhan1,স্বর্ণা,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRAC_DHAN2,BRAC dhan2,BG 003,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRAC_DHAN2,BRAC dhan2,BG 026,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN100,BRRI dhan100,BR7166-5B-5,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,parent of the 2006 F1 used as female; breeding line not traced in the register,2
-RICE-BRRI_DHAN100,BRRI dhan100,BG305,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,parent of the 2006 F1 used as female,2
-RICE-BRRI_DHAN100,BRRI dhan100,ব্রি ধান২৯ (BRRI dhan29),RICE-BRRI_DHAN29,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,crossed 2007; resolved by name (lib_keys.make_key),1
-RICE-BRRI_DHAN101,BRRI dhan101,IRBB60,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN101,BRRI dhan101,ব্রি ধান২৯,RICE-BRRI_DHAN29,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BRRI_DHAN102,BRRI dhan102,IR 91153-AC 117,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,4
-RICE-BRRI_DHAN102,BRRI dhan102,IR05F102,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,4
-RICE-BRRI_DHAN102,BRRI dhan102,IR 68144-2B-2-2-3-1-166,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,3
-RICE-BRRI_DHAN102,BRRI dhan102,IR 66,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,2
-RICE-BRRI_DHAN102,BRRI dhan102,NSIC RC 158,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,3
-RICE-BRRI_DHAN102,BRRI dhan102,NEGRO,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,3
-RICE-BRRI_DHAN102,BRRI dhan102,BRRI dhan29,RICE-BRRI_DHAN29,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),2
-RICE-BRRI_DHAN103,BRRI dhan103,BRRI dhan29,RICE-BRRI_DHAN29,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BRRI_DHAN103,BRRI dhan103,FL378,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN104,BRRI dhan104,IR74052-217-3-3,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN104,BRRI dhan104,BR7150-11-7-4-2-16,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
-RICE-BRRI_DHAN105,BRRI dhan105,BR16,RICE-BR16,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BRRI_DHAN105,BRRI dhan105,90060-TR1252-8-2-1,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
-RICE-BRRI_DHAN106,BRRI dhan106,MOROBEREKAN,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN106,BRRI dhan106,IR50,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN107,BRRI dhan107,local collection (unnamed),,selection_source,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,pure-line selection,0
-RICE-BRRI_DHAN108,BRRI dhan108,IR 80561 A (CMS line),,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN108,BRRI dhan108,China inbred 321,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN109,BRRI dhan109,ব্রি ধান৪৪,RICE-BRRI_DHAN44,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BRRI_DHAN109,BRRI dhan109,ব্রি ধান৫২,RICE-BRRI_DHAN52,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BRRI_DHAN110,BRRI dhan110,IR262,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN110,BRRI dhan110,PR30245-10-414,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
-RICE-BRRI_DHAN111,BRRI dhan111,তিলোক-কাচারি,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN111,BRRI dhan111,ব্রি ধান৪১,RICE-BRRI_DHAN41,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BRRI_DHAN112,BRRI dhan112,CN-4,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN112,BRRI dhan112,BRRI dhan67,RICE-BRRI_DHAN67,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BRRI_DHAN113,BRRI dhan113,BRRI dhan29,RICE-BRRI_DHAN29,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BRRI_DHAN113,BRRI dhan113,Hbj.B.VI (Pashushail),,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN114,BRRI dhan114,IRBL-9W(LTH),,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN114,BRRI dhan114,BRRI dhan29,RICE-BRRI_DHAN29,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BRRI_DHAN115,BRRI dhan115,BRRI dhan28,RICE-BRRI_DHAN28,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BRRI_DHAN115,BRRI dhan115,Padi Kool (black rice),,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN116,BRRI dhan116,BRRI dhan29,RICE-BRRI_DHAN29,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BRRI_DHAN116,BRRI dhan116,HUA 565,RICE-BRRI_DHAN75,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by breeding line (exact or hyphen-bounded prefix),1
-RICE-BRRI_DHAN117,BRRI dhan117,CN-6,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN117,BRRI dhan117,BRRI dhan67,RICE-BRRI_DHAN67,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BRRI_DHAN118,BRRI dhan118,BRRI dhan28,RICE-BRRI_DHAN28,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BRRI_DHAN118,BRRI dhan118,Bhutan (Bhutanese cold-tolerant rice),,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN27,BRRI dhan27,KN1 B-361-1-8-6-9,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,sister line of BR17 (same cross designation); parents taken from that documented cross,1
-RICE-BRRI_DHAN27,BRRI dhan27,C168,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN28,BRRI dhan28,BR6 (IR28),RICE-BR6,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BRRI_DHAN28,BRRI dhan28,Purbachi,RICE-OLD_PURBACHI,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by exact register name/alias,1
-RICE-BRRI_DHAN29,BRRI dhan29,BG90-2,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN29,BRRI dhan29,BR51-46-5,RICE-BR10,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by breeding line (exact or hyphen-bounded prefix),1
-RICE-BRRI_DHAN30,BRRI dhan30,IR2058-78-1-3-2-3,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN30,BRRI dhan30,BR4,RICE-BR4,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BRRI_DHAN31,BRRI dhan31,BR11,RICE-BR11,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BRRI_DHAN31,BRRI dhan31,ARC10550,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN32,BRRI dhan32,BR4,RICE-BR4,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BRRI_DHAN32,BRRI dhan32,BR2662,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN33,BRRI dhan33,BG388,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN33,BRRI dhan33,BG367-4,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN34,BRRI dhan34,Khaskani (Acc. No. 4341),,selection_source,,N,,breeding_line,05_output/final/bgd_rice_varieties.csv,selection from a genebank accession of the landrace Khaskani,0
-RICE-BRRI_DHAN35,BRRI dhan35,BR4,RICE-BR4,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BRRI_DHAN35,BRRI dhan35,BR26-7-4-1,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,2
-RICE-BRRI_DHAN35,BRRI dhan35,ARC14529,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,2
-RICE-BRRI_DHAN36,BRRI dhan36,IR64,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN36,BRRI dhan36,IR35293-125-3-2-3,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN37,BRRI dhan37,Basmati(D),,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN37,BRRI dhan37,BR5,RICE-BR5,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BRRI_DHAN38,BRRI dhan38,Basmati(D),,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN38,BRRI dhan38,BR5,RICE-BR5,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BRRI_DHAN39,BRRI dhan39,BR1185-2B-56-2-1-1,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,2
-RICE-BRRI_DHAN39,BRRI dhan39,BR1674-28-3-1-1,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,sister line of BRRI dhan35 (same cross designation); parents taken from that documented cross,2
-RICE-BRRI_DHAN39,BRRI dhan39,BR2558-7-3-2-2,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
-RICE-BRRI_DHAN40,BRRI dhan40,IR4595-4-1-15,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN40,BRRI dhan40,BR10,RICE-BR10,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BRRI_DHAN41,BRRI dhan41,BR23,RICE-BR23,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BRRI_DHAN41,BRRI dhan41,BR1185-2B-16-1,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
-RICE-BRRI_DHAN42,BRRI dhan42,BR14,RICE-BR14,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BRRI_DHAN42,BRRI dhan42,IR25588-7-3-1,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN43,BRRI dhan43,BR24,RICE-BR24,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BRRI_DHAN43,BRRI dhan43,BR21,RICE-BR21,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BRRI_DHAN44,BRRI dhan44,BR10,RICE-BR10,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BRRI_DHAN44,BRRI dhan44,BRRI dhan31,RICE-BRRI_DHAN31,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BRRI_DHAN45,BRRI dhan45,BR2,RICE-BR2,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BRRI_DHAN45,BRRI dhan45,TETEP,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN46,BRRI dhan46,BR11,RICE-BR11,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),2
-RICE-BRRI_DHAN46,BRRI dhan46,Swarnalata,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,2
-RICE-BRRI_DHAN46,BRRI dhan46,ARC14766A,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN47,BRRI dhan47,IR515111-B-B-34-B,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN47,BRRI dhan47,TCCP266-2-49-B-B-3,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
-RICE-BRRI_DHAN48,BRRI dhan48,BR1543-9-2-1,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
-RICE-BRRI_DHAN48,BRRI dhan48,IR13249-49-3-2-2,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN49,BRRI dhan49,BR4962-12-4-1,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
-RICE-BRRI_DHAN49,BRRI dhan49,IR33380-7-2-1-3,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN50,BRRI dhan50,BR30,RICE-BRRI_DHAN30,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BRRI_DHAN50,BRRI dhan50,IR67684B,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN51,BRRI dhan51,Swarna,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN51,BRRI dhan51,IR49830-7-1-2-3,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN52,BRRI dhan52,BR11,RICE-BR11,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BRRI_DHAN52,BRRI dhan52,IR40931-33-1-3-2,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN53,BRRI dhan53,BR10,RICE-BR10,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),2
-RICE-BRRI_DHAN53,BRRI dhan53,BR23,RICE-BR23,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),2
-RICE-BRRI_DHAN53,BRRI dhan53,BR847-76-1-1,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
-RICE-BRRI_DHAN54,BRRI dhan54,BR1185-2B-16-1,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
-RICE-BRRI_DHAN54,BRRI dhan54,BR548-128-1-3,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
-RICE-BRRI_DHAN55,BRRI dhan55,IR 64,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN55,BRRI dhan55,Oryza rufipogon,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN56,BRRI dhan56,IR55419-4,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN56,BRRI dhan56,WAY RAREM,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN57,BRRI dhan57,BR11,RICE-BR11,recurrent,BC5,N,,pedigree,05_output/final/bgd_rice_varieties.csv,"NIL, BC5F1 (NSB 75 minutes); resolved by name (lib_keys.make_key)",1
-RICE-BRRI_DHAN57,BRRI dhan57,INGER line CR146-7027-224,,donor,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,Indian (CRRI) line received through INGER; breeding line not traced in the register,1
-RICE-BRRI_DHAN58,BRRI dhan58,BRRI dhan29,RICE-BRRI_DHAN29,somaclone_source,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),0
-RICE-BRRI_DHAN60,BRRI dhan60,BR7166-4-5-3,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
-RICE-BRRI_DHAN60,BRRI dhan60,BR26,RICE-BR26,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BRRI_DHAN61,BRRI dhan61,IR64419-3B-4-3,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN61,BRRI dhan61,BRRI dhan29,RICE-BRRI_DHAN29,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BRRI_DHAN62,BRRI dhan62,Jirakateri,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN62,BRRI dhan62,BRRI dhan39,RICE-BRRI_DHAN39,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BRRI_DHAN63,BRRI dhan63,Amol-3,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN63,BRRI dhan63,BRRI dhan28,RICE-BRRI_DHAN28,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BRRI_DHAN64,BRRI dhan64,IR75382-32-2-3-3,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN64,BRRI dhan64,BR7166-4-5-3-2-5-5B1-92,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
-RICE-BRRI_DHAN65,BRRI dhan65,OM606,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN65,BRRI dhan65,IR44592-62-1-1-3,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN66,BRRI dhan66,IR78875-176-B-2,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN66,BRRI dhan66,IR78875-207-B-3,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN67,BRRI dhan67,IR61247-3B-8-2-1,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN67,BRRI dhan67,BRRI dhan36,RICE-BRRI_DHAN36,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BRRI_DHAN68,BRRI dhan68,BRRI dhan29*2,RICE-BRRI_DHAN29,recurrent,2,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BRRI_DHAN68,BRRI dhan68,IR68144,,donor,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN69,BRRI dhan69,WuShanYouZhan,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN69,BRRI dhan69,PI312777,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN70,BRRI dhan70,IR67423-208-6-2-3-3,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN70,BRRI dhan70,IR65610-105-2-5-2-2-2,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN71,BRRI dhan71,IR55423-01 (NSIC Rc 9),,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN71,BRRI dhan71,IRRI148,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN72,BRRI dhan72,BR7166-4-5-3,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
-RICE-BRRI_DHAN72,BRRI dhan72,BRRI dhan 39,RICE-BRRI_DHAN39,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BRRI_DHAN73,BRRI dhan73,BRRI dhan 40,RICE-BRRI_DHAN40,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BRRI_DHAN73,BRRI dhan73,NSIC Rc 106,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN74,BRRI dhan74,IR68144,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN74,BRRI dhan74,ব্রি ধান২৯ (BRRI dhan29),RICE-BRRI_DHAN29,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BRRI_DHAN75,BRRI dhan75,Yuefengzhan,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN75,BRRI dhan75,E-Zhong 5,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN76,BRRI dhan76,IR75862-208-8-B-B-HR1,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN76,BRRI dhan76,BR6110-10-1-2,RICE-BRRI_DHAN44,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by breeding line (exact or hyphen-bounded prefix),1
-RICE-BRRI_DHAN77,BRRI dhan77,IR75862-208-8-B-B-HR1,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN77,BRRI dhan77,BR6110-10-1-2,RICE-BRRI_DHAN44,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by breeding line (exact or hyphen-bounded prefix),1
-RICE-BRRI_DHAN78,BRRI dhan78,IR84645,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN78,BRRI dhan78,IR84649,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN79,BRRI dhan79,ব্রি ধান৪৯,RICE-BRRI_DHAN49,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BRRI_DHAN79,BRRI dhan79,ব্রি ধান৫২,RICE-BRRI_DHAN52,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BRRI_DHAN80,BRRI dhan80,IR65610-105-2-5-2-2,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN80,BRRI dhan80,IR67423-208-6-2-3-3,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN81,BRRI dhan81,Amol-3,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN81,BRRI dhan81,ব্রি ধান২৮,RICE-BRRI_DHAN28,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BRRI_DHAN82,BRRI dhan82,NERICA10,,selection_source,,Y,AfricaRice,pedigree,05_output/final/bgd_rice_varieties.csv,pure-line selection (Rice Profile); line NERICA10-7-PL2-B,0
-RICE-BRRI_DHAN83,BRRI dhan83,BR24,RICE-BR24,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BRRI_DHAN83,BRRI dhan83,BR1890-12-2-1-1-HR45,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,sister line of BRRI dhan27 (same cross designation); parents taken from that documented cross,1
-RICE-BRRI_DHAN84,BRRI dhan84,BRRI dhan29,RICE-BRRI_DHAN29,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),3
-RICE-BRRI_DHAN84,BRRI dhan84,IR68144,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,3
-RICE-BRRI_DHAN84,BRRI dhan84,BRRI dhan28,RICE-BRRI_DHAN28,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),2
-RICE-BRRI_DHAN84,BRRI dhan84,BR11,RICE-BR11,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BRRI_DHAN85,BRRI dhan85,BR4828-54-1-4-9,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,2
-RICE-BRRI_DHAN85,BRRI dhan85,IR50,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,2
-RICE-BRRI_DHAN85,BRRI dhan85,BR4828-54-1-4-9,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,2
-RICE-BRRI_DHAN85,BRRI dhan85,LU HONG ZAO 1,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,2
-RICE-BRRI_DHAN86,BRRI dhan86,Niamat,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN86,BRRI dhan86,BR802-78-2-1-1,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,sister line of BRRI dhan29 (same cross designation); parents taken from that documented cross,1
-RICE-BRRI_DHAN87,BRRI dhan87,BRRI dhan29*3,RICE-BRRI_DHAN29,recurrent,3,N,,cgiar_spia_flags (SPIA 2025 Table 27 'IRRI/INGER entry used as parents'),05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BRRI_DHAN87,BRRI dhan87,Oryza rufipogon (IRGC103404),,donor,,Y,IRRI,cgiar_spia_flags (SPIA 2025 Table 27 'IRRI/INGER entry used as parents'),05_output/final/bgd_rice_varieties.csv,IRRI genebank accession,1
-RICE-BRRI_DHAN88,BRRI dhan88,ব্রি ধান২৯,RICE-BRRI_DHAN29,somaclone_source,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),0
-RICE-BRRI_DHAN89,BRRI dhan89,BRRI dhan29*3,RICE-BRRI_DHAN29,recurrent,3,N,,cgiar_spia_flags (SPIA 2025 Table 27 'IRRI/INGER entry used as parents'),05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BRRI_DHAN89,BRRI dhan89,Oryza rufipogon (IRGC103404),,donor,,Y,IRRI,cgiar_spia_flags (SPIA 2025 Table 27 'IRRI/INGER entry used as parents'),05_output/final/bgd_rice_varieties.csv,IRRI genebank accession,1
-RICE-BRRI_DHAN90,BRRI dhan90,BR7166-5B-1-RAN-1,,recurrent,2,N,,pedigree,05_output/final/bgd_rice_varieties.csv,F1 backcrossed once to BR7166-5B-1-RAN-1; breeding line not traced in the register,1
-RICE-BRRI_DHAN90,BRRI dhan90,ব্রি ধান-৩৪ (BRRI dhan34),RICE-BRRI_DHAN34,donor,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BRRI_DHAN91,BRRI dhan91,তিলককাচারি,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN91,BRRI dhan91,ব্রি ধান-৪১,RICE-BRRI_DHAN41,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BRRI_DHAN92,BRRI dhan92,"IRGC103918 (rice x wheat derived line 'Rice/Wheat (RI)', collected from IRRI)",,female,,Y,IRRI,pedigree; Rice Profile id 100 intro,05_output/final/bgd_rice_varieties.csv; 03_extracted/tables/brri_riceprofile.csv,"Rice Profile id 100: 'IRGC103918' collected from IRRI Philippines, anther-cultured, then crossed twice with a BRRI line; generation 2 or deeper",2
-RICE-BRRI_DHAN92,BRRI dhan92,BR319-1-HR2,,male,,N,,pedigree; Rice Profile id 100 intro,05_output/final/bgd_rice_varieties.csv; 03_extracted/tables/brri_riceprofile.csv,BRRI line in the full pedigree Rice/Wheat(RI)/BR319-1-HR2//DH(Mingolo/Suweon290)/Panbira; sister line of BR14 (same cross designation); parents taken from that documented cross,2
-RICE-BRRI_DHAN92,BRRI dhan92,DH (Mingolo/Suweon290),,unknown,,N,,pedigree; Rice Profile id 100 intro,05_output/final/bgd_rice_varieties.csv; 03_extracted/tables/brri_riceprofile.csv,doubled-haploid line; position in the cross not clear from the printed formula,2
-RICE-BRRI_DHAN92,BRRI dhan92,Panbira,,unknown,,N,,pedigree; Rice Profile id 100 intro,05_output/final/bgd_rice_varieties.csv; 03_extracted/tables/brri_riceprofile.csv,position in the cross not clear from the printed formula,2
-RICE-BRRI_DHAN93,BRRI dhan93,local germplasm (unnamed),,selection_source,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,pure-line selection; line BR-SF (Rang)-PL1-B,0
-RICE-BRRI_DHAN94,BRRI dhan94,local germplasm (unnamed),,selection_source,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,pure-line selection; line BR-RS (Raj)-PL4-B,0
-RICE-BRRI_DHAN95,BRRI dhan95,লাল স্বর্ণা (Lal Swarna),,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN95,BRRI dhan95,Barisail,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,parent of the F1 used as male,2
-RICE-BRRI_DHAN95,BRRI dhan95,PSBRC2,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,Philippine Seed Board release; no source in the archive states its breeding origin,2
-RICE-BRRI_DHAN96,BRRI dhan96,BRRI dhan28*3,RICE-BRRI_DHAN28,recurrent,3,N,,cgiar_spia_flags (SPIA 2025 Table 27 'IRRI/INGER entry used as parents'),05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BRRI_DHAN96,BRRI dhan96,Oryza rufipogon (IRGC103404),,donor,,Y,IRRI,cgiar_spia_flags (SPIA 2025 Table 27 'IRRI/INGER entry used as parents'),05_output/final/bgd_rice_varieties.csv,IRRI genebank accession,1
-RICE-BRRI_DHAN97,BRRI dhan97,IRRI 113,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN97,BRRI dhan97,ব্রি ধান৪০,RICE-BRRI_DHAN40,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
-RICE-BRRI_DHAN98,BRRI dhan98,MLT-145-2,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN98,BRRI dhan98,HR17512-11-2-3-1-4-2-3,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
-RICE-BRRI_DHAN99,BRRI dhan99,Huang-Hua-Zhan,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_DHAN99,BRRI dhan99,OM1723,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_HYBRID1,BRRI hybrid dhan1,IR58025A,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_HYBRID1,BRRI hybrid dhan1,BR827-35-2-1-1R,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
-RICE-BRRI_HYBRID10,BRRI hybrid dhan10,BRRI72A,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
-RICE-BRRI_HYBRID10,BRRI hybrid dhan10,BRRI42R (both parent lines developed in Bangladesh),,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
-RICE-BRRI_HYBRID2,BRRI hybrid dhan2,BRR10A,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
-RICE-BRRI_HYBRID2,BRRI hybrid dhan2,BRRI10R,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
-RICE-BRRI_HYBRID3,BRRI hybrid dhan3,BRR11A,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
-RICE-BRRI_HYBRID3,BRRI hybrid dhan3,BRRI15R,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
-RICE-BRRI_HYBRID4,BRRI hybrid dhan4,IR58025A,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_HYBRID4,BRRI hybrid dhan4,BRRI10R,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
-RICE-BRRI_HYBRID5,BRRI hybrid dhan5,BRR7A,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
-RICE-BRRI_HYBRID5,BRRI hybrid dhan5,BRRI31R,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
-RICE-BRRI_HYBRID6,BRRI hybrid dhan6,IR79156A,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_HYBRID6,BRRI hybrid dhan6,BRRI20R,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
-RICE-BRRI_HYBRID7,BRRI hybrid dhan7,IR75608A,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BRRI_HYBRID7,BRRI hybrid dhan7,BRRI31R,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
-RICE-BRRI_HYBRID8,BRRI hybrid dhan8,BRRI99A,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
-RICE-BRRI_HYBRID8,BRRI hybrid dhan8,BRRI37R,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
-RICE-BRRI_HYBRID9,BRRI hybrid dhan9,BRRI72A,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
-RICE-BRRI_HYBRID9,BRRI hybrid dhan9,BRRI56R (both parent lines developed in Bangladesh),,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
-RICE-BU_DHAN1,BU dhan1,KK8,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BU_DHAN1,BU dhan1,Badsabhog,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BU_DHAN2,BU dhan2,IR-58025B,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BU_DHAN2,BU dhan2,BUR-55 (BSMRAU conserved germplasm),,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-GAU_DHAN3,GAU dhan3,বিইউ এসিসি-৩৪,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-GAU_DHAN3,GAU dhan3,বিইউ এসিসি-৫১,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-IR5,IR5,Peta,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-IR5,IR5,Tangkai Rotan,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-IR8,IR8,Peta,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-IR8,IR8,Dee-Geo-Woo-Gen,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-IRATOM24,Iratom-24,IR 8,RICE-IR8,mutant_source,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),0
-RICE-OLD_BAU63,BAU-63 (Bharosa),IR 758-15-2,,selection_source,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,0
-RICE-OLD_PAJAM,Pajam,Mahsuri,,unknown,,N,,pedigree (= TRIVSA 'Original breeding line name'),05_output/final/bgd_rice_varieties.csv,TRIVSA: developing institution 'Malaysia'; relation to Mahsuri not stated,1
-RICE-OLD_PURBACHI,Purbachi,Chin-chu-ai,,unknown,,N,,pedigree (= TRIVSA 'Original breeding line name'),05_output/final/bgd_rice_varieties.csv,TRIVSA: developing institution 'China'; SCA compendium p.11 '(উৎসঃ গণচীন)',1
-RICE-PVT_ACI_DHAN1,ACI dhan1,IR102481-BK-BK (IRRI segregating population),,selection_source,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,pedigree selection by ACI from an IRRI cross population,0
-RICE-PVT_ACI_DHAN3,ACI dhan3,ASRBCR38-29-1-5-1,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
-RICE-PVT_ACI_DHAN3,ACI dhan3,CNI9004,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-PVT_SUPREME_DHAN1,Supreme dhan1,পানপাতা,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-PVT_SUPREME_DHAN1,Supreme dhan1,সাদা স্বর্ণা,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+﻿child_id,child_name,parent_label_as_printed,parent_id,sister_of_id,parent_role,backcross_dose,parent_is_cgiar_line,parent_cgiar_center,source_column,source_file,note,generation
+RICE-BAU_DHAN2,BAU dhan2,Nizersail,,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BAU_DHAN2,BAU dhan2,IR 578-175-2-2,,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BINADHAN10,Binadhan-10,IR 42598-B-B-B-B-12,,,female,,Y,IRRI,cgiar_spia_flags (SPIA 2025 Table 27 'IRRI/INGER entry used as parents'),05_output/final/bgd_rice_varieties.csv,,1
+RICE-BINADHAN10,Binadhan-10,NONA BOKRA,,,male,,N,,cgiar_spia_flags (SPIA 2025 Table 27 'IRRI/INGER entry used as parents'),05_output/final/bgd_rice_varieties.csv,,1
+RICE-BINADHAN11,Binadhan-11,CIHERANG*2,,,recurrent,2,N,,cgiar_spia_flags (SPIA 2025 Table 27 'IRRI/INGER entry used as parents'),05_output/final/bgd_rice_varieties.csv,,1
+RICE-BINADHAN11,Binadhan-11,IRRI 149,,,donor,,Y,IRRI,cgiar_spia_flags (SPIA 2025 Table 27 'IRRI/INGER entry used as parents'),05_output/final/bgd_rice_varieties.csv,,1
+RICE-BINADHAN12,Binadhan-12,SAMBHA MAHSURI*4,,,recurrent,4,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BINADHAN12,Binadhan-12,IR 49830-7-1-2-3,,,donor,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BINADHAN13,Binadhan-13,Kalizira (local aromatic cultivar),,,mutant_source,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,gamma ray 150 Gy + Datura extract,0
+RICE-BINADHAN14,Binadhan-14,Ashfal,,,mutant_source,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,carbon-ion beam mutagenesis,0
+RICE-BINADHAN15,Binadhan-15,IR 2153-14-1-6-2,,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,printed 'IR 2153-14-1-6-2/IR 2061-214-38 2/IR 2071-625-1-252'; order of crosses unclear,1
+RICE-BINADHAN15,Binadhan-15,IR 2061-214-38,,,unknown,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BINADHAN15,Binadhan-15,IR 2071-625-1-252,,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BINADHAN17,Binadhan-17,C418(ZHONG413)2,,,female,,N,,cgiar_spia_flags (SPIA 2025 Table 27 'IRRI/INGER entry used as parents'),05_output/final/bgd_rice_varieties.csv,,1
+RICE-BINADHAN17,Binadhan-17,SH109,,,female,,N,,cgiar_spia_flags (SPIA 2025 Table 27 'IRRI/INGER entry used as parents'),05_output/final/bgd_rice_varieties.csv,,2
+RICE-BINADHAN17,Binadhan-17,(ZHONG413)2,,,male,,N,,cgiar_spia_flags (SPIA 2025 Table 27 'IRRI/INGER entry used as parents'),05_output/final/bgd_rice_varieties.csv,,2
+RICE-BINADHAN18,Binadhan-18,ব্রি ধান২৯ (BRRI dhan29),RICE-BRRI_DHAN29,,mutant_source,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,carbon-ion irradiation of BRRI dhan29 seed; resolved by name (lib_keys.make_key),0
+RICE-BINADHAN19,Binadhan-19,NERICA-10,,,mutant_source,,Y,AfricaRice,pedigree,05_output/final/bgd_rice_varieties.csv,carbon-ion irradiation 40 Gy,0
+RICE-BINADHAN20,Binadhan-20,বিনা ধান ৭ (Binadhan-7),RICE-BINADHAN7,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BINADHAN20,Binadhan-20,iron-rich breeding line from Vietnam (unnamed),,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BINADHAN21,Binadhan-21,NERICA-10,,,mutant_source,,Y,AfricaRice,pedigree,05_output/final/bgd_rice_varieties.csv,gamma irradiation 350 Gy,0
+RICE-BINADHAN23,Binadhan-23,IRRI 149,,,female,,Y,IRRI,cgiar_spia_flags (SPIA 2025 Table 27 'IRRI/INGER entry used as parents'),05_output/final/bgd_rice_varieties.csv,,1
+RICE-BINADHAN23,Binadhan-23,IRRI 128,,,male,,Y,IRRI,cgiar_spia_flags (SPIA 2025 Table 27 'IRRI/INGER entry used as parents'),05_output/final/bgd_rice_varieties.csv,,1
+RICE-BINADHAN24,Binadhan-24,Tap Hanh (Vietnam),,,mutant_source,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,gamma irradiation 250 Gy,0
+RICE-BINADHAN25,Binadhan-25,ব্রি ধান২৯ (BRRI dhan29),RICE-BRRI_DHAN29,,mutant_source,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,carbon-ion irradiation mutant of BRRI dhan29; resolved by name (lib_keys.make_key),0
+RICE-BINADHAN4,Binadhan-4,BR 4,RICE-BR4,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BINADHAN4,Binadhan-4,Iratom 38,RICE-IRATOM38,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BINADHAN5,Binadhan-5,Iratom-24,RICE-IRATOM24,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BINADHAN5,Binadhan-5,Dular,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BINADHAN6,Binadhan-6,Iratom-24,RICE-IRATOM24,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BINADHAN6,Binadhan-6,Dular,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BINADHAN7,Binadhan-7,"Tainguyen (Tai Nguyen, Vietnam; line TNDB-100)",,,mutant_source,,N,,TRIVSA Releases row 65 col Parents; IAEA MVD item 3150 (via 04_working/evidence_F3I.csv),02_raw/asti_trivsa/TRIVSA-Rice-Data.xlsx; 03_extracted/tables/iaea_mvd_bgd.csv,"gamma-ray M3 lines from IAEA project RAS/5/037, selected at BINA; the register pedigree cell holds only the line TNDB100",0
+RICE-BINADHAN8,Binadhan-8,IR 29,,,female,,Y,IRRI,cgiar_spia_flags (SPIA 2025 Table 27 'IRRI/INGER entry used as parents'),05_output/final/bgd_rice_varieties.csv,,1
+RICE-BINADHAN8,Binadhan-8,POKKALI B,,,male,,N,,cgiar_spia_flags (SPIA 2025 Table 27 'IRRI/INGER entry used as parents'),05_output/final/bgd_rice_varieties.csv,,1
+RICE-BINADHAN9,Binadhan-9,"কালজিরা (Kalizira, local aromatic)",,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BINADHAN9,Binadhan-9,Y-1281 (high-yielding mutant line),,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BINASHAIL,Binashail,Nizersail,,,mutant_source,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,0
+RICE-BR1,BR1,IR262-24-3,,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BR1,BR1,TKM6,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BR10,BR10,IR20,RICE-IR20,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BR10,BR10,IR5-114-3-1,,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BR11,BR11,IR20,RICE-IR20,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BR11,BR11,IR5-47-2,,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BR12,BR12,BR1,RICE-BR1,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BR12,BR12,IR425-1-1-3-8-3,,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BR14,BR14,IR5 (D),RICE-IR5,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BR14,BR14,BR3,RICE-BR3,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BR15,BR15,IR1561-228-1-2,,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,2
+RICE-BR15,BR15,IR1737,,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,2
+RICE-BR15,BR15,CR94-13,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BR16,BR16,IR1416-131-5,,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,2
+RICE-BR16,BR16,IR1364-37-3-1,,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,2
+RICE-BR16,BR16,IR1544A-E666,,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BR17,BR17,Zerak,,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BR17,BR17,IR8,RICE-IR8,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BR18,BR18,Pelita1-1,,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BR18,BR18,IR1108-2,,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BR19,BR19,IR2180-2,,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BR19,BR19,IR2178,,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BR2,BR2,CP-SLO,,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BR2,BR2,Sigadis,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BR20,BR20,IR272-4-1-2-J1,,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BR20,BR20,IR5,RICE-IR5,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BR21,BR21,C22,,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BR21,BR21,IET1444,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BR22,BR22,Nizersail,,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BR22,BR22,BR51-46-5,RICE-BR10,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by breeding line (exact or hyphen-bounded prefix),1
+RICE-BR23,BR23,DA29,,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BR23,BR23,BR4,RICE-BR4,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BR24,BR24,C22,,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BR24,BR24,IR9752-136-2,,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BR25,BR25,Pajam,RICE-OLD_PAJAM,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by exact register name/alias,1
+RICE-BR25,BR25,IR26,,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BR26,BR26,IR18348-36-3-3,,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,2
+RICE-BR26,BR26,IR25863-61-3-2,,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,2
+RICE-BR26,BR26,IR58,,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BR3,BR3,IR506-1-133,,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BR3,BR3,Latisail,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BR4,BR4,IR20,RICE-IR20,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BR4,BR4,IR5-114-3-1,,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BR5,BR5,Badshabhog,,,unknown,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,pedigree cell reads 'Badshabhog rice'; relation not stated,1
+RICE-BR6,BR6,IR833-6-2-1-1,,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,2
+RICE-BR6,BR6,IR1561-149-1,,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,2
+RICE-BR6,BR6,IR1737,,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BR7,BR7,IR1416-131-5,,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,2
+RICE-BR7,BR7,IR22,,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,2
+RICE-BR7,BR7,C4-63,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BR8,BR8,IR272-4-1-2-J1,,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BR8,BR8,IR305-3-17-1-3,,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BR9,BR9,IR272-4-1-2-J1,,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BR9,BR9,IR8,RICE-IR8,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BRAC_DHAN1,BRAC dhan1,বিআর১১,RICE-BR11,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BRAC_DHAN1,BRAC dhan1,স্বর্ণা,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRAC_DHAN2,BRAC dhan2,BG 003,,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRAC_DHAN2,BRAC dhan2,BG 026,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN100,BRRI dhan100,BR7166-5B-5,,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,parent of the 2006 F1 used as female; breeding line not traced in the register,2
+RICE-BRRI_DHAN100,BRRI dhan100,BG305,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,parent of the 2006 F1 used as female,2
+RICE-BRRI_DHAN100,BRRI dhan100,ব্রি ধান২৯ (BRRI dhan29),RICE-BRRI_DHAN29,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,crossed 2007; resolved by name (lib_keys.make_key),1
+RICE-BRRI_DHAN101,BRRI dhan101,IRBB60,,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN101,BRRI dhan101,ব্রি ধান২৯,RICE-BRRI_DHAN29,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BRRI_DHAN102,BRRI dhan102,IR 91153-AC 117,,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,4
+RICE-BRRI_DHAN102,BRRI dhan102,IR05F102,,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,4
+RICE-BRRI_DHAN102,BRRI dhan102,IR 68144-2B-2-2-3-1-166,,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,3
+RICE-BRRI_DHAN102,BRRI dhan102,IR 66,,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,2
+RICE-BRRI_DHAN102,BRRI dhan102,NSIC RC 158,,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,3
+RICE-BRRI_DHAN102,BRRI dhan102,NEGRO,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,3
+RICE-BRRI_DHAN102,BRRI dhan102,BRRI dhan29,RICE-BRRI_DHAN29,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),2
+RICE-BRRI_DHAN103,BRRI dhan103,BRRI dhan29,RICE-BRRI_DHAN29,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BRRI_DHAN103,BRRI dhan103,FL378,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN104,BRRI dhan104,IR74052-217-3-3,,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN104,BRRI dhan104,BR7150-11-7-4-2-16,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
+RICE-BRRI_DHAN105,BRRI dhan105,BR16,RICE-BR16,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BRRI_DHAN105,BRRI dhan105,90060-TR1252-8-2-1,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
+RICE-BRRI_DHAN106,BRRI dhan106,MOROBEREKAN,,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN106,BRRI dhan106,IR50,,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN107,BRRI dhan107,local collection (unnamed),,,selection_source,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,pure-line selection,0
+RICE-BRRI_DHAN108,BRRI dhan108,IR 80561 A (CMS line),,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN108,BRRI dhan108,China inbred 321,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN109,BRRI dhan109,ব্রি ধান৪৪,RICE-BRRI_DHAN44,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BRRI_DHAN109,BRRI dhan109,ব্রি ধান৫২,RICE-BRRI_DHAN52,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BRRI_DHAN110,BRRI dhan110,IR262,,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN110,BRRI dhan110,PR30245-10-414,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
+RICE-BRRI_DHAN111,BRRI dhan111,তিলোক-কাচারি,,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN111,BRRI dhan111,ব্রি ধান৪১,RICE-BRRI_DHAN41,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BRRI_DHAN112,BRRI dhan112,CN-4,,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN112,BRRI dhan112,BRRI dhan67,RICE-BRRI_DHAN67,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BRRI_DHAN113,BRRI dhan113,BRRI dhan29,RICE-BRRI_DHAN29,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BRRI_DHAN113,BRRI dhan113,Hbj.B.VI (Pashushail),,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN114,BRRI dhan114,IRBL-9W(LTH),,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN114,BRRI dhan114,BRRI dhan29,RICE-BRRI_DHAN29,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BRRI_DHAN115,BRRI dhan115,BRRI dhan28,RICE-BRRI_DHAN28,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BRRI_DHAN115,BRRI dhan115,Padi Kool (black rice),,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN116,BRRI dhan116,BRRI dhan29,RICE-BRRI_DHAN29,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BRRI_DHAN116,BRRI dhan116,HUA 565,RICE-BRRI_DHAN75,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by breeding line (exact or hyphen-bounded prefix),1
+RICE-BRRI_DHAN117,BRRI dhan117,CN-6,,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN117,BRRI dhan117,BRRI dhan67,RICE-BRRI_DHAN67,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BRRI_DHAN118,BRRI dhan118,BRRI dhan28,RICE-BRRI_DHAN28,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BRRI_DHAN118,BRRI dhan118,Bhutan (Bhutanese cold-tolerant rice),,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN27,BRRI dhan27,KN1 B-361-1-8-6-9,,RICE-BR17,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,sister line of BR17 (same cross designation); parents taken from that documented cross,1
+RICE-BRRI_DHAN27,BRRI dhan27,C168,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN28,BRRI dhan28,BR6 (IR28),RICE-BR6,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BRRI_DHAN28,BRRI dhan28,Purbachi,RICE-OLD_PURBACHI,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by exact register name/alias,1
+RICE-BRRI_DHAN29,BRRI dhan29,BG90-2,,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN29,BRRI dhan29,BR51-46-5,RICE-BR10,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by breeding line (exact or hyphen-bounded prefix),1
+RICE-BRRI_DHAN30,BRRI dhan30,IR2058-78-1-3-2-3,,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN30,BRRI dhan30,BR4,RICE-BR4,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BRRI_DHAN31,BRRI dhan31,BR11,RICE-BR11,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BRRI_DHAN31,BRRI dhan31,ARC10550,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN32,BRRI dhan32,BR4,RICE-BR4,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BRRI_DHAN32,BRRI dhan32,BR2662,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN33,BRRI dhan33,BG388,,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN33,BRRI dhan33,BG367-4,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN34,BRRI dhan34,Khaskani (Acc. No. 4341),,,selection_source,,N,,breeding_line,05_output/final/bgd_rice_varieties.csv,selection from a genebank accession of the landrace Khaskani,0
+RICE-BRRI_DHAN35,BRRI dhan35,BR4,RICE-BR4,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BRRI_DHAN35,BRRI dhan35,BR26-7-4-1,,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,2
+RICE-BRRI_DHAN35,BRRI dhan35,ARC14529,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,2
+RICE-BRRI_DHAN36,BRRI dhan36,IR64,,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN36,BRRI dhan36,IR35293-125-3-2-3,,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN37,BRRI dhan37,Basmati(D),,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN37,BRRI dhan37,BR5,RICE-BR5,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BRRI_DHAN38,BRRI dhan38,Basmati(D),,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN38,BRRI dhan38,BR5,RICE-BR5,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BRRI_DHAN39,BRRI dhan39,BR1185-2B-56-2-1-1,,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,2
+RICE-BRRI_DHAN39,BRRI dhan39,BR1674-28-3-1-1,,RICE-BRRI_DHAN35,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,sister line of BRRI dhan35 (same cross designation); parents taken from that documented cross,2
+RICE-BRRI_DHAN39,BRRI dhan39,BR2558-7-3-2-2,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
+RICE-BRRI_DHAN40,BRRI dhan40,IR4595-4-1-15,,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN40,BRRI dhan40,BR10,RICE-BR10,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BRRI_DHAN41,BRRI dhan41,BR23,RICE-BR23,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BRRI_DHAN41,BRRI dhan41,BR1185-2B-16-1,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
+RICE-BRRI_DHAN42,BRRI dhan42,BR14,RICE-BR14,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BRRI_DHAN42,BRRI dhan42,IR25588-7-3-1,,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN43,BRRI dhan43,BR24,RICE-BR24,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BRRI_DHAN43,BRRI dhan43,BR21,RICE-BR21,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BRRI_DHAN44,BRRI dhan44,BR10,RICE-BR10,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BRRI_DHAN44,BRRI dhan44,BRRI dhan31,RICE-BRRI_DHAN31,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BRRI_DHAN45,BRRI dhan45,BR2,RICE-BR2,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BRRI_DHAN45,BRRI dhan45,TETEP,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN46,BRRI dhan46,BR11,RICE-BR11,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),2
+RICE-BRRI_DHAN46,BRRI dhan46,Swarnalata,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,2
+RICE-BRRI_DHAN46,BRRI dhan46,ARC14766A,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN47,BRRI dhan47,IR515111-B-B-34-B,,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN47,BRRI dhan47,TCCP266-2-49-B-B-3,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
+RICE-BRRI_DHAN48,BRRI dhan48,BR1543-9-2-1,,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
+RICE-BRRI_DHAN48,BRRI dhan48,IR13249-49-3-2-2,,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN49,BRRI dhan49,BR4962-12-4-1,,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
+RICE-BRRI_DHAN49,BRRI dhan49,IR33380-7-2-1-3,,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN50,BRRI dhan50,BR30,RICE-BRRI_DHAN30,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BRRI_DHAN50,BRRI dhan50,IR67684B,,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN51,BRRI dhan51,Swarna,,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN51,BRRI dhan51,IR49830-7-1-2-3,,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN52,BRRI dhan52,BR11,RICE-BR11,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BRRI_DHAN52,BRRI dhan52,IR40931-33-1-3-2,,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN53,BRRI dhan53,BR10,RICE-BR10,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),2
+RICE-BRRI_DHAN53,BRRI dhan53,BR23,RICE-BR23,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),2
+RICE-BRRI_DHAN53,BRRI dhan53,BR847-76-1-1,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
+RICE-BRRI_DHAN54,BRRI dhan54,BR1185-2B-16-1,,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
+RICE-BRRI_DHAN54,BRRI dhan54,BR548-128-1-3,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
+RICE-BRRI_DHAN55,BRRI dhan55,IR 64,,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN55,BRRI dhan55,Oryza rufipogon,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN56,BRRI dhan56,IR55419-4,,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN56,BRRI dhan56,WAY RAREM,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN57,BRRI dhan57,BR11,RICE-BR11,,recurrent,BC5,N,,pedigree,05_output/final/bgd_rice_varieties.csv,"NIL, BC5F1 (NSB 75 minutes); resolved by name (lib_keys.make_key)",1
+RICE-BRRI_DHAN57,BRRI dhan57,INGER line CR146-7027-224,,,donor,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,Indian (CRRI) line received through INGER; breeding line not traced in the register,1
+RICE-BRRI_DHAN58,BRRI dhan58,BRRI dhan29,RICE-BRRI_DHAN29,,somaclone_source,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),0
+RICE-BRRI_DHAN60,BRRI dhan60,BR7166-4-5-3,,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
+RICE-BRRI_DHAN60,BRRI dhan60,BR26,RICE-BR26,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BRRI_DHAN61,BRRI dhan61,IR64419-3B-4-3,,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN61,BRRI dhan61,BRRI dhan29,RICE-BRRI_DHAN29,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BRRI_DHAN62,BRRI dhan62,Jirakateri,,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN62,BRRI dhan62,BRRI dhan39,RICE-BRRI_DHAN39,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BRRI_DHAN63,BRRI dhan63,Amol-3,,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN63,BRRI dhan63,BRRI dhan28,RICE-BRRI_DHAN28,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BRRI_DHAN64,BRRI dhan64,IR75382-32-2-3-3,,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN64,BRRI dhan64,BR7166-4-5-3-2-5-5B1-92,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
+RICE-BRRI_DHAN65,BRRI dhan65,OM606,,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN65,BRRI dhan65,IR44592-62-1-1-3,,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN66,BRRI dhan66,IR78875-176-B-2,,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN66,BRRI dhan66,IR78875-207-B-3,,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN67,BRRI dhan67,IR61247-3B-8-2-1,,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN67,BRRI dhan67,BRRI dhan36,RICE-BRRI_DHAN36,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BRRI_DHAN68,BRRI dhan68,BRRI dhan29*2,RICE-BRRI_DHAN29,,recurrent,2,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BRRI_DHAN68,BRRI dhan68,IR68144,,,donor,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN69,BRRI dhan69,WuShanYouZhan,,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN69,BRRI dhan69,PI312777,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN70,BRRI dhan70,IR67423-208-6-2-3-3,,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN70,BRRI dhan70,IR65610-105-2-5-2-2-2,,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN71,BRRI dhan71,IR55423-01 (NSIC Rc 9),,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN71,BRRI dhan71,IRRI148,,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN72,BRRI dhan72,BR7166-4-5-3,,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
+RICE-BRRI_DHAN72,BRRI dhan72,BRRI dhan 39,RICE-BRRI_DHAN39,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BRRI_DHAN73,BRRI dhan73,BRRI dhan 40,RICE-BRRI_DHAN40,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BRRI_DHAN73,BRRI dhan73,NSIC Rc 106,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN74,BRRI dhan74,IR68144,,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN74,BRRI dhan74,ব্রি ধান২৯ (BRRI dhan29),RICE-BRRI_DHAN29,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BRRI_DHAN75,BRRI dhan75,Yuefengzhan,,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN75,BRRI dhan75,E-Zhong 5,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN76,BRRI dhan76,IR75862-208-8-B-B-HR1,,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN76,BRRI dhan76,BR6110-10-1-2,RICE-BRRI_DHAN44,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by breeding line (exact or hyphen-bounded prefix),1
+RICE-BRRI_DHAN77,BRRI dhan77,IR75862-208-8-B-B-HR1,,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN77,BRRI dhan77,BR6110-10-1-2,RICE-BRRI_DHAN44,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by breeding line (exact or hyphen-bounded prefix),1
+RICE-BRRI_DHAN78,BRRI dhan78,IR84645,,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN78,BRRI dhan78,IR84649,,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN79,BRRI dhan79,ব্রি ধান৪৯,RICE-BRRI_DHAN49,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BRRI_DHAN79,BRRI dhan79,ব্রি ধান৫২,RICE-BRRI_DHAN52,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BRRI_DHAN80,BRRI dhan80,IR65610-105-2-5-2-2,,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN80,BRRI dhan80,IR67423-208-6-2-3-3,,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN81,BRRI dhan81,Amol-3,,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN81,BRRI dhan81,ব্রি ধান২৮,RICE-BRRI_DHAN28,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BRRI_DHAN82,BRRI dhan82,NERICA10,,,selection_source,,Y,AfricaRice,pedigree,05_output/final/bgd_rice_varieties.csv,pure-line selection (Rice Profile); line NERICA10-7-PL2-B,0
+RICE-BRRI_DHAN83,BRRI dhan83,BR24,RICE-BR24,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BRRI_DHAN83,BRRI dhan83,BR1890-12-2-1-1-HR45,,RICE-BRRI_DHAN27,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,sister line of BRRI dhan27 (same cross designation); parents taken from that documented cross,1
+RICE-BRRI_DHAN84,BRRI dhan84,BRRI dhan29,RICE-BRRI_DHAN29,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),3
+RICE-BRRI_DHAN84,BRRI dhan84,IR68144,,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,3
+RICE-BRRI_DHAN84,BRRI dhan84,BRRI dhan28,RICE-BRRI_DHAN28,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),2
+RICE-BRRI_DHAN84,BRRI dhan84,BR11,RICE-BR11,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BRRI_DHAN85,BRRI dhan85,BR4828-54-1-4-9,,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,2
+RICE-BRRI_DHAN85,BRRI dhan85,IR50,,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,2
+RICE-BRRI_DHAN85,BRRI dhan85,BR4828-54-1-4-9,,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,2
+RICE-BRRI_DHAN85,BRRI dhan85,LU HONG ZAO 1,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,2
+RICE-BRRI_DHAN86,BRRI dhan86,Niamat,,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN86,BRRI dhan86,BR802-78-2-1-1,,RICE-BRRI_DHAN29,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,sister line of BRRI dhan29 (same cross designation); parents taken from that documented cross,1
+RICE-BRRI_DHAN87,BRRI dhan87,BRRI dhan29*3,RICE-BRRI_DHAN29,,recurrent,3,N,,cgiar_spia_flags (SPIA 2025 Table 27 'IRRI/INGER entry used as parents'),05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BRRI_DHAN87,BRRI dhan87,Oryza rufipogon (IRGC103404),,,donor,,Y,IRRI,cgiar_spia_flags (SPIA 2025 Table 27 'IRRI/INGER entry used as parents'),05_output/final/bgd_rice_varieties.csv,IRRI genebank accession,1
+RICE-BRRI_DHAN88,BRRI dhan88,ব্রি ধান২৯,RICE-BRRI_DHAN29,,somaclone_source,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),0
+RICE-BRRI_DHAN89,BRRI dhan89,BRRI dhan29*3,RICE-BRRI_DHAN29,,recurrent,3,N,,cgiar_spia_flags (SPIA 2025 Table 27 'IRRI/INGER entry used as parents'),05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BRRI_DHAN89,BRRI dhan89,Oryza rufipogon (IRGC103404),,,donor,,Y,IRRI,cgiar_spia_flags (SPIA 2025 Table 27 'IRRI/INGER entry used as parents'),05_output/final/bgd_rice_varieties.csv,IRRI genebank accession,1
+RICE-BRRI_DHAN90,BRRI dhan90,BR7166-5B-1-RAN-1,,,recurrent,2,N,,pedigree,05_output/final/bgd_rice_varieties.csv,F1 backcrossed once to BR7166-5B-1-RAN-1; breeding line not traced in the register,1
+RICE-BRRI_DHAN90,BRRI dhan90,ব্রি ধান-৩৪ (BRRI dhan34),RICE-BRRI_DHAN34,,donor,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BRRI_DHAN91,BRRI dhan91,তিলককাচারি,,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN91,BRRI dhan91,ব্রি ধান-৪১,RICE-BRRI_DHAN41,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BRRI_DHAN92,BRRI dhan92,"IRGC103918 (rice x wheat derived line 'Rice/Wheat (RI)', collected from IRRI)",,,female,,Y,IRRI,pedigree; Rice Profile id 100 intro,05_output/final/bgd_rice_varieties.csv; 03_extracted/tables/brri_riceprofile.csv,"Rice Profile id 100: 'IRGC103918' collected from IRRI Philippines, anther-cultured, then crossed twice with a BRRI line; generation 2 or deeper",2
+RICE-BRRI_DHAN92,BRRI dhan92,BR319-1-HR2,,RICE-BR14,male,,N,,pedigree; Rice Profile id 100 intro,05_output/final/bgd_rice_varieties.csv; 03_extracted/tables/brri_riceprofile.csv,BRRI line in the full pedigree Rice/Wheat(RI)/BR319-1-HR2//DH(Mingolo/Suweon290)/Panbira; sister line of BR14 (same cross designation); parents taken from that documented cross,2
+RICE-BRRI_DHAN92,BRRI dhan92,DH (Mingolo/Suweon290),,,unknown,,N,,pedigree; Rice Profile id 100 intro,05_output/final/bgd_rice_varieties.csv; 03_extracted/tables/brri_riceprofile.csv,doubled-haploid line; position in the cross not clear from the printed formula,2
+RICE-BRRI_DHAN92,BRRI dhan92,Panbira,,,unknown,,N,,pedigree; Rice Profile id 100 intro,05_output/final/bgd_rice_varieties.csv; 03_extracted/tables/brri_riceprofile.csv,position in the cross not clear from the printed formula,2
+RICE-BRRI_DHAN93,BRRI dhan93,local germplasm (unnamed),,,selection_source,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,pure-line selection; line BR-SF (Rang)-PL1-B,0
+RICE-BRRI_DHAN94,BRRI dhan94,local germplasm (unnamed),,,selection_source,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,pure-line selection; line BR-RS (Raj)-PL4-B,0
+RICE-BRRI_DHAN95,BRRI dhan95,লাল স্বর্ণা (Lal Swarna),,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN95,BRRI dhan95,Barisail,,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,parent of the F1 used as male,2
+RICE-BRRI_DHAN95,BRRI dhan95,PSBRC2,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,Philippine Seed Board release; no source in the archive states its breeding origin,2
+RICE-BRRI_DHAN96,BRRI dhan96,BRRI dhan28*3,RICE-BRRI_DHAN28,,recurrent,3,N,,cgiar_spia_flags (SPIA 2025 Table 27 'IRRI/INGER entry used as parents'),05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BRRI_DHAN96,BRRI dhan96,Oryza rufipogon (IRGC103404),,,donor,,Y,IRRI,cgiar_spia_flags (SPIA 2025 Table 27 'IRRI/INGER entry used as parents'),05_output/final/bgd_rice_varieties.csv,IRRI genebank accession,1
+RICE-BRRI_DHAN97,BRRI dhan97,IRRI 113,,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN97,BRRI dhan97,ব্রি ধান৪০,RICE-BRRI_DHAN40,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
+RICE-BRRI_DHAN98,BRRI dhan98,MLT-145-2,,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN98,BRRI dhan98,HR17512-11-2-3-1-4-2-3,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
+RICE-BRRI_DHAN99,BRRI dhan99,Huang-Hua-Zhan,,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_DHAN99,BRRI dhan99,OM1723,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_HYBRID1,BRRI hybrid dhan1,IR58025A,,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_HYBRID1,BRRI hybrid dhan1,BR827-35-2-1-1R,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
+RICE-BRRI_HYBRID10,BRRI hybrid dhan10,BRRI72A,,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
+RICE-BRRI_HYBRID10,BRRI hybrid dhan10,BRRI42R (both parent lines developed in Bangladesh),,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
+RICE-BRRI_HYBRID2,BRRI hybrid dhan2,BRR10A,,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
+RICE-BRRI_HYBRID2,BRRI hybrid dhan2,BRRI10R,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
+RICE-BRRI_HYBRID3,BRRI hybrid dhan3,BRR11A,,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
+RICE-BRRI_HYBRID3,BRRI hybrid dhan3,BRRI15R,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
+RICE-BRRI_HYBRID4,BRRI hybrid dhan4,IR58025A,,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_HYBRID4,BRRI hybrid dhan4,BRRI10R,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
+RICE-BRRI_HYBRID5,BRRI hybrid dhan5,BRR7A,,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
+RICE-BRRI_HYBRID5,BRRI hybrid dhan5,BRRI31R,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
+RICE-BRRI_HYBRID6,BRRI hybrid dhan6,IR79156A,,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_HYBRID6,BRRI hybrid dhan6,BRRI20R,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
+RICE-BRRI_HYBRID7,BRRI hybrid dhan7,IR75608A,,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BRRI_HYBRID7,BRRI hybrid dhan7,BRRI31R,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
+RICE-BRRI_HYBRID8,BRRI hybrid dhan8,BRRI99A,,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
+RICE-BRRI_HYBRID8,BRRI hybrid dhan8,BRRI37R,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
+RICE-BRRI_HYBRID9,BRRI hybrid dhan9,BRRI72A,,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
+RICE-BRRI_HYBRID9,BRRI hybrid dhan9,BRRI56R (both parent lines developed in Bangladesh),,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
+RICE-BU_DHAN1,BU dhan1,KK8,,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BU_DHAN1,BU dhan1,Badsabhog,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BU_DHAN2,BU dhan2,IR-58025B,,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BU_DHAN2,BU dhan2,BUR-55 (BSMRAU conserved germplasm),,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-GAU_DHAN3,GAU dhan3,বিইউ এসিসি-৩৪,,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-GAU_DHAN3,GAU dhan3,বিইউ এসিসি-৫১,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-IR5,IR5,Peta,,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-IR5,IR5,Tangkai Rotan,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-IR8,IR8,Peta,,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-IR8,IR8,Dee-Geo-Woo-Gen,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-IRATOM24,Iratom-24,IR 8,RICE-IR8,,mutant_source,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),0
+RICE-OLD_BAU63,BAU-63 (Bharosa),IR 758-15-2,,,selection_source,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,0
+RICE-OLD_PAJAM,Pajam,Mahsuri,,,unknown,,N,,pedigree (= TRIVSA 'Original breeding line name'),05_output/final/bgd_rice_varieties.csv,TRIVSA: developing institution 'Malaysia'; relation to Mahsuri not stated,1
+RICE-OLD_PURBACHI,Purbachi,Chin-chu-ai,,,unknown,,N,,pedigree (= TRIVSA 'Original breeding line name'),05_output/final/bgd_rice_varieties.csv,TRIVSA: developing institution 'China'; SCA compendium p.11 '(উৎসঃ গণচীন)',1
+RICE-PVT_ACI_DHAN1,ACI dhan1,IR102481-BK-BK (IRRI segregating population),,,selection_source,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,pedigree selection by ACI from an IRRI cross population,0
+RICE-PVT_ACI_DHAN3,ACI dhan3,ASRBCR38-29-1-5-1,,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,breeding line not traced in the register,1
+RICE-PVT_ACI_DHAN3,ACI dhan3,CNI9004,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-PVT_SUPREME_DHAN1,Supreme dhan1,পানপাতা,,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-PVT_SUPREME_DHAN1,Supreme dhan1,সাদা স্বর্ণা,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1

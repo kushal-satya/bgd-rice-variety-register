@@ -1,0 +1,25 @@
+"""Discovery rows for datasets found on local disk (agent tag LOC)."""
+import csv, datetime
+T = datetime.date.today().isoformat()
+P = "01_discovery/_parts/"
+def w(name, header, rows):
+    with open(P + name, "w", newline="", encoding="utf-8") as f:
+        c = csv.writer(f); c.writerow(header.split(",")); c.writerows(rows)
+
+w("LOC_search_log.csv", "date,agent,engine_site,query,language,n_results,useful_hits,notes", [
+ [T,"LOC","local disk find","*variet* / *dna* / *fingerprint* under RES/BGD_MIX","en","8","3","SPIA DNA fingerprinting folder (2 copies), mixtape_dna.json derived outputs"],
+ [T,"LOC","local disk ls","RES/BGD_MIX/CG_Stocktake","en","5","1","BAN_Stocktake_July_2023.xlsx (SPIA CGIAR innovations stocktake)"],
+ [T,"LOC","local SurveyCTO codebook","SPIA_BIHS_2024_Varnames.xlsx choices: label contains dhan|Binadhan|BRRI|hybrid","en","5 lists","1","list 'paddy' 185 codes incl. popular names (Chandina BR-1, Miniket, Jira...)"],
+ [T,"LOC","local DNA ref file","Barcode_reference_2024.xlsx","en","110","1","110 reference varieties: BD-1..BD-106 (subset) + 11 Binadhan"],
+])
+H = "dataset_id,title,publisher_or_author,url,covers_rice,covers_fish,coverage_description,years_covered,n_records,format,license,last_updated,backbone_potential,backbone_rationale,cgiar_fields_present,accessed,notes"
+w("LOC_existing_datasets.csv", H, [
+ ["LOC-01","SPIA Bangladesh Study 2025 replication package: DNA fingerprinting reference library (Barcode_reference_2024.xlsx)","CGIAR SPIA (Singla et al. 2025)","https://github.com/CGIAR-SPIA/SPIA-Bangladesh-Study-2025","yes","no","Reference seed samples used for DNA fingerprinting of farmer rice; names only (BD-n = BRRI dhan n / BR n; Binadhan-n); no dates, pedigree or developer","n/a (2024 collection)","110","XLSX","see LICENSE at https://osf.io/v9jtu","2025","low","Names only; useful as a cross-check list of varieties SPIA treated as distinct and for local-name/DNA mapping","none","yes","Copied to 02_raw/spia_bd2025/"],
+ ["LOC-02","SPIA 2024 rice DNA assignment results (bangladesh_rice_assignment_results.xlsx)","CGIAR SPIA","https://github.com/CGIAR-SPIA/SPIA-Bangladesh-Study-2025","yes","no","2,202 field samples matched to reference varieties (Top_Reference, purity, Status)","2024","2202","XLSX","see LICENSE","2025","none","Adoption data, not a release list; source for local_names via farmer-reported vs DNA identity","none","yes",""],
+ ["LOC-03","SPIA ref_clusters_no_hybrids_with_HH_Ids.csv","CGIAR SPIA","https://github.com/CGIAR-SPIA/SPIA-Bangladesh-Study-2025","yes","no","370 rows of farmer-reported names (Miniket, Jira, Katari, Hira, Shuvo Lota, BR28/29...) with DNA cluster group and barcode; column labelled 'HH Id' is not a household id","2024","370","CSV","see LICENSE","2025","none","Directly relevant to local_names: market names such as Miniket mapped to DNA clusters","none","yes","Column labels unreliable; verify against SPIA report text before use"],
+ ["LOC-04","SPIA BIHS 2024 SurveyCTO codebook, choice list 'paddy'","CGIAR SPIA / IFPRI BIHS lineage","https://github.com/CGIAR-SPIA/SPIA-Bangladesh-Study-2025","yes","partial (fish species lists elsewhere in codebook)","185 rice variety codes: BR-1..BR-69 with popular names (Chandina, Mala, Biplob...), BRRI dhan 70-106, BRRI hybrid 1-8, BINA 1-25, private hybrids (Hira, ACI 5, Lal Teer, Taj, Shakti...), market/local names (Miniket, Jira-type, Guti/Swarna...)","as of 2024","185","XLSX","see LICENSE","2025","low","Survey code list, not authoritative; valuable for local-name aliases and as a completeness check","none","yes","Exported to 03_extracted/tables/spia_bihs2024_paddy_choices.csv"],
+ ["LOC-05","CGIAR-related innovations - Bangladesh stocktake (BAN_Stocktake_July_2023.xlsx)","CGIAR SPIA","unknown public URL (file received by user)","yes (grouped)","yes (GIFT)","193 rows of CGIAR-related innovations, rice varieties grouped (e.g. 'Salt-tolerant rice variety (8)', 'Zinc rice variety (10)', 'GSR direct release (13)'), GIFT tilapia, with narrative CGIAR-attribution text and adoption evidence","to 2023","193 rows (3 rice groups, 1 fish strain)","XLSX","unknown","2023-12-01 (Definitions sheet)","medium (for CGIAR role only)","Not a release list; but gives SPIA's CGIAR attribution of groups of varieties that we can test against pedigree evidence","CGIAR effort narrative per innovation","yes","Copied to 02_raw/spia_stocktake/; group members not listed variety by variety in the cells read so far"],
+])
+w("LOC_sources_inventory.csv", "source_id,title,publisher,url,language,date,format,coverage,authority_rank,robots_txt_status,wayback_available,access_notes,notes", [
+ ["LOC-S1","SPIA Bangladesh Study 2025: Updating the Green Revolution (report)","CGIAR SPIA","https://iaes.cgiar.org/spia/publications/spia-bangladesh-study-2025-updating-green-revolution","en","2025","PDF text","DNA-fingerprinted adoption of rice varieties; CGIAR attribution of varieties","4_cgiar_record","not_checked","not_checked","report PDF not yet downloaded","Replication repo cloned locally"],
+])

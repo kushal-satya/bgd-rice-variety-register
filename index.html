@@ -4,9 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Bangladesh Rice Variety Register</title>
+<meta name="description" content="Every rice variety approved for cultivation in Bangladesh since 1966, with the National Seed Board decision, pedigree, stated traits, link to CGIAR breeding and survey codes, each traced to its source document.">
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 <div class="wrap">
 <header class="mast">
   <h1 data-text="title" data-inline></h1>
@@ -14,18 +16,22 @@
 </header>
 <nav class="views" aria-label="Views">
   <a href="#overview" data-view="overview">Overview</a>
-  <a href="#figures" data-view="figures">Figures</a>
   <a href="#register" data-view="register">Register</a>
+  <a href="#cgiar" data-view="cgiar">CGIAR and lineage</a>
+  <a href="#figures" data-view="figures">Figures</a>
   <a href="#surveys" data-view="surveys">Surveys</a>
   <a href="#fish" data-view="fish">Fish</a>
   <a href="#methods" data-view="methods">Methods</a>
-  <a href="#data" data-view="data">Data and references</a>
-  <a href="#board" data-view="board" class="internal" hidden>Board contacts</a>
+  <a href="#data" data-view="data">Data and citation</a>
 </nav>
 
-<main>
+<main id="main" tabindex="-1">
 <section id="overview" data-view="overview">
   <div class="lede" data-text="lede"></div>
+  <form id="ovq" role="search" class="ovq">
+    <label for="ovqi">Find a variety</label>
+    <div class="ovqrow"><input id="ovqi" type="search" placeholder="BRRI dhan29, ব্রি ধান ২৯, IR64, Hira 2"><button type="submit">Search the register</button></div>
+  </form>
   <dl class="dsmeta">
     <dt>Coverage</dt><dd data-text="meta-coverage" data-inline></dd>
     <dt>Completeness</dt><dd data-text="meta-completeness" data-inline></dd>
@@ -33,84 +39,125 @@
     <dt>Version</dt><dd data-text="meta-version" data-inline></dd>
     <dt>Unit</dt><dd data-text="meta-unit" data-inline></dd>
   </dl>
-  <h2 data-text="brief-title" data-inline></h2>
-  <div class="prose" data-text="brief"></div>
   <h2 data-text="guide-title" data-inline></h2>
   <div class="prose" data-text="guide"></div>
-</section>
-
-<section id="figures" data-view="figures">
-  <div class="grid2">
-    <figure>
-      <h2 data-text="fig1-title" data-inline></h2>
-      <div class="sub" data-text="fig1-sub"></div>
-      <div class="legend">
-        <span><i class="sw" style="background:var(--s-pub)"></i>Public inbred</span>
-        <span><i class="sw hp"></i>Public hybrid</span>
-        <span><i class="sw" style="background:var(--s-pvt)"></i>Private inbred</span>
-        <span><i class="sw hv"></i>Private hybrid</span>
-      </div>
-      <svg id="f1" viewBox="0 0 640 300" role="img" aria-label="Stacked bars of rice variety approvals per year by sector and type"></svg>
-      <figcaption data-text="fig1-caption"></figcaption>
-    </figure>
-    <figure>
-      <h2 data-text="fig2-title" data-inline></h2>
-      <div class="sub" data-text="fig2-sub"></div>
-      <div class="legend" id="lg2"></div>
-      <svg id="f2" viewBox="0 0 380 300" role="img" aria-label="Stacked horizontal bars: inbred approvals per five-year period by CGIAR link"></svg>
-      <figcaption data-text="fig2-caption"></figcaption>
-    </figure>
-  </div>
-  <figure class="block">
-    <h2 data-text="fig3-title" data-inline></h2>
-    <div class="sub" data-text="fig3-sub"></div>
-    <svg id="f3" viewBox="0 0 1040 360" role="img" aria-label="Grid of inbred varieties per stated trait and decade of approval"></svg>
-    <figcaption data-text="fig3-caption"></figcaption>
-  </figure>
+  <h2 data-text="brief-title" data-inline></h2>
+  <div class="prose" data-text="brief"></div>
 </section>
 
 <section id="register" data-view="register">
   <h2 data-text="register-title" data-inline></h2>
   <div class="sub" data-text="register-sub"></div>
-  <div class="controls">
-    <label for="q">Search name, line or pedigree<input id="q" type="search" placeholder="e.g. dhan29, IR64, Hira, ব্রি ধান"></label>
-    <label for="fs">Sector<select id="fs"><option value="">All</option><option value="public">Public</option><option value="private">Private (companies, NGOs)</option></select></label>
-    <label for="fg">Developer<select id="fg"></select></label>
-    <label for="ft">Type<select id="ft"><option value="">All</option><option>inbred</option><option>hybrid</option></select></label>
-    <label for="ff">Stated trait<select id="ff"><option value="">All</option></select></label>
-    <label for="fc">CGIAR link<select id="fc"><option value="">All</option></select></label>
-    <span class="count" id="cnt"></span><button id="csv" type="button">Download selection (CSV)</button>
-  </div>
-  <div class="tw"><table id="tb">
+  <details class="filters" open>
+    <summary>Filters</summary>
+    <div class="controls">
+      <label for="q">Search name, line or pedigree<input id="q" type="search" placeholder="e.g. dhan29, IR64, Hira, ব্রি ধান"></label>
+      <label for="fs">Sector<select id="fs"><option value="">All</option><option value="public">Public</option><option value="private">Private (companies, NGOs)</option></select></label>
+      <label for="fg">Developer<select id="fg"></select></label>
+      <label for="ft">Type<select id="ft"><option value="">All</option><option>inbred</option><option>hybrid</option></select></label>
+      <label for="ff">Stated trait<select id="ff"><option value="">All</option></select></label>
+      <label for="fc">CGIAR link<select id="fc"><option value="">All</option></select></label>
+    </div>
+  </details>
+  <div class="regbar"><span class="count" id="cnt" aria-live="polite"></span><button id="csv" type="button">Download selection (CSV)</button></div>
+  <p class="note key" id="ckey"></p>
+  <div class="tw"><table id="tb" >
     <thead><tr>
-      <th data-k="name" scope="col">Variety</th><th data-k="developer_group" scope="col">Developer</th>
-      <th data-k="approval_date" scope="col" aria-sort="ascending">Approved</th><th data-k="approval_reference" scope="col">NSB meeting</th>
-      <th scope="col">Stated traits</th><th data-k="cgiar_role" scope="col">CGIAR</th><th scope="col">Source</th>
+      <th data-k="name" scope="col" aria-sort="none">Variety</th><th data-k="developer_group" scope="col" aria-sort="none">Developer</th>
+      <th data-k="approval_date" scope="col" aria-sort="descending">Approved</th><th data-k="approval_reference" scope="col" aria-sort="none">NSB meeting</th>
+      <th scope="col">Stated traits</th><th data-k="cgiar_role" scope="col" aria-sort="none">CGIAR link</th><th scope="col">Source</th>
     </tr></thead><tbody></tbody></table></div>
   <div class="pager"><button id="prev" type="button">Previous</button><span id="pg"></span><button id="next" type="button">Next</button></div>
+</section>
+
+<section id="cgiar" data-view="cgiar">
+  <h2 data-text="cgiar-title" data-inline></h2>
+  <div class="prose" data-text="cgiar-intro"></div>
+  <figure class="block">
+    <h3 data-text="fig4-title" data-inline></h3>
+    <div class="sub" data-text="fig4-sub"></div>
+    <div class="legend" id="lg4"></div>
+    <svg id="f4" viewBox="0 0 640 300" role="img" aria-describedby="f4data" aria-label="Inbred approvals per five-year period by generations to the nearest CGIAR line"></svg>
+    <figcaption data-text="fig4-caption"></figcaption>
+    <details class="figdata" id="f4data"></details>
+  </figure>
+  <figure class="block" id="f6wrap">
+    <h3 data-text="fig6-title" data-inline></h3>
+    <div class="sub" data-text="fig6-sub"></div>
+    <div class="legend" id="lg6"></div>
+    <svg id="f6" viewBox="0 0 640 160" role="img" aria-describedby="f6data" aria-label="Share of rice plots in household surveys by CGIAR link of the variety grown"></svg>
+    <figcaption data-text="fig6-caption"></figcaption>
+    <details class="figdata" id="f6data"></details>
+  </figure>
+  <figure class="block">
+    <h3 data-text="fig5-title" data-inline></h3>
+    <div class="sub" data-text="fig5-sub"></div>
+    <div class="legend" id="lg5"></div>
+    <svg id="f5" viewBox="0 0 640 360" role="img" aria-describedby="f5data" aria-label="Breeding lines with the most descendants among approved varieties"></svg>
+    <figcaption data-text="fig5-caption"></figcaption>
+    <details class="figdata" id="f5data"></details>
+  </figure>
+  <div class="block" id="linbox">
+    <h3 data-text="lin-title" data-inline></h3>
+    <div class="sub" data-text="lin-sub"></div>
+    <form id="linform" class="ovq" role="search">
+      <label for="linq">Variety or breeding line</label>
+      <div class="ovqrow"><input id="linq" list="linlist" type="search" placeholder="BRRI dhan29, BR11, IR8, IR20"><button type="submit">Show family tree</button></div>
+      <datalist id="linlist"></datalist>
+    </form>
+    <p id="lininfo" class="lininfo" aria-live="polite"></p>
+    <div class="legend"><span><i class="sw" style="background:var(--d0)"></i>CGIAR line</span><span><i class="sw" style="background:var(--accent)"></i>Selected variety</span>
+      <span><i class="sw empty"></i>Approved variety</span><span><i class="sw dashed"></i>Breeding line or foreign variety, not approved here</span><span>Dashed link: mutant, somaclone or selection</span></div>
+    <div class="tw lintw"><svg id="lin" viewBox="0 0 900 400" role="img" aria-label="Family tree of the selected variety: ancestors to the left, approved descendants to the right"></svg></div>
+    <figcaption data-text="lin-caption"></figcaption>
+  </div>
+</section>
+
+<section id="figures" data-view="figures">
+  <figure>
+    <h2 data-text="fig1-title" data-inline></h2>
+    <div class="sub" data-text="fig1-sub"></div>
+    <div class="legend">
+      <span><i class="sw" style="background:var(--s-pub)"></i>Public inbred</span>
+      <span><i class="sw hp"></i>Public hybrid</span>
+      <span><i class="sw" style="background:var(--s-pvt)"></i>Private inbred</span>
+      <span><i class="sw hv"></i>Private hybrid</span>
+    </div>
+    <svg id="f1" viewBox="0 0 640 360" role="img" aria-describedby="f1data" aria-label="Rice variety approvals per year, public developers above and seed companies below"></svg>
+    <figcaption data-text="fig1-caption"></figcaption>
+    <details class="figdata" id="f1data"></details>
+  </figure>
+  <figure class="block">
+    <h2 data-text="fig2-title" data-inline></h2>
+    <div class="sub" data-text="fig2-sub"></div>
+    <svg id="f2" viewBox="0 0 640 280" role="img" aria-describedby="f2data" aria-label="Cumulative number of approved varieties by sector and seed type"></svg>
+    <figcaption data-text="fig2-caption"></figcaption>
+    <details class="figdata" id="f2data"></details>
+  </figure>
+  <figure class="block">
+    <h2 data-text="fig3-title" data-inline></h2>
+    <div class="sub" data-text="fig3-sub"></div>
+    <svg id="f3" viewBox="0 0 1040 360" role="img" aria-describedby="f3data" aria-label="Share of inbred varieties stating each trait, by decade of approval"></svg>
+    <figcaption data-text="fig3-caption"></figcaption>
+    <details class="figdata" id="f3data"></details>
+  </figure>
 </section>
 
 <section id="surveys" data-view="surveys">
   <h2 data-text="surveys-title" data-inline></h2>
   <div class="prose" data-text="surveys-intro"></div>
-  <div class="tw"><table id="cwtb" style="min-width:760px"><thead><tr>
-    <th scope="col">Code list</th><th scope="col" class="r">Codes</th><th scope="col" class="r">One register variety</th><th scope="col" class="r">Brand family</th><th scope="col" class="r">Not an approved variety</th><th scope="col" class="r">Residual category</th><th scope="col" class="r">Unmatched</th>
-  </tr></thead><tbody></tbody></table></div>
-  <p class="note" data-text="surveys-note"></p>
-</section>
-
-<section id="board" data-view="board" class="internal" hidden>
-  <h2 data-text="board-title" data-inline></h2>
-  <div class="sub" data-text="board-sub"></div>
-  <div class="controls">
-    <label for="bq">Search name, post or organisation<input id="bq" type="search" placeholder="e.g. BRRI, Director General, Mannan"></label>
-    <label for="bo">Organisation<select id="bo"><option value="">All</option></select></label>
-    <label for="bm">Meeting<select id="bm"><option value="">All</option></select></label>
-    <span class="count" id="bcnt"></span>
+  <div class="block">
+    <h3>Codes in each list</h3>
+    <div class="tw"><table id="cwtb" style="min-width:760px"><thead><tr>
+      <th scope="col">Code list</th><th scope="col" class="r">Codes</th><th scope="col" class="r">One register variety</th><th scope="col" class="r">Brand family</th><th scope="col" class="r">Not an approved variety</th><th scope="col" class="r">Residual category</th><th scope="col" class="r">Unmatched</th>
+    </tr></thead><tbody></tbody></table></div>
+    <p class="note" data-text="surveys-note"></p>
   </div>
-  <div class="tw"><table id="btb" style="min-width:980px"><thead><tr>
-    <th scope="col">Meeting</th><th scope="col">Name</th><th scope="col">Designation</th><th scope="col">Organisation</th><th scope="col">Phone</th><th scope="col">E-mail</th><th scope="col">Read</th><th scope="col">Source</th>
-  </tr></thead><tbody></tbody></table></div>
+  <div class="block" id="pcwrap" hidden>
+    <h3 data-text="plots-title" data-inline></h3>
+    <div class="sub" data-text="plots-sub"></div>
+    <div class="tw"><table id="pctb" style="min-width:760px"><thead></thead><tbody></tbody></table></div>
+  </div>
 </section>
 
 <section id="fish" data-view="fish">
@@ -120,7 +167,7 @@
     <h3>Improved strains</h3>
     <div class="sub" data-text="fish-strains-sub"></div>
     <div class="tw"><table id="fishtb" style="min-width:820px"><thead><tr>
-      <th scope="col">Strain</th><th scope="col">Species</th><th scope="col">Release basis</th><th scope="col">Government act</th><th scope="col">Released</th><th scope="col">CGIAR</th>
+      <th scope="col">Strain</th><th scope="col">Species</th><th scope="col">Release basis</th><th scope="col">Government act</th><th scope="col">Released</th><th scope="col">CGIAR link</th>
     </tr></thead><tbody></tbody></table></div>
   </div>
   <div class="block">
@@ -178,6 +225,10 @@
     <div class="prose" data-text="availability"></div>
   </div>
   <div class="block">
+    <h3>Licence, personal data and acknowledgements</h3>
+    <div class="prose" data-text="about"></div>
+  </div>
+  <div class="block">
     <h3>Files</h3>
     <div class="tw"><table id="filetb" style="min-width:760px"><thead><tr>
       <th scope="col">File</th><th scope="col">Contents</th><th scope="col">Unit of observation</th><th scope="col" class="r">Rows</th><th scope="col" class="r">Columns</th><th scope="col" class="r">MB</th>
@@ -189,6 +240,8 @@
     <div id="reflist"></div>
   </div>
 </section>
+
+
 </main>
 
 <footer data-text="footer"></footer>

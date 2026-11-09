@@ -1,10 +1,11 @@
 /* Layout: a research data report. One reading column (max 1080px): dataset header, two figures, the register,
    fish, methods, references, citation. Hairlines, no cards, one accent; colour belongs to data marks. */
 :root{
-  --bg:#FBFCFB; --surface:#FFFFFF; --ink:#14201C; --ink-2:#4E5B56; --ink-3:#6E7A75;
+  --bg:#FBFCFB; --surface:#FFFFFF; --ink:#14201C; --ink-2:#4E5B56; --ink-3:#5F6B66;
   --rule:#DCE3E0; --rule-2:#EDF1EF; --accent:#07555F; --accent-ink:#07555F; --warn:#9A5B13;
   --s-pub:#008C84; --s-pvt:#C2701F;
   --c1:#054047; --c2:#2C7F80; --c3:#86BDBA; --c4:#C6CCC9; --c5:#EEF1EF; --hatch:#B9C2BE;
+  --d0:#073B42; --d1:#1F6F70; --d2:#4C9C98; --d3:#9CCAC6;
   --hover:rgba(7,85,95,.07);
   --f-sans: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans Bengali",sans-serif;
   --f-num: ui-monospace,"SFMono-Regular","Cascadia Mono",Consolas,monospace;
@@ -14,12 +15,14 @@
   --rule:#2B3532; --rule-2:#1F2725; --accent:#5BB8B3; --accent-ink:#7FCBC6; --warn:#E0A55A;
   --s-pub:#1E9A95; --s-pvt:#D27E28;
   --c1:#A6E0DB; --c2:#4FA9A4; --c3:#2B6765; --c4:#4A514E; --c5:#232B29; --hatch:#3E4845;
+  --d0:#B8E6E2; --d1:#6DBDB8; --d2:#3E8C88; --d3:#285E5B;
   --hover:rgba(91,184,179,.09); color-scheme:dark }}
 :root[data-theme="dark"]{
   --bg:#121816; --surface:#171E1C; --ink:#E6ECE9; --ink-2:#AAB6B1; --ink-3:#8A9691;
   --rule:#2B3532; --rule-2:#1F2725; --accent:#5BB8B3; --accent-ink:#7FCBC6; --warn:#E0A55A;
   --s-pub:#1E9A95; --s-pvt:#D27E28;
   --c1:#A6E0DB; --c2:#4FA9A4; --c3:#2B6765; --c4:#4A514E; --c5:#232B29; --hatch:#3E4845;
+  --d0:#B8E6E2; --d1:#6DBDB8; --d2:#3E8C88; --d3:#285E5B;
   --hover:rgba(91,184,179,.09); color-scheme:dark }
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--f-sans);margin:0}
@@ -161,3 +164,65 @@ tr.det h3{font-size:14px;letter-spacing:.02em;text-transform:uppercase;color:var
 tr.det h3:first-child{margin-top:0}
 @media (max-width:600px){nav.views{gap:0 14px} nav.views a{font-size:13.5px;padding:9px 0 7px}}
 [hidden]{display:none!important}
+
+/* ---- v1.2: accessibility, record view, lineage ---- */
+.skip{position:absolute;left:-9999px;top:0}
+.skip:focus{left:16px;top:8px;background:var(--surface);color:var(--ink);padding:6px 10px;z-index:30;border:1px solid var(--ink-3)}
+main:focus{outline:none}
+.controls input,.controls select,button,#csv{border-color:var(--ink-3)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .cc2{color:var(--bg)}}
+:root[data-theme="dark"] .cc2{color:var(--bg)}
+[lang="bn"]{font-family:"Noto Sans Bengali","Nirmala UI",Vrinda,var(--f-sans);line-height:1.6}
+.bn[lang="bn"],.bn [lang="bn"]{font-size:13.5px}
+.sw.empty{background:var(--bg);outline:1px solid var(--ink-3);outline-offset:-1px}
+.sw.dashed{background:var(--surface);outline:1px dashed var(--ink-3);outline-offset:-1px}
+.sw.hcol{background:repeating-linear-gradient(-45deg,var(--d2) 0 2px,var(--bg) 2px 5px);outline:1px solid var(--d2);outline-offset:-1px}
+.cgmark{display:inline-block;font-size:10.5px;padding:0 4px;background:var(--d0);color:var(--bg);border-radius:2px;margin-right:4px}
+/* overview search */
+.ovq{margin:0 0 26px;max-width:640px}
+.ovq label{display:block;font-size:13px;color:var(--ink-2);margin-bottom:4px}
+.ovqrow{display:flex;gap:8px;flex-wrap:wrap}
+.ovqrow input{flex:1 1 260px;min-width:0;font:inherit;font-size:15px;padding:8px 10px;border:1px solid var(--ink-3);border-radius:2px;background:var(--surface);color:var(--ink)}
+.ovqrow button{font-size:14px;padding:8px 14px}
+/* register */
+details.filters>summary{display:none}
+details.filters{margin:0}
+.regbar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:4px 0 4px}
+.regbar .count{margin-left:0}
+#csv{white-space:nowrap}
+.key{margin:2px 0 10px}
+.key .code{margin:0 2px 0 6px;vertical-align:-3px}
+button.vname{all:unset;cursor:pointer;color:var(--accent-ink);font-weight:600;text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px}
+button.vname:hover{text-decoration-color:var(--accent-ink)}
+button.vname:focus-visible,button.sort:focus-visible,svg a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+button.sort{all:unset;cursor:pointer;font-weight:inherit}
+th[aria-sort="ascending"] button.sort::after{content:" 91"} th[aria-sort="descending"] button.sort::after{content:" 93"}
+#tb tr.row{scroll-margin-top:calc(var(--navh,46px) + 10px)}
+tr.isopen td{background:var(--rule-2)}
+.rechead{border-bottom:1px solid var(--rule);padding-bottom:8px;margin-bottom:6px}
+tr.det h3.rectitle{font-size:18px;margin:0;text-transform:none;letter-spacing:0;color:var(--ink)}
+.recsub{margin:2px 0 0;color:var(--ink-2);font-size:13.5px}
+tr.det h4{font-size:12.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3);margin:16px 0 6px;font-weight:650}
+tr.det .dl{grid-template-columns:230px 1fr}
+details.sec{margin-top:14px;border-top:1px solid var(--rule);padding-top:8px}
+details.sec>summary{font-size:13.5px;font-weight:600;color:var(--accent-ink);cursor:pointer}
+details.dec{margin:6px 0 6px 10px}
+p.mins{white-space:pre-wrap;margin:6px 0;font-size:13px}
+.figdata{margin-top:10px;font-size:13px}
+.figdata>summary{color:var(--accent-ink);cursor:pointer;font-size:13px}
+.figdata table{font-size:12.5px}
+.figdata th[scope="row"]{font-weight:500;text-align:left}
+/* lineage */
+.lininfo{font-size:14px;margin:4px 0 10px;max-width:90ch}
+.lintw{border:1px solid var(--rule);background:var(--bg)}
+#lin{min-width:600px}
+svg a.lnode{cursor:pointer}
+svg a.lnode:hover rect{stroke:var(--accent);stroke-width:1.5}
+svg .lab.link{text-decoration:underline;text-decoration-color:var(--rule)}
+svg .lab.cg{font-weight:650}
+@media (min-width:1000px){#register .tw{overflow:visible} #tb thead th{position:sticky;top:var(--navh,46px);background:var(--bg);z-index:2}}
+@media (max-width:600px){
+  details.filters>summary{display:block;cursor:pointer;font-size:14px;font-weight:600;color:var(--accent-ink);margin-bottom:8px}
+  tr.det td{display:block;width:calc(100vw - 40px);position:sticky;left:0}
+  tr.det .dl{grid-template-columns:1fr} tr.det .dl dd{margin-bottom:6px}
+}

@@ -1,0 +1,458 @@
+<title>Bangladesh Rice Variety Register</title>
+<style>
+/* Layout: a research data report. One reading column (max 1080px): dataset header, two figures, the register,
+   fish, methods, references, citation. Hairlines, no cards, one accent; colour belongs to data marks. */
+:root{
+  --bg:#FBFCFB; --surface:#FFFFFF; --ink:#14201C; --ink-2:#4E5B56; --ink-3:#6E7A75;
+  --rule:#DCE3E0; --rule-2:#EDF1EF; --accent:#07555F; --accent-ink:#07555F; --warn:#9A5B13;
+  --s-pub:#008C84; --s-pvt:#C2701F;
+  --c1:#054047; --c2:#2C7F80; --c3:#86BDBA; --c4:#C6CCC9; --c5:#EEF1EF; --hatch:#B9C2BE;
+  --hover:rgba(7,85,95,.07);
+  --f-sans: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans Bengali",sans-serif;
+  --f-num: ui-monospace,"SFMono-Regular","Cascadia Mono",Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#121816; --surface:#171E1C; --ink:#E6ECE9; --ink-2:#AAB6B1; --ink-3:#8A9691;
+  --rule:#2B3532; --rule-2:#1F2725; --accent:#5BB8B3; --accent-ink:#7FCBC6; --warn:#E0A55A;
+  --s-pub:#1E9A95; --s-pvt:#D27E28;
+  --c1:#A6E0DB; --c2:#4FA9A4; --c3:#2B6765; --c4:#4A514E; --c5:#232B29; --hatch:#3E4845;
+  --hover:rgba(91,184,179,.09); color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#121816; --surface:#171E1C; --ink:#E6ECE9; --ink-2:#AAB6B1; --ink-3:#8A9691;
+  --rule:#2B3532; --rule-2:#1F2725; --accent:#5BB8B3; --accent-ink:#7FCBC6; --warn:#E0A55A;
+  --s-pub:#1E9A95; --s-pvt:#D27E28;
+  --c1:#A6E0DB; --c2:#4FA9A4; --c3:#2B6765; --c4:#4A514E; --c5:#232B29; --hatch:#3E4845;
+  --hover:rgba(91,184,179,.09); color-scheme:dark }
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--f-sans);margin:0}
+.wrap{max-width:1080px;margin:0 auto;padding-inline:20px;padding-block:28px 64px}
+header{border-bottom:2px solid var(--ink);padding-bottom:16px;margin-bottom:26px}
+h1{font-size:30px;line-height:1.15;margin:0 0 8px;font-weight:700;letter-spacing:-.01em;text-wrap:balance}
+.lede{max-width:72ch;color:var(--ink-2);margin:0 0 12px;font-size:16px}
+.dsmeta{display:grid;grid-template-columns:max-content 1fr;gap:2px 16px;font-size:13px;color:var(--ink-2);margin:0}
+.dsmeta dt{color:var(--ink-3)} .dsmeta dd{margin:0}
+nav.toc{font-size:13px;margin-top:12px;display:flex;flex-wrap:wrap;gap:4px 16px}
+h2{font-size:20px;margin:0 0 4px;font-weight:700;text-wrap:balance}
+h3{font-size:15px;margin:20px 0 4px;font-weight:650}
+.sub{font-size:13.5px;color:var(--ink-2);margin:0 0 14px;max-width:82ch}
+section{margin-bottom:46px;scroll-margin-top:12px}
+.grid2{display:grid;grid-template-columns:1fr;gap:36px}
+figure{margin:0;min-width:0}
+figcaption{font-size:12.5px;color:var(--ink-3);margin-top:8px;max-width:90ch}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:13px;color:var(--ink-2);margin:0 0 8px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:11px;height:11px;border-radius:2px;display:inline-block;flex:none}
+.sw.hp{background:repeating-linear-gradient(45deg,var(--s-pub) 0 2px,var(--bg) 2px 4px);outline:1px solid var(--s-pub);outline-offset:-1px}
+.sw.hv{background:repeating-linear-gradient(45deg,var(--s-pvt) 0 2px,var(--bg) 2px 4px);outline:1px solid var(--s-pvt);outline-offset:-1px}
+.sw.hatch{background:repeating-linear-gradient(45deg,var(--hatch) 0 2px,var(--c5) 2px 5px);outline:1px solid var(--rule)}
+svg{display:block;width:100%;height:auto;overflow:visible}
+svg text{fill:var(--ink-3);font-size:11px;font-family:var(--f-sans)}
+svg .ax{stroke:var(--ink-3);stroke-width:1}
+svg .gl{stroke:var(--rule);stroke-dasharray:2 3;stroke-width:1}
+svg .ann{fill:var(--ink-2);font-size:11.5px}
+svg .annl{stroke:var(--ink-3);stroke-width:1}
+svg .lab{fill:var(--ink);font-size:11.5px;font-variant-numeric:tabular-nums}
+.note{font-size:12.5px;color:var(--ink-3);margin-top:8px;max-width:90ch}
+#tip{position:fixed;pointer-events:none;background:var(--surface);color:var(--ink);border:1px solid var(--rule);
+  padding:8px 10px;font-size:12.5px;line-height:1.45;border-radius:3px;box-shadow:0 2px 8px rgba(0,0,0,.08);z-index:20;max-width:300px}
+#tip b{font-weight:650}
+#tip .r{display:flex;justify-content:space-between;gap:14px;font-variant-numeric:tabular-nums}
+#tip .k{display:inline-flex;align-items:center;gap:6px;color:var(--ink-2)}
+.controls{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:end;margin:0 0 10px}
+.controls label{display:flex;flex-direction:column;gap:3px;font-size:12px;color:var(--ink-2)}
+.controls input,.controls select{font:inherit;font-size:14px;color:var(--ink);background:var(--surface);border:1px solid var(--rule);
+  border-radius:3px;padding:6px 8px;min-width:0;max-width:100%}
+.controls input{width:250px}
+.controls input:focus,.controls select:focus,button:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.count{font-size:13px;color:var(--ink-2);margin-left:auto;font-variant-numeric:tabular-nums}
+.tw{overflow-x:auto;border-top:1px solid var(--ink);border-bottom:1px solid var(--rule)}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+#tb{min-width:900px}
+th{text-align:left;font-weight:650;font-size:12.5px;color:var(--ink-2);padding:8px 10px;border-bottom:1px solid var(--rule);white-space:nowrap}
+#tb th{cursor:pointer;user-select:none}
+th[aria-sort="ascending"]::after{content:" ↑";color:var(--accent-ink)}
+th[aria-sort="descending"]::after{content:" ↓";color:var(--accent-ink)}
+td{padding:7px 10px;border-bottom:1px solid var(--rule-2);vertical-align:top}
+th.r,td.r{text-align:right}
+tbody tr.row{cursor:pointer}
+tbody tr.row:hover{background:var(--hover)}
+td.num,.mono{font-family:var(--f-num);font-size:12.5px;font-variant-numeric:tabular-nums}
+.bn{color:var(--ink-2);font-size:12.5px}
+.st{font-size:11.5px;color:var(--warn)}
+.code{display:inline-block;width:18px;height:18px;line-height:18px;text-align:center;border-radius:2px;font-size:11.5px;font-weight:650;font-family:var(--f-num)}
+.cc1{background:var(--c1);color:var(--bg)} .cc2{background:var(--c2);color:#fff} .cc3{background:var(--c3);color:var(--ink)}
+.cc4{background:var(--c4);color:var(--ink)} .cc5{background:repeating-linear-gradient(45deg,var(--hatch) 0 2px,var(--c5) 2px 5px);color:var(--ink)}
+tr.det td{background:var(--rule-2);padding:12px 14px 14px}
+.dl{display:grid;grid-template-columns:180px 1fr;gap:4px 14px;font-size:13px;max-width:100%}
+.dl dt{color:var(--ink-3)} .dl dd{margin:0;min-width:0;overflow-wrap:anywhere}
+a{color:var(--accent-ink);text-underline-offset:2px}
+.pager{display:flex;gap:8px;align-items:center;margin-top:10px;font-size:13px;color:var(--ink-2)}
+button{font:inherit;font-size:13px;background:var(--surface);color:var(--ink);border:1px solid var(--rule);border-radius:3px;padding:5px 10px;cursor:pointer}
+button:disabled{opacity:.4;cursor:default}
+.prose{max-width:78ch;font-size:14.5px}
+.prose p{margin:0 0 10px}
+.prose ul{margin:0 0 10px;padding-left:20px}
+.prose li{margin-bottom:4px}
+ol.refs{padding-left:22px;font-size:13.5px;max-width:92ch}
+ol.refs li{margin-bottom:8px;overflow-wrap:anywhere}
+.refgroup{font-size:12.5px;color:var(--ink-3);margin:16px 0 6px;font-weight:650}
+details summary{cursor:pointer;font-size:13px}
+p.citation{max-width:92ch;padding-left:2em;text-indent:-2em;font-size:14px;margin:0 0 6px}
+pre.cite{white-space:pre-wrap;font-family:var(--f-num);font-size:12.5px;background:var(--surface);border:1px solid var(--rule);border-radius:3px;padding:10px 12px;max-width:92ch;margin:0 0 10px}
+footer{border-top:1px solid var(--rule);padding-top:14px;font-size:12.5px;color:var(--ink-3)}
+@media (min-width:900px){.grid2{grid-template-columns:1.55fr 1fr}}
+@media (max-width:600px){h1{font-size:24px}.dl,.dsmeta{grid-template-columns:1fr}.controls input{width:100%}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+<header>
+  <h1>Bangladesh Rice Variety Register</h1>
+  <p class="lede" id="lede"></p>
+  <dl class="dsmeta" id="dsmeta"></dl>
+  <nav class="toc" aria-label="Sections"><a href="#figures">Figures</a><a href="#register">Register</a><a href="#fish">Fish</a><a href="#methods">Methods</a><a href="#references">References</a><a href="#cite">Data and citation</a></nav>
+</header>
+
+<section id="figures">
+  <div class="grid2">
+    <figure>
+      <h2>Approvals by year, 1966–2026</h2>
+      <p class="sub">Rice varieties approved for cultivation each year, by developer sector and seed type. Year of the National Seed Board decision; pre-1974 introductions dated by the SCA compendium.</p>
+      <div class="legend">
+        <span><i class="sw" style="background:var(--s-pub)"></i>Public inbred</span>
+        <span><i class="sw hp"></i>Public hybrid</span>
+        <span><i class="sw" style="background:var(--s-pvt)"></i>Private inbred</span>
+        <span><i class="sw hv"></i>Private hybrid</span>
+      </div>
+      <svg id="f1" viewBox="0 0 640 300" role="img" aria-label="Stacked bars of rice variety approvals per year by sector and type"></svg>
+      <figcaption>Colour shows who developed the variety: public (BRRI, BINA, universities, BADC) or private (seed companies and NGOs such as BRAC). Hatching marks hybrids, which can be public or private. 2026 covers one meeting (115th, 5 February).</figcaption>
+    </figure>
+    <figure>
+      <h2>CGIAR link of inbred varieties</h2>
+      <p class="sub">Share of inbred approvals per decade by the strongest documented CGIAR link. Number of varieties at right.</p>
+      <div class="legend" id="lg2"></div>
+      <svg id="f2" viewBox="0 0 380 300" role="img" aria-label="Stacked horizontal bars of CGIAR link by decade"></svg>
+      <figcaption>Coded from documented pedigrees, NSB minutes and institute records, never from names. Hybrids are not shown: most private hybrids have no published pedigree.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="register">
+  <h2>Register</h2>
+  <p class="sub">One row per approved variety. Select a row for pedigree, gazette notification, CGIAR evidence, literature and the source documents.</p>
+  <div class="controls">
+    <label for="q">Search name, line or pedigree<input id="q" type="search" placeholder="e.g. dhan29, IR64, Hira, ব্রি ধান"></label>
+    <label for="fs">Sector<select id="fs"><option value="">All</option><option value="public">Public</option><option value="private">Private (companies, NGOs)</option></select></label>
+    <label for="fg">Developer<select id="fg"></select></label>
+    <label for="ft">Type<select id="ft"><option value="">All</option><option>inbred</option><option>hybrid</option></select></label>
+    <label for="fc">CGIAR link<select id="fc"><option value="">All</option></select></label>
+    <span class="count" id="cnt"></span>
+  </div>
+  <div class="tw"><table id="tb">
+    <thead><tr>
+      <th data-k="name" scope="col">Variety</th><th data-k="developer_group" scope="col">Developer</th>
+      <th data-k="approval_date" scope="col" aria-sort="ascending">Approved</th><th data-k="approval_reference" scope="col">NSB decision</th>
+      <th data-k="breeding_line" scope="col">Breeding line</th><th data-k="cgiar_role" scope="col">CGIAR</th><th scope="col">Source</th>
+    </tr></thead><tbody></tbody></table></div>
+  <div class="pager"><button id="prev" type="button">Previous</button><span id="pg"></span><button id="next" type="button">Next</button></div>
+</section>
+
+<section id="fish">
+  <h2>Fish: improved strains and government control</h2>
+  <div class="prose">
+    <p>The state controls fish and shrimp <b>species</b>, not <b>strains</b>. The Ministry of Fisheries and Livestock and the Department of Fisheries decide which species hatcheries may produce (Fish Hatchery Rules 2011) and import (Fish Quarantine Rules 2024), ban species by gazette, and approved one new species (vannamei, 2023). There is no equivalent of the National Seed Board for improved strains: no strain register, no required trials and no release committee. Hybrid release needs approval of the Director General of Fisheries (Fish Hatchery Act 2010, s. 6(2)), but none is on record.</p>
+  </div>
+  <h3>Improved strains</h3>
+  <p class="sub">Release basis: R1 ministerial naming (MoFL notification) · R2 institute release (BFRI) · R3 CGIAR release (WorldFish) · R4 dissemination only.</p>
+  <div class="tw"><table id="fishtb" style="min-width:820px"><thead><tr>
+    <th scope="col">Strain</th><th scope="col">Species</th><th scope="col">Release basis</th><th scope="col">Government act</th><th scope="col">Released</th><th scope="col">CGIAR</th>
+  </tr></thead><tbody></tbody></table></div>
+  <h3>Germplasm transfers and planned releases</h3>
+  <p class="sub">Introductions of improved germplasm and announced generations, kept apart from released strains.</p>
+  <div class="tw"><table id="fishev" style="min-width:640px"><thead><tr>
+    <th scope="col">Event</th><th scope="col">Type</th><th scope="col">Date</th><th scope="col">Developer</th><th scope="col">Note</th>
+  </tr></thead><tbody></tbody></table></div>
+  <h3>Government acts on fish species and strains</h3>
+  <p class="sub" id="fishgsub"></p>
+  <div class="tw"><table id="fishg" style="min-width:640px"><thead><tr>
+    <th scope="col">Type of act</th><th scope="col" class="r">Acts</th><th scope="col">Body</th><th scope="col">Period</th>
+  </tr></thead><tbody></tbody></table></div>
+  <h3>Key acts</h3>
+  <div class="tw"><table id="fishk" style="min-width:820px"><thead><tr>
+    <th scope="col">Date</th><th scope="col">Species or strain</th><th scope="col">Act</th><th scope="col">Body</th><th scope="col">Reference</th>
+  </tr></thead><tbody></tbody></table></div>
+</section>
+
+<section id="methods">
+  <h2>Methods</h2>
+  <div class="prose" id="methodsprose"></div>
+  <h3>Verification of values read from scans</h3>
+  <div class="grid2">
+    <div class="tw" style="border-bottom:0"><table id="qa1"><thead><tr><th scope="col">OCR word confidence (Tesseract, 0–100)</th><th scope="col" class="r">Pages</th><th scope="col" class="r">Values read</th></tr></thead><tbody></tbody></table></div>
+    <div class="tw" style="border-bottom:0"><table id="qa2"><thead><tr><th scope="col">How values were checked</th><th scope="col" class="r">Evidence rows</th></tr></thead><tbody></tbody></table></div>
+  </div>
+  <p class="note" id="qanote"></p>
+</section>
+
+<section id="references">
+  <h2>References</h2>
+  <p class="sub">Primary documents and datasets. Every link was requested on the build date; "archived copy" points to the Internet Archive where the original host is offline.</p>
+  <div id="reflist"></div>
+</section>
+
+<section id="cite">
+  <h2>Data and citation</h2>
+  <h3>Suggested citation</h3>
+  <p class="citation" id="citetext"></p>
+  <h3>Data availability</h3>
+  <div class="prose"><p>The register and its supporting tables are distributed as UTF-8 CSV files and as one Excel workbook (<span class="mono">bgd_variety_archive.xlsx</span>) that opens with a README and the data dictionary (<span class="mono">DATA_DICTIONARY.md</span>). Every source document is archived unchanged with its SHA-256 fingerprint; original addresses and Internet Archive copies are listed in <span class="mono">bgd_sources.csv</span>. The scripts that rebuild every table from the archived sources are distributed with the data.</p></div>
+  <h3>Files</h3>
+  <div class="tw"><table id="filetb" style="min-width:760px"><thead><tr>
+    <th scope="col">File</th><th scope="col">Contents</th><th scope="col">Unit of observation</th><th scope="col" class="r">Rows</th><th scope="col" class="r">Columns</th><th scope="col" class="r">MB</th>
+  </tr></thead><tbody></tbody></table></div>
+</section>
+
+<footer id="foot"></footer>
+</div>
+<div id="tip" hidden></div>
+
+<script type="application/json" id="data">__DATA__</script>
+<script>
+(function(){
+const D = JSON.parse(document.getElementById('data').textContent);
+const R = D.rice;
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const NS = 'http://www.w3.org/2000/svg';
+const el = (t, a, p) => { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); if (p) p.appendChild(e); return e; };
+const fmt = n => Number(n).toLocaleString('en-US');
+const clip = (t, n) => { t = String(t||''); if (t.length <= n) return t; const c = t.slice(0, n); return c.slice(0, Math.max(c.lastIndexOf(' '), n*0.6|0)).replace(/[\s,;(/]+$/,'') + '…'; };
+const link = (u, label) => u ? `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(label)}</a>` : '';
+const sector = r => /^(Private company|Private or NGO inbred)$/.test(r.developer_group) ? 'private' : 'public';
+const series = r => (sector(r) === 'public' ? 'pub_' : 'pvt_') + (r.rice_type === 'hybrid' ? 'hyb' : 'inb');
+const SER = [['pub_inb','Public inbred','var(--s-pub)','background:var(--s-pub)',''],['pub_hyb','Public hybrid','url(#hp)','','hp'],['pvt_inb','Private inbred','var(--s-pvt)','background:var(--s-pvt)',''],['pvt_hyb','Private hybrid','url(#hv)','','hv']];
+const CODES = {'1':'CGIAR line released directly','2':'CGIAR parent or grandparent','3':'Collaboration or funding only','4':'No CGIAR element in pedigree','5':'Unknown'};
+const SRC = [[/nsb_minutes/, 'NSB minutes'], [/approved_crop_varieties|registered_hybrid_rice/, 'SCA annual list'], [/approved_varieties_notified_crops/, 'SCA compendium 2016'],
+  [/hybrid_rice_(varieties_)?list/, 'MoA hybrid list'], [/gazette|bgpress|release_gazette/, 'Bangladesh Gazette'], [/adc|adhunik/, 'BRRI handbook'],
+  [/riceprofile/, 'BRRI Rice Profile'], [/factsheet|fact_sheet|brri\//, 'BRRI record'], [/bina/, 'BINA record'], [/spia/, 'SPIA 2025'], [/trivsa/, 'TRIVSA'], [/harvestplus/, 'HarvestPlus']];
+const srcLabel = f => { for (const [re, l] of SRC) if (re.test((f||'').toLowerCase())) return l; return 'Source document'; };
+const offline = st => st === 'dead' || st === 'unreachable';
+
+// Header
+const yrs = R.map(r => +r.approval_year).filter(Boolean), y0 = Math.min(...yrs), y1 = Math.max(...yrs);
+const hybN = R.filter(r => r.rice_type==='hybrid').length;
+$('#lede').textContent = `Every rice variety approved for cultivation in Bangladesh, ${y0}–${y1}, with the National Seed Board decision behind each approval, its pedigree, its documented link to CGIAR research, and the source documents. Also covers improved fish strains and the government acts that control fish species.`;
+const meta = [['Coverage', `${fmt(R.length)} rice varieties (${fmt(R.length-hybN)} inbred, ${fmt(hybN)} hybrid; public and private) · ${D.fish.length} improved fish strains · ${fmt((D.fish_groups||[]).reduce((a,g)=>a+g.n,0))} government acts on fish`],
+  ['Data as of', '115th National Seed Board meeting, 5 February 2026'],
+  ['Version', `1.0 (${new Date(D.built + 'T00:00:00Z').toLocaleDateString('en-GB', {day:'numeric', month:'long', year:'numeric', timeZone:'UTC'})})`],
+  ['Unit', 'One officially approved variety (release, registration or pre-1974 introduction)']];
+$('#dsmeta').innerHTML = meta.map(([k,v]) => `<dt>${k}</dt><dd>${esc(v)}</dd>`).join('');
+
+// Tooltip
+const tip = $('#tip');
+function showTip(ev, html){ tip.innerHTML = html; tip.hidden = false; moveTip(ev); }
+function moveTip(ev){ const w = tip.offsetWidth, h = tip.offsetHeight; let x = ev.clientX + 14, y = ev.clientY + 14;
+  if (x + w > innerWidth - 8) x = ev.clientX - w - 14; if (y + h > innerHeight - 8) y = ev.clientY - h - 14; tip.style.left = x+'px'; tip.style.top = y+'px'; }
+function hideTip(){ tip.hidden = true; }
+
+// Figure 1
+(function(){
+  const svg = $('#f1'), W = 640, H = 300, m = {l:30, r:8, t:14, b:26};
+  const years = []; for (let y=1966; y<=2026; y++) years.push(y);
+  const cnt = {}; years.forEach(y => cnt[y] = {pub_inb:0,pub_hyb:0,pvt_inb:0,pvt_hyb:0});
+  R.forEach(r => { const y = +r.approval_year; if (cnt[y]) cnt[y][series(r)]++; });
+  const sum = c => c.pub_inb+c.pub_hyb+c.pvt_inb+c.pvt_hyb;
+  const max = Math.max(...years.map(y => sum(cnt[y])));
+  const defs = el('defs',{},svg);
+  [['hp','var(--s-pub)'],['hv','var(--s-pvt)']].forEach(([id,col]) => { const pt = el('pattern',{id,width:4,height:4,patternUnits:'userSpaceOnUse',patternTransform:'rotate(45)'},defs);
+    el('rect',{width:4,height:4,fill:'var(--bg)'},pt); el('rect',{width:2,height:4,fill:col},pt); });
+  const top = Math.ceil(max/10)*10, iw = W-m.l-m.r, ih = H-m.t-m.b, bw = iw/years.length;
+  const ys = v => m.t + ih - v/top*ih;
+  for (let v=0; v<=top; v+=10){ el('line',{x1:m.l,x2:W-m.r,y1:ys(v),y2:ys(v),class: v? 'gl':'ax'},svg);
+    const t = el('text',{x:m.l-6,y:ys(v)+3.5,'text-anchor':'end'},svg); t.textContent = v; }
+  years.forEach((y,i) => { if (y%10===0 || y===1966){ const t = el('text',{x:m.l+i*bw+bw/2,y:H-8,'text-anchor':'middle'},svg); t.textContent = y; } });
+  years.forEach((y,i) => {
+    let acc = 0; const c = cnt[y], tot = sum(c); const x = m.l + i*bw + 1, w = Math.max(1, bw-2);
+    const segs = SER.filter(s => c[s[0]]>0);
+    segs.forEach((s,j) => { const v = c[s[0]]; const yTop = ys(acc+v), hgt = ys(acc)-ys(acc+v);
+      const gap = j < segs.length-1 ? 1 : 0;
+      const rr = el('rect',{x, y:yTop+gap, width:w, height:Math.max(0,hgt-gap), fill:s[2], rx: j===segs.length-1 ? 1.5 : 0},svg);
+      if (s[4]) { rr.setAttribute('stroke', s[4]==='hp' ? 'var(--s-pub)' : 'var(--s-pvt)'); rr.setAttribute('stroke-width','0.8'); }
+      acc += v; });
+    const hit = el('rect',{x:m.l+i*bw, y:m.t, width:bw, height:ih, fill:'transparent'},svg);
+    hit.addEventListener('mousemove', ev => showTip(ev, `<b>${y}</b> · ${tot} approved` + SER.map(s =>
+      `<div class="r"><span class="k"><i class="sw ${s[4]}" style="${s[3]}"></i>${s[1]}</span><span>${c[s[0]]}</span></div>`).join('')));
+    hit.addEventListener('mouseleave', hideTip);
+  });
+  const first = R.filter(r => r.rice_type==='hybrid').sort((a,b) => a.approval_date.localeCompare(b.approval_date))[0];
+  if (first){ const i = +first.approval_year - 1966, x = m.l + i*bw + bw/2, c = cnt[+first.approval_year];
+    el('line',{x1:x,x2:x,y1:ys(sum(c))-4,y2:ys(top*0.62),class:'annl'},svg);
+    const t = el('text',{x:x-4,y:ys(top*0.62)-6,'text-anchor':'end',class:'ann'},svg);
+    t.textContent = 'First hybrids registered, 40th NSB meeting, Sep 1998'; }
+})();
+
+// Figure 2
+(function(){
+  const svg = $('#f2'), W = 380, m = {l:46, r:34, t:6, b:22}, rowH = 34;
+  $('#lg2').innerHTML = ['1','2','3','4','5'].map(k => `<span><i class="sw ${k==='5'?'hatch':''}" style="${k==='5'?'':'background:var(--c'+k+')'}"></i>${k} ${CODES[k].replace('CGIAR ','').replace('No CGIAR element in pedigree','No CGIAR element')}</span>`).join('');
+  const decs = [1960,1970,1980,1990,2000,2010,2020];
+  const H = m.t + decs.length*rowH + m.b; svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  const defs = el('defs',{},svg), pat = el('pattern',{id:'h5',width:5,height:5,patternUnits:'userSpaceOnUse',patternTransform:'rotate(45)'},defs);
+  el('rect',{width:5,height:5,fill:'var(--c5)'},pat); el('rect',{width:2,height:5,fill:'var(--hatch)'},pat);
+  const iw = W-m.l-m.r;
+  [0,.25,.5,.75,1].forEach(p => { const x = m.l + p*iw; el('line',{x1:x,x2:x,y1:m.t,y2:H-m.b,class:'gl'},svg);
+    const t = el('text',{x, y:H-6,'text-anchor':'middle'},svg); t.textContent = (p*100)+'%'; });
+  decs.forEach((d,i) => {
+    const rows = R.filter(r => r.rice_type==='inbred' && +r.approval_year>=d && +r.approval_year<d+10);
+    const c = {}; ['1','2','3','4','5'].forEach(k => c[k] = rows.filter(r => (r.cgiar_role||'5')===k).length);
+    const tot = rows.length, y = m.t + i*rowH + 7, h = rowH-14;
+    const lab = el('text',{x:m.l-8,y:y+h/2+4,'text-anchor':'end',class:'lab'},svg); lab.textContent = d+'s';
+    const nl = el('text',{x:W-m.r+6,y:y+h/2+4,class:'lab'},svg); nl.textContent = tot;
+    let acc = 0; const keys = ['1','2','3','4','5'].filter(k => c[k]>0);
+    keys.forEach((k,j) => { const w = c[k]/tot*iw, gap = j<keys.length-1 ? 1.5 : 0;
+      el('rect',{x:m.l+acc, y, width:Math.max(0,w-gap), height:h, fill: k==='5' ? 'url(#h5)' : `var(--c${k})`},svg); acc += w; });
+    const hit = el('rect',{x:m.l,y:y-4,width:iw,height:h+8,fill:'transparent'},svg);
+    hit.addEventListener('mousemove', ev => showTip(ev, `<b>${d}s</b> · ${tot} inbreds` + keys.map(k =>
+      `<div class="r"><span class="k">${k} ${CODES[k]}</span><span>${c[k]} (${Math.round(c[k]/tot*100)}%)</span></div>`).join('')));
+    hit.addEventListener('mouseleave', hideTip);
+  });
+})();
+
+// Register
+const fg = $('#fg'), fc = $('#fc');
+fg.innerHTML = '<option value="">All</option>' + [...new Set(R.map(r => r.developer_group))].sort().map(g => `<option>${esc(g)}</option>`).join('');
+fc.innerHTML += ['1','2','3','4','5'].map(k => `<option value="${k}">${k} · ${CODES[k]}</option>`).join('');
+R.forEach(r => { r.name = r.variety_name || r.official_name_en || r.official_name_bn; r._s = [r.variety_name,r.official_name_en,r.official_name_bn,r.popular_name,r.breeding_line,r.pedigree,r.developer,r.variety_id].join(' ').toLowerCase(); });
+let sortK = 'approval_date', sortDir = 1, page = 0, open = null; const PER = 40;
+function filtered(){ const q = $('#q').value.trim().toLowerCase();
+  return R.filter(r => (!q || r._s.includes(q)) && (!$('#fs').value || sector(r)===$('#fs').value) && (!fg.value || r.developer_group===fg.value) && (!$('#ft').value || r.rice_type===$('#ft').value) && (!fc.value || r.cgiar_role===fc.value))
+   .sort((a,b) => { const x = (a[sortK]||''), y = (b[sortK]||''); return (x<y?-1:x>y?1:0)*sortDir || a.approval_date.localeCompare(b.approval_date); }); }
+function sourceCell(r){
+  const lab = srcLabel(r.local_file);
+  if (r.source_url && !offline(r.source_url_status)) return link(r.source_url, lab) + (r.archived_url ? `<div class="bn">${link(r.archived_url, 'archived copy')}</div>` : '');
+  if (r.archived_url) return link(r.archived_url, lab) + `<div class="st">original offline; archived copy</div>`;
+  return esc(lab) + (r.source_url ? `<div class="st">original offline</div>` : '');
+}
+function detail(r){
+  const links = (s) => (s||'').split(' | ').filter(u => /^https?:/.test(u)).map(u => link(u, u.replace(/^https?:\/\/(www\.)?/,'').slice(0,70))).join('<br>');
+  const rows = [['Name as printed', esc(r.official_name_en)],['Bangla name', esc(r.official_name_bn)],['Popular name', esc(r.popular_name)],['Developer (as printed)', esc(r.developer)],
+    ['Approval route', esc((r.release_category||'').replace('NSB_release','Release by NSB (ছাড়করণ)').replace('NSB_registration','Registration by NSB (নিবন্ধন)').replace('pre_NSB_recommended','Recommended before the NSB existed'))],
+    ['NSB decision', esc(r.approval_reference)],['Gazette notification', esc(r.gazette_date)],['Season', esc(r.season)],['Pedigree', esc(r.pedigree)],
+    ['CGIAR link', r.cgiar_role ? esc(`${r.cgiar_role} · ${CODES[r.cgiar_role]}`) : ''],['CGIAR centre', esc(r.cgiar_center)],['CGIAR lineage', esc(r.cgiar_lineage)],
+    ['CGIAR own statements', esc(r.cgiar_independent)],['CGIAR sources', links(r.cgiar_source_urls)],['CGIAR evidence document', links(r.cgiar_evidence_url)],
+    ['Key papers', links(r.key_papers)],['Adoption (as reported)', esc(r.adoption)],['Market segment', esc(r.market_segment)],['Product profile', esc(r.product_profile)],
+    ['How verified', esc(r.validation_summary)],['Sources disagree on', esc(r.conflict_fields)],
+    ['Archived file', esc(r.local_file)],['Quality flags', esc(r.flags)]];
+  const decs = (D.decisions||{})[r.variety_id] || [];
+  const decHtml = decs.length ? `<h3 style="margin-top:14px">National Seed Board decisions (${decs.length})</h3>` + decs.map(x =>
+    `<details style="margin:4px 0"><summary>${esc(x.d)} · NSB ${esc(x.m)} · ${esc((x.t||'').replace(/_/g,' '))}${x.src ? ' · ' + link(x.src, 'minutes, p. ' + (x.pg||'')) : ''}</summary>
+     ${x.h ? `<p class="bn" style="margin:6px 0">${esc(x.h)}</p>` : ''}
+     <p style="white-space:pre-wrap;margin:6px 0;font-size:13px">${esc(x.p)}</p>
+     ${x.dec ? `<p style="margin:6px 0"><b>Decision:</b> ${esc(x.dec)}</p>` : ''}</details>`).join('') +
+    '<p class="note">Text as read from the minutes (OCR or text layer; numbers verified on page images). Full text and every extracted attribute: bgd_nsb_decisions_full.csv.</p>' : '';
+  return '<dl class="dl">' + rows.filter(x => x[1]).map(([k,v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('') + '</dl>' + decHtml;
+}
+function render(){
+  const rows = filtered(), pages = Math.max(1, Math.ceil(rows.length/PER)); page = Math.min(page, pages-1);
+  $('#cnt').textContent = `${rows.length} of ${R.length} varieties`;
+  $('#pg').textContent = `Page ${page+1} of ${pages}`; $('#prev').disabled = page===0; $('#next').disabled = page>=pages-1;
+  const tb = $('#tb tbody'); tb.innerHTML = '';
+  rows.slice(page*PER, page*PER+PER).forEach(r => {
+    const tr = document.createElement('tr'); tr.className = 'row'; tr.tabIndex = 0;
+    const code = r.cgiar_role || '5';
+    tr.innerHTML = `<td><div>${esc(r.name)}</div><div class="bn">${esc(r.official_name_bn)}</div></td>
+      <td>${esc(r.developer_group)}<div class="bn">${sector(r)} · ${esc(r.rice_type)}</div></td>
+      <td class="num">${esc(r.approval_date)}</td><td>${esc((r.approval_reference||'').replace(/,? agenda.*$/,''))}</td>
+      <td class="mono">${esc(r.breeding_line)}</td>
+      <td><span class="code cc${code}" title="${esc(CODES[code])}">${code}</span>${r.cgiar_center ? ' <span class="bn">'+esc(r.cgiar_center)+'</span>' : ''}</td>
+      <td>${sourceCell(r)}</td>`;
+    const toggle = () => { open = open===r.variety_id ? null : r.variety_id; render(); };
+    tr.addEventListener('click', e => { if (e.target.closest('a')) return; toggle(); });
+    tr.addEventListener('keydown', e => { if (e.key==='Enter'||e.key===' '){ e.preventDefault(); toggle(); } });
+    tb.appendChild(tr);
+    if (open===r.variety_id){ const d = document.createElement('tr'); d.className = 'det'; d.innerHTML = `<td colspan="7">${detail(r)}</td>`; tb.appendChild(d); }
+  });
+  document.querySelectorAll('#tb th[data-k]').forEach(th => th.setAttribute('aria-sort', th.dataset.k===sortK ? (sortDir>0?'ascending':'descending') : 'none'));
+}
+['#q','#fs','#fg','#ft','#fc'].forEach(s => $(s).addEventListener('input', () => { page = 0; render(); }));
+$('#prev').onclick = () => { page--; render(); }; $('#next').onclick = () => { page++; render(); };
+document.querySelectorAll('#tb th[data-k]').forEach(th => th.addEventListener('click', () => { const k = th.dataset.k; sortDir = sortK===k ? -sortDir : 1; sortK = k; render(); }));
+render();
+
+// Fish
+const ft = $('#fishtb tbody');
+D.fish.slice().sort((a,b) => (a.release_date||'9').localeCompare(b.release_date||'9')).forEach(f => {
+  const tr = document.createElement('tr');
+  tr.innerHTML = `<td>${esc(f.strain_name_std || f.strain_name)}<div class="bn">${esc((f.strain_name||'').replace(/\s*\(TVC wording\)/,''))}</div></td><td><i>${esc((f.species_scientific||'').split('(')[0])}</i></td>
+    <td>${esc(f.release_basis)}</td><td>${esc(f.government_act)}</td><td class="num">${esc(f.release_date || '—')}</td>
+    <td><span class="code cc${f.cgiar_role||'5'}" title="${esc(CODES[f.cgiar_role||'5'])}">${esc(f.cgiar_role||'5')}</span></td>`;
+  ft.appendChild(tr);
+});
+const fe = $('#fishev tbody');
+D.fish_events.slice().sort((a,b) => (a.release_date||'9').localeCompare(b.release_date||'9')).forEach(e => {
+  const tr = document.createElement('tr');
+  const type = (e.event_type||'').replace(/^germplasm /,'').replace(/\(.*\)/,'').trim();
+  tr.innerHTML = `<td>${esc(e.strain_name || e.event_id)}</td><td>${esc(type)}</td><td class="num">${esc(e.release_date || 'planned')}</td><td>${esc((e.developer||'').split('(')[0])}</td><td class="bn">${esc(e.notes||'')}</td>`;
+  fe.appendChild(tr);
+});
+const TYPE = {import_approval_ornamental:'Ornamental species permitted for import', hatchery_permitted_species:'Species hatcheries may produce', introduction_recorded:'Exotic introduction (no approval instrument found)',
+  technology_validation_listing:'BFRI validated-technology listing', framework_instrument:'Legal power (framework)', ban:'Species ban', import_approval:'Species permitted for broodstock or seed import',
+  introduction_approval:'Approval of a new species', policy:'Policy', technology_transfer:'Strain handover', strain_naming:'Strain naming by ministry notification', brood_bank_supply:'Brood bank supply',
+  enforcement_directive:'Enforcement directive', genetic_resource_protection:'Genetic resource protection', ban_proposal:'Proposed ban', strain_release:'Strain release by institute',
+  farm_permit_procedure:'Farm permit procedure', implementation_circular:'Implementation circular', health_certification_requirement:'Health certification requirement', hatchery_permitted_input:'Permitted hatchery input'};
+const groups = D.fish_groups || [];
+$('#fishgsub').textContent = `${fmt(groups.reduce((a,g)=>a+g.n,0))} acts by the Ministry of Fisheries and Livestock (MoFL), the Department of Fisheries (DoF) and BFRI, by type. The full register, with quotes and sources, is in bgd_fish_approvals.csv.`;
+const fgt = $('#fishg tbody');
+groups.forEach(g => { const tr = document.createElement('tr');
+  const per = g.first && g.last ? (g.first.slice(0,4) === g.last.slice(0,4) ? g.first.slice(0,4) : `${g.first.slice(0,4)}–${g.last.slice(0,4)}`) : '';
+  tr.innerHTML = `<td>${esc(TYPE[g.approval_type] || g.approval_type)}</td><td class="num r">${g.n}</td><td>${esc(g.bodies)}</td><td class="num">${esc(per)}</td>`; fgt.appendChild(tr); });
+const fk = $('#fishk tbody');
+(D.fish_key_acts||[]).slice().sort((a,b) => (a.approval_date||'').localeCompare(b.approval_date||'')).forEach(a => {
+  const tr = document.createElement('tr');
+  const ref = a.source_url && !offline(a.source_url_status) ? link(a.source_url, clip(a.approval_reference||'source', 90)) : esc(a.approval_reference||'');
+  tr.innerHTML = `<td class="num">${esc(a.approval_date||'')}</td><td>${esc(a.name||'')}<div class="bn"><i>${esc(a.species_scientific||'')}</i></div></td><td>${esc(TYPE[a.approval_type]||a.approval_type)}</td><td>${esc(a.approving_body||'')}</td><td>${ref}</td>`;
+  fk.appendChild(tr);
+});
+
+// Methods
+(function(){
+  const q = D.qa || {};
+  const dated = R.filter(r => (r.approval_date||'').length === 10).length, gaz = R.filter(r => r.gazette_date).length;
+  $('#methodsprose').innerHTML = `
+    <p><b>Scope.</b> The unit is an officially approved rice variety: a release (ছাড়করণ) or registration (নিবন্ধন) by the National Seed Board (NSB) under the Seeds Ordinance 1977 (as amended 2005) and the Seed Act 2018, or an introduction recommended before the NSB existed (1966–1973). Coverage runs to the 115th NSB meeting (5 February 2026). Names with no documented approval (for example Jirashail, refused in 2022) are kept in a separate file.</p>
+    <p><b>Sources.</b> NSB minutes 1–115 and Technical Committee minutes; the Seed Certification Agency's annual lists (FY2014-15 to 2025-26) and 2016 compendium; the Ministry of Agriculture's cumulative hybrid list; Bangladesh Gazette release notices; BRRI and BINA records; and CGIAR publications and databases (SPIA, IRRI, HarvestPlus, WorldFish, ASTI/TRIVSA, GloMIP). Each file was downloaded, fingerprinted (SHA-256) and kept unchanged; the Internet Archive copy is recorded where one exists.</p>
+    <p><b>Extraction and verification.</b> Most official records are scanned Bangla PDFs. They were read with Tesseract 5.4 (Bangla and English models) and, for legacy SutonnyMJ text, converted to Unicode. A number or date read from a scan entered the register only after it matched the key of NSB meeting numbers and dates (built from the minutes) or was confirmed by eye on an image of the page. An independent check of 205 fields in 25 random rows and all fish rows found no mismatches. ${fmt(dated)} varieties carry the exact NSB meeting date; ${fmt(gaz)} carry a gazette date.</p>
+    <p><b>Coding.</b> Approval date is the NSB meeting date; the earliest gazette date is kept separately. Sector is public (BRRI, BINA, universities, BADC) or private (companies and NGOs); it is independent of seed type. The CGIAR link is the strongest documented one: 1 CGIAR line released directly, 2 CGIAR parent or grandparent, 3 collaboration or funding only, 4 pedigree known with no CGIAR element, 5 unknown. Codes come only from documented pedigrees and statements, never from names. CGIAR's own published attributions (SPIA 2025, Dikitanan et al. 2022, Villanueva et al. 2022, IRRI, HarvestPlus) are recorded beside each code as an independent check.</p>
+    <p><b>Disagreements.</b> When sources differ, the value from the most authoritative source enters the register (NSB minutes, then gazette, then official lists, then institutes, then CGIAR records) and every other version is kept in the conflicts file.</p>
+    <p><b>Limitations.</b> Most private hybrids have no published pedigree (CGIAR code 5). Some releases before 2007 have no gazette notification on record. The register describes what was approved, not what farmers grow; adoption figures are reported only where a source gives them.</p>`;
+  const t1 = $('#qa1 tbody');
+  (q.ocr_bands || []).forEach(b => { const tr = document.createElement('tr'); tr.innerHTML = `<td>${esc(b[0])}</td><td class="num r">${fmt(b[1])}</td><td class="num r">${fmt(b[2])}</td>`; t1.appendChild(tr); });
+  const lab = {key_check:'Matched the NSB meeting-date key', visual_check:'Read by eye on the page image', two_source:'Two independent sources agree', text:'Machine-readable text, HTML, API or spreadsheet', unvalidated:'Machine-readable, single source'};
+  const agg = {}; (q.by_check || []).forEach(([m,c,n]) => { const k = (m==='ocr' && c==='unvalidated') ? 'ocr_unvalidated' : c; agg[k] = (agg[k]||0) + n; });
+  const t2 = $('#qa2 tbody');
+  ['key_check','visual_check','two_source','unvalidated','text','ocr_unvalidated'].filter(k => agg[k]).forEach(k => { const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${esc(k==='ocr_unvalidated' ? 'Read by OCR, not confirmed (kept out of the register)' : lab[k])}</td><td class="num r">${fmt(agg[k])}</td>`; t2.appendChild(tr); });
+  $('#qanote').textContent = `${fmt(q.evidence_rows||0)} evidence rows from ${fmt(q.n_sources||0)} source files; ${fmt(q.n_conflicts||0)} disagreeing values kept in the conflicts file. Mean OCR word confidence across ${fmt(q.ocr_pages||0)} scanned pages: ${q.ocr_mean_conf ?? '–'}.`;
+})();
+
+// References
+(function(){
+  const by = {}; (D.references||[]).forEach(r => (by[r.group] = by[r.group] || []).push(r));
+  let n = 0;
+  $('#reflist').innerHTML = Object.entries(by).map(([g, rs]) => `<div class="refgroup">${esc(g)}</div><ol class="refs" start="${n+1}">` + rs.map(r => { n++;
+    const main = r.url && !offline(r.url_status) ? link(r.url, r.url.includes('doi.org/') ? r.url.replace('https://','') : 'source') : '';
+    const arc = r.archived_url ? (main ? ' · ' : '') + link(r.archived_url, 'archived copy') : '';
+    const off = r.url && offline(r.url_status) ? ` <span class="st">original offline</span>` : '';
+    return `<li>${esc(r.citation)} ${main}${arc}${off}</li>`; }).join('') + '</ol>').join('');
+})();
+
+// Data and citation
+const built = new Date(D.built + 'T00:00:00Z').toLocaleDateString('en-GB', {day:'numeric', month:'long', year:'numeric', timeZone:'UTC'});
+$('#citetext').innerHTML = `Kumar, K. (2026). <i>Bangladesh Rice Variety Register: officially approved rice varieties and improved fish strains, 1966–2026</i> [Data set]. Version 1.0, ${esc(built)}. Cornell University. Data as of the 115th meeting of the National Seed Board, 5 February 2026.`;
+const ftb = $('#filetb tbody');
+(D.files||[]).forEach(f => { const tr = document.createElement('tr');
+  tr.innerHTML = `<td class="mono">${esc(f.file)}</td><td>${esc(f.desc)}</td><td>${esc(f.unit)}</td><td class="num r">${fmt(f.rows)}</td><td class="num r">${f.cols}</td><td class="num r">${f.mb < 0.1 ? '&lt;0.1' : f.mb}</td>`;
+  ftb.appendChild(tr); });
+$('#foot').textContent = `Bangladesh Rice Variety Register, version 1.0 (${built}).`;
+})();
+</script>

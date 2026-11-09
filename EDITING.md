@@ -54,6 +54,12 @@ numbers in the prose stay correct after a rebuild. To add one, add a line to the
 | `{{n_fish_ornamental}}` | ornamental fish species in the quarantine schedule |
 | `{{built}}`, `{{built_long}}` | build date (2026-10-08 / 8 October 2026) |
 
+## Updating the data
+
+From the project root, `bash scripts/rebuild_all.sh` rebuilds every table and ends with `scripts/build_site.py`, which
+refreshes `site/data/` and writes the single-file version `05_output/final/rice_register_standalone.html`
+(the same page with text, data and script inlined; it opens from disk with no server).
+
 ## Viewing locally
 
 Browsers do not let a page opened from disk read `data/site_data.json`. Serve the folder instead:
@@ -63,6 +69,7 @@ python -m http.server 8765 --directory site
 ```
 
 then open http://localhost:8765. (Or open the standalone file, which needs no server.)
+
 
 ## Publishing on GitHub Pages
 
