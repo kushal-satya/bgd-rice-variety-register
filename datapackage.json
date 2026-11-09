@@ -485,33 +485,6 @@
    }
   },
   {
-   "name": "bgd_failures",
-   "path": "data/bgd_failures.csv",
-   "profile": "tabular-data-resource",
-   "format": "csv",
-   "mediatype": "text/csv",
-   "encoding": "utf-8-sig",
-   "schema": {
-    "fields": [
-     {
-      "name": "id",
-      "type": "string"
-     },
-     {
-      "name": "reason",
-      "type": "string"
-     },
-     {
-      "name": "local_file",
-      "type": "string"
-     }
-    ],
-    "missingValues": [
-     ""
-    ]
-   }
-  },
-  {
    "name": "bgd_fish_approvals",
    "path": "data/bgd_fish_approvals.csv",
    "profile": "tabular-data-resource",
@@ -2854,7 +2827,7 @@
      {
       "name": "nearest_cgiar_ancestor",
       "title": "Nearest CGIAR ancestor",
-      "description": "Name or designation of the CGIAR line found at depth_to_cgiar (for example 'IR20', 'IR8', 'Oryza rufipogon (IRGC103404)'). A register variety (such as BR6) appears when it is itself a CGIAR line. Values: Free text as printed in the pedigree.",
+      "description": "Name or designation of the CGIAR line found at depth_to_cgiar (for example 'IR20', 'IR8', 'Oryza rufipogon (IRGC103404)'). For a mutant, somaclone or selection made directly from a CGIAR line (depth 0) it is the source line (NERICA-10 for Binadhan-19, IR8 for Iratom-24); a register variety (such as BR6) appears when it is itself a CGIAR line introduced and released. Values: Free text as printed in the pedigree.",
       "type": "string"
      },
      {
@@ -2924,9 +2897,9 @@
       "type": "number"
      },
      {
-      "name": "cgiar_derivation",
-      "title": "How the variety was derived",
-      "description": "How the variety was made, from the parsed pedigree: a CGIAR line introduced and released, a cross, or a mutant, somaclone or pure-line selection of an earlier line. Separates the three code-2 mutants of CGIAR lines at depth 0 (Iratom-24, Binadhan-19, Binadhan-21) from code-1 introductions and selections. Values: introduction; cross; mutant; somaclone; selection; blank when no pedigree was parsed.",
+      "name": "breeding_route",
+      "title": "Breeding route",
+      "description": "How the variety was made, from the parsed pedigree; independent of cgiar_role: a line introduced and released, a cross, or a mutant, somaclone or pure-line selection of an earlier line. Renamed from cgiar_derivation in version 1.2 so that it is not confused with the register column of that name, which has a different vocabulary. Values: introduction; cross; mutant; somaclone; selection; blank when no pedigree was parsed.",
       "type": "string"
      },
      {
@@ -4317,6 +4290,12 @@
       "type": "string"
      },
      {
+      "name": "quality_notes",
+      "title": "Quality notes",
+      "description": "The flags of the row written out as sentences for readers: why the CGIAR code is what it is, which fields rest on readings that could not be confirmed and were left blank, where sources disagree. The machine-readable flags stay in flags. Values: Free text, one sentence per flag; blank when the row has no flag that needs explaining (unvalidated_values=<n> is not repeated).",
+      "type": "string"
+     },
+     {
       "name": "conflict_fields",
       "title": "Fields in dispute",
       "description": "Substantive fields on which the sources for this row disagree, separated by '; '. Only approval_date, gazette_date, breeding_line, pedigree, release_category, origin_country, release_date, generation and approval_or_release_mechanism are considered substantive. Blank means no substantive disagreement was found among eligible values. Values: Field names separated by '; '.",
@@ -4379,7 +4358,7 @@
      {
       "name": "nearest_cgiar_ancestor",
       "title": "Nearest CGIAR ancestor",
-      "description": "Name or designation of the CGIAR line found at depth_to_cgiar (for example 'IR20', 'IR8', 'Oryza rufipogon (IRGC103404)'). A register variety (such as BR6) appears when it is itself a CGIAR line. Values: Free text as printed in the pedigree.",
+      "description": "Name or designation of the CGIAR line found at depth_to_cgiar (for example 'IR20', 'IR8', 'Oryza rufipogon (IRGC103404)'). For a mutant, somaclone or selection made directly from a CGIAR line (depth 0) it is the source line (NERICA-10 for Binadhan-19, IR8 for Iratom-24); a register variety (such as BR6) appears when it is itself a CGIAR line introduced and released. Values: Free text as printed in the pedigree.",
       "type": "string"
      },
      {

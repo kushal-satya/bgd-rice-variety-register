@@ -139,6 +139,8 @@ bad1 = dep[(dep.depth_to_cgiar == "0") & (dep.cgiar_role != "1")]
 bad2 = dep[(dep.depth_to_cgiar != "0") & (dep.cgiar_role != "2")]
 check("depth_to_cgiar 0 <=> cgiar_role 1; depth >= 1 => cgiar_role 2", bad1.empty and bad2.empty,
       f"depth 0 not code 1: {bad1.variety_id.tolist()[:5]}; depth>=1 not code 2: {bad2.variety_id.tolist()[:5]}")
+c2 = R[(R.cgiar_role == "2") & R.depth_to_cgiar.eq("") & ~R.notes.str.contains(r"depth[^.|]{0,40}unknown", case=False)]
+check("every code 2 has depth_to_cgiar >= 1 or a note that the depth is unknown", c2.empty, f"{c2.variety_id.tolist()[:5]}")   # REV3, V3-12
 c1 = R[(R.cgiar_role == "1") & (R.depth_to_cgiar.ne("0"))]
 check("every code 1 has depth_to_cgiar 0 or no parsed pedigree", c1[c1.depth_to_cgiar.ne("")].empty, f"{c1[c1.depth_to_cgiar.ne('')].variety_id.tolist()[:5]}")
 # regions (A2-11, A4-03, A4-04)
@@ -179,9 +181,21 @@ nonfc = [(f.name, c) for f in F.glob("bgd_*.csv") if f.stat().st_size < 30e6 and
 main_nf = [x for x in nonfc if x[0] != "bgd_evidence.csv"]
 check("all text in Unicode NFC (verbatim OCR columns exempt)", not main_nf, f"{len(main_nf)} columns not NFC: {main_nf[:5]}")
 ev_nf = [x for x in nonfc if x[0] == "bgd_evidence.csv"]
-check("bgd_evidence.csv text in Unicode NFC", not ev_nf, f"{len(ev_nf)} columns not NFC: {ev_nf[:5]}", warn=True)
+check("bgd_evidence.csv text in Unicode NFC", not ev_nf, f"{len(ev_nf)} columns not NFC: {ev_nf[:5]}")   # REV3: fixed in build_evidence_public.py, no longer a warning
 crit = "yield_criterion_pct" in R.columns and "yield_advantage_pct" not in R.columns
 check("yield_criterion_pct replaces yield_advantage_pct", crit, "renamed in v1.2")
+# REV3 (round-2 review V2-08): a variety's decision text comes from its own part of the agenda item
+DEC = pd.read_csv(F / "bgd_nsb_decisions_full.csv", dtype=str).fillna("")
+_dt = DEC[DEC.decision_text.ne("")]
+_auto = _dt[~_dt.manual_field_sources.str.contains("decision_text")]          # hand-read decisions are exempt from the text test
+_notin = _auto[[not all(p.strip() in it for p in t.split("\n\n") if p.strip()) for t, it in zip(_auto.decision_text, _auto.item_text_verbatim)]]
+_other = _dt[_dt.decision_text.str.contains(r"নননোটিফাইড|নন-নোটিফাইড|বীজমান|মাঠমান|Seed Standard")
+             | _dt.decision_text.str.contains(r"\s(?:আলোচ্য\s*(?:সূচী|সূচি|বিষয়)\s*[-–:]?\s*\S{1,4}\s*[:ঃ।]|সভায় আর কোন\S* আলোচ্য)")]
+_bare = _dt[_dt.decision_text.str.strip().str.fullmatch(r"\W*(?:\[কলাম ২\])?\W*সি\S*ন্ত\W*")]
+check("decision text lies in the item text, names no other agenda topic, is not a bare label",
+      _notin.empty and _other.empty and _bare.empty,
+      f"{len(_dt)} decisions with text; not in item {len(_notin)} {_notin.dec_id.tolist()[:3]}; other topic {len(_other)} "
+      f"{_other.dec_id.tolist()[:3]}; bare label {len(_bare)} {_bare.dec_id.tolist()[:3]}")
 
 # 9 page data
 d = json.load(open(F / "viz_data.json", encoding="utf-8"))

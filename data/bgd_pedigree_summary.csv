@@ -1,4 +1,4 @@
-﻿variety_id,n_parents_parsed,depth_to_cgiar,nearest_cgiar_ancestor,pedigree_parse_status,cgiar_path,current_cgiar_role,implied_cgiar_role,irri_share_nominal,cgiar_share_nominal,irri_weight_raitzer,cgiar_weight_raitzer,raitzer_basis,share_untraced_weight,irri_weight_raitzer_published,cgiar_derivation,spia_in_t27,spia_category,spia_irri_direct,spia_indirect_ir_parent,spia_inger_entry,spia_in_reference_library,spia_harvestplus,spia_none
+﻿variety_id,n_parents_parsed,depth_to_cgiar,nearest_cgiar_ancestor,pedigree_parse_status,cgiar_path,current_cgiar_role,implied_cgiar_role,irri_share_nominal,cgiar_share_nominal,irri_weight_raitzer,cgiar_weight_raitzer,raitzer_basis,share_untraced_weight,irri_weight_raitzer_published,breeding_route,spia_in_t27,spia_category,spia_irri_direct,spia_indirect_ir_parent,spia_inger_entry,spia_in_reference_library,spia_harvestplus,spia_none
 RICE-BAU_DHAN2,2,1,IR 578-175-2-2,parsed,BAU dhan2 <-g1- IR 578-175-2-2,2,2,0.5,0.5,0.25,0.25,geometric rule: NARS cross with CGIAR material within three generations,0,,cross,N,,,,,,,
 RICE-BAU_DHAN3,0,0,BAU dhan3,statement_only,BAU dhan3,1,1,1,1,1,1,last-cross rule: IRRI line released directly,0,,introduction,N,,,,,,,
 RICE-BINADHAN10,2,1,IR 42598-B-B-B-B-12,parsed,Binadhan-10 <-g1- IR 42598-B-B-B-B-12,2,2,0.5,0.5,0.25,0.25,geometric rule: NARS cross with CGIAR material within three generations,0,,cross,Y,direct,Y,N,N,Y,N,N
@@ -10,9 +10,9 @@ RICE-BINADHAN15,3,1,IR 2153-14-1-6-2,parsed,Binadhan-15 <-g1- IR 2153-14-1-6-2,2
 RICE-BINADHAN16,0,,IRRI (line not named),statement_only,statement: 'Contains IRRI genetic material' (SPIA 2025 Table 27),2,2,,,,,"not computed: IRRI ancestry stated, line not named",,,,Y,indirect,N,Y,N,Y,N,N
 RICE-BINADHAN17,1,,,parsed,,3,3,0,0,0,0,"geometric rule: NARS cross, no CGIAR line traced within three generations",0.375,,cross,Y,direct,Y,N,N,Y,N,N
 RICE-BINADHAN18,1,2,IR20,parsed,Binadhan-18 <-mutant_source- BRRI dhan29 <-g1- BR10 <-g1- IR20,2,2,0.5,0.5,0.125,0.125,geometric rule: NARS cross with CGIAR material within three generations,0.25,,mutant,Y,none,N,N,N,N,N,Y
-RICE-BINADHAN19,1,0,Binadhan-19,parsed,Binadhan-19,1,1,0,1,0,1,last-cross rule: AfricaRice line released directly,0,,mutant,Y,none,N,N,N,N,N,Y
+RICE-BINADHAN19,1,0,NERICA-10,parsed,Binadhan-19 <-mutant_source- NERICA-10,1,1,0,1,0,1,last-cross rule: AfricaRice line released directly,0,,mutant,Y,none,N,N,N,N,N,Y
 RICE-BINADHAN20,2,,,parsed,,4,4,0,0,0,0,"geometric rule: NARS cross, no CGIAR line traced within three generations",0,,cross,Y,direct,Y,N,N,Y,Y,N
-RICE-BINADHAN21,1,0,Binadhan-21,parsed,Binadhan-21,1,1,0,1,0,1,last-cross rule: AfricaRice line released directly,0,,mutant,Y,none,N,N,N,N,N,Y
+RICE-BINADHAN21,1,0,NERICA-10,parsed,Binadhan-21 <-mutant_source- NERICA-10,1,1,0,1,0,1,last-cross rule: AfricaRice line released directly,0,,mutant,Y,none,N,N,N,N,N,Y
 RICE-BINADHAN22,0,,,none,,5,5,,,,,not computed: no parents parsed,,,,Y,none,N,N,N,N,N,Y
 RICE-BINADHAN23,2,0,Binadhan-23,parsed,Binadhan-23,1,1,1,1,1,1,last-cross rule: IRRI line released directly,0,,introduction,Y,direct,Y,N,N,Y,N,N
 RICE-BINADHAN24,1,,,parsed,,4,4,0,0,0,0,"geometric rule: NARS cross, no CGIAR line traced within three generations",0,,mutant,Y,none,N,N,N,N,N,Y
@@ -129,7 +129,7 @@ RICE-BRRI_DHAN78,2,0,BRRI dhan78,parsed,BRRI dhan78,1,1,1,1,1,1,last-cross rule:
 RICE-BRRI_DHAN79,2,1,BRRI dhan52,parsed,BRRI dhan79 <-g1- BRRI dhan52,2,2,0.75,0.75,0.3125,0.3125,geometric rule: NARS cross with CGIAR material within three generations,0.03125,,cross,Y,indirect,N,Y,N,Y,N,N
 RICE-BRRI_DHAN80,2,1,IR65610-105-2-5-2-2,parsed,BRRI dhan80 <-g1- IR65610-105-2-5-2-2,2,2,1,1,0.5,0.5,geometric rule: NARS cross with CGIAR material within three generations,0,,cross,Y,indirect,N,Y,N,Y,N,N
 RICE-BRRI_DHAN81,2,2,BR6,parsed,BRRI dhan81 <-g1- BRRI dhan28 <-g1- BR6,2,2,0.25,0.25,0.0625,0.0625,geometric rule: NARS cross with CGIAR material within three generations,0.25,,cross,Y,indirect,N,Y,N,Y,N,N
-RICE-BRRI_DHAN82,1,0,BRRI dhan82,parsed,BRRI dhan82,1,1,0,1,0,1,last-cross rule: AfricaRice line released directly,0,,selection,Y,none,N,N,N,Y,N,Y
+RICE-BRRI_DHAN82,1,0,NERICA10,parsed,BRRI dhan82 <-selection_source- NERICA10,1,1,0,1,0,1,last-cross rule: AfricaRice line released directly,0,,selection,Y,none,N,N,N,Y,N,Y
 RICE-BRRI_DHAN83,2,2,IR9752-136-2,parsed,BRRI dhan83 <-g1- BR24 <-g1- IR9752-136-2,2,2,0.375,0.375,0.078125,0.078125,geometric rule: NARS cross with CGIAR material within three generations,0.125,,cross,Y,none,N,N,N,Y,N,Y
 RICE-BRRI_DHAN84,1,2,IR20,parsed,BRRI dhan84 <-g1- BR11 <-g1- IR20,2,2,0.75,0.75,0.15625,0.15625,geometric rule: NARS cross with CGIAR material within three generations,0,,cross,Y,direct,Y,Y,N,Y,Y,N
 RICE-BRRI_DHAN85,0,2,IR50,parsed_untraced_lines,BRRI dhan85 <-g2- IR50,2,2,0.25,0.25,0.0625,0.0625,geometric rule: NARS cross with CGIAR material within three generations,0.125,,cross,Y,indirect,N,Y,N,Y,N,N
@@ -149,8 +149,8 @@ RICE-BRRI_DHAN98,2,,,parsed_untraced_lines,,4,4,0,0,0,0,"geometric rule: NARS cr
 RICE-BRRI_DHAN99,2,0,BRRI dhan99,parsed,BRRI dhan99,1,1,1,1,1,1,last-cross rule: IRRI line released directly,0,,introduction,Y,direct,Y,N,N,Y,N,N
 RICE-BRRI_HYBRID1,2,0,BRRI hybrid dhan1,parsed_untraced_lines,BRRI hybrid dhan1,1,1,1,1,1,1,last-cross rule: IRRI line released directly,0,,introduction,Y,indirect,N,Y,N,N,N,N
 RICE-BRRI_HYBRID10,2,,,parsed_untraced_lines,,4,4,0,0,0,0,"geometric rule: NARS cross, no CGIAR line traced within three generations",0.25,,cross,N,,,,,,,
-RICE-BRRI_HYBRID2,2,,,parsed_untraced_lines,,4,4,0,0,0,0,"geometric rule: NARS cross, no CGIAR line traced within three generations",0.25,,cross,Y,indirect,N,Y,N,N,N,N
-RICE-BRRI_HYBRID3,2,,,parsed_untraced_lines,,4,4,0,0,0,0,"geometric rule: NARS cross, no CGIAR line traced within three generations",0.25,,cross,Y,indirect,N,Y,N,N,N,N
+RICE-BRRI_HYBRID2,2,,,parsed_untraced_lines,,5,4,0,0,0,0,"geometric rule: NARS cross, no CGIAR line traced within three generations",0.25,,cross,Y,indirect,N,Y,N,N,N,N
+RICE-BRRI_HYBRID3,2,,,parsed_untraced_lines,,5,4,0,0,0,0,"geometric rule: NARS cross, no CGIAR line traced within three generations",0.25,,cross,Y,indirect,N,Y,N,N,N,N
 RICE-BRRI_HYBRID4,2,1,IR58025A,parsed_untraced_lines,BRRI hybrid dhan4 <-g1- IR58025A,2,2,0.5,0.5,0.25,0.25,geometric rule: NARS cross with CGIAR material within three generations,0.125,,cross,Y,indirect,N,Y,N,N,N,N
 RICE-BRRI_HYBRID5,2,,,parsed_untraced_lines,,4,4,0,0,0,0,"geometric rule: NARS cross, no CGIAR line traced within three generations",0.25,,cross,Y,none,N,N,N,N,N,Y
 RICE-BRRI_HYBRID6,2,1,IR79156A,parsed_untraced_lines,BRRI hybrid dhan6 <-g1- IR79156A,2,2,0.5,0.5,0.25,0.25,geometric rule: NARS cross with CGIAR material within three generations,0.125,,cross,Y,indirect,N,Y,N,N,N,N
@@ -433,12 +433,12 @@ RICE-HYB_WINALLHYBRIDDHAN11,0,,,none,,5,5,,,,,not computed: no parents parsed,,,
 RICE-IR20,0,0,IR20,none,IR20,1,1,1,1,1,1,last-cross rule: IRRI line released directly,0,,introduction,N,,,,,,,
 RICE-IR5,2,0,IR5,parsed,IR5,1,1,1,1,1,1,last-cross rule: IRRI line released directly,0,,introduction,N,,,,,,,
 RICE-IR8,2,0,IR8,parsed,IR8,1,1,1,1,1,1,last-cross rule: IRRI line released directly,0,,introduction,N,,,,,,,
-RICE-IRATOM24,1,0,Iratom-24,parsed,Iratom-24,1,1,1,1,1,1,last-cross rule: IRRI line released directly,0,,mutant,Y,indirect,N,Y,N,N,N,N
+RICE-IRATOM24,1,0,IR8,parsed,Iratom-24 <-mutant_source- IR8,1,1,1,1,1,1,last-cross rule: IRRI line released directly,0,,mutant,Y,indirect,N,Y,N,N,N,N
 RICE-IRATOM38,0,,,none,,5,5,,,,,not computed: no parents parsed,,,,N,,,,,,,
-RICE-OLD_BAU63,1,0,BAU-63 (Bharosa),parsed,BAU-63 (Bharosa),1,1,1,1,1,1,last-cross rule: IRRI line released directly,0,,selection,N,,,,,,,
+RICE-OLD_BAU63,1,0,IR 758-15-2,parsed,BAU-63 (Bharosa) <-selection_source- IR 758-15-2,1,1,1,1,1,1,last-cross rule: IRRI line released directly,0,,selection,N,,,,,,,
 RICE-OLD_PAJAM,1,,,parsed,,4,4,0,0,0,0,"geometric rule: NARS cross, no CGIAR line traced within three generations",0,,,N,,,,,,,
 RICE-OLD_PURBACHI,1,,,parsed,,4,4,0,0,0,0,"geometric rule: NARS cross, no CGIAR line traced within three generations",0,,,N,,,,,,,
-RICE-PVT_ACI_DHAN1,1,0,ACI dhan1,parsed,ACI dhan1,1,1,1,1,1,1,last-cross rule: IRRI line released directly,0,,selection,N,,,,,,,
+RICE-PVT_ACI_DHAN1,1,0,IR102481-BK-BK (IRRI segregating population),parsed,ACI dhan1 <-selection_source- IR102481-BK-BK (IRRI segregating population),1,1,1,1,1,1,last-cross rule: IRRI line released directly,0,,selection,N,,,,,,,
 RICE-PVT_ACI_DHAN2,0,,,none,,5,5,,,,,not computed: no parents parsed,,,,N,,,,,,,
 RICE-PVT_ACI_DHAN3,2,,,parsed_untraced_lines,,4,4,0,0,0,0,"geometric rule: NARS cross, no CGIAR line traced within three generations",0.5,,cross,N,,,,,,,
 RICE-PVT_RABI_DHAN1,0,0,RU dhan1 (Rabi dhan1),statement_only,RU dhan1 (Rabi dhan1),1,1,1,1,1,1,last-cross rule: IRRI line released directly,0,,introduction,N,,,,,,,

@@ -71,6 +71,38 @@ def _derivation(x):
 
 r.insert(r.columns.get_loc("cgiar_role") + 1, "cgiar_derivation", r.apply(_derivation, axis=1))
 r = r.drop(columns=[c for c in ("status",) if c in r])   # REV2 (A1-20): the legacy source 'status' contradicted legal_status_2026
+# REV3 (round-2 review V2-12): nor is its disagreement shown ('status: chose unknown; also seed multiplication ... suspended')
+r["conflict_note"] = r["conflict_note"].map(lambda s: " | ".join(x for x in s.split(" | ") if not x.startswith("status: ")))
+# REV3 (round-2 review V2-16): the machine flags stay; quality_notes says the same in sentences a reader can use
+_FLAG_TEXT = {
+    "cgiar_role_default_unknown_no_pedigree": "No pedigree is published, so the CGIAR link is coded 5 (unknown).",
+    "cgiar_role_5_pedigree_needs_review": "The pedigree text does not name parents clearly enough to code the CGIAR link, so it is coded 5 (unknown).",
+    "cgiar_role_4_pedigree_documented_no_cgiar_element": "The documented parents include no CGIAR line, so the CGIAR link is coded 4.",
+    "cgiar_role_2_via_parent_variety": "The CGIAR link (code 2) runs through a parent that is itself a register variety.",
+    "cgiar_center_missing": "No source names the CGIAR centre behind the link.",
+    "breeding_line_not_a_code_moved": "The text printed in the breeding-line column was a description, not a line code, and was moved to the pedigree.",
+    "institute_claim_only": "Only the breeding institute's own publications were found for this variety; no official list or decision.",
+    "year_only": "Only the year of approval is documented.",
+    "date_single_source": "The approval date rests on a single source.",
+    "planned_not_released": "Planned, not released.",
+}
+
+
+def _quality_notes(flags):
+    out = []
+    for f in [x for x in str(flags).split(";") if x]:
+        if f in _FLAG_TEXT:
+            out.append(_FLAG_TEXT[f])
+        elif f.endswith("_unvalidated_only"):
+            fld = f[: -len("_unvalidated_only")].replace("_", " ")
+            out.append(f"The {fld} was read only by OCR that could not be confirmed on the page image, so it is left blank.")
+        elif f.startswith("has_conflicts:"):
+            out.append("Sources disagree on " + ", ".join(x.replace("_", " ") for x in f.split(":", 1)[1].split(","))
+                       + "; the value chosen and the alternatives are in conflict_note.")
+    return " ".join(out)
+
+
+r.insert(r.columns.get_loc("flags") + 1, "quality_notes", r["flags"].map(_quality_notes))
 r = LF.apply(r, ("source_url", "archived_url", "cgiar_evidence_url"))
 r["doi_key_paper"] = r["doi_key_paper"].map(lambda v: " | ".join(LF.clean_doi(x) for x in v.split(" | ")) if v else v)
 r["doi_key_paper_status"] = r["doi_key_paper"].map(lambda v: "; ".join(LF.status("https://doi.org/" + x) for x in v.split(" | ")) if v else "")
@@ -235,7 +267,7 @@ with pd.ExcelWriter(F / "bgd_variety_archive.xlsx", engine="openpyxl") as xw:
 keep = ["variety_id", "variety_name", "developer_group", "sector", "rice_type", "approval_year", "official_name_en", "official_name_bn", "popular_name",
         "developer", "release_category", "approval_date", "approval_reference", "gazette_date", "breeding_line", "pedigree",
         "season", "cgiar_role", "cgiar_center", "cgiar_lineage", "cgiar_independent", "cgiar_source_urls", "cgiar_evidence_url", "source_url_status", "archived_url_status", "adoption", "market_segment", "product_profile",
-        "validation_summary", "conflict_fields", "feature_tags", "feature_evidence", "duration_days", "yield_t_ha",
+        "validation_summary", "conflict_fields", "quality_notes", "feature_tags", "feature_evidence", "duration_days", "yield_t_ha",
         "yield_criterion_pct", "yield_basis", "check_variety", "ecosystem", "region_scope", "recommended_region", "special_traits_official",
         "identifying_traits_official", "quality_traits", "stress_tolerance", "dus_result", "vcu_sites", "gazette_status", "source_url", "archived_url", "local_file", "flags",
         "conflict_note", "trait_text_available", "season_std", "ecosystem_std", "grain_class", "breeding_method", "developer_std", "developer_type",

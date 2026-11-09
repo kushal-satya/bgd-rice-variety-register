@@ -209,7 +209,8 @@ def drx(digs):
     return "".join(DIG.get(c, re.escape(c)) for c in digs)
 
 
-def tokens(d):
+def tokens(d, strict=True):
+    """strict (REV3): a hybrid name keeps its brand word; the loose form (anchoring only) also accepts 'ধান২০' alone."""
     rx = []
     for f in ("breeding_line_raw", "variety_raw", "key_name_hint"):
         v = IT.norm(d.get(f, ""))
@@ -227,10 +228,19 @@ def tokens(d):
                 rx.append(pre + r"(?<![0-9০-৯])" + drx(big) + r"(?![0-9০-৯])")
             words = re.findall(r"[\u0980-\u09FF]+|[A-Za-z]+", re.sub(r"[0-9০-৯]+", " ", part))
             if words and len(big) <= 3:
-                w = [x for x in words if x not in ("ও", "এবং")][-2:]
-                if w:
+                w = [x for x in words if x not in ("ও", "এবং")]
+                # REV3: 'হাইব্রিড ধান-৩' alone also matches another firm's 'ব্যাবিলন হাইব্রিড ধান-৩'; a hybrid name keeps its brand word
+                hyb = any(re.fullmatch(r"হাইব্রিড|hybrid", x, re.I) for x in w[-2:])
+                w = w[-3:] if hyb and strict and len(w) >= 3 else w[-2:]
+                if w and hyb and strict:
+                    # OCR spellings: হাইবিড / হাইব্রেড for হাইব্রিড, a dropped র-phala (বি for ব্রি)
+                    fz = lambda x: (r"(?:হাই\S{0,4}ড|hybrid)" if re.fullmatch(r"হাইব্রিড|hybrid", x, re.I)
+                                    else re.escape(x).replace("্র", "(?:্র)?"))
+                    rx.append(r"\s*-?\s*".join(fz(x) for x in w) + r"\s*-?\s*" + drx(big) + r"(?![0-9০-৯])")
+                elif w:
                     rx.append(r"\s*-?\s*".join(re.escape(x) for x in w) + r"\s*-?\s*" + drx(big) + r"(?![0-9০-৯])")
-                    rx.append(re.escape(w[-1]) + r"\s*-?\s*" + drx(big) + r"(?![0-9০-৯])")
+                    if not hyb or not strict:
+                        rx.append(re.escape(w[-1]) + r"\s*-?\s*" + drx(big) + r"(?![0-9০-৯])")
     seen = []
     for r in rx:
         if r not in seen:
@@ -250,6 +260,86 @@ FIELDS = ["breeding_line", "pedigree_cross", "pedigree_statements", "hybrid_pare
           "label_requirements", "cgiar_mentions", "cgiar_lineage", "cgiar_role", "cgiar_center", "cgiar_quote"]
 NUMERIC = ["yield_t_ha", "yield_advantage_pct", "duration_days", "dus_distinct_traits_n", "dus_years", "vcu_regions_n",
            "vcu_sites_n", "amylose_pct", "lb_ratio", "grain_wt_1000_g", "protein_pct", "zinc_mg_kg", "iron_mg_kg", "provisional_years"]
+
+
+LABEL_WORD = r"(?:সি(?:দ্ধ|ন্ধ|দ্দ|দ্ব)ান্ত|সদ্ধান্ত)"
+DEC_LABEL = re.compile(r"^\W{0,3}(" + LABEL_WORD + r"|\[কলাম ২\])")
+ENUM = re.compile(r"^\W{0,3}\(?([ক-হ]{1,2}|[০-৯0-9]{1,2})(?:\)|।|\.(?![0-9০-৯]))")
+NON_VARIETY = re.compile(r"নননোটিফাইড|নন-নোটিফাইড|বীজমান|মাঠমান|Seed Standard|Field Standard")
+DEC_VERB = re.compile(r"(?:করা|দেয়া|দেওয়া|দেয়া)\s*হ(?:লো|ল(?!ে)|য়েছে|য়েছে)|গৃহীত\s*হ(?:লো|ল(?!ে))")
+DISCUSSION = re.compile(r"সুপারিশ\s*কর(?:েছে|েন|া হয়)|আলোচনা|প্রস্তাব\s*কর")
+
+
+NEXT_ITEM = re.compile(r"\s(?:আলোচ্য\s*(?:সূচী|সূচি|বিষয়|বিষয়)\s*[-–:]?\s*\S{1,4}\s*[:ঃ।]|সভায় আর কোন\S* আলোচ্য)")
+
+
+def cut_next_item(t):
+    """A paragraph that OCR ran on into the next agenda heading (or the closing sentence) is cut there."""
+    m = NEXT_ITEM.search(t)
+    return t[:m.start()].rstrip() if m and m.start() > 0 else t
+
+
+def is_dec_label(p):
+    return bool(DEC_LABEL.match(p)) or bool(re.search(LABEL_WORD, p[:25]))
+
+
+def scoped_decisions(paras, tks, rice_only):
+    """REV3 (round-2 review V2-08): the decision text of one variety, taken only from its own part of the agenda item.
+
+    An agenda item can hold several sub-items ((১) seed standards of 74 crops, (২) a potato variety, (৩) hybrid rice ...),
+    each with its own 'সিদ্ধান্ত' paragraph, so a decision that does not name the variety must not be borrowed from
+    another sub-item. Paragraphs are grouped into decision blocks: a 'সিদ্ধান্ত' paragraph plus the enumerated clauses that
+    follow it ((১), (২) ... or (ক), (খ) ...; one marker class per block) when the label is bare or ends with a colon, or only
+    lettered continuation clauses from (খ) on after a label that already states a decision. In order:
+    1. blocks that name the variety: the label (when bare or introducing a list) and the clauses naming the variety;
+    2. the variety's own paragraph when it states the decision inline ('... নিবন্ধনের জন্য ছাড়করণ করা হলো'), not a
+       discussion or recommendation;
+    3. the first decision block after the variety's first paragraph, if no new agenda heading intervenes and the block
+       names no other crop and is not about seed standards (a generic decision such as 'the 13 varieties are registered');
+    4. otherwise blank."""
+    cur, cls, blocks, inblock = None, None, [], set()
+    for i, p in enumerate(paras):
+        m = ENUM.match(p)
+        if is_dec_label(p):
+            rest = re.sub(r"^\W{0,3}(\[কলাম ২\]\s*)?" + LABEL_WORD + r"\S*\s*[:ঃ§]?", "", p).strip()
+            rest = re.sub(r"^-?\s*[০-৯0-9]+\s*তম সভার কার্যবিবরণী\s*", "", rest)     # running page header merged by OCR
+            bare = len(rest) < 15
+            lst = bare or bool(re.search(r"[:ঃ]\s*[-–]?\s*$", rest))
+            cur = {"label": i, "bare": bare, "list": lst, "paras": [i]}; cls = None
+            blocks.append(cur); inblock.add(i)
+            continue
+        if cur is not None and m:
+            c = "digit" if re.match(r"[০-৯0-9]", m.group(1)) else "letter"
+            ok = (cls is None or c == cls) and (cur["list"] or (c == "letter" and m.group(1) != "ক"))
+            if ok:
+                cls = c; cur["paras"].append(i); inblock.add(i)
+                continue
+        cur = None
+    names = lambda p: any(t.search(p) for t in tks)
+    out = []
+    for b in blocks:
+        hit = [i for i in b["paras"] if names(paras[i])]
+        if hit:
+            keep = ([b["label"]] if b["label"] not in hit and b["list"] else []) + hit
+            out += [q for q in (rice_only(paras[i]) for i in keep) if q.strip()]
+    if out:
+        return out
+    own = [i for i, p in enumerate(paras) if names(p) and i not in inblock]
+    for i in own:
+        p = paras[i]
+        if DEC_VERB.search(p) and not DISCUSSION.search(p) and not OTHER_CROP.search(p):
+            out.append(p)
+    if out:
+        return out
+    first = own[0] if own else None
+    cand = [b for b in blocks if first is not None and b["label"] > first] if first is not None else (blocks if len(blocks) == 1 else [])
+    for b in cand[:1]:
+        if first is not None and any(re.match(r"^\W{0,3}আলোচ্য", paras[j]) for j in range(first + 1, b["label"])):
+            break
+        txt = "\n\n".join(paras[i] for i in b["paras"])
+        if not OTHER_CROP.search(txt) and not NON_VARIETY.search(txt) and not (b["bare"] and len(b["paras"]) == 1):
+            out.append(txt)
+    return out
 
 
 def main():
@@ -323,7 +413,7 @@ def main():
             continue
         i, how = IT.locate(stem, page, find, alt)
         if i is None:
-            for tk in tokens(d):
+            for tk in tokens(d, strict=False):
                 P = IT.pages(stem)
                 cand = [j for j, (pg, u, mm) in enumerate(P) if abs(pg - page) <= 2 and tk.search(u)]
                 if cand:
@@ -406,10 +496,7 @@ def main():
                 else:
                     on = False
             return " ".join(keep)
-        dec_var = [q for q in (rice_only(p) for p in dec_paras if any(t.search(p) for t in tks)) if q]
-        if not dec_var:
-            # no decision paragraph names the variety: fall back only to decisions that are not about another crop
-            dec_var = [p for p in dec_paras if not OTHER_CROP.search(p)]
+        dec_var = [q for q in (cut_next_item(x) for x in scoped_decisions(item_clean.split("\n\n"), tks, rice_only)) if q.strip()]
         row.update({"pages": f"{p0}" if p0 == p1 else f"{p0}-{p1}", "text_source": txt_source, "anchor_status": L["found"],
                     "agenda_heading_verbatim": heading, "item_text_verbatim": item_clean, "variety_passage_verbatim": passage,
                     "raw_text": raw_text(stem, s, e), "n_decisions_in_item": len(sib)})

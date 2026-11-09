@@ -92,6 +92,11 @@ def main():
     for c in COLS:
         if c not in ("variety_id", "field", "chosen", "local_file"):
             out[c] = out[c].map(RP.text)
+    # REV3 (round-2 review V3-11): Unicode NFC like every other published table; value_raw stays as read (verbatim)
+    import unicodedata
+    for c in COLS:
+        if c != "value_raw":
+            out[c] = out[c].map(lambda v: unicodedata.normalize("NFC", v) if isinstance(v, str) else v)
     out = out.sort_values(["variety_id", "field", "chosen"], ascending=[True, True, False], kind="stable")
     out.to_csv(OUT, index=False, encoding="utf-8-sig")
     n_pub = sum(1 for k in pub if k[1] in set(ev.field))

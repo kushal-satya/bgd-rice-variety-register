@@ -193,6 +193,12 @@ def pick(df, field):
     if field in TRIAL_NUM:
         d["tc"] = d["source_id"].map(trial_class)
         d = d.sort_values(["tc", "ro", "vw", "cw"]); return d.iloc[0], d
+    if field == "release_category" and re.search(r"^HYB_|HYBRID", str(df.pilot_key.iloc[0])):
+        # REV3 (round-2 review V2-05): for a hybrid the approving NSB decision settles the route. The gazette notices of
+        # 2013-15 print BRRI hybrid dhan3 and dhan4 in a table of released varieties, but NSB 70 and NSB 72 (agenda
+        # 'নিবন্ধিকরণ') registered them, as the MoA hybrid lists and the SCA compendium also record.
+        d["tc"] = d["source_id"].str.match(r"NSB_").map({True: 0, False: 1})
+        d = d.sort_values(["tc", "ro", "vw", "cw"]); return d.iloc[0], d
     if field == "gazette_date":
         d = d.sort_values(["value", "ro"]); return d.iloc[0], d
     if field == "release_date":

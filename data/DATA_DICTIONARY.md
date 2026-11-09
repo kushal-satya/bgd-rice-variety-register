@@ -65,17 +65,17 @@ explicitly; otherwise codes such as `0` flags and years are silently retyped and
 | [bgd_nsb_decisions_full.csv](#bgd_nsb_decisions_fullcsv) | One NSB decision on one variety | 579 |
 | [bgd_official_list_rows_full.csv](#bgd_official_list_rows_fullcsv) | One printed cell of an official list | 9,539 |
 | [bgd_cgiar_sources.csv](#bgd_cgiar_sourcescsv) | One CGIAR-produced source document | 94 |
-| [bgd_cgiar_statements.csv](#bgd_cgiar_statementscsv) | One statement by one CGIAR source about one variety and field | 2,636 |
+| [bgd_cgiar_statements.csv](#bgd_cgiar_statementscsv) | One statement by one CGIAR source about one variety and field | 2,631 |
 | [bgd_literature.csv](#bgd_literaturecsv) | One variety-publication pair | 3,105 |
 | [bgd_publications.csv](#bgd_publicationscsv) | One publication | 1,468 |
 | [bgd_variety_people.csv](#bgd_variety_peoplecsv) | One person named for one variety | 150 |
 | [bgd_institutions.csv](#bgd_institutionscsv) | One developing institution or division | 14 |
-| [bgd_local_names.csv](#bgd_local_namescsv) | One name linked (or explicitly not linked) to a variety | 151 |
+| [bgd_local_names.csv](#bgd_local_namescsv) | One name linked (or explicitly not linked) to a variety | 152 |
 | [bgd_fish_strains.csv](#bgd_fish_strainscsv) | One released improved fish strain | 9 |
 | [bgd_fish_events.csv](#bgd_fish_eventscsv) | One germplasm transfer, dissemination or planned release | 6 |
 | [bgd_fish_approvals.csv](#bgd_fish_approvalscsv) | One government act on a fish or shrimp species, strain or framework | 183 |
-| [bgd_conflicts.csv](#bgd_conflictscsv) | One version of one field for one variety from one source | 9,981 |
-| [bgd_conflicts_summary.csv](#bgd_conflicts_summarycsv) | One variety and field with more than one version | 563 |
+| [bgd_conflicts.csv](#bgd_conflictscsv) | One version of one field for one variety from one source | 9,932 |
+| [bgd_conflicts_summary.csv](#bgd_conflicts_summarycsv) | One variety and field with more than one version | 559 |
 | [bgd_sources.csv](#bgd_sourcescsv) | One archived source file | 386 |
 | [bgd_ocr_pages.csv](#bgd_ocr_pagescsv) | One page of an official document | 1,925 |
 | [bgd_ocr_audit.csv](#bgd_ocr_auditcsv) | One OCR'd page that supplied values | 166 |
@@ -89,7 +89,7 @@ explicitly; otherwise codes such as `0` flags and years are silently retyped and
 | [bgd_pedigree_ancestors.csv](#bgd_pedigree_ancestorscsv) | One ancestor of one variety along one path | 633 |
 | [bgd_variety_events.csv](#bgd_variety_eventscsv) | One NSB decision event for one variety | 538 |
 | [bgd_variety_status.csv](#bgd_variety_statuscsv) | One variety | 445 |
-| [bgd_evidence.csv](#bgd_evidencecsv) | One reading of one field for one variety from one source | 27,833 |
+| [bgd_evidence.csv](#bgd_evidencecsv) | One reading of one field for one variety from one source | 27,826 |
 
 ## bgd_rice_varieties.csv
 
@@ -97,7 +97,7 @@ explicitly; otherwise codes such as `0` flags and years are silently retyped and
 
 The register of rice varieties approved in Bangladesh: every variety released or registered by the National Seed Board (NSB) from its first meeting in 1974 to meeting 115 (5 February 2026), and the few varieties recommended before the Board existed. Each row gives the variety's names, developer, approval route and NSB decision, gazette notification, pedigree, agronomic traits, documented CGIAR link with its evidence, legal status in 2026, and the main source with quality flags. Values are chosen from long-format evidence by field-specific precedence rules; every competing value is kept in bgd_conflicts.csv. Columns after the source columns are derived in English for analysis (scripts/derive_covariates.py, feature_tags.py) or copied from the pedigree and status tables.
 
-The file has 444 rows and 112 columns.
+The file has 444 rows and 113 columns.
 
 | column | meaning | values | coverage |
 |---|---|---|---:|
@@ -125,7 +125,7 @@ The file has 444 rows and 112 columns.
 | `origin_statement` | Statements of origin found in the pedigree slot of a source (for example 'origin India', 'imported from China'), kept separately because they describe where seed came from, not parentage. | Statements separated by ' \| '. | 0.19 |
 | `trial_codes` | Seed Certification Agency trial entry numbers of a hybrid (for example 'H-101/127'), found in the pedigree or breeding-line slot of a source. They identify the entry in the SCA's VCU trials and are not pedigrees. | Codes separated by ' \| ' (several trial years may be listed). | 0.18 |
 | `pedigree_note` | Text found in the pedigree slot that is not a pedigree: 'own development', a trade name, a supplier, or a trait. Kept so that nothing printed is lost. | Notes separated by ' \| '. | 0.04 |
-| `breeding_method` | How the variety was developed, read from the pedigree text. Several methods can apply (for example a cross followed by marker-assisted backcrossing). Blank means the pedigree is empty or names a single parent without saying how it was used. | introduction; selection; cross; mutation; somaclonal; biotech; hybrid (CMS 3-line); hybrid (2-line); hybrid (system not stated); joined by '; '. 'introduction' and the hybrid values are exclusive. | 0.96 |
+| `breeding_method` | How the variety was developed, read from the pedigree text. Several methods can apply (for example a cross followed by marker-assisted backcrossing). Blank means the pedigree is empty or names a single parent without saying how it was used. | introduction; selection; cross; mutation; somaclonal; biotech; hybrid (CMS 3-line); hybrid (2-line); hybrid (system not stated); joined by '; '. 'introduction' and the hybrid values are exclusive. | 0.97 |
 | `release_category` | Legal route by which the variety was approved. Release (ছাড়করণ) applies to inbred varieties and some public hybrids; registration (নিবন্ধন) is the route for hybrids, which since 1998 are registered after VCU trials rather than released. A row is in the register only if this field is filled. | NSB_release; NSB_registration; pre_NSB_recommended (recommended 1966-1973, before the National Seed Board was constituted). | 1.00 |
 | `approving_body` | Body that approved the variety, as the sources describe it. For varieties released after 1977 the NSB approves and the Ministry of Agriculture notifies the release in the Gazette. | Mostly 'NSB' or 'NSB (approval); Government/MoA (notification)'; some rows name the Technical Committee meeting that recommended the variety; 'none: recommended before the NSB was constituted (1974)' for pre-NSB varieties. | 1.00 |
 | `approval_date` | Date of the National Seed Board meeting that released or registered the variety. For the pre-NSB varieties it is the date or year of the recommendation. An earlier provisional release is in provisional_release_date, and later decisions (extensions, renamings, suspensions) are in bgd_variety_events.csv. This is a decision date, not the gazette date, the date of first sale or the date of first cultivation. | ISO date YYYY-MM-DD; year only (YYYY) when only the year is documented, which affects 12 rows (flag year_only). | 1.00 |
@@ -182,7 +182,7 @@ The file has 444 rows and 112 columns.
 | `cgiar_role` | Strongest documented link between the variety and CGIAR research, coded 1 to 5. The code describes documented links only: code 5 means no parentage or link is documented, which is the case for nearly all private hybrids, and it must not be read as 'no CGIAR involvement'. | 1 = CGIAR line released directly, including a mutant, somaclone or selection made directly from a CGIAR line (depth_to_cgiar 0); 2 = CGIAR parent or earlier ancestor (depth_to_cgiar &gt;= 1), traced up to five generations (use depth_to_cgiar &lt;= 2 for the SPIA parent-or-grandparent definition); 3 = CGIAR collaboration or funding only; 4 = pedigree known, no CGIAR element; 5 = unknown. | 1.00 |
 | `cgiar_derivation` | The kind of CGIAR link behind cgiar_role, so that code 1 and code 2 can be split by breeding route. | direct line; selection; mutant/somaclone (code 1); cross with CGIAR parent (code 2, depth 1); ancestor (code 2, depth &gt;= 2); collaboration (3); none (4); unknown (5). | 1.00 |
 | `cgiar_center` | CGIAR centre named in the documented link. Blank for codes 4 and 5. | IRRI; AfricaRice; HarvestPlus. | 0.31 |
-| `cgiar_lineage` | Every documented CGIAR link written out, including weaker links than the one coded in cgiar_role (for example 'IRRI grandparent: IR20 via BR10' or 'pedigree known: Iratom-24 x Dular'). | Free text; links separated by ' \| '. | 0.32 |
+| `cgiar_lineage` | Every documented CGIAR link written out, including weaker links than the one coded in cgiar_role (for example 'IRRI grandparent: IR20 via BR10' or 'pedigree known: Iratom-24 x Dular'). | Free text; links separated by ' \| '. | 0.33 |
 | `cgiar_evidence` | The quotation or table cell, as condensed by the extracting agent, that supports the CGIAR link coded in cgiar_role. | Free text, often Bangla. | 0.12 |
 | `cgiar_evidence_quote` | Exact text of the source behind cgiar_evidence, in the original language, cut to 200 characters. | Free text, up to 200 characters. | 0.12 |
 | `cgiar_evidence_source` | Archived file and page from which cgiar_evidence was taken. | '02_raw/&lt;path&gt;, p. &lt;n&gt;'. | 0.12 |
@@ -198,6 +198,7 @@ The file has 444 rows and 112 columns.
 | `n_sources` | Number of distinct source documents that supplied at least one usable (eligible) value for the row. It measures how well documented a row is, not how many sources agree. | Count, 1 or more. | 1.00 |
 | `validation_summary` | Summary of how the key values of the row were checked, written as field=check (extraction method) and separated by '; '. The fields reported are approval_date, breeding_line, gazette_date and cgiar_role when present. | Checks: key_check (a date or number matched the validated NSB meeting-date key); visual_check (read by eye on the page image or a crop of it); two_source (two independent sources give the same value); unvalidated (machine-readable text or OCR not checked by eye). 'text' means the value came from a machine-readable text layer and needed no check. Methods: html; pdf_text (the PDF's own Unicode text layer); bijoy2unicode (a legacy SutonnyMJ/Bijoy text layer converted to Unicode); api_json; xlsx; ocr (Tesseract 5 OCR of a 300-dpi render); visual_check (transcribed by eye from the page image). | 1.00 |
 | `flags` | Machine-readable quality flags for the row, separated by ';'. A flag marks something an analyst should know before using the row; the absence of flags does not certify a value. | year_only (only the year of the date is documented); date_single_source (one source, not cross-checked); has_conflicts:&lt;fields&gt; (sources disagree on a substantive field); &lt;field&gt;_unvalidated_only (the field had only unvalidated OCR values, which never enter the register, so it is blank); unvalidated_values=&lt;n&gt; (number of such values set aside); breeding_line_not_a_code_moved (descriptive text moved out of breeding_line); institute_claim_only (no official evidence); cgiar_role_default_unknown_no_pedigree, cgiar_role_5_pedigree_needs_review, cgiar_role_4_pedigree_documented_no_cgiar_element, cgiar_role_2_via_parent_variety, cgiar_center_missing (how cgiar_role was set); planned_not_released (fish). | 0.98 |
+| `quality_notes` | The flags of the row written out as sentences for readers: why the CGIAR code is what it is, which fields rest on readings that could not be confirmed and were left blank, where sources disagree. The machine-readable flags stay in flags. | Free text, one sentence per flag; blank when the row has no flag that needs explaining (unvalidated_values=&lt;n&gt; is not repeated). | 0.98 |
 | `conflict_fields` | Substantive fields on which the sources for this row disagree, separated by '; '. Only approval_date, gazette_date, breeding_line, pedigree, release_category, origin_country, release_date, generation and approval_or_release_mechanism are considered substantive. Blank means no substantive disagreement was found among eligible values. | Field names separated by '; '. | 0.59 |
 | `conflict_note` | One short note per field on which sources disagree, of the form '&lt;field&gt;: chose &lt;value&gt;; also &lt;other value&gt; (&lt;source_id&gt;)', with notes for different fields separated by ' \| '. It covers every field, including formatting differences, and is a pointer to bgd_conflicts.csv, which holds every version with its file and page. | Free text; notes separated by ' \| '. Later gazette notifications are listed as 'later gazette(s): &lt;dates&gt;'. | 1.00 |
 | `notes` | Free-text notes added by the coordinator or reviewers about the row, such as a CGIAR record that was checked and not used. | Free text; blank for most rows. | 0.06 |
@@ -208,7 +209,7 @@ The file has 444 rows and 112 columns.
 | `hybrid_seed_source` | Whether the commercial F1 seed of a hybrid is imported or produced in Bangladesh, where an NSB decision states it (an 'imported and trialled' hybrid, an F1 import permission, or parent-line imports for F1 production in Bangladesh). Never inferred from origin_country or the company. | imported; produced in Bangladesh; both; unknown (hybrid, not stated); blank for inbreds. | 0.63 |
 | `hybrid_seed_source_evidence` | The NSB meeting and statement behind hybrid_seed_source. | Free text naming the meeting. | 0.02 |
 | `depth_to_cgiar` | Number of generations between the variety and the nearest CGIAR line in its documented pedigree: 0 when the variety is a CGIAR line or a mutant, somaclone or selection of one, 1 when a parent is a CGIAR line, 2 for a grandparent, and so on. Blank means no CGIAR line was found within five generations of the documented pedigree, including the many varieties with no pedigree at all. | Integer 0-5; blank. | 0.30 |
-| `nearest_cgiar_ancestor` | Name or designation of the CGIAR line found at depth_to_cgiar (for example 'IR20', 'IR8', 'Oryza rufipogon (IRGC103404)'). A register variety (such as BR6) appears when it is itself a CGIAR line. | Free text as printed in the pedigree. | 0.30 |
+| `nearest_cgiar_ancestor` | Name or designation of the CGIAR line found at depth_to_cgiar (for example 'IR20', 'IR8', 'Oryza rufipogon (IRGC103404)'). For a mutant, somaclone or selection made directly from a CGIAR line (depth 0) it is the source line (NERICA-10 for Binadhan-19, IR8 for Iratom-24); a register variety (such as BR6) appears when it is itself a CGIAR line introduced and released. | Free text as printed in the pedigree. | 0.30 |
 | `source_url_status` | Result of the most recent automated check of the address in source_url. A status other than ok does not mean the archived copy is missing: the file itself is kept under 02_raw/. | ok; blocked_to_bots (HTTP 403: the page exists but refuses automated checks); dead (404, 410 or a soft error page); unreachable (DNS, TLS or timeout failure); unchecked. Blank when the link column is blank. | 1.00 |
 | `archived_url_status` | Result of the most recent automated check of the address in archived_url. A status other than ok does not mean the archived copy is missing: the file itself is kept under 02_raw/. | ok; blocked_to_bots (HTTP 403: the page exists but refuses automated checks); dead (404, 410 or a soft error page); unreachable (DNS, TLS or timeout failure); unchecked. Blank when the link column is blank. | 0.56 |
 | `cgiar_evidence_url_status` | Result of the most recent automated check of the address in cgiar_evidence_url. A status other than ok does not mean the archived copy is missing: the file itself is kept under 02_raw/. | ok; blocked_to_bots (HTTP 403: the page exists but refuses automated checks); dead (404, 410 or a soft error page); unreachable (DNS, TLS or timeout failure); unchecked. Blank when the link column is blank. | 0.12 |
@@ -249,19 +250,19 @@ The file has 579 rows and 90 columns.
 | `hybrid_maintainer_B_line` | Maintainer line of a hybrid where the minutes print it; empty in the current release. | As printed. | 0.00 |
 | `hybrid_parent_male_R_line` | Restorer (male) parent line of a hybrid where the minutes print it. | As printed. | 0.00 |
 | `hybrid_parent_statements` | Sentences that mention hybrid parent lines, their import or local production. | Verbatim sentences matched by keyword, joined by ' ‖ '. Keyword matching can pick up sentences about other matters in the same agenda item, so read them against variety_passage_verbatim. | 0.02 |
-| `germplasm_source` | Statement of where the seed or germplasm came from, as printed. | Free text, Bangla or English; equals origin_statements in the current build. | 0.26 |
+| `germplasm_source` | Statement of where the seed or germplasm came from, as printed. | Free text, Bangla or English; equals origin_statements in the current build. | 0.28 |
 | `origin_country` | Country of origin of the seed or germplasm read from the minutes, with any correction noted. | Country names in English, sometimes with a correction note. | 0.25 |
-| `origin_statements` | Sentences that state the origin of the variety or its seed. | Verbatim sentences matched by keyword, joined by ' ‖ '. Keyword matching can pick up sentences about other matters in the same agenda item, so read them against variety_passage_verbatim. | 0.13 |
+| `origin_statements` | Sentences that state the origin of the variety or its seed. | Verbatim sentences matched by keyword, joined by ' ‖ '. Keyword matching can pick up sentences about other matters in the same agenda item, so read them against variety_passage_verbatim. | 0.18 |
 | `developer_applicant` | Institute or company that proposed or imported the variety, as listed in the index and, where found, as printed in the passage ('as printed: ...'). | Free text; ' \| as printed: ' separates the index value from the printed one. | 0.90 |
 | `season` | Season for which the decision approves the variety, in English. | Aus; Aman; Boro; Rope (transplanted) Aman or Aus; qualifiers as written. | 0.65 |
 | `region_scope` | Region for which the decision approves the variety, summarised in English. | 'nationwide' or a list of regions or towns. | 0.73 |
-| `region_text` | Sentences of the decision that name the approved area. | Verbatim sentences matched by keyword, joined by ' ‖ '. Keyword matching can pick up sentences about other matters in the same agenda item, so read them against variety_passage_verbatim. | 0.46 |
+| `region_text` | Sentences of the decision that name the approved area. | Verbatim sentences matched by keyword, joined by ' ‖ '. Keyword matching can pick up sentences about other matters in the same agenda item, so read them against variety_passage_verbatim. | 0.71 |
 | `dus_result` | Result of the Distinctness, Uniformity and Stability test as described in the minutes. | Verbatim text. | 0.06 |
 | `dus_statements` | Sentences about the DUS test. | Verbatim sentences matched by keyword, joined by ' ‖ '. Keyword matching can pick up sentences about other matters in the same agenda item, so read them against variety_passage_verbatim. | 0.04 |
 | `dus_years` | Number of years or seasons of DUS testing. | Integer, sometimes with years in parentheses. | 0.06 |
 | `dus_distinct_traits_n` | Number of traits on which the variety was found distinct from the check. | Count. | 0.07 |
 | `dus_check_variety` | Variety against which distinctness was tested. | As printed (Bangla). | 0.07 |
-| `vcu_statements` | Sentences about the Value for Cultivation and Use trials. | Verbatim sentences matched by keyword, joined by ' ‖ '. Keyword matching can pick up sentences about other matters in the same agenda item, so read them against variety_passage_verbatim. | 0.24 |
+| `vcu_statements` | Sentences about the Value for Cultivation and Use trials. | Verbatim sentences matched by keyword, joined by ' ‖ '. Keyword matching can pick up sentences about other matters in the same agenda item, so read them against variety_passage_verbatim. | 0.25 |
 | `vcu_regions_n` | Number of regions in which VCU trials were held. | Count. | 0.08 |
 | `vcu_sites_n` | Number of VCU trial sites. | Count, occasionally with a qualifier. | 0.08 |
 | `vcu_trial_type` | Whether the VCU trials were on research stations, on farms or both. | on-station; on-farm; 'on-station; on-farm'. | 0.18 |
@@ -283,7 +284,7 @@ The file has 579 rows and 90 columns.
 | `iron_mg_kg` | Iron content of the grain, with the Board's comment where it made one. | Milligrams per kilogram; text where brown and polished values or a comment are given. | 0.01 |
 | `stress_tolerance` | Tolerance and resistance statements in the decision. | Verbatim text. | 0.09 |
 | `tc_recommendation_text` | Text of the NSB Technical Committee recommendation on which the decision rests, verbatim. | Bangla text. | 0.86 |
-| `decision_text` | Decision paragraph or paragraphs (সিদ্ধান্ত) of the agenda item that name the variety, verbatim. When no decision paragraph names it, decision paragraphs that are not about another crop are given. | Bangla text; paragraphs separated by blank lines. | 0.70 |
+| `decision_text` | Decision paragraph or paragraphs (সিদ্ধান্ত) of the agenda item that name the variety, verbatim. When no decision paragraph names it, decision paragraphs that are not about another crop are given. | Bangla text; paragraphs separated by blank lines. | 0.72 |
 | `decision_conditions` | Conditions attached to the decision, verbatim. | Bangla text. | 0.67 |
 | `import_period` | Sentences of the conditions that concern seed import (আমদানি). | Sentences joined by ' ‖ '. | 0.26 |
 | `provisional_years` | Length in years of a provisional or time-limited approval. | Years. | 0.01 |
@@ -311,7 +312,7 @@ The file has 579 rows and 90 columns.
 | `manual_field_sources` | Fields whose values were entered or corrected by hand, each with the page crop or note that supports it. | '&lt;field&gt;: &lt;note&gt;' entries joined by ' \| '; 'visual:pg_&lt;meeting&gt;_p&lt;page&gt;' names the crop read by eye. | 0.55 |
 | `f3m_notes` | Notes written by the reader of the minutes (agent F3M or F5M), in English. | Free text. | 0.54 |
 | `variety_passage_verbatim` | The paragraphs of the agenda item that name the variety, verbatim. For a single-variety item of moderate length it is the whole item. | Bangla text; paragraphs separated by blank lines. | 1.00 |
-| `variety_segment_verbatim` | In a multi-variety passage, the sentences from the first mention of this variety up to the next sentence that names another variety of the same item. Blank when the segment equals the passage. | Bangla text. | 0.50 |
+| `variety_segment_verbatim` | In a multi-variety passage, the sentences from the first mention of this variety up to the next sentence that names another variety of the same item. Blank when the segment equals the passage. | Bangla text. | 0.46 |
 | `item_text_verbatim` | Full text of the agenda item, cleaned only of line-break noise, page numbers and file-path footers. | Bangla text; paragraphs separated by blank lines. | 1.00 |
 | `raw_text` | Unmodified text of the agenda item as it came from the OCR or the unconverted Bijoy text layer, with page markers. Bijoy text appears as Latin-character garble (for example 'Av‡jvP¨m~Px') and is kept so that conversions can be checked. | Text with '[p.&lt;n&gt;]' page markers. | 1.00 |
 
@@ -375,7 +376,7 @@ The file has 94 rows and 10 columns.
 
 Each statement that a CGIAR source makes about a rice variety or fish strain: the field, the value, the exact quote or table cell, its location, and how it was read and checked. Only eligible evidence (text methods or validated readings) is included.
 
-The file has 2,636 rows and 14 columns.
+The file has 2,631 rows and 14 columns.
 
 | column | meaning | values | coverage |
 |---|---|---|---:|
@@ -526,13 +527,13 @@ The file has 14 rows and 9 columns.
 
 Popular, survey and market names of rice varieties, each with its source and the kind of source. Market labels such as Miniket and grain-type labels are recorded with flags and are never assigned to a variety without evidence.
 
-The file has 151 rows and 11 columns.
+The file has 152 rows and 11 columns.
 
 | column | meaning | values | coverage |
 |---|---|---|---:|
 | `variety_id` | Register variety the name refers to. Blank when the name belongs to no register variety (for example the market label Miniket); such names are flagged and never forced onto a variety. | 'RICE-' followed by a key built from the official name by lib_keys.make_key: BR&lt;n&gt; (BR series, 1970-1993), BRRI_DHAN&lt;n&gt;, BRRI_HYBRID&lt;n&gt;, BINADHAN&lt;n&gt;, IRATOM&lt;n&gt;, BINASHAIL, BU_, BAU_ and GAU_ (universities), BRAC_DHAN&lt;n&gt;, PVT_ (other private inbreds), HYB_&lt;trade name&gt; (private and BADC hybrids), IR&lt;n&gt; and OLD_ (pre-BRRI introductions and old names). | 0.97 |
 | `local_name` | Popular, survey or market name, in the script used by the source. | Free text. | 1.00 |
-| `local_name_bn` | Bangla form of the name when the source prints one; left blank rather than transliterated otherwise. | Bangla text. | 0.54 |
+| `local_name_bn` | Bangla form of the name when the source prints one; left blank rather than transliterated otherwise. | Bangla text. | 0.55 |
 | `region` | Region where the name is used, when the source restricts it. | Free text. | 0.01 |
 | `source` | Title of the source that reports the name. | Free text. | 1.00 |
 | `local_file` | Path of the source file inside the archive, relative to the archive root. Every value in the archive can be traced to a page of a file under 02_raw/. | Relative path beginning '02_raw/'; the SHA-256 of each file is in bgd_sources.csv. | 1.00 |
@@ -671,7 +672,7 @@ The file has 183 rows and 26 columns.
 
 Every value on which eligible sources disagree, in long format: one row per version, with its source, file, page, extraction method and validation, and a flag for the version used in the register. Formatting differences are included; bgd_conflicts_summary.csv separates them from substantive disagreements.
 
-The file has 9,981 rows and 13 columns.
+The file has 9,932 rows and 13 columns.
 
 | column | meaning | values | coverage |
 |---|---|---|---:|
@@ -695,7 +696,7 @@ The file has 9,981 rows and 13 columns.
 
 Disagreements between sources on the analytically important fields, one row per variety and field, classified as formatting only, compatible, a later decision or notification, a date difference, or substantive, with the value used and every alternative.
 
-The file has 563 rows and 10 columns.
+The file has 559 rows and 10 columns.
 
 | column | meaning | values | coverage |
 |---|---|---|---:|
@@ -980,7 +981,7 @@ The file has 444 rows and 24 columns.
 | `variety_id` | Stable identifier of a rice variety in the register and the key for joining every table in the archive. The number inside the identifier is the official series number of the variety, not a running count. | 'RICE-' followed by a key built from the official name by lib_keys.make_key: BR&lt;n&gt; (BR series, 1970-1993), BRRI_DHAN&lt;n&gt;, BRRI_HYBRID&lt;n&gt;, BINADHAN&lt;n&gt;, IRATOM&lt;n&gt;, BINASHAIL, BU_, BAU_ and GAU_ (universities), BRAC_DHAN&lt;n&gt;, PVT_ (other private inbreds), HYB_&lt;trade name&gt; (private and BADC hybrids), IR&lt;n&gt; and OLD_ (pre-BRRI introductions and old names). | 1.00 |
 | `n_parents_parsed` | Number of direct parents (generation 0 or 1) parsed from the pedigree. | Count. | 1.00 |
 | `depth_to_cgiar` | Number of generations between the variety and the nearest CGIAR line in its documented pedigree: 0 when the variety is a CGIAR line or a mutant, somaclone or selection of one, 1 when a parent is a CGIAR line, 2 for a grandparent, and so on. Blank means no CGIAR line was found within five generations of the documented pedigree, including the many varieties with no pedigree at all. | Integer 0-5; blank. | 0.30 |
-| `nearest_cgiar_ancestor` | Name or designation of the CGIAR line found at depth_to_cgiar (for example 'IR20', 'IR8', 'Oryza rufipogon (IRGC103404)'). A register variety (such as BR6) appears when it is itself a CGIAR line. | Free text as printed in the pedigree. | 0.30 |
+| `nearest_cgiar_ancestor` | Name or designation of the CGIAR line found at depth_to_cgiar (for example 'IR20', 'IR8', 'Oryza rufipogon (IRGC103404)'). For a mutant, somaclone or selection made directly from a CGIAR line (depth 0) it is the source line (NERICA-10 for Binadhan-19, IR8 for Iratom-24); a register variety (such as BR6) appears when it is itself a CGIAR line introduced and released. | Free text as printed in the pedigree. | 0.30 |
 | `pedigree_parse_status` | What the pedigree parser could do with the variety's pedigree. | parsed; parsed_untraced_lines (parents include institute lines that cannot be traced in the register); statement_only (only a statement such as 'line collected from IRRI'); none (no pedigree). | 1.00 |
 | `cgiar_path` | Chain from the variety to its nearest CGIAR ancestor. | '&lt;variety&gt; &lt;-g&lt;n&gt;- &lt;ancestor&gt;' links, with mutant_source, selection_source or somaclone_source for derivations and '[sister of ...]' for sister lines. | 0.30 |
 | `current_cgiar_role` | cgiar_role of the variety in the register when the pedigree was built (working column). | 1-5. | 1.00 |
@@ -992,7 +993,7 @@ The file has 444 rows and 24 columns.
 | `raitzer_basis` | Which branch of the Raitzer rule produced irri_weight_raitzer, or why it was not computed. | last-cross rule: IRRI line released directly; last-cross rule: AfricaRice line released directly; last-cross rule: mutant or selection of a CGIAR line; geometric rule: NARS cross with CGIAR material within three generations; geometric rule: NARS cross, no CGIAR line traced within three generations; not computed: no parents parsed; not computed: IRRI ancestry stated, line not named. | 1.00 |
 | `share_untraced_weight` | Part of the Raitzer pedigree weight (out of 0.5) that sits on ancestors whose CGIAR status is unknown: the ancestors of a breeding line that cannot be traced, and that line's own position unless it is a Bangladeshi institute line (BR, BRRI, BINA and similar). irri_weight_raitzer + share_untraced_weight is an upper bound on the IRRI weight. For BRRI dhan29 the untraced line is BG90-2 (0.25), and the published 0.375 equals the upper bound. | 0-0.5; blank when the weight is not computed. | 0.38 |
 | `irri_weight_raitzer_published` | IRRI attribution weight printed by Raitzer et al. (2015, p. 92, section 3.5.1.2) for the two varieties they attribute. | 0-1; blank for all other varieties. | 0.00 |
-| `cgiar_derivation` | How the variety was made, from the parsed pedigree: a CGIAR line introduced and released, a cross, or a mutant, somaclone or pure-line selection of an earlier line. Separates the three code-2 mutants of CGIAR lines at depth 0 (Iratom-24, Binadhan-19, Binadhan-21) from code-1 introductions and selections. | introduction; cross; mutant; somaclone; selection; blank when no pedigree was parsed. | 0.37 |
+| `breeding_route` | How the variety was made, from the parsed pedigree; independent of cgiar_role: a line introduced and released, a cross, or a mutant, somaclone or pure-line selection of an earlier line. Renamed from cgiar_derivation in version 1.2 so that it is not confused with the register column of that name, which has a different vocabulary. | introduction; cross; mutant; somaclone; selection; blank when no pedigree was parsed. | 0.37 |
 | `spia_in_t27` | Whether the variety is listed in SPIA (2025) Appendix B, Table 27 (rice varietal releases). | Y; N. | 1.00 |
 | `spia_category` | SPIA's own class for the variety: direct (IRRI's direct contribution), indirect (IR line as one parent) or none. SPIA's definition, not the register's cgiar_role; see 06_validation/cgiar_spia_concordance.csv. | direct; indirect; none; blank when not in Table 27. | 0.31 |
 | `spia_irri_direct` | SPIA Table 27 column 'IRRI's Direct Contribution'. | Y; N; blank when not in Table 27. | 0.31 |
@@ -1106,7 +1107,7 @@ The file has 445 rows and 7 columns.
 
 The long-format evidence behind every value in the register: for each variety or fish strain and each field, every value read from every source, with the source file, page, locator, extraction method and validation, and a flag for the row that set the published value. Unvalidated OCR readings are kept here but never enter the register. Personal contact details are removed from the text columns.
 
-The file has 27,833 rows and 13 columns.
+The file has 27,826 rows and 13 columns.
 
 | column | meaning | values | coverage |
 |---|---|---|---:|

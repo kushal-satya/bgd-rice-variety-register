@@ -28,7 +28,13 @@ def main():
     pkg = json.loads(pkg_path.read_text(encoding="utf-8"))
     errs, frames = [], {}
     listed = {pathlib.PurePosixPath(r["path"]).name for r in pkg["resources"]}
+    # REV3: build_datapackage.py packages exactly the tables the site offers (viz_data.json 'files'); a CSV the site does not
+    # publish (bgd_failures.csv, an internal build log) is not expected in the package
+    viz = data / "viz_data.json"
+    offered = {f["file"] for f in json.loads(viz.read_text(encoding="utf-8"))["files"]} if viz.exists() else None
     for fp in sorted(data.glob("bgd_*.csv")):
+        if offered is not None and fp.name not in offered:
+            continue
         if fp.name != "bgd_nsb_attendance.csv" and fp.name not in listed:
             errs.append(f"{fp.name}: CSV not listed in the package")
     if "bgd_nsb_attendance.csv" in listed:

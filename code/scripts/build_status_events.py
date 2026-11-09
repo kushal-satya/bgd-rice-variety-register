@@ -228,6 +228,12 @@ def _detail(r, etype):
     parts = [BASE_DETAIL[etype] + f" (NSB meeting {r['meeting_no']})"]
     if etype == "registration" and PROVISIONAL_HINT.search(_variety_text(r) + r["decision_type"] + r["f3m_notes"]):
         parts[0] = "Registered provisionally or conditionally by the NSB" + f" (NSB meeting {r['meeting_no']})"
+    if etype == "suspension":
+        # REV3 (round-2 review V2-11): say what was suspended, as the minutes do: seed multiplication (IR8 and IR20, NSB 7)
+        # or cultivation (Iratom-38, NSB 14)
+        what = ("Seed multiplication suspended" if re.search(r"seed multiplication|বীজ বর্ধন", r["f3m_notes"] + _variety_text(r))
+                else "Cultivation suspended" if re.search(r"cultivation|চাষাবাদ", r["f3m_notes"]) else "Suspended")
+        parts[0] = what + f" by the NSB (NSB meeting {r['meeting_no']})"
     if r["season"] and not _has_bn(r["season"]):
         parts.append(f"season: {r['season']}")
     if r["region_scope"] and not _has_bn(r["region_scope"]):

@@ -479,6 +479,15 @@ def main():
         if st == "parsed" and g is not None:
             untraced = g.note.str.contains("not traced").any()
             st = "parsed_untraced_lines" if untraced else "parsed"
+        if d == 0 and g is not None:
+            # REV3 (round-2 review V3): a mutant, somaclone or selection of a CGIAR line is code 1 at depth 0, but its
+            # nearest CGIAR line is the source line (NERICA-10 for Binadhan-19, IR8 for Iratom-24), not the variety itself
+            src = g[g.parent_role.isin(DERIV_ROLES) & (g.parent_is_cgiar_line.eq("Y")
+                                                         | g.parent_id.fillna("").map(lambda p: bool(p) and cgiar_line(p)))]
+            if len(src):
+                s0 = src.iloc[0]
+                anc = R.at[s0.parent_id, "variety_name"] if s0.parent_id else s0.parent_label_as_printed
+                path = f"{r.variety_name} <-{s0.parent_role}- {anc}"
         stated = re.search(r"contains irri genetic material", r.pedigree + " " + r.cgiar_spia_flags, re.I)
         if d is None and stated:              # IRRI ancestry stated by a CGIAR source without a named line
             anc, path = "IRRI (line not named)", "statement: 'Contains IRRI genetic material' (SPIA 2025 Table 27)"
@@ -526,10 +535,14 @@ SPIA_REASONS = {
     "RICE-BINADHAN18": "Register 2 (depth 2): carbon-ion mutant of BRRI dhan29, whose grandparents IR20 and IR5-114-3-1 are "
                        "IRRI lines. SPIA sets every flag to N, although it codes Binadhan-25, another BRRI dhan29 mutant, "
                        "indirect_ir_parent=Y.",
-    "RICE-BINADHAN19": "Register 2 (depth 0): mutant of NERICA-10, an AfricaRice line. SPIA's classes record IRRI and INGER "
-                       "contributions only, so an AfricaRice source falls outside them.",
-    "RICE-BINADHAN21": "Register 2 (depth 0): mutant of NERICA-10, an AfricaRice line. SPIA's classes record IRRI and INGER "
-                       "contributions only, so an AfricaRice source falls outside them.",
+    "RICE-BINADHAN19": "Register 1 (depth 0): carbon-ion mutant of NERICA-10, an AfricaRice line, made in Bangladesh and "
+                       "released. SPIA's classes record IRRI and INGER contributions only, so an AfricaRice source falls "
+                       "outside them.",
+    "RICE-BINADHAN21": "Register 1 (depth 0): gamma-ray mutant of NERICA-10, an AfricaRice line, made in Bangladesh and "
+                       "released. SPIA's classes record IRRI and INGER contributions only, so an AfricaRice source falls "
+                       "outside them.",
+    "RICE-IRATOM24": "Register 1 (depth 0): gamma-ray mutant of IR8 released directly (coordinator ruling, v1.2: a mutant of "
+                     "a CGIAR line is code 1). SPIA codes it indirect.",
     "RICE-BRRI_DHAN82": "Register 1: pure-line selection from NERICA10, an AfricaRice line. SPIA's classes record IRRI and "
                         "INGER contributions only.",
     "RICE-BINADHAN20": "Register 4: Binadhan-7 (a mutant of Tai Nguyen) crossed with an unnamed Vietnamese iron-rich line, "
@@ -555,12 +568,14 @@ SPIA_REASONS = {
     "RICE-BRRI_DHAN86": "Register 2 (depth 3): the male parent BR802-78-2-1-1 is a sister line of BRRI dhan29 "
                         "(BG90-2/BR51-46-5), whose grandparents are IR20 and IR5-114-3-1. SPIA does not follow sister "
                         "lines, and the IRRI lines sit beyond its grandparent limit.",
-    "RICE-BRRI_HYBRID2": "Register 4: BRRI CMS and restorer lines (BRR10A/BRRI10R) whose own pedigrees are not published, "
-                         "so no CGIAR line can be traced. SPIA codes indirect (IR line as one parent); no source in the "
-                         "archive documents IRRI material in these lines.",
-    "RICE-BRRI_HYBRID3": "Register 4: BRRI CMS and restorer lines (BRR11A/BRRI15R) whose own pedigrees are not published, "
-                         "so no CGIAR line can be traced. SPIA codes indirect (IR line as one parent); no source in the "
-                         "archive documents IRRI material in these lines.",
+    "RICE-BRRI_HYBRID2": "Register 5: the parents are the BRRI CMS and restorer lines BRRI10A and BRRI10R, whose own "
+                         "pedigrees are not published, so whether they carry IRRI material cannot be checked (v1.2, review "
+                         "V2-10; code 4 requires parents known to contain no CGIAR line). SPIA codes indirect (IR line as "
+                         "one parent) without naming the line.",
+    "RICE-BRRI_HYBRID3": "Register 5: the parents are the BRRI CMS and restorer lines BRRI11A and BRRI15R, whose own "
+                         "pedigrees are not published, so whether they carry IRRI material cannot be checked (v1.2, review "
+                         "V2-10; code 4 requires parents known to contain no CGIAR line). SPIA codes indirect (IR line as "
+                         "one parent) without naming the line.",
 }
 
 
@@ -725,7 +740,7 @@ def attribution(R, E, S, cgiar_line):
               "share_untraced_weight"):
         X[c] = X[c].map(lambda v: "" if v == "" else f"{round(float(v), 6):g}")
 
-    # ---- cgiar_derivation (A2-06) and SPIA flags split out of cgiar_spia_flags (A2-07)
+    # ---- breeding_route (A2-06; named cgiar_derivation before REV3) and SPIA flags split out of cgiar_spia_flags (A2-07)
     deriv = {}
     for vid in R.index:
         roles = {e.parent_role for e in by_child.get(vid, [])}
@@ -738,7 +753,7 @@ def attribution(R, E, S, cgiar_line):
         elif not d and roles & {"female", "male", "recurrent", "donor"}:
             d = "cross"
         deriv[vid] = d
-    X["cgiar_derivation"] = pd.Series(deriv)
+    X["breeding_route"] = pd.Series(deriv)      # REV3 (V3-05): was cgiar_derivation, a name the register uses for another vocabulary
     fl = R["cgiar_spia_flags"]
     cat = fl.str.extract(r"^spia_(direct|indirect|none)")[0].fillna("")
     X["spia_in_t27"] = cat.map(lambda c: "Y" if c else "N")

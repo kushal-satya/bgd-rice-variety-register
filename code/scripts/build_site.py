@@ -35,7 +35,7 @@ if cw_fp.exists():
     cw = pd.read_csv(cw_fp, dtype=str, keep_default_na=False)
     cw = cw[cw.variety_id.ne("")]
     SRC0 = {"BIHS2011_12": "BIHS 2011–12", "BIHS2015": "BIHS 2015", "BIHS2018_19": "BIHS 2018–19", "BIHS2024_SPIA": "BIHS 2024 (SPIA)",
-            "MIXTAPE2026_draft": "MIXTAPE 2026 draft", "SPIA_DNA_reference": "SPIA DNA reference sample"}
+            "MIXTAPE2026_draft": "MIXTAPE 2026, March and May drafts", "MIXTAPE2026_0821": "MIXTAPE 2026, 21 August draft", "MIXTAPE2026_CAPI": "MIXTAPE 2026, CAPI forms (October)", "SPIA_DNA_reference": "SPIA DNA reference sample"}
     codes = (cw.assign(t=cw.source.map(SRC0).fillna(cw.source) + " code " + cw.code)
                .groupby("variety_id").t.apply(lambda s: " | ".join(dict.fromkeys(s))))
     for row in base["rice"]:
@@ -56,7 +56,7 @@ if ev_fp.exists():
     base["events"] = evs
 # how the survey code lists match the register, by source
 SRC = {"BIHS2011_12": "BIHS 2011–12", "BIHS2015": "BIHS 2015", "BIHS2018_19": "BIHS 2018–19", "BIHS2024_SPIA": "BIHS 2024 (SPIA)",
-       "MIXTAPE2026_draft": "MIXTAPE 2026 draft", "SPIA_DNA_reference": "SPIA DNA reference sample"}
+       "MIXTAPE2026_draft": "MIXTAPE 2026, March and May drafts", "MIXTAPE2026_0821": "MIXTAPE 2026, 21 August draft", "MIXTAPE2026_CAPI": "MIXTAPE 2026, CAPI forms (October)", "SPIA_DNA_reference": "SPIA DNA reference sample"}
 if cw_fp.exists():
     cwall = pd.read_csv(cw_fp, dtype=str, keep_default_na=False)
     grp = lambda m: "resolved" if m in ("exact_code_name", "normalised_name", "alias") else m

@@ -544,6 +544,10 @@ def _region(row):
     scope = re.sub(r";[^;|]*\(discussion\)", "", row.get("region_scope", "")).strip()
     rec = row.get("recommended_region", "")
     names_place = bool(scope) and (NATIONWIDE.search(scope) or _divisions_in(scope))
+    if scope and not names_place and re.search(r"\b(areas?|regions?|AEZ)\b|tidal|haor", scope, re.I):
+        # REV3 (round-2 review V3-08): the approving decision names a target area without divisions (BRRI dhan44, NSB 58:
+        # 'দক্ষিণ অঞ্চলের জোয়ার ভাটা এলাকায়'); it prevails over a list's 'whole country', so not nationwide, divisions blank
+        return "", "0"
     text = scope if names_place else (rec + " | " + scope)
     text = re.sub(r";[^;|]*\(discussion\)", "", text)
     if not text.strip(" |"):

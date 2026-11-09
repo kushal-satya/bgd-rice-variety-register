@@ -27,11 +27,17 @@ FREE_TEXT = ["special_traits_official", "identifying_traits_official", "stress_t
 NEAR = r"[^।|;.]{0,40}"
 TOL_BN = r"(সহিষ্ণু|সহনশীল|সহ্য|উপযোগী|প্রতিরোধ)"
 TOL_EN = r"(toleran|resist|suited|suitable|prone area|adapted)"
+# REV3 (round-2 review V3-10): official texts that call a variety flood tolerant or say it survives full submergence
+# (Binadhan-12: SCA compendium 'flood tolerant; seedlings survive 20-25 days of submergence'; BINA 'বন্যা সহিষ্ণু ... ২৫ দিন
+# পর্যন্ত পানিতে সম্পূর্ণ নিমজ্জিত অবস্থায় বেঁচে থাকতে পারে'). Stagnant flooding and waterlogging (জলাবদ্ধ) stay excluded.
+SUBM_EXTRA = (r"(?<!জলাবদ্ধ )বন্যা ?(সহিষ্ণু|সহনশীল)|নিমজ্জিত[^।|;]{0,20}বেঁচে|surviv\w*[^|;.]{0,40}submergence"
+              r"|(?<!stagnant )(?<!stagnant-)(?<!stagnant)flood[- ]?toleran")
 
 RULES = [  # (tag, free-text pattern, SPIA flag, TRIVSA pattern)
     ("salt tolerant", rf"(লবণ|লবন){NEAR}{TOL_BN}|{TOL_BN}{NEAR}(লবণ|লবন)|(salt|salin|saline){NEAR}{TOL_EN}|{TOL_EN}{NEAR}(salt|salin)",
      "saline_tolerance=Y", r"Salt injury resistance:\s*(T|R)\b"),
-    ("submergence tolerant", rf"(জলমগ্ন|আকস্মিক বন্যা){NEAR}{TOL_BN}|{TOL_BN}{NEAR}জলমগ্ন|(submergence|flash.?flood){NEAR}{TOL_EN}|{TOL_EN}{NEAR}submergence|\bSub1\b",
+    ("submergence tolerant", rf"(জলমগ্ন|আকস্মিক বন্যা){NEAR}{TOL_BN}|{TOL_BN}{NEAR}জলমগ্ন|(submergence|flash.?flood){NEAR}{TOL_EN}|{TOL_EN}{NEAR}submergence|\bSub1\b"
+                             rf"|{SUBM_EXTRA}",
      "sub1=Y", r"Submergence[^:]*:\s*(T|R)\b"),
     ("drought tolerant", rf"খরা{NEAR}{TOL_BN}|{TOL_BN}{NEAR}খরা|drought{NEAR}{TOL_EN}|{TOL_EN}{NEAR}drought|খরা সহিষ্ণু",
      "drought_tolerance=Y", r"Drought[^:]*:\s*(T|R)\b"),

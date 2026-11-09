@@ -427,7 +427,7 @@ const readableEvidence = s => (s || '').split(' | ').filter(Boolean).map(x => { 
 const EVENT = {release: 'released', registration: 'registered', extension_season_or_region: 'approval extended to a further season or region',
   denotification_proposed_deferred: 'withdrawal proposed and deferred', rename: 'renamed', 'recommendation_pending/deferred': 'decision deferred',
   import_permission: 'seed import permitted', provisional_release: 'released provisionally', full_release_after_provisional: 'full release after provisional release',
-  condition_change: 'conditions of approval changed', status_change_other: 'status changed', suspension: 'seed multiplication suspended',
+  condition_change: 'conditions of approval changed', status_change_other: 'status changed', suspension: 'suspended',
   registration_renewal_or_extension: 'registration renewed or extended', rejection: 'rejected'};
 const parentsHtml = r => ((D.parents || {})[r.variety_id] || []).map(x => {
   const name = x.id ? `<a href="#${esc(x.id)}">${T(x.l)}</a>` : T(x.l);
@@ -449,7 +449,7 @@ const status = r => r.legal_status_2026 || r.status_as_of_2026 || '';
 function detail(r) {
   const dl = arr => `<dl class="dl">` + arr.filter(x => x[1]).map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('') + '</dl>';
   const ident = [['Name as printed', T(r.official_name_en)], ['Bangla name', T(r.official_name_bn)], ['Popular name', T(r.popular_name)], ['Other names', T(r.aliases)],
-    ['Developer as printed', T(r.developer)], ['Developer', esc([r.developer_std, r.developer_type].filter(Boolean).join(' · '))],
+    ['Developer as printed in the source', T(r.developer)], ['Developer', esc([r.developer_std, r.developer_type].filter(Boolean).join(' · '))],
     ['Approval route', T(ROUTE[r.release_category] || r.release_category)], ['Approving meeting', T(r.approval_reference)],
     ['Gazette notification', esc([r.gazette_date, r.gazette_status].filter(Boolean).join(' · '))],
     ['Legal status at the 115th meeting (5 Feb 2026)', status(r) ? esc(status(r)) + (r.status_basis ? `<div class="bn">${T(r.status_basis)}</div>` : '') : ''],
@@ -467,9 +467,9 @@ function detail(r) {
     ['Grain and quality', T(r.quality_traits)], ['Stress tolerance', T(r.stress_tolerance)], ['DUS result', T(r.dus_result)], ['Trial sites (VCU)', T(r.vcu_sites)]];
   const evid = [['Codes in household surveys', esc((r.survey_codes || '').split(' | ').join('; '))], ['What CGIAR sources say', T(r.cgiar_independent)],
     ['CGIAR sources', links(r.cgiar_source_urls)], ['CGIAR evidence document', links(r.cgiar_evidence_url)], ['Key papers', links(r.key_papers)],
-    ['Adoption (as reported)', T(r.adoption)], ['Market segment', esc(r.market_segment)], ['How the values were verified', esc(readable(r.validation_summary))],
+    ['Adoption (as reported)', T(r.adoption)], ['Market segment (GloMIP)', esc((r.market_segment || '').replace(/^[\s|]+|[\s|]+$/g, '').replace(/\s*\|\s*\|\s*/g, ' | '))], ['How the values were verified', esc(readable(r.validation_summary))],
     ['Where sources disagree', T((r.conflict_note || r.conflict_fields || '').replace(/\s*\((?:DS|RB|[A-Z]{2})-[A-Z]?\d+\)/g, '').split(' | ').join('; '))],
-    ['Main source', sourceCell(r)], ['Quality notes', esc(readableFlags(r.flags))]];
+    ['Main source', sourceCell(r)], ['Quality notes', esc(r.quality_notes || readableFlags(r.flags))]];
   const decs = (D.decisions || {})[r.variety_id] || [];
   const decHtml = decs.length ? `<details class="sec"><summary>National Seed Board decisions (${decs.length}), with the text of the minutes</summary>` + decs.map(x =>
     `<details class="dec"><summary>${esc(x.d)} · NSB ${esc(x.m)} · ${esc((x.t || '').replace(/_/g, ' '))}${x.src ? ' · ' + link(x.src, 'minutes, p. ' + (x.pg || '')) : ''}</summary>

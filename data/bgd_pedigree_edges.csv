@@ -12,9 +12,9 @@ RICE-BINADHAN14,Binadhan-14,Ashfal,,,mutant_source,,N,,pedigree,05_output/final/
 RICE-BINADHAN15,Binadhan-15,IR 2153-14-1-6-2,,,female,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,printed 'IR 2153-14-1-6-2/IR 2061-214-38 2/IR 2071-625-1-252'; order of crosses unclear,1
 RICE-BINADHAN15,Binadhan-15,IR 2061-214-38,,,unknown,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
 RICE-BINADHAN15,Binadhan-15,IR 2071-625-1-252,,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1
-RICE-BINADHAN17,Binadhan-17,C418(ZHONG413)2,,,female,,N,,cgiar_spia_flags (SPIA 2025 Table 27 'IRRI/INGER entry used as parents'),05_output/final/bgd_rice_varieties.csv,,1
-RICE-BINADHAN17,Binadhan-17,SH109,,,female,,N,,cgiar_spia_flags (SPIA 2025 Table 27 'IRRI/INGER entry used as parents'),05_output/final/bgd_rice_varieties.csv,,2
-RICE-BINADHAN17,Binadhan-17,(ZHONG413)2,,,male,,N,,cgiar_spia_flags (SPIA 2025 Table 27 'IRRI/INGER entry used as parents'),05_output/final/bgd_rice_varieties.csv,,2
+RICE-BINADHAN17,Binadhan-17,C418(ZHONG413)2,,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1
+RICE-BINADHAN17,Binadhan-17,SH109,,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,2
+RICE-BINADHAN17,Binadhan-17,(ZHONG413)2,,,male,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,2
 RICE-BINADHAN18,Binadhan-18,ব্রি ধান২৯ (BRRI dhan29),RICE-BRRI_DHAN29,,mutant_source,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,carbon-ion irradiation of BRRI dhan29 seed; resolved by name (lib_keys.make_key),0
 RICE-BINADHAN19,Binadhan-19,NERICA-10,,,mutant_source,,Y,AfricaRice,pedigree,05_output/final/bgd_rice_varieties.csv,carbon-ion irradiation 40 Gy,0
 RICE-BINADHAN20,Binadhan-20,বিনা ধান ৭ (Binadhan-7),RICE-BINADHAN7,,female,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,resolved by name (lib_keys.make_key),1
