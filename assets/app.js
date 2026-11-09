@@ -157,12 +157,12 @@ function fig1() {
     el('line', {x1: x, x2: x, y1: ys(COUNT[+first.approval_year].pvt_hyb + COUNT[+first.approval_year].pvt_inb) - 3, y2: ys(top * 0.7), class: 'annl'}, svg);
     el('text', {x: x - 4, y: ys(top * 0.7) - 5, 'text-anchor': 'end', class: 'ann'}, svg).textContent = narrow(W) ? 'First hybrids, 1998' : 'First hybrids registered, 40th NSB meeting, Sep 1998'; }
   dataTable('f1data', ['Year', 'Public inbred', 'Public hybrid', 'Private inbred', 'Private hybrid', 'All'],
-    YEARS.filter(y => COUNT[y].pub_inb + COUNT[y].pub_hyb + COUNT[y].pvt_inb + COUNT[y].pvt_hyb).map(y => { const c = COUNT[y]; return [y + (y === STATS.year_max ? ' (one meeting)' : ''), c.pub_inb, c.pub_hyb, c.pvt_inb, c.pvt_hyb, c.pub_inb + c.pub_hyb + c.pvt_inb + c.pvt_hyb]; }));
+    YEARS.filter(y => COUNT[y].pub_inb + COUNT[y].pub_hyb + COUNT[y].pvt_inb + COUNT[y].pvt_hyb).map(y => { const c = COUNT[y]; return [y + (y === STATS.year_max ? ' (one meeting)' : ''), c.pub_inb, c.pub_hyb, c.pvt_inb, c.pvt_hyb, c.pub_inb + c.pub_hyb + c.pvt_inb + c.pvt_hyb]; }), 'Years with no approvals are omitted.');
 }
 // Figure 2: cumulative stock of approved varieties
 function fig2() {
   const svg = $('#f2'); svg.innerHTML = '';
-  const W = widthOf(svg), H = narrow(W) ? 240 : 280, m = {l: 36, r: narrow(W) ? 92 : 120, t: 12, b: 24};
+  const W = widthOf(svg), H = narrow(W) ? 250 : 280, m = {l: 36, r: narrow(W) ? 108 : 120, t: 12, b: 24};
   svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
   const L = [['Public inbred', 'pub_inb', 'var(--s-pub)', ''], ['Private hybrid', 'pvt_hyb', 'var(--s-pvt)', ''], ['Public hybrid', 'pub_hyb', 'var(--s-pub)', '4 3'], ['Private inbred', 'pvt_inb', 'var(--s-pvt)', '4 3']];
   const cum = {}; L.forEach(([, k]) => { let a = 0; cum[k] = YEARS.map(y => (a += COUNT[y][k])); });
@@ -177,14 +177,14 @@ function fig2() {
     const v = cum[k][cum[k].length - 1]; ends.push([ys(v), `${lab} ${v}`, col]);
   });
   ends.sort((a, b) => a[0] - b[0]); let prev = -99;
-  ends.forEach(([y, t, col]) => { const yy = Math.max(y, prev + 13); prev = yy; el('text', {x: W - m.r + 6, y: yy + 4, class: 'lab', style: `fill:${col}`}, svg).textContent = t; });
+  ends.forEach(([y, t, col]) => { const yy = Math.max(y, prev + 14); prev = yy; el('text', {x: W - m.r + 6, y: yy + 4, class: 'lab', style: `fill:${col}`}, svg).textContent = t; });
   const hit = el('rect', {x: m.l, y: m.t, width: W - m.l - m.r, height: H - m.t - m.b, fill: 'transparent'}, svg);
   hit.addEventListener('mousemove', ev => { const b = svg.getBoundingClientRect(), x = (ev.clientX - b.left) * W / b.width;
     const y = Math.round(STATS.year_min + (x - m.l) / (W - m.l - m.r) * (STATS.year_max - STATS.year_min)), i = Math.max(0, Math.min(YEARS.length - 1, y - STATS.year_min));
     showTip(ev, `<b>By end of ${YEARS[i]}</b>` + L.map(([lab, k]) => `<div class="r"><span class="k">${lab}</span><span>${cum[k][i]}</span></div>`).join('')); });
   hit.addEventListener('mouseleave', hideTip);
   dataTable('f2data', ['By end of', 'Public inbred', 'Public hybrid', 'Private inbred', 'Private hybrid'],
-    YEARS.filter(y => y % 5 === 0 || y === STATS.year_max).map(y => { const i = y - STATS.year_min; return [y, cum.pub_inb[i], cum.pub_hyb[i], cum.pvt_inb[i], cum.pvt_hyb[i]]; }));
+    YEARS.filter(y => y % 5 === 0 || y === 2009 || y === STATS.year_max).map(y => { const i = y - STATS.year_min; return [y + (y === STATS.year_max ? ' (to February)' : ''), cum.pub_inb[i], cum.pub_hyb[i], cum.pvt_inb[i], cum.pvt_hyb[i]]; }), 'Selected years: every fifth year, 2009 (when private hybrids overtook public inbreds) and the last year.');
 }
 // Figure 3: share of inbred varieties stating each trait, by decade
 function fig3() {
@@ -199,13 +199,14 @@ function fig3() {
   const cw = (W - m.l - m.r) / decs.length, H = m.t + tags.length * rowH + m.b;
   svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
   decs.forEach((d, j) => { const x = m.l + j * cw + cw / 2;
-    el('text', {x, y: 13, 'text-anchor': 'middle', class: 'lab'}, svg).textContent = narrow(W) ? `’${String(d).slice(2)}s` : `${d}s`;
+    const part = d < STATS.year_min || d + 9 > STATS.year_max ? '*' : '';
+    el('text', {x, y: 13, 'text-anchor': 'middle', class: 'lab'}, svg).textContent = (narrow(W) ? `’${String(d).slice(2)}s` : `${d}s`) + part;
     el('text', {x, y: 27, 'text-anchor': 'middle'}, svg).textContent = `n=${nDec[d] || 0}`; });
   el('text', {x: W - m.r + 6, y: 27}, svg).textContent = 'all';
   tags.forEach((t, i) => {
     const y = m.t + i * rowH;
     el('line', {x1: 0, x2: W, y1: y + rowH, y2: y + rowH, class: 'gl'}, svg);
-    el('text', {x: m.l - 8, y: y + rowH / 2 + 4, 'text-anchor': 'end', class: 'lab'}, svg).textContent = t;
+    el('text', {x: m.l - 8, y: y + rowH / 2 + 4, 'text-anchor': 'end', class: 'lab'}, svg).textContent = narrow(W) ? t.replace('bacterial blight', 'blight').replace(' / deepwater / haor', ' / deepwater') : t;
     decs.forEach((d, j) => { const n = cell[t + '|' + d] || 0, sh = nDec[d] ? n / nDec[d] : 0, x = m.l + j * cw;
       if (n) { el('rect', {x: x + 2, y: y + 2, width: cw - 4, height: rowH - 4, fill: 'var(--s-pub)', 'fill-opacity': 0.10 + 0.55 * sh}, svg);
         el('text', {x: x + cw / 2, y: y + rowH / 2 + 4, 'text-anchor': 'middle', class: 'lab'}, svg).textContent = narrow(W) ? Math.round(sh * 100) : Math.round(sh * 100) + '%'; } });
@@ -254,7 +255,7 @@ const DEPTH = [['0', 'Itself a CGIAR line', 'var(--d0)'], ['1', 'CGIAR parent', 
   ['collab', 'Collaboration or funding only', 'url(#hcol)'], ['none', 'No CGIAR line in the traceable pedigree', 'none'], ['unknown', 'Pedigree unknown', 'url(#h5)']];
 const depthCat = r => r.cgiar_role === '5' || !r.cgiar_role ? 'unknown' : r.cgiar_role === '4' ? 'none' : r.cgiar_role === '3' ? 'collab'
   : r.depth_to_cgiar === '' || r.depth_to_cgiar == null ? (r.cgiar_role === '1' ? '0' : '1') : (+r.depth_to_cgiar >= 3 ? '3+' : String(+r.depth_to_cgiar));
-const swatch = c => c[2] === 'none' ? '<i class="sw empty"></i>' : c[2] === 'url(#h5)' ? '<i class="sw hatch"></i>' : c[2] === 'url(#hcol)' ? '<i class="sw hcol"></i>' : `<i class="sw" style="background:${c[2]}"></i>`;
+const swatch = c => c[2] === 'resid' ? '<i class="sw resid"></i>' : c[2] === 'none' ? '<i class="sw empty"></i>' : c[2] === 'url(#h5)' ? '<i class="sw hatch"></i>' : c[2] === 'url(#hcol)' ? '<i class="sw hcol"></i>' : `<i class="sw" style="background:${c[2]}"></i>`;
 // Figure 4: inbred approvals by generations to the nearest CGIAR line, five-year periods
 function fig4() {
   const svg = $('#f4'); if (!svg) return; svg.innerHTML = ''; hatchDefs(svg);
@@ -288,7 +289,7 @@ function fig5() {
   const top = FOUNDERS.slice(0, 14), W = widthOf(svg), lw = narrow(W) ? 120 : 170, m = {l: lw, r: 40, t: 6, b: 22}, rowH = 24, H = m.t + top.length * rowH + m.b;
   svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
   const G = [['1', 'Children', 'var(--d1)'], ['2', 'Grandchildren', 'var(--d2)'], ['3', 'Later generations', 'var(--d3)']];
-  $('#lg5').innerHTML = G.map(g => `<span><i class="sw" style="background:${g[2]}"></i>${g[1]}</span>`).join('') + '<span><b class="cgmark">CGIAR</b> line bred at a CGIAR centre</span>';
+  $('#lg5').innerHTML = G.map(g => `<span><i class="sw" style="background:${g[2]}"></i>${g[1]}</span>`).join('') + '<span><b>● Bold name</b>: line bred at a CGIAR centre</span>';
   const max = Math.ceil(Math.max(...top.map(f => f.d.size)) / 10) * 10, xs = v => m.l + v / max * (W - m.l - m.r);
   for (let v = 0; v <= max; v += 10) { el('line', {x1: xs(v), x2: xs(v), y1: m.t, y2: H - m.b, class: v ? 'gl' : 'ax'}, svg); el('text', {x: xs(v), y: H - 6, 'text-anchor': 'middle'}, svg).textContent = v; }
   const table = [];
@@ -315,29 +316,32 @@ function fig6() {
     el('rect', {width: 5, height: 5, fill: 'var(--bg)'}, pc); el('rect', {width: 2, height: 5, fill: 'var(--d2)'}, pc); }
   const CATS = [['d0', 'Itself a CGIAR line', 'var(--d0)'], ['d1', 'CGIAR parent', 'var(--d1)'], ['d2', 'CGIAR grandparent', 'var(--d2)'], ['d3', 'CGIAR ancestor 3–5 generations back', 'var(--d3)'],
     ['collab', 'Collaboration or funding only', 'url(#hcol)'], ['none', 'No CGIAR line in the pedigree', 'none'], ['unknown', 'Pedigree unknown', 'url(#h5)'],
-    ['brand_family', 'Brand family (several hybrids)', 'var(--c4)'], ['not_approved', 'Never approved (e.g. Swarna, Miniket)', 'var(--s-pvt)'], ['other', 'Other or not recorded', 'var(--rule)']];
+    ['brand_family', 'Brand family (several hybrids)', 'var(--c4)'], ['not_approved', 'Never approved (e.g. Swarna, Miniket)', 'var(--na)'], ['other', 'Residual code ("other", local or unlisted)', 'resid']];
   $('#lg6').innerHTML = CATS.map(c => `<span>${swatch(c)}${c[1]}</span>`).join('');
   const rounds = [...new Set(P.map(p => p.round))];
-  const W = widthOf(svg), m = {l: narrow(W) ? 88 : 120, r: 10, t: 6, b: 22}, rowH = 30, H = m.t + rounds.length * rowH + m.b, xs = v => m.l + v * (W - m.l - m.r);
+  const W = widthOf(svg), m = {l: narrow(W) ? 100 : 130, r: 10, t: 6, b: 22}, rowH = 38, H = m.t + rounds.length * rowH + m.b, xs = v => m.l + v * (W - m.l - m.r);
   svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
   [0, .25, .5, .75, 1].forEach(v => { el('line', {x1: xs(v), x2: xs(v), y1: m.t, y2: H - m.b, class: v ? 'gl' : 'ax'}, svg); el('text', {x: xs(v), y: H - 6, 'text-anchor': 'middle'}, svg).textContent = Math.round(v * 100) + '%'; });
   const table = [];
   rounds.forEach((rd, i) => {
-    const rows = P.filter(p => p.round === rd), n = +((rows[0] || {}).denom || 0), y = m.t + i * rowH + 6, h = rowH - 12;
-    el('text', {x: m.l - 8, y: y + h / 2 + 4, 'text-anchor': 'end', class: 'lab'}, svg).textContent = rd;
+    const rows = P.filter(p => p.round === rd), n = +((rows[0] || {}).denom || 0), y = m.t + i * rowH + 6, h = rowH - 16, star = /2011/.test(rd) ? '*' : '';
+    el('text', {x: m.l - 8, y: y + h / 2 + 2, 'text-anchor': 'end', class: 'lab'}, svg).textContent = rd + star;
+    el('text', {x: m.l - 8, y: y + h / 2 + 15, 'text-anchor': 'end'}, svg).textContent = `n=${fmt(n)} plots`;
     let acc = 0; const by = {};
     CATS.forEach(([k, , col]) => { const s = rows.filter(p => p.cat === k).reduce((a, p) => a + (+p.share || 0), 0); by[k] = s; if (!s) return;
-      el('rect', {x: xs(acc) + 0.5, y, width: Math.max(0, xs(acc + s) - xs(acc) - 1), height: h, fill: col === 'none' ? 'var(--bg)' : col, stroke: col === 'none' ? 'var(--ink-3)' : 'none'}, svg); acc += s; });
+      el('rect', {x: xs(acc) + 0.5, y, width: Math.max(0, xs(acc + s) - xs(acc) - 1), height: h, fill: col === 'none' ? 'var(--bg)' : col === 'resid' ? 'var(--c5)' : col, stroke: col === 'none' || col === 'resid' ? 'var(--ink-3)' : 'none', 'stroke-width': 1}, svg); acc += s; });
     const hit = el('rect', {x: 0, y: y - 6, width: W, height: rowH, fill: 'transparent'}, svg);
     hover(hit, () => `<b>${esc(rd)}</b> · ${fmt(n)} rice plots with a variety code` + CATS.filter(c => by[c[0]]).map(c => `<div class="r"><span class="k">${c[1]}</span><span>${Math.round(by[c[0]] * 1000) / 10}%</span></div>`).join(''));
-    table.push([esc(rd) + ` (n=${fmt(n)})`, ...CATS.map(c => (Math.round(by[c[0]] * 1000) / 10) + '%')]);
+    table.push([esc(rd) + star + ` (n=${fmt(n)})`, ...CATS.map(c => (Math.round(by[c[0]] * 1000) / 10) + '%')]);
   });
-  dataTable('f6data', ['Survey round', ...CATS.map(c => c[1])], table, 'Shares of rice plot reports that carry a variety code, matched through the crosswalk.');
+  dataTable('f6data', ['Survey round', ...CATS.map(c => c[1])], table, 'Shares of rice plot reports that carry a variety code, matched through the crosswalk. * The 2011–12 code list had no codes for Swarna, Miniket or local varieties, so those plots fall under the residual code and the round is not comparable with later ones.');
 }
 // Lineage explorer: ancestors to the left, descendants to the right, generations as columns
 let LIN = null;
 function lineage(k) {
-  const svg = $('#lin'); if (!svg || !NODE[k]) return; LIN = k; svg.innerHTML = '';
+  const svg = $('#lin'); if (!svg) return;
+  if (!NODE[k]) { $('#lininfo').textContent = `No variety or breeding line with the identifier ${k} is in the pedigree graph. Choose one from the list.`; svg.innerHTML = ''; return; }
+  LIN = k; svg.innerHTML = '';
   const n0 = NODE[k], r0 = BYID[k];
   const anc = [[k]], seenA = new Set([k]);
   for (let g = 1; g <= 5; g++) { const next = []; anc[g - 1].forEach(x => (PARENTS[x] || []).forEach(p => { if (!seenA.has(p.key)) { seenA.add(p.key); next.push(p.key); } })); if (!next.length) break; anc.push(next); }
@@ -362,10 +366,11 @@ function lineage(k) {
       'stroke-dasharray': /inferred|sister/.test(p.basis || '') ? '1 3' : /mutant|somaclone|selection/.test(p.role || '') ? '3 2' : ''}, edges); }));
   Object.entries(pos).forEach(([key, p]) => {
     const n = NODE[key], isC = key === k, a = el('a', {href: n.reg ? '#L-' + encodeURIComponent(key) : '#L-' + encodeURIComponent(key), class: 'lnode'}, svg);
-    el('rect', {x: p.x, y: p.y, width: boxW, height: boxH, rx: 2, fill: n.cg ? 'var(--d0)' : isC ? 'var(--accent)' : 'var(--surface)', stroke: n.cg || isC ? 'none' : n.reg ? 'var(--ink-3)' : 'var(--rule)', 'stroke-dasharray': n.reg ? '' : '3 2'}, a);
-    const fg = n.cg || isC ? 'var(--bg)' : 'var(--ink)';
+    el('rect', {x: p.x, y: p.y, width: boxW, height: boxH, rx: 2, fill: n.cg ? 'var(--d0)' : 'var(--surface)', stroke: n.cg ? 'none' : 'var(--ink-3)', 'stroke-dasharray': n.reg || n.cg ? '' : '3 2'}, a);
+    if (isC) el('rect', {x: p.x - 3, y: p.y - 3, width: boxW + 6, height: boxH + 6, rx: 3, fill: 'none', stroke: 'var(--warn)', 'stroke-width': 2.5}, a);
+    const fg = n.cg ? 'var(--bg)' : 'var(--ink)';
     el('text', {x: p.x + 7, y: p.y + 14, style: `fill:${fg};font-size:11.5px;font-weight:${isC ? 650 : 500}`}, a).textContent = clip(n.label, Math.floor(boxW / 6.6));
-    el('text', {x: p.x + 7, y: p.y + 27, style: `fill:${fg};font-size:10.5px;opacity:.85`}, a).textContent = n.cg ? `CGIAR line${n.centre ? ' · ' + n.centre : ''}` : n.reg ? `approved ${n.year || ''}` : 'breeding line';
+    el('text', {x: p.x + 7, y: p.y + 27, style: `fill:${fg};font-size:10.5px;opacity:.85`}, a).textContent = [n.reg ? `approved ${n.year || ''}` : (n.cg ? '' : 'breeding line'), n.cg ? `CGIAR line${n.centre ? ' · ' + n.centre : ''}` : ''].filter(Boolean).join(' · ');
     a.addEventListener('mousemove', ev => showTip(ev, `<b>${esc(n.label)}</b>${n.cg ? ' · CGIAR line' : ''}${n.reg ? ` · approved ${n.year || ''} · CGIAR link ${esc(BYID[key].cgiar_role || '5')}` : ' · not an approved variety'}<div class="k">${n.reg ? 'Select to centre the tree on it.' : 'A breeding line or foreign variety used as a parent.'}</div>`));
     a.addEventListener('mouseleave', hideTip);
   });
@@ -431,7 +436,12 @@ const parentsHtml = r => ((D.parents || {})[r.variety_id] || []).map(x => {
   return name + tag + role; }).join('<br>');
 const laterDecisions = r => ((D.events || {})[r.variety_id] || []).filter(x => !/^(release|registration)$/.test(x.t)).slice().sort((a, b) => (a.d || '').localeCompare(b.d || ''))
   .map(x => `${esc(x.d || '')} · NSB ${esc(x.m)} · ${esc(EVENT[x.t] || x.t.replace(/_/g, ' '))}${x.x ? ': ' + T(x.x) : ''}`).join('<br>');
-const depthHtml = r => r.depth_to_cgiar === '' || r.depth_to_cgiar == null ? '' : r.depth_to_cgiar === '0' ? 'the variety is itself a CGIAR line' :
+const depthHtml = r => r.depth_to_cgiar === '' || r.depth_to_cgiar == null ? '' : r.depth_to_cgiar === '0' ?
+  (/mutant|somaclon|selection/i.test(r.cgiar_derivation || '') ? (() => {
+    const src = ((D.parents || {})[r.variety_id] || []).find(x => /mutant|somaclone|selection/.test(x.role || '')) || {};
+    const line = src.l || (r.nearest_cgiar_ancestor !== r.name ? r.nearest_cgiar_ancestor : '');
+    const kind = /selection/i.test(src.role || r.cgiar_derivation) ? 'selection' : /somaclon/i.test(src.role || '') ? 'somaclonal derivative' : 'mutant';
+    return `0: a ${kind} of the CGIAR line ${esc(line || 'named in the pedigree')}, made in Bangladesh`; })() : 'the variety is itself a CGIAR line') :
   `${esc(r.depth_to_cgiar)} (${r.depth_to_cgiar === '1' ? 'parent' : r.depth_to_cgiar === '2' ? 'grandparent' : r.depth_to_cgiar + ' generations back'})${r.nearest_cgiar_ancestor ? ': ' + esc(r.nearest_cgiar_ancestor) : ''}`;
 const links = s => (s || '').split(' | ').filter(u => /^https?:/.test(u)).map(u => link(u, u.replace(/^https?:\/\/(www\.)?/, '').slice(0, 70))).join('<br>');
 const ROUTE = {NSB_release: 'Release by the National Seed Board (ছাড়করণ)', NSB_registration: 'Registration by the National Seed Board (নিবন্ধন)', pre_NSB_recommended: 'Recommended before the National Seed Board existed'};
@@ -650,7 +660,8 @@ const TYPE = {import_approval_ornamental: 'Ornamental species permitted for impo
 
 // ---------- files ----------
 (D.files || []).forEach(f => { const tr = document.createElement('tr');
-  const name = D.download_base !== null ? `<a href="${esc((D.download_base ?? 'data/') + f.file)}">${esc(f.file)}</a>` : esc(f.file);
-  tr.innerHTML = `<td class="mono">${name}</td><td>${esc(f.desc)}</td><td>${esc(f.unit)}</td><td class="num r">${fmt(f.rows)}</td><td class="num r">${f.cols}</td><td class="num r">${f.mb < 0.1 ? '&lt;0.1' : f.mb}</td>`;
+  const href = f.path ? f.path : (D.download_base ?? 'data/') + f.file;
+  const name = D.download_base !== null ? `<a href="${esc(href)}">${esc(f.file)}</a>` : esc(f.file);
+  tr.innerHTML = `<td class="mono">${name}</td><td>${esc(f.desc)}</td><td>${esc(f.unit)}</td><td class="num r">${f.rows === '' ? '' : fmt(f.rows)}</td><td class="num r">${f.cols ?? ''}</td><td class="num r">${f.mb < 0.1 ? '&lt;0.1' : f.mb}</td>`;
   $('#filetb tbody').appendChild(tr); });
 })();

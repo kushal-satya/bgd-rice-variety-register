@@ -34,7 +34,10 @@ DATE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 
 
 def public_files():
-    return sorted(p for p in F.glob("bgd_*.csv") if p.name not in PRIVATE)
+    """Exactly the tables offered for download on the site (the files list make_final.py writes into viz_data.json)."""
+    import json
+    listed = {f["file"] for f in json.loads((F / "viz_data.json").read_text(encoding="utf-8"))["files"]}
+    return sorted(p for p in F.glob("bgd_*.csv") if p.name in listed and p.name not in PRIVATE)
 
 
 def field_type(dtype, s):

@@ -5,7 +5,7 @@
   --rule:#DCE3E0; --rule-2:#EDF1EF; --accent:#07555F; --accent-ink:#07555F; --warn:#9A5B13;
   --s-pub:#008C84; --s-pvt:#C2701F;
   --c1:#054047; --c2:#2C7F80; --c3:#86BDBA; --c4:#C6CCC9; --c5:#EEF1EF; --hatch:#B9C2BE;
-  --d0:#073B42; --d1:#1F6F70; --d2:#4C9C98; --d3:#9CCAC6;
+  --d0:#073B42; --d1:#1F6F70; --d2:#4C9C98; --d3:#86BBB7; --na:#8C6A9E;
   --hover:rgba(7,85,95,.07);
   --f-sans: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans Bengali",sans-serif;
   --f-num: ui-monospace,"SFMono-Regular","Cascadia Mono",Consolas,monospace;
@@ -15,14 +15,14 @@
   --rule:#2B3532; --rule-2:#1F2725; --accent:#5BB8B3; --accent-ink:#7FCBC6; --warn:#E0A55A;
   --s-pub:#1E9A95; --s-pvt:#D27E28;
   --c1:#A6E0DB; --c2:#4FA9A4; --c3:#2B6765; --c4:#4A514E; --c5:#232B29; --hatch:#3E4845;
-  --d0:#B8E6E2; --d1:#6DBDB8; --d2:#3E8C88; --d3:#285E5B;
+  --d0:#B8E6E2; --d1:#6DBDB8; --d2:#3E8C88; --d3:#34706C; --na:#B596C4;
   --hover:rgba(91,184,179,.09); color-scheme:dark }}
 :root[data-theme="dark"]{
   --bg:#121816; --surface:#171E1C; --ink:#E6ECE9; --ink-2:#AAB6B1; --ink-3:#8A9691;
   --rule:#2B3532; --rule-2:#1F2725; --accent:#5BB8B3; --accent-ink:#7FCBC6; --warn:#E0A55A;
   --s-pub:#1E9A95; --s-pvt:#D27E28;
   --c1:#A6E0DB; --c2:#4FA9A4; --c3:#2B6765; --c4:#4A514E; --c5:#232B29; --hatch:#3E4845;
-  --d0:#B8E6E2; --d1:#6DBDB8; --d2:#3E8C88; --d3:#285E5B;
+  --d0:#B8E6E2; --d1:#6DBDB8; --d2:#3E8C88; --d3:#34706C; --na:#B596C4;
   --hover:rgba(91,184,179,.09); color-scheme:dark }
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--f-sans);margin:0}
@@ -226,3 +226,7 @@ svg .lab.cg{font-weight:650}
   tr.det td{display:block;width:calc(100vw - 40px);position:sticky;left:0}
   tr.det .dl{grid-template-columns:1fr} tr.det .dl dd{margin-bottom:6px}
 }
+.sw.resid{background:var(--c5);outline:1px solid var(--ink-3);outline-offset:-1px}
+.sw.sel{background:var(--surface);outline:2.5px solid var(--warn);outline-offset:-2px}
+.ln{display:inline-block;width:22px;height:0;border-top:1px solid var(--ink-3);vertical-align:middle}
+.ln.thick{border-top:2px solid var(--d1)} .ln.dash{border-top-style:dashed} .ln.dot{border-top-style:dotted;border-top-width:2px}

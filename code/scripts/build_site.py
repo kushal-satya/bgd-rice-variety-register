@@ -102,6 +102,8 @@ if fp.exists():
         na = g[(g.dimension == "cgiar_role") & g.category.str.startswith("not_approved_name")]
         if len(na):
             rows.append(dict(round=rd, cat="not_approved", n=str(na.n_plots.astype(int).sum()), share=str(na.share.astype(float).sum()), denom=na.denominator.iloc[0]))
+    for x in rows:
+        x["round"] = {"SPIA 2024": "BIHS 2024 (SPIA)"}.get(x["round"], x["round"])
     base["plot_cgiar"] = rows
     top = pg[pg.dimension == "top10_register_variety"]
     base["plot_top"] = top[["round", "variety_id", "variety_name", "cgiar_role", "share"]].to_dict("records")
@@ -156,6 +158,24 @@ def report(*paths):
 
 
 listed = [x["file"] for x in base["files"]]
+# the documentation and metadata files offered beside the tables (rows in the files table, with their own paths)
+DOCS = [("bgd_variety_archive.xlsx", "data/", "All tables in one Excel workbook, with a README sheet and the data dictionary", "Workbook"),
+        ("DATA_DICTIONARY.md", "data/", "Every column of every table: meaning, values, source and coverage", "Column"),
+        ("CHANGELOG.md", "data/", "Corrections and additions between versions", "Version"),
+        ("datapackage.json", "", "Machine-readable description of every table (Frictionless Data Package)", "Table"),
+        ("sources/CATALOGUE.csv", "", "Every source document: title, issuer, date, type, original address, Internet Archive copy, SHA-256", "Source document"),
+        ("LICENSE", "", "Licence: CC BY 4.0 for data and documentation, MIT for code", ""),
+        ("CITATION.cff", "", "Citation metadata", "")]
+for name, folder, desc, unit in DOCS:
+    src = {"datapackage.json": R / "release/datapackage.json", "sources/CATALOGUE.csv": R / "02_raw/CATALOGUE.csv",
+           "LICENSE": R / "release/LICENSE", "CITATION.cff": R / "release/CITATION.cff"}.get(name, FINAL / name)
+    if src.exists():
+        base["files"].append(dict(file=name, path=folder + name, desc=desc, unit=unit, rows="", cols="", mb=round(src.stat().st_size / 1e6, 1)))
+# local copies so the links also work when site/ is served on its own
+for name, src in [("datapackage.json", R / "release/datapackage.json"), ("LICENSE", R / "release/LICENSE"), ("CITATION.cff", R / "release/CITATION.cff"),
+                  ("NOTICE.md", R / "release/NOTICE.md"), ("sources/CATALOGUE.csv", R / "02_raw/CATALOGUE.csv")]:
+    if src.exists():
+        (SITE / name).parent.mkdir(parents=True, exist_ok=True); shutil.copy2(src, SITE / name)
 
 # ---- internal edition ----
 internal = dict(base, attendance=attendance)
@@ -172,6 +192,15 @@ full, body = single_file(internal)
 
 # ---- public edition: scrub personal contacts everywhere, including the verbatim NSB text shown in the register ----
 public = json.loads(RP.text(json.dumps(base, ensure_ascii=False)))
+for decs in public.get("decisions", {}).values():      # verbatim minutes text: the stricter free-text rule
+    for x in decs:
+        for k in ("h", "p", "dec"):
+            if isinstance(x.get(k), str):
+                x[k] = RP.free_text(x[k])
+for r in public.get("rice", []):
+    for k in ("special_traits_official", "identifying_traits_official", "stress_tolerance", "quality_traits", "recommended_region", "conflict_note", "cgiar_independent"):
+        if isinstance(r.get(k), str):
+            r[k] = RP.free_text(r[k])
 public["attendance"] = []
 data_folder(SITE, public, listed + EXTRA, redact=True)
 _dd = (SITE / "data/DATA_DICTIONARY.md").read_text(encoding="utf-8")   # the public dictionary does not describe the internal attendance table

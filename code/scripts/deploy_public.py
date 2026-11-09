@@ -37,10 +37,10 @@ txt = re.sub(r"<!-- @board-title -->.*?(?=<!-- @)", "", txt, flags=re.S)
 # 3. release metadata, code, source catalogue, playbook
 for f in (R / "release").iterdir():
     shutil.copy2(f, DEP / f.name)
-code = DEP / "code"; code.mkdir()
+code = DEP / "code"; code.mkdir(exist_ok=True)
 shutil.copytree(R / "scripts", code / "scripts", ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))
 shutil.copy2(R / "requirements.txt", code / "requirements.txt")
-src = DEP / "sources"; src.mkdir()
+src = DEP / "sources"; src.mkdir(exist_ok=True)
 for f in ("CATALOGUE.csv", "README.md"):
     if (R / "02_raw" / f).exists():
         shutil.copy2(R / "02_raw" / f, src / f)
@@ -76,6 +76,10 @@ for f in DEP.rglob("*"):
         bad.append(f"{f.relative_to(DEP)}: internal attendance table")
     for m in RP.MOBILE.finditer(t):
         bad.append(f"{f.relative_to(DEP)}: mobile number pattern '{m.group(0)}'")
+    if f.name in ("bgd_ocr_pages.csv", "bgd_nsb_decisions_full.csv", "site_data.json"):   # the looser OCR rule too
+        for m in RP.DIGIT_RUN.finditer(t):
+            if RP._run(m) == RP.MARK_MOBILE and not re.search(r"https?://\S*$", t[max(0, m.start() - 120):m.start()]):
+                bad.append(f"{f.relative_to(DEP)}: digit run with a mobile pattern '{m.group(0)}'")
     for m in RP.EMAIL.finditer(t):
         a = re.sub(r"\s|^mailto:", "", m.group(0).lower())
         if a not in OK_MAILS and not any(a.endswith(o) for o in OK_MAILS) and "example" not in a:

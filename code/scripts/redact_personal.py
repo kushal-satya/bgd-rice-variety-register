@@ -74,11 +74,35 @@ def redact(df):
     return df
 
 
+# OCR and verbatim text can write a mobile number with separators inside it, run it into neighbouring digits, or misread
+# its leading 0. In free-text columns any run of 10 or more digits (Latin or Bangla, with single spaces, hyphens or dots
+# between groups) that contains a Bangladeshi mobile pattern is removed whole. Hash and identifier columns are never
+# touched, because they are not free text.
+# A phone number is written in at most three groups of three or more digits (for example 01XXX-XXXXXX, written in Latin or Bangla digits);
+# breeding lines (BR1674-15-4-1-3-1) and memo numbers (33.00.0000.130.99.027) have short groups or follow letters.
+DIGIT_RUN = re.compile(r"(?<![A-Za-z0-9০-৯\-.])[0-9০-৯]{3,}(?:[\s\-.][0-9০-৯]{3,}){0,2}(?![0-9০-৯]|[\-.][0-9০-৯])")
+NOT_TEXT_COLUMN = re.compile(r"(^|_)(id|ids|sha256|sha|hash|url|urls|doi|file|path|date|page|pages|key|code|line|no|year)$|_id_|^variety_id|^source_id", re.I)
+_BN = str.maketrans("০১২৩৪৫৬৭৮৯", "0123456789")
+
+
+def _run(m):
+    digits = re.sub(r"[\s\-.]", "", m.group(0)).translate(_BN)
+    return MARK_MOBILE if len(digits) >= 10 and re.search(r"1[3-9]\d{8}", digits) else m.group(0)
+
+
+def free_text(s):
+    return DIGIT_RUN.sub(_run, text(s))
+
+
 def public_table(name, df):
-    """Public copy of a released table: personal contact columns dropped (DROP_COLUMNS), then text() on every cell.
-    name is the file name (e.g. 'bgd_variety_people.csv'); a path is accepted too."""
+    """Public copy of a released table: personal contact columns dropped (DROP_COLUMNS), text() on every cell, and the
+    stricter free_text() on free-text columns. name is the file name (e.g. 'bgd_variety_people.csv'); a path is accepted too."""
     drop = [c for c in DROP_COLUMNS.get(pathlib.Path(str(name)).name, []) if c in df.columns]
-    return redact(df.drop(columns=drop))
+    df = redact(df.drop(columns=drop))
+    for c in df.columns:   # every column that is not an identifier, hash, address, date, page or file path
+        if not NOT_TEXT_COLUMN.search(c) and df[c].dtype == object:
+            df[c] = df[c].map(lambda v: free_text(v) if isinstance(v, str) else v)
+    return df
 
 
 def redact_xlsx(src, dst):

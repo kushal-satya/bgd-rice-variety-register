@@ -86,7 +86,7 @@ if t1 is not None:
     compare("Figure 1 (approvals per year)", got, want)
 t2 = table(soup, "f2data")
 if t2 is not None:
-    got = {(int(r.iloc[0]), c): num(r[c]) for _, r in t2.iterrows() for c in t2.columns[1:]}
+    got = {(int(re.match(r"\d{4}", r.iloc[0]).group()), c): num(r[c]) for _, r in t2.iterrows() for c in t2.columns[1:]}
     want = {}
     for y in {k[0] for k in got}:
         s = rice[rice.y <= y]
