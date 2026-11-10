@@ -1,5 +1,21 @@
 # Changes between versions
 
+## Version 1.3 (10 November 2026)
+
+Version 1.3 follows a third audit of the identity fields and adds attribute, institute and people columns. A stocktake compiled by a team at Bangladesh Agricultural University (draft of 20 September 2026) was compared row by row with the register; it was used only to point to values worth checking, and no value in the register comes from it (`06_validation/bau_comparison.md`). Decisions are in `00_admin/decisions_log.md` under 10 November 2026.
+
+### Errors corrected
+
+Thirty identity values were wrong and are corrected (`04_working/evidence_corrections_rev4.csv`, `06_validation/error_sweep_r3.md`): ten breeding lines, nine Bangla names, five developers, two pedigrees, two seasons and two English names. Among them, the breeding lines of BRRI dhan51 and dhan52 had been OCR-garbled names and are now IR81213-246-237 and IR85260-66-654-Gaz2; BRRI dhan45 is BR5877-21-2-3 and BRRI dhan40 BR5331-93-2-8-3, as the NSB minutes print them; the pedigree of BRRI dhan47 reads IR51511 (the handbook's IR515111 is kept as a recorded disagreement). Breeding lines and pedigree readings are now chosen by the number of independent sources that agree, with the NSB minutes deciding ties (`06_validation/precedence_support_log.csv`). The proposer of a variety at a Board meeting is now read only from the clause next to the variety's own name, which corrects Binadhan-9 and Hira-10. Of 735 source disagreements across ten fields, 7 remain unresolved and are listed in the sweep report.
+
+### Pedigree parents that are not one variety
+
+Parents outside the register now carry a type (`parent_type` in `bgd_pedigree_edges.csv`; `04_working/pedigree_parent_types.csv`). A group name such as 'Basmati (D)', unnamed germplasm and a wild species without an accession are kept as printed and marked as not identifiable; twenty landraces are marked as such; four spelling pairs of one landrace now share one node, and the Binadhan-17 cross is read as C418, Zhong 413 and SH109.
+
+### New columns
+
+The register gains 41 attribute columns read from the official lists, NSB decisions, the BRRI handbook and Rice Profile and BINA's pages: yield potential, duration and plant height by season, grain type and size as printed, aleurone colour, amylose, protein, zinc, iron, glycemic index, germplasm origin and target ecosystem, each group with the file and page it is printed on. Columns that no archived source states (on-farm yield, grain length and breadth in mm, first year of adoption, CGIAR projects) are present and empty. It also gains the national research institute, the breeding division (marked stated or inferred), the proposer as printed in the minutes, and the year the institute released the variety where its own sources state it (`institute_release_year`, 153 varieties; `approval_year` remains the NSB year). Release papers name breeders for 24 varieties (`bgd_variety_people.csv`).
+
 ## Version 1.2 (November 2026)
 
 Version 1.2 follows a second review by seven reviewers (an agricultural economist, a development economist, an archivist, a data auditor, a designer, a completeness reviewer and an editor of data publications). Every judgement is recorded, with its evidence, in `00_admin/decisions_log.md` under 10 November 2026; the reviewer corrections are in `04_working/evidence_corrections_rev2.csv` and `04_working/evidence_REV2.csv`, written by `scripts/rev2_corrections.py`.

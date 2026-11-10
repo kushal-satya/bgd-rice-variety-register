@@ -1,8 +1,8 @@
-cff-version: 1.2.0
+cff-version: 1.3.0
 message: "If you use this register, please cite it as below. To cite a single variety, also give its identifier, for example RICE-BRRI_DHAN29."
 type: dataset
 title: "Bangladesh Rice Variety Register: officially approved rice varieties, with improved fish strains"
-version: 1.2.0
+version: 1.3.0
 # date-released: YYYY-MM-DD   (to be set by the PI on the day of the release; uncomment then)
 authors:
   - family-names: Kumar
@@ -37,7 +37,7 @@ keywords:
 preferred-citation:
   type: dataset
   title: "Bangladesh Rice Variety Register: officially approved rice varieties, with improved fish strains"
-  version: 1.2.0
+  version: 1.3.0
   authors:
     - family-names: Kumar
       given-names: Kushal

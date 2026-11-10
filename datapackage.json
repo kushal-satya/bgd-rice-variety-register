@@ -2,7 +2,7 @@
  "profile": "tabular-data-package",
  "name": "bgd-rice-variety-register",
  "title": "Bangladesh Rice Variety Register: officially approved rice varieties, with improved fish strains",
- "version": "1.2.0",
+ "version": "1.3.0",
  "homepage": "https://kushal-satya.github.io/bgd-rice-variety-register/",
  "description": "Every rice variety officially approved in Bangladesh (National Seed Board meetings 1 to 115, 1974 to 5 February 2026, and the varieties recommended before the Board existed), with the evidence for every value, the Board's decisions, official lists, CGIAR links, pedigrees, improved fish strains and government acts on fish. All files are UTF-8 CSV with a byte-order mark; read every column as text and convert numeric columns explicitly.",
  "keywords": [
@@ -1098,8 +1098,8 @@
    "format": "csv",
    "mediatype": "text/csv",
    "encoding": "utf-8-sig",
-   "title": "One developing institution or division",
-   "description": "Developing institutes and their breeding divisions, with the official website and the public office contact taken from the institution's own contact page.",
+   "title": "One developing institution, division or company",
+   "description": "Every developer in the register: public institutes, their breeding divisions and university departments with official names in Bangla and English, parent ministry, address, office telephone and fax, role mailboxes and the head of the unit from the institution's own pages; companies and NGOs are listed with their number of varieties, contacts collected only for some.",
    "schema": {
     "fields": [
      {
@@ -1156,6 +1156,103 @@
       "name": "notes",
       "title": "Notes",
       "description": "What the division develops or why it is listed. Values: Free text.",
+      "type": "string"
+     },
+     {
+      "name": "institution_short",
+      "title": "Short name",
+      "description": "Standardised short name, the value used in nars_institute. Values: BRRI, BINA, BAU, BSMRAU/GAU, RU, BADC, BRAC, or company name.",
+      "type": "string"
+     },
+     {
+      "name": "institution_name_en",
+      "title": "Official name (English)",
+      "description": "Official English name of the institution. Values: Free text.",
+      "type": "string"
+     },
+     {
+      "name": "institution_name_bn",
+      "title": "Official name (Bangla)",
+      "description": "Official Bangla name of the institution, as printed on its own pages or in NSB minutes. Values: Bangla text.",
+      "type": "string"
+     },
+     {
+      "name": "division_name_en",
+      "title": "Division (English)",
+      "description": "English name of the division or department; blank on institution-level rows. Values: Free text.",
+      "type": "string"
+     },
+     {
+      "name": "division_name_bn",
+      "title": "Division (Bangla)",
+      "description": "Bangla name of the division as printed, with the place where it is printed. Values: Bangla text.",
+      "type": "string"
+     },
+     {
+      "name": "developer_category",
+      "title": "Developer category",
+      "description": "Kind of developer. Values: NARS institute; public university; public seed corporation; NGO; private company.",
+      "type": "string"
+     },
+     {
+      "name": "parent_ministry",
+      "title": "Parent ministry",
+      "description": "Ministry under which the institution sits, as stated on its own pages; blank where the pages consulted do not state it. Values: Free text.",
+      "type": "string"
+     },
+     {
+      "name": "parent_ministry_source",
+      "title": "Parent ministry source",
+      "description": "Archived file and quoted phrase that states the parent ministry, or 'not stated on the pages consulted'. Values: Free text.",
+      "type": "string"
+     },
+     {
+      "name": "address",
+      "title": "Postal address",
+      "description": "Office address as printed by the institution. Values: Free text.",
+      "type": "string"
+     },
+     {
+      "name": "office_phone",
+      "title": "Office telephone",
+      "description": "Office landline, PABX and extension as printed (never mobile numbers). Values: Free text.",
+      "type": "string"
+     },
+     {
+      "name": "fax",
+      "title": "Fax",
+      "description": "Office fax number as printed. Values: Free text.",
+      "type": "string"
+     },
+     {
+      "name": "role_email",
+      "title": "Role mailbox",
+      "description": "Office (role) e-mail addresses such as dg@ or head.breeding@, which name an office, not a person. Webmail is never copied. Values: Addresses joined by '; ' with the office in parentheses.",
+      "type": "string"
+     },
+     {
+      "name": "head_name_as_listed",
+      "title": "Head of unit",
+      "description": "Head of the institution or division, name and post as listed on the institution's site. Values: Free text (often Bangla).",
+      "type": "string"
+     },
+     {
+      "name": "head_source_url",
+      "title": "Head source",
+      "description": "Page that lists the head. Values: Absolute URL.",
+      "type": "string",
+      "format": "uri"
+     },
+     {
+      "name": "n_varieties",
+      "title": "Varieties",
+      "description": "Number of register varieties credited to the institution (institution rows) or to the division, stated or inferred (division rows). Values: Count.",
+      "type": "integer"
+     },
+     {
+      "name": "contact_status",
+      "title": "Contact status",
+      "description": "Whether office contact details were collected for the row. Values: 'collected from the institution's own site'; 'the unit publishes no contact; use the institution row'; 'not collected (...)'; 'no contact published or collected'.",
       "type": "string"
      }
     ],
@@ -2473,6 +2570,12 @@
       "type": "string"
      },
      {
+      "name": "ancestor_parent_type",
+      "title": "Type of parent",
+      "description": "What kind of parent this is. A group name (for example 'Basmati (D)'), unnamed germplasm or a species without an accession is kept as printed but cannot be identified as one variety; spelling variants of one landrace share one node. Values: register variety; CGIAR line; breeding line or numbered variety; named variety; traditional variety (landrace); wild species accession; wild species (accession not stated); group name (not one variety); unnamed germplasm; local type name (not traceable to one line).",
+      "type": "string"
+     },
+     {
       "name": "generation",
       "title": "Generation",
       "description": "Generation of the ancestor relative to the variety: 1 parent, 2 grandparent (or parent of an unnamed F1 inside a composite cross), 3 great-grandparent, up to 5; 0 for the source of a mutant, somaclone or selection, which has the same genetic content as the variety. Values: Integer 0-5.",
@@ -2633,6 +2736,12 @@
       "title": "Generation",
       "description": "Generation of the parent relative to the child: 1 for direct parents, 2 for parents of an unnamed F1 inside a composite cross, and so on; 0 for mutant, somaclone and selection sources, which share the child's generation. Values: Integer 0-4.",
       "type": "integer"
+     },
+     {
+      "name": "parent_type",
+      "title": "Type of parent",
+      "description": "What kind of parent this is. A group name (for example 'Basmati (D)'), unnamed germplasm or a species without an accession is kept as printed but cannot be identified as one variety; spelling variants of one landrace share one node. Values: register variety; CGIAR line; breeding line or numbered variety; named variety; traditional variety (landrace); wild species accession; wild species (accession not stated); group name (not one variety); unnamed germplasm; local type name (not traceable to one line).",
+      "type": "string"
      }
     ],
     "missingValues": [
@@ -2679,6 +2788,12 @@
       "name": "ancestor_kind",
       "title": "Kind of ancestor",
       "description": "What the ancestor is. Values: register variety; CGIAR line; other line.",
+      "type": "string"
+     },
+     {
+      "name": "ancestor_parent_type",
+      "title": "Type of parent",
+      "description": "What kind of parent this is. A group name (for example 'Basmati (D)'), unnamed germplasm or a species without an accession is kept as printed but cannot be identified as one variety; spelling variants of one landrace share one node. Values: register variety; CGIAR line; breeding line or numbered variety; named variety; traditional variety (landrace); wild species accession; wild species (accession not stated); group name (not one variety); unnamed germplasm; local type name (not traceable to one line).",
       "type": "string"
      },
      {
@@ -3364,6 +3479,18 @@
       "type": "string"
      },
      {
+      "name": "institute_release_year",
+      "title": "Year the institute released the variety",
+      "description": "Year the breeding institute states it released the variety, where this differs from or precedes the National Seed Board approval (for example the BR series, released by BRRI before NSB approval). approval_year remains the NSB year. Values: Four-digit year; blank where no institute source states it.",
+      "type": "string"
+     },
+     {
+      "name": "institute_release_year_source",
+      "title": "Source of the institute release year",
+      "description": "File, page and locator of the institute source that states institute_release_year. Values: Free text.",
+      "type": "string"
+     },
+     {
       "name": "provisional_release_date",
       "title": "Provisional release date",
       "description": "Date of an earlier provisional release by the NSB, for varieties whose full release came later (BRRI dhan40 and BRRI dhan41). Blank for all other varieties. Values: ISO date YYYY-MM-DD.",
@@ -3879,6 +4006,18 @@
       "type": "string"
      },
      {
+      "name": "institute_release_year",
+      "title": "Year the institute released the variety",
+      "description": "Year the breeding institute states it released the variety, where this differs from or precedes the National Seed Board approval (for example the BR series, released by BRRI before NSB approval). approval_year remains the NSB year. Values: Four-digit year; blank where no institute source states it.",
+      "type": "string"
+     },
+     {
+      "name": "institute_release_year_source",
+      "title": "Source of the institute release year",
+      "description": "File, page and locator of the institute source that states institute_release_year. Values: Free text.",
+      "type": "string"
+     },
+     {
       "name": "provisional_release_date",
       "title": "Provisional release date",
       "description": "Date of an earlier provisional release by the NSB, for varieties whose full release came later (BRRI dhan40 and BRRI dhan41). Blank for all other varieties. Values: ISO date YYYY-MM-DD.",
@@ -4320,6 +4459,276 @@
       "type": "string"
      },
      {
+      "name": "variety_type",
+      "title": "Variety type",
+      "description": "Type of the variety in the vocabulary of the BAU stocktake column 'Type (e.g. OPV, Hybrid, HYV)'. Taken from the register's own type, which records how the official documents describe the variety. Values: hybrid; inbred; inbred (mutant). No archived source states HYV, local improved or OPV per variety in a form that could be attributed without inference, so those labels are not used.",
+      "type": "string"
+     },
+     {
+      "name": "variety_type_source",
+      "title": "Source of variety type",
+      "description": "Where each non-blank value of variety_type was read: file, page and locator of the chosen reading, prefixed by the column name and separated by ' | '; 'other readings' lists different values in lower-ranked sources. Values: Free text; blank when the group is blank.",
+      "type": "string"
+     },
+     {
+      "name": "germplasm_origin",
+      "title": "Germplasm origin (as stated)",
+      "description": "Origin of the germplasm as printed in the official list (origin cell of SCA and MoA hybrid lists, gazettes) or in the NSB decision (germplasm source), with an English gloss in front of the printed Bangla, e.g. 'China (চীন)'. Where no list or decision states it, the register's origin_statement or origin_country. Values: Free text.",
+      "type": "string"
+     },
+     {
+      "name": "germplasm_origin_source",
+      "title": "Source of germplasm origin",
+      "description": "Where each non-blank value of germplasm_origin was read: file, page and locator of the chosen reading, prefixed by the column name and separated by ' | '; 'other readings' lists different values in lower-ranked sources. Values: Free text; blank when the group is blank.",
+      "type": "string"
+     },
+     {
+      "name": "yield_potential_aus_t_ha",
+      "title": "Yield (official description), Aus",
+      "description": "Yield stated for the variety in the Aus season, in t/ha as printed (ranges kept as 'a-b'). Sources in order: official lists (gazette, SCA, MoA 'average yield'), BRRI Adhunik Dhaner Chash 2025 Table 2, BRRI Rice Profile, BINA variety page, and last the Board's trial mean in the NSB decision. It is the yield the official and institute documents state, not a measured farm yield. A value goes to a season only when the same source names that season for it (a printed season label, or a source row for a single season). Values: Number or range 'a-b'; blank when not stated.",
+      "type": "string"
+     },
+     {
+      "name": "yield_potential_aman_t_ha",
+      "title": "Yield (official description), Aman",
+      "description": "Yield stated for the variety in the Aman season, in t/ha as printed (ranges kept as 'a-b'). Sources in order: official lists (gazette, SCA, MoA 'average yield'), BRRI Adhunik Dhaner Chash 2025 Table 2, BRRI Rice Profile, BINA variety page, and last the Board's trial mean in the NSB decision. It is the yield the official and institute documents state, not a measured farm yield. A value goes to a season only when the same source names that season for it (a printed season label, or a source row for a single season). Values: Number or range 'a-b'; blank when not stated.",
+      "type": "string"
+     },
+     {
+      "name": "yield_potential_boro_t_ha",
+      "title": "Yield (official description), Boro",
+      "description": "Yield stated for the variety in the Boro season, in t/ha as printed (ranges kept as 'a-b'). Sources in order: official lists (gazette, SCA, MoA 'average yield'), BRRI Adhunik Dhaner Chash 2025 Table 2, BRRI Rice Profile, BINA variety page, and last the Board's trial mean in the NSB decision. It is the yield the official and institute documents state, not a measured farm yield. A value goes to a season only when the same source names that season for it (a printed season label, or a source row for a single season). Values: Number or range 'a-b'; blank when not stated.",
+      "type": "string"
+     },
+     {
+      "name": "yield_potential_source",
+      "title": "Source of yield potential",
+      "description": "Where each non-blank value of yield_potential_aus_t_ha, yield_potential_aman_t_ha, yield_potential_boro_t_ha was read: file, page and locator of the chosen reading, prefixed by the column name and separated by ' | '; 'other readings' lists different values in lower-ranked sources. Values: Free text; blank when the group is blank.",
+      "type": "string"
+     },
+     {
+      "name": "on_farm_yield_aus_t_ha",
+      "title": "On-farm yield, Aus",
+      "description": "Yield in farmers' fields in the Aus season, filled only when a source labels a yield as on-farm. No archived source does so for any variety, so the column is blank (kept for the BAU column set). A value goes to a season only when the same source names that season for it (a printed season label, or a source row for a single season). Values: Number or range 'a-b'; blank when not stated.",
+      "type": "number"
+     },
+     {
+      "name": "on_farm_yield_aman_t_ha",
+      "title": "On-farm yield, Aman",
+      "description": "Yield in farmers' fields in the Aman season, filled only when a source labels a yield as on-farm. No archived source does so for any variety, so the column is blank (kept for the BAU column set). A value goes to a season only when the same source names that season for it (a printed season label, or a source row for a single season). Values: Number or range 'a-b'; blank when not stated.",
+      "type": "number"
+     },
+     {
+      "name": "on_farm_yield_boro_t_ha",
+      "title": "On-farm yield, Boro",
+      "description": "Yield in farmers' fields in the Boro season, filled only when a source labels a yield as on-farm. No archived source does so for any variety, so the column is blank (kept for the BAU column set). A value goes to a season only when the same source names that season for it (a printed season label, or a source row for a single season). Values: Number or range 'a-b'; blank when not stated.",
+      "type": "number"
+     },
+     {
+      "name": "on_farm_yield_source",
+      "title": "Source of on farm yield",
+      "description": "Where each non-blank value of on_farm_yield_aus_t_ha, on_farm_yield_aman_t_ha, on_farm_yield_boro_t_ha was read: file, page and locator of the chosen reading, prefixed by the column name and separated by ' | '; 'other readings' lists different values in lower-ranked sources. Values: Free text; blank when the group is blank.",
+      "type": "string"
+     },
+     {
+      "name": "duration_aus_days",
+      "title": "Growth duration, Aus",
+      "description": "Growth duration (seed to maturity) in days in the Aus season as printed. Same source order as yield_potential. A value goes to a season only when the same source names that season for it (a printed season label, or a source row for a single season). Values: Number or range 'a-b'; blank when not stated.",
+      "type": "string"
+     },
+     {
+      "name": "duration_aman_days",
+      "title": "Growth duration, Aman",
+      "description": "Growth duration (seed to maturity) in days in the Aman season as printed. Same source order as yield_potential. A value goes to a season only when the same source names that season for it (a printed season label, or a source row for a single season). Values: Number or range 'a-b'; blank when not stated.",
+      "type": "string"
+     },
+     {
+      "name": "duration_boro_days",
+      "title": "Growth duration, Boro",
+      "description": "Growth duration (seed to maturity) in days in the Boro season as printed. Same source order as yield_potential. A value goes to a season only when the same source names that season for it (a printed season label, or a source row for a single season). Values: Number or range 'a-b'; blank when not stated.",
+      "type": "string"
+     },
+     {
+      "name": "duration_source",
+      "title": "Source of duration",
+      "description": "Where each non-blank value of duration_aus_days, duration_aman_days, duration_boro_days was read: file, page and locator of the chosen reading, prefixed by the column name and separated by ' | '; 'other readings' lists different values in lower-ranked sources. Values: Free text; blank when the group is blank.",
+      "type": "string"
+     },
+     {
+      "name": "plant_height_aus_cm",
+      "title": "Plant height, Aus",
+      "description": "Plant height in cm in the Aus season as printed (official list identifying traits, ADC 2025 Table 2, Rice Profile, BINA page). A value goes to a season only when the same source names that season for it (a printed season label, or a source row for a single season). Values: Number or range 'a-b'; blank when not stated.",
+      "type": "string"
+     },
+     {
+      "name": "plant_height_aman_cm",
+      "title": "Plant height, Aman",
+      "description": "Plant height in cm in the Aman season as printed (official list identifying traits, ADC 2025 Table 2, Rice Profile, BINA page). A value goes to a season only when the same source names that season for it (a printed season label, or a source row for a single season). Values: Number or range 'a-b'; blank when not stated.",
+      "type": "string"
+     },
+     {
+      "name": "plant_height_boro_cm",
+      "title": "Plant height, Boro",
+      "description": "Plant height in cm in the Boro season as printed (official list identifying traits, ADC 2025 Table 2, Rice Profile, BINA page). A value goes to a season only when the same source names that season for it (a printed season label, or a source row for a single season). Values: Number or range 'a-b'; blank when not stated.",
+      "type": "string"
+     },
+     {
+      "name": "plant_height_source",
+      "title": "Source of plant height",
+      "description": "Where each non-blank value of plant_height_aus_cm, plant_height_aman_cm, plant_height_boro_cm was read: file, page and locator of the chosen reading, prefixed by the column name and separated by ' | '; 'other readings' lists different values in lower-ranked sources. Values: Free text; blank when the group is blank.",
+      "type": "string"
+     },
+     {
+      "name": "grain_type",
+      "title": "Grain type (English class)",
+      "description": "English class of the printed grain description in grain_size_text. Values: long slender; medium slender; short bold; medium bold; long bold; short slender; '<shape> (length not stated)'; '<length> (shape not stated)'.",
+      "type": "string"
+     },
+     {
+      "name": "grain_length_mm",
+      "title": "Milled grain length (mm)",
+      "description": "Length of the milled grain in mm as printed ('চালের দৈর্ঘ্য'). Values: Number; blank when not stated.",
+      "type": "number"
+     },
+     {
+      "name": "grain_breadth_mm",
+      "title": "Milled grain breadth (mm)",
+      "description": "Breadth of the milled grain in mm as printed ('চালের প্রস্থ'). Values: Number; blank when not stated.",
+      "type": "number"
+     },
+     {
+      "name": "lb_ratio",
+      "title": "Length/breadth ratio",
+      "description": "Length-to-breadth ratio of the grain as printed in the NSB decision or official list. Values: Number; blank when not stated.",
+      "type": "number"
+     },
+     {
+      "name": "grain_size_text",
+      "title": "Grain description (as printed)",
+      "description": "The grain-size phrase as printed in the chosen source, in Bangla (e.g. 'চাল মাঝারি চিকন ও সাদা'). Values: Free text.",
+      "type": "string"
+     },
+     {
+      "name": "aleurone_colour",
+      "title": "Grain colour",
+      "description": "Colour of the milled grain as stated (চাল সাদা = white, লাল = red, বাদামী = brown). A white belly (পেটে সাদা দাগ, chalkiness) is not a colour statement. The BAU column is 'Aleurone color'; Bangladeshi sources describe the milled grain, not the aleurone layer as such. Values: white; red; brown.",
+      "type": "string"
+     },
+     {
+      "name": "grain_source",
+      "title": "Source of grain",
+      "description": "Where each non-blank value of grain_type, grain_length_mm, grain_breadth_mm, lb_ratio, grain_size_text, aleurone_colour was read: file, page and locator of the chosen reading, prefixed by the column name and separated by ' | '; 'other readings' lists different values in lower-ranked sources. Values: Free text; blank when the group is blank.",
+      "type": "string"
+     },
+     {
+      "name": "amylose_pct",
+      "title": "Amylose (%)",
+      "description": "Amylose content in percent as printed in the official list, the NSB decision (measurements reported to the Board), ADC 2025, Rice Profile or BINA page, in that order. A qualifier ('>20') is kept. Values: Number, range or qualified number; blank when not stated.",
+      "type": "string"
+     },
+     {
+      "name": "protein_pct",
+      "title": "Protein (%)",
+      "description": "Protein content in percent as printed in the official list, the NSB decision (measurements reported to the Board), ADC 2025, Rice Profile or BINA page, in that order. A qualifier ('>20') is kept. Values: Number, range or qualified number; blank when not stated.",
+      "type": "number"
+     },
+     {
+      "name": "zinc_mg_kg",
+      "title": "Zinc (mg/kg)",
+      "description": "Zinc content in mg/kg as printed in the official list, the NSB decision (measurements reported to the Board), ADC 2025, Rice Profile or BINA page, in that order. A qualifier ('>20') is kept. Values: Number, range or qualified number; blank when not stated.",
+      "type": "string"
+     },
+     {
+      "name": "iron_mg_kg",
+      "title": "Iron (mg/kg)",
+      "description": "Iron content in mg/kg as printed in the official list, the NSB decision (measurements reported to the Board), ADC 2025, Rice Profile or BINA page, in that order. A qualifier ('>20') is kept. Values: Number, range or qualified number; blank when not stated.",
+      "type": "number"
+     },
+     {
+      "name": "glycemic_index",
+      "title": "Glycemic index",
+      "description": "Glycemic index as printed in the official list, the NSB decision (measurements reported to the Board), ADC 2025, Rice Profile or BINA page, in that order. A qualifier ('>20') is kept. Values: Number, range or qualified number; blank when not stated.",
+      "type": "number"
+     },
+     {
+      "name": "grain_quality_source",
+      "title": "Source of grain quality",
+      "description": "Where each non-blank value of amylose_pct, protein_pct, zinc_mg_kg, iron_mg_kg, glycemic_index was read: file, page and locator of the chosen reading, prefixed by the column name and separated by ' | '; 'other readings' lists different values in lower-ranked sources. Values: Free text; blank when the group is blank.",
+      "type": "string"
+     },
+     {
+      "name": "target_ecosystem",
+      "title": "Target ecosystem",
+      "description": "Target rice ecosystem, copied from ecosystem_std so that the BAU column set is complete. Values: As ecosystem_std.",
+      "type": "string"
+     },
+     {
+      "name": "target_ecosystem_source",
+      "title": "Source of target ecosystem",
+      "description": "Where each non-blank value of target_ecosystem was read: file, page and locator of the chosen reading, prefixed by the column name and separated by ' | '; 'other readings' lists different values in lower-ranked sources. Values: Free text; blank when the group is blank.",
+      "type": "string"
+     },
+     {
+      "name": "first_year_of_adoption",
+      "title": "First year of adoption",
+      "description": "First year farmers are recorded growing the variety, filled only when a source states it. No archived source does, so the column is blank. Values: Year; blank.",
+      "type": "number"
+     },
+     {
+      "name": "first_year_of_adoption_source",
+      "title": "Source of first year of adoption",
+      "description": "Where each non-blank value of first_year_of_adoption was read: file, page and locator of the chosen reading, prefixed by the column name and separated by ' | '; 'other readings' lists different values in lower-ranked sources. Values: Free text; blank when the group is blank.",
+      "type": "string"
+     },
+     {
+      "name": "cgiar_projects",
+      "title": "CGIAR projects",
+      "description": "CGIAR projects or programmes that developed or disseminated the variety, filled by the round-3 coordinator from CGIAR records. Values: Free text; blank until filled.",
+      "type": "string"
+     },
+     {
+      "name": "cgiar_projects_source",
+      "title": "Source of cgiar projects",
+      "description": "Where each non-blank value of cgiar_projects was read: file, page and locator of the chosen reading, prefixed by the column name and separated by ' | '; 'other readings' lists different values in lower-ranked sources. Values: Free text; blank when the group is blank.",
+      "type": "string"
+     },
+     {
+      "name": "dissemination_notes",
+      "title": "Dissemination notes",
+      "description": "Notes on dissemination pathways, filled only from an archived source. Blank at present. Values: Free text; blank.",
+      "type": "string"
+     },
+     {
+      "name": "dissemination_notes_source",
+      "title": "Source of dissemination notes",
+      "description": "Where each non-blank value of dissemination_notes was read: file, page and locator of the chosen reading, prefixed by the column name and separated by ' | '; 'other readings' lists different values in lower-ranked sources. Values: Free text; blank when the group is blank.",
+      "type": "string"
+     },
+     {
+      "name": "nars_institute",
+      "title": "National institute / developer",
+      "description": "The national institute behind the variety, standardised; for company and NGO varieties the developer's name. For lines bred abroad and released before the NSB (IR5, IR8, IR20, Pajam, Purbachi) the releasing institute named in the register's developer field. Values: BRRI, BINA, BAU, BSMRAU/GAU (BU dhan, BU aromatic hybrid and GAU dhan series), RU (University of Rajshahi), BADC, BRAC, or the company/NGO name as in developer_std.",
+      "type": "string"
+     },
+     {
+      "name": "nars_division",
+      "title": "Developing division",
+      "description": "Division or department of the institute credited with the variety. See nars_division_basis for whether a source names it or it is inferred. Values: e.g. 'Plant Breeding Division, BRRI', 'Hybrid Rice Division, BRRI', 'Biotechnology Division, BRRI' (contributing division), 'Plant Breeding Division, BINA', 'Department of Genetics and Plant Breeding, BSMRAU'. Blank where no source names one.",
+      "type": "string"
+     },
+     {
+      "name": "nars_division_basis",
+      "title": "Division basis",
+      "description": "Whether nars_division is stated by a source for this variety or inferred from the division's published mandate. Values: 'stated' (a source names the variety with the division: division page, key-paper affiliation, NSB minutes); 'inferred' (the division develops the institute's varieties of this kind but the variety is not named); 'not stated'; 'not applicable' (companies, NGOs, BADC).",
+      "type": "string"
+     },
+     {
+      "name": "proposer_as_printed",
+      "title": "Proposer (as printed)",
+      "description": "The proposing or developing organisation as printed in the NSB minutes of the approval decision (the clause before 'কর্তৃক প্রস্তাবিত/উদ্ভাবিত' or 'এর প্রস্তাবিত'), OCR text with list numbering removed. Blank where the minutes do not name it in a form the script can attribute to this variety. Values: Bangla text as printed (OCR).",
+      "type": "string"
+     },
+     {
       "name": "status_as_of_2026",
       "title": "Legal status, February 2026",
       "description": "Legal status of the variety after the last NSB meeting in the archive (meeting 115, 5 February 2026). 'Active' is a legal status under the Seeds Ordinance and says nothing about whether seed is produced or sold. Status is never inferred from elapsed time; no registration is coded as expired. Kept for compatibility; legal_status_2026 states the same finding in words. Values: active; suspended; unknown (no NSB approval on record, a time-limited approval with no recorded renewal, or an approval made conditional with no recorded outcome); cancelled (defined, but no case found).",
@@ -4470,6 +4879,132 @@
     ],
     "missingValues": [
      ""
+    ]
+   }
+  },
+  {
+   "name": "bgd_variety_area",
+   "path": "data/bgd_variety_area.csv",
+   "profile": "tabular-data-resource",
+   "format": "csv",
+   "mediatype": "text/csv",
+   "encoding": "utf-8-sig",
+   "title": "One variety in one season and year from one source",
+   "description": "Variety-wise rice area coverage from the two public by-variety sources that could be archived: the BRRI Agricultural Economics Division table of the percent of the national seasonal rice area under each BRRI variety (sample survey; Aus 1990-91 to 2023-24, Aman 1991-92 to 2023-24, Boro 1990-91 to 2023-24 with a misprinted header), and the hectares under each BINA variety in 2022-23 and 2023-24 reported by DAE district offices and published by the BINA Agricultural Economics Division. No DAE or BBS publication giving area by named variety for all varieties was found online (06_validation/dae_area_search.md). Values are as printed; shares are never converted to hectares.",
+   "schema": {
+    "fields": [
+     {
+      "name": "variety_id",
+      "title": "Variety identifier",
+      "description": "Identifier of the variety in the register; every value is a register variety_id. Values: 'RICE-' followed by a key built from the official name by lib_keys.make_key: BR<n> (BR series, 1970-1993), BRRI_DHAN<n>, BRRI_HYBRID<n>, BINADHAN<n>, IRATOM<n>, BINASHAIL, BU_, BAU_ and GAU_ (universities), BRAC_DHAN<n>, PVT_ (other private inbreds), HYB_<trade name> (private and BADC hybrids), IR<n> and OLD_ (pre-BRRI introductions and old names).",
+      "type": "string"
+     },
+     {
+      "name": "variety_name_source",
+      "title": "Name as printed",
+      "description": "Variety name exactly as printed in the source table. Values: Free text (e.g. BRRI dhan29, Binadhan-17, BR11).",
+      "type": "string"
+     },
+     {
+      "name": "season",
+      "title": "Season",
+      "description": "Rice season of the figure. Values: Aus; Aman; Boro.",
+      "type": "string"
+     },
+     {
+      "name": "year",
+      "title": "Agricultural year",
+      "description": "Agricultural (crop) year of the figure, as printed in the source. Values: YYYY-YY. BRRI Boro page: the first column is printed '2022-24' and is read as 2023-24; no 2021-22 column is printed there (see flag).",
+      "type": "string"
+     },
+     {
+      "name": "area_ha",
+      "title": "Area (ha)",
+      "description": "Area planted to the variety in the season, in hectares, where the source prints hectares. Values: Hectares; blank for the BRRI percentages (shares are never converted to hectares).",
+      "type": "number"
+     },
+     {
+      "name": "area_share_pct",
+      "title": "Share of seasonal rice area (%)",
+      "description": "Percent of the national rice area of the season under the variety, as printed. Values: Percent, 0-100; blank where the printed number is flagged as implausible.",
+      "type": "number"
+     },
+     {
+      "name": "season_total_ha",
+      "title": "Seasonal rice area (ha)",
+      "description": "National rice area of the season used by the source as denominator, where printed. Values: Hectares; printed only in the 2023-24 BINA table (BBS 2023).",
+      "type": "number"
+     },
+     {
+      "name": "geography",
+      "title": "Geography",
+      "description": "Area to which the figure refers. Values: Bangladesh (all rows are national).",
+      "type": "string"
+     },
+     {
+      "name": "measure",
+      "title": "Measure",
+      "description": "What the figure measures. Values: percent of national seasonal rice area; hectares, and percent of national seasonal rice area.",
+      "type": "string"
+     },
+     {
+      "name": "data_origin",
+      "title": "Origin of the data",
+      "description": "Who collected the underlying data. Values: BRRI Agricultural Economics Division sample survey (BRRI varieties only); DAE district offices (64 districts), compiled by BINA Agricultural Economics Division (BINA varieties only).",
+      "type": "string"
+     },
+     {
+      "name": "value_printed",
+      "title": "Printed value",
+      "description": "The number(s) exactly as printed, before conversion. Values: Text.",
+      "type": "string"
+     },
+     {
+      "name": "flag",
+      "title": "Quality flag",
+      "description": "Problem found in the printed source for this row, if any. Values: Free text; blank when none.",
+      "type": "string"
+     },
+     {
+      "name": "source_file",
+      "title": "Source file",
+      "description": "Archived source file (path in 02_raw, listed in 02_raw/manifest.csv with URL and SHA-256). Values: Path.",
+      "type": "string"
+     },
+     {
+      "name": "source_page",
+      "title": "Source page",
+      "description": "Page of the PDF file (1-based) holding the figure. Values: Integer.",
+      "type": "number"
+     },
+     {
+      "name": "source_table",
+      "title": "Source table",
+      "description": "Title of the table holding the figure; for journal articles the printed page number is added. Values: Free text.",
+      "type": "string"
+     },
+     {
+      "name": "source_citation",
+      "title": "Citation",
+      "description": "Citation of the source. Values: Free text.",
+      "type": "string"
+     }
+    ],
+    "missingValues": [
+     ""
+    ],
+    "foreignKeys": [
+     {
+      "fields": [
+       "variety_id"
+      ],
+      "reference": {
+       "resource": "bgd_rice_varieties",
+       "fields": [
+        "variety_id"
+       ]
+      }
+     }
     ]
    }
   },
@@ -4786,7 +5321,7 @@
    "mediatype": "text/csv",
    "encoding": "utf-8-sig",
    "title": "One person named for one variety",
-   "description": "Authors of the key papers and breeders named in official or publication sources, with role, affiliation and ORCID as stated, and professional contact details only where the institution's official directory or the paper itself publishes them.",
+   "description": "People named for each variety: authors of the key and release papers, breeders thanked by name in National Seed Board minutes, the officer named on BINA's page for the variety, and the current head of the developing division; with role, affiliation and ORCID as stated, the developing institute and division, and professional contact details only where the institution's official directory or the paper itself publishes them.",
    "schema": {
     "fields": [
      {
@@ -4810,7 +5345,7 @@
      {
       "name": "role_as_stated",
       "title": "Role",
-      "description": "Role of the person with respect to the variety. Values: 'author of key paper (<publication type>)', with ' - corresponding author' where applicable; breeder roles from official sources.",
+      "description": "Role of the person with respect to the variety. Values: 'author of key paper (<publication type>)', with ' - corresponding author' where applicable; for breeders, page officers and division heads, the statement of the source in words.",
       "type": "string"
      },
      {
@@ -4854,6 +5389,48 @@
       "name": "notes",
       "title": "Notes",
       "description": "How the person was matched to the directory and how the author list was obtained. Values: Free text.",
+      "type": "string"
+     },
+     {
+      "name": "role",
+      "title": "Role (standardised)",
+      "description": "Role of the person with respect to the variety, standardised. Values: 'breeder' (thanked by name in NSB minutes for developing the variety); 'release-paper author' (author of the variety's release/description paper, 04_working/PEOPLE/release_papers.csv, authors in printed order); 'corresponding author' (of a key paper that is not a release paper); 'key-paper author' (key paper that is not a release paper); 'division head (current)' (head in 2026 of the developing division, stated or inferred, as listed on the institution's site; not necessarily head when the variety was bred); 'variety page officer (BINA)' (officer in charge named on BINA's page for the variety, not a breeder).",
+      "type": "string"
+     },
+     {
+      "name": "is_corresponding_author",
+      "title": "Corresponding author",
+      "description": "Whether the person is marked as corresponding author of the paper named in source. Values: yes, no.",
+      "type": "string"
+     },
+     {
+      "name": "nars_institute",
+      "title": "Developing institute",
+      "description": "Standardised national institute or developer of the variety (repeated from 04_working/PEOPLE/variety_nars.csv). Values: BRRI, BINA, BAU, BSMRAU/GAU, RU, BADC, BRAC, or the company name.",
+      "type": "string"
+     },
+     {
+      "name": "nars_division",
+      "title": "Developing division",
+      "description": "Division or department credited with the variety, with the institute; blank where no source names one. Whether the value is stated by a source or inferred from the division's mandate is in 04_working/PEOPLE/variety_nars.csv (nars_division_basis). Values: e.g. 'Plant Breeding Division, BRRI', 'Hybrid Rice Division, BRRI'.",
+      "type": "string"
+     },
+     {
+      "name": "source_locator",
+      "title": "Role source locator",
+      "description": "Where the role statement is: archived file and page, or DOI. Values: '02_raw/... , p. N' or 'doi:...'.",
+      "type": "string"
+     },
+     {
+      "name": "record_source",
+      "title": "Record origin",
+      "description": "Which step produced the row. Values: 'L1: author list of the key paper (API metadata)'; 'PEOPLE: NSB minutes'; 'PEOPLE: BINA variety page'; 'PEOPLE: institution directory'; 'PEOPLE: release paper (04_working/PEOPLE/release_papers.csv)' (release paper not yet in the literature table).",
+      "type": "string"
+     },
+     {
+      "name": "is_first_author",
+      "title": "First author",
+      "description": "Whether the person is the first author of the variety's release/description paper. Values: yes, no; blank on rows that are not release-paper authors.",
       "type": "string"
      }
     ],

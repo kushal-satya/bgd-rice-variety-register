@@ -197,6 +197,48 @@ check("decision text lies in the item text, names no other agenda topic, is not 
       f"{len(_dt)} decisions with text; not in item {len(_notin)} {_notin.dec_id.tolist()[:3]}; other topic {len(_other)} "
       f"{_other.dec_id.tolist()[:3]}; bare label {len(_bare)} {_bare.dec_id.tolist()[:3]}")
 
+# 11 REV4 identity checks (E1, round-3 error sweep, 2026-11-10). QA_IDENTITY_REGISTER=<csv> runs them on another copy of the
+# register (e.g. 05_output/rice_varieties.csv before make_final.py has been rerun); by default they read the final release.
+import os
+_R0 = R
+R = pd.read_csv(os.environ["QA_IDENTITY_REGISTER"], dtype=str).fillna("") if os.environ.get("QA_IDENTITY_REGISTER") else R
+_BN = re.compile(r"[ঀ-৿]")
+_BNL = r"[ঀ-০৲-৿]"
+_PROSE = re.compile(r"selection|irradiat|mutant|collected|introduc|cross|variety|local|rice|from|under|with|seed|agenda|printed|per NSB|proposed", re.I)
+blb = R[R.breeding_line.str.contains(_BN) | R.breeding_line.str.contains(_PROSE)]
+check("no Bangla script or prose in breeding_line", blb.empty, f"{len(blb)}: {blb[['variety_id', 'breeding_line']].values.tolist()[:4]}")
+_codecols = ["variety_name", "official_name_en", "official_name_bn", "popular_name", "aliases", "breeding_line", "pedigree",
+             "hybrid_parent_female", "hybrid_parent_male", "developer", "trial_codes", "check_variety", "approval_reference"]
+_gar = []
+for c in [c for c in _codecols if c in R]:
+    for vid, v in zip(R.variety_id, R[c]):
+        if (re.search(_BNL + r"[A-Za-z]|[A-Za-z]" + _BNL, v) or re.search(r"[\x00-\x08\x0b\x0c\x0e-\x1f�]", v)
+                or any(re.search(r"[A-Za-z]", t) and re.search(r"[০-৯]", t) for t in re.split(r"[\s/|,;()\[\]]+", v))
+                or re.search(r"বর্যাক|সve|ণড়ঁ", v)
+                or re.search(r"[0-9][০-৯]|[০-৯][0-9]", v)                          # one digit run in two scripts
+                or re.search(r"(?<![A-Za-z0-9])1[1Il][0-9০-৯]{5,}-", v)):           # 'IR' read as '11' (Rabi dhan-1, NSB 99)
+            _gar.append((vid, c, v[:40]))
+check("no OCR/Bijoy garble tokens in code and name fields (Latin inside a Bangla word, Bangla digits in a Latin code, control characters)",
+      not _gar, f"{len(_gar)}: {_gar[:4]}")
+_norm = lambda v: re.sub(r"[\s\-–_.,;:()*]+", "", str(v)).lower()
+# a breeding line may be shared only for a stated reason (one line released under two names, or the same line in two registrations)
+SHARED_OK = {}
+_bl = R[R.breeding_line.ne("")].assign(n=lambda x: x.breeding_line.map(_norm))
+_dup = _bl[_bl.n.duplicated(keep=False)]
+_bad = [(n, sorted(g.variety_id)) for n, g in _dup.groupby("n") if not all(v in SHARED_OK for v in g.variety_id)]
+check("a breeding_line is shared by two varieties only with a stated reason", not _bad, f"{len(_bad)} shared codes without reason: {_bad[:4]}")
+_RI = R if "institute_release_year" in R else pd.read_csv(ROOT / "05_output/rice_varieties.csv", dtype=str).fillna("")
+if "institute_release_year" in _RI:
+    _iy = _RI[_RI.institute_release_year.ne("")]
+    _ay = pd.to_numeric(_iy.approval_date.str[:4], errors="coerce"); _yy = pd.to_numeric(_iy.institute_release_year, errors="coerce")
+    _out = _iy[~((_yy <= _ay + 1) & (_yy >= _ay - 3))]
+    check("institute_release_year within approval year -3 to +1", _out.empty,
+          f"{len(_iy)} with an institute year{'' if _RI is R else ' (read from 05_output; final not yet rebuilt)'}; outside: "
+          f"{_out[['variety_id', 'approval_date', 'institute_release_year']].values.tolist()[:6]}")
+else:
+    check("institute_release_year within approval year -3 to +1", False, "column institute_release_year missing")
+R = _R0
+
 # 9 page data
 d = json.load(open(F / "viz_data.json", encoding="utf-8"))
 check("page data has every register row", len(d["rice"]) == len(R), f"page {len(d['rice'])}, register {len(R)}")

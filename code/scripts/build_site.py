@@ -74,7 +74,7 @@ if cf_fp.exists():
 lg_fp = FINAL / "bgd_lineage_graph.json"
 if lg_fp.exists():
     g = json.loads(lg_fp.read_text(encoding="utf-8"))
-    base["lineage"] = {"nodes": [{k: n.get(k, "") for k in ("id", "label", "kind", "year", "cgiar_center")} for n in g["nodes"]],
+    base["lineage"] = {"nodes": [{k: n.get(k, "") for k in ("id", "label", "kind", "year", "cgiar_center", "parent_type")} for n in g["nodes"]],
                        "edges": [{k: e.get(k, "") for k in ("source", "target", "role", "basis")} for e in g["edges"]]}
 # rice plot reports in household surveys: matching coverage and CGIAR categories (built by build_crosswalk.py)
 VAL = R / "06_validation"
@@ -197,9 +197,9 @@ for decs in public.get("decisions", {}).values():      # verbatim minutes text: 
         for k in ("h", "p", "dec"):
             if isinstance(x.get(k), str):
                 x[k] = RP.free_text(x[k])
-for r in public.get("rice", []):
-    for k in ("special_traits_official", "identifying_traits_official", "stress_tolerance", "quality_traits", "recommended_region", "conflict_note", "cgiar_independent"):
-        if isinstance(r.get(k), str):
+for r in public.get("rice", []):   # every free-text field (v1.3: the *_source columns of derive_attributes quote OCR text)
+    for k in list(r):
+        if isinstance(r.get(k), str) and not RP.NOT_TEXT_COLUMN.search(k):
             r[k] = RP.free_text(r[k])
 public["attendance"] = []
 data_folder(SITE, public, listed + EXTRA, redact=True)

@@ -342,6 +342,39 @@ def scoped_decisions(paras, tks, rice_only):
     return out
 
 
+APPL = re.compile(r"((?:[^\s।¦]+\s){1,8}?)(?:কর্তৃক|কতৃক|কর্তক)\s*(?:প্রস্তাবিত|উদ্ভাবিত|উত্তাবিত|আমদানিকৃত)")
+
+
+def own_applicant(passage, own, oth):
+    """REV4 (E1, round 3): the proposer clause ('<institute> কর্তৃক প্রস্তাবিত/উদ্ভাবিত') that belongs to this variety. In an agenda
+    item covering several varieties the first clause of the passage often names another variety's proposer (NSB 77 item 3:
+    Binadhan-9 was read as proposed by BRRI; NSB 72 item 2: Hira-10 likewise). Take the clause nearest to a mention of the
+    variety's own name with no sibling variety or other crop named in between (within 250 characters); if there is none,
+    record nothing."""
+    ms = list(APPL.finditer(passage))
+    if not ms:
+        return ""
+    if True:   # also for single-variety items: an agenda item can dispose of other crops too (NSB 33: jute, sugarcane)
+        own_pos = [m.start() for t in own for m in t.finditer(passage)]
+        oth_pos = [m.start() for t in oth for m in t.finditer(passage)] + [m.start() for m in OTHER_CROP.finditer(passage)]
+        cand = []
+        for m in ms:
+            for p in own_pos:
+                a, b = sorted((m.start(), p))
+                gap = (p - m.end()) if p >= m.end() else (m.start() - p)
+                if 0 <= gap <= 250 and not any(a < q < b for q in oth_pos):
+                    cand.append((gap, m.start(), m))
+        if not cand:
+            return ""
+        best = min(cand, key=lambda x: (x[0], x[1]))[2]
+    g = best.group(1).strip()
+    # keep only the institution: drop a lead-in such as 'সিদ্ধান্ত ঃ' or 'প্রচলিত শর্ত সাপেক্ষে সাময়িকভাবে'
+    parts = re.split(r"(?<!প্রা)(?<!প্রো)(?<!লি)(?<!কোং)(?<!কো)\s*[ঃ:;](?:\s+|$)|সাময়িকভাবে|সাপেক্ষে|ভিত্তিতে|মাধ্যমে|প্রাপ্ত|উল্লেখ রয়েছে যে,|চাষাবাদের জন্য|তবে", g)
+    g = next((x.strip() for x in reversed(parts) if x and x.strip(" ,/)")), g)
+    g = re.sub(r"^\(?[ক-হ০-৯0-9a-zA-Z]{1,3}\)\s*", "", g).strip(" ,/")       # enumerator '(খ)', '(১)', '(il)'
+    return g
+
+
 def main():
     IX = list(csv.DictReader(open(W / "F3M_decisions_index.csv", encoding="utf-8")))
     MD = {d["meeting_no"]: (d["meeting_date"], d["date_validation"]) for d in IX}
@@ -551,9 +584,9 @@ def main():
         vals["decision_text"] = "\n\n".join(dec_var)
         vals["breeding_line"] = d.get("breeding_line_raw", "")
         vals["developer_applicant"] = d.get("developer", "")
-        m = re.search(r"((?:[^\s।¦]+\s){1,8}?)(?:কর্তৃক|কতৃক|কর্তক)\s*(?:প্রস্তাবিত|উদ্ভাবিত|উত্তাবিত|আমদানিকৃত)", passage)
+        m = own_applicant(passage, tks, [t for sd in sib if sd != did for t in TOK.get(sd, [])])
         if m:
-            vals["developer_applicant"] = (vals["developer_applicant"] + " | as printed: " if vals["developer_applicant"] else "as printed: ") + m.group(1).strip()
+            vals["developer_applicant"] = (vals["developer_applicant"] + " | as printed: " if vals["developer_applicant"] else "as printed: ") + m
         vals["season"] = d.get("season", "")
         vals["region_scope"] = d.get("region_scope", "")
         rt = [x for x in sentences("\n".join(dec_var) or passage) if re.search(r"সারা\s*দেশ|সারাদেশ|অঞ্চল|এলাকায়|জেলা", x)]

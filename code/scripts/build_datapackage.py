@@ -93,7 +93,7 @@ def main():
         "profile": "tabular-data-package",
         "name": "bgd-rice-variety-register",
         "title": "Bangladesh Rice Variety Register: officially approved rice varieties, with improved fish strains",
-        "version": "1.2.0",
+        "version": "1.3.0",
         "homepage": "https://kushal-satya.github.io/bgd-rice-variety-register/",
         "description": "Every rice variety officially approved in Bangladesh (National Seed Board meetings 1 to 115, 1974 to 5 February "
                        "2026, and the varieties recommended before the Board existed), with the evidence for every value, the Board's "

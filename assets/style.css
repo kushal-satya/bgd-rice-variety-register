@@ -176,6 +176,7 @@ main:focus{outline:none}
 .bn[lang="bn"],.bn [lang="bn"]{font-size:13.5px}
 .sw.empty{background:var(--bg);outline:1px solid var(--ink-3);outline-offset:-1px}
 .sw.dashed{background:var(--surface);outline:1px dashed var(--ink-3);outline-offset:-1px}
+.sw.dotted{background:var(--surface);outline:1px dotted var(--ink-3);outline-offset:-1px}
 .sw.hcol{background:repeating-linear-gradient(-45deg,var(--d2) 0 2px,var(--bg) 2px 5px);outline:1px solid var(--d2);outline-offset:-1px}
 .cgmark{display:inline-block;font-size:10.5px;padding:0 4px;background:var(--d0);color:var(--bg);border-radius:2px;margin-right:4px}
 /* overview search */
@@ -230,3 +231,8 @@ svg .lab.cg{font-weight:650}
 .sw.sel{background:var(--surface);outline:2.5px solid var(--warn);outline-offset:-2px}
 .ln{display:inline-block;width:22px;height:0;border-top:1px solid var(--ink-3);vertical-align:middle}
 .ln.thick{border-top:2px solid var(--d1)} .ln.dash{border-top-style:dashed} .ln.dot{border-top-style:dotted;border-top-width:2px}
+/* v1.3: per-season attribute table inside a record */
+table.mini{border-collapse:collapse;font-size:.9em;margin:.1em 0}
+table.mini th,table.mini td{padding:.15em .7em .15em 0;text-align:left;border-bottom:1px solid var(--rule,#ddd);font-weight:normal}
+table.mini thead th{color:var(--ink-3);text-transform:none}
+table.mini tbody th{color:var(--ink-3)}

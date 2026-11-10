@@ -1,7 +1,7 @@
 {
   "title": "Bangladesh Rice Variety Register: officially approved rice varieties, with improved fish strains",
   "upload_type": "dataset",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "<p>A register of every rice variety officially approved in Bangladesh, from the first meeting of the National Seed Board in 1974 to its 115th meeting on 5 February 2026, with the varieties recommended before the Board existed: identifiers, names in English and Bangla, developer, approval route and Board decision, gazette notification, pedigree, traits, documented CGIAR link, legal status in 2026 and quality flags. Every value is traced to a page of an archived source document, and every competing value is kept.</p><p>Companion tables cover the Board's decisions, official variety lists, improved fish strains and government acts on fish, CGIAR and literature sources, and a crosswalk to survey variety codes. Data and documentation are released under CC BY 4.0 and code under the MIT licence; third-party source documents keep their own rights (see NOTICE.md).</p>",
   "creators": [
     {

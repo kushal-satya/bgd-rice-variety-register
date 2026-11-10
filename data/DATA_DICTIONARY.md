@@ -1,6 +1,6 @@
 # Bangladesh Rice Variety Register: data dictionary
 
-Kushal Kumar, Cornell University. Generated 2026-11-09 by `scripts/write_dictionary.py`.
+Kushal Kumar, Cornell University. Generated 2026-11-10 by `scripts/write_dictionary.py`.
 
 This dictionary describes every column of every table in the Bangladesh Rice Variety Register and its companion tables on
 fish strains, sources and literature. Each table section gives the unit of observation, the number of rows, and for each
@@ -68,15 +68,15 @@ explicitly; otherwise codes such as `0` flags and years are silently retyped and
 | [bgd_cgiar_statements.csv](#bgd_cgiar_statementscsv) | One statement by one CGIAR source about one variety and field | 2,631 |
 | [bgd_literature.csv](#bgd_literaturecsv) | One variety-publication pair | 3,105 |
 | [bgd_publications.csv](#bgd_publicationscsv) | One publication | 1,468 |
-| [bgd_variety_people.csv](#bgd_variety_peoplecsv) | One person named for one variety | 150 |
-| [bgd_institutions.csv](#bgd_institutionscsv) | One developing institution or division | 14 |
+| [bgd_variety_people.csv](#bgd_variety_peoplecsv) | One person named for one variety | 335 |
+| [bgd_institutions.csv](#bgd_institutionscsv) | One developing institution, division or company | 91 |
 | [bgd_local_names.csv](#bgd_local_namescsv) | One name linked (or explicitly not linked) to a variety | 152 |
 | [bgd_fish_strains.csv](#bgd_fish_strainscsv) | One released improved fish strain | 9 |
 | [bgd_fish_events.csv](#bgd_fish_eventscsv) | One germplasm transfer, dissemination or planned release | 6 |
 | [bgd_fish_approvals.csv](#bgd_fish_approvalscsv) | One government act on a fish or shrimp species, strain or framework | 183 |
-| [bgd_conflicts.csv](#bgd_conflictscsv) | One version of one field for one variety from one source | 9,932 |
-| [bgd_conflicts_summary.csv](#bgd_conflicts_summarycsv) | One variety and field with more than one version | 559 |
-| [bgd_sources.csv](#bgd_sourcescsv) | One archived source file | 386 |
+| [bgd_conflicts.csv](#bgd_conflictscsv) | One version of one field for one variety from one source | 9,760 |
+| [bgd_conflicts_summary.csv](#bgd_conflicts_summarycsv) | One variety and field with more than one version | 538 |
+| [bgd_sources.csv](#bgd_sourcescsv) | One archived source file | 391 |
 | [bgd_ocr_pages.csv](#bgd_ocr_pagescsv) | One page of an official document | 1,925 |
 | [bgd_ocr_audit.csv](#bgd_ocr_auditcsv) | One OCR'd page that supplied values | 166 |
 | [bgd_rice_not_approved_or_unresolved.csv](#bgd_rice_not_approved_or_unresolvedcsv) | One rice name with no documented approval | 8 |
@@ -85,11 +85,12 @@ explicitly; otherwise codes such as `0` flags and years are silently retyped and
 | [bgd_non_register_names.csv](#bgd_non_register_namescsv) | One widely grown rice name without a Bangladesh approval | 17 |
 | [bgd_pedigree_edges.csv](#bgd_pedigree_edgescsv) | One parent-child link | 326 |
 | [bgd_pedigree_summary.csv](#bgd_pedigree_summarycsv) | One register variety | 444 |
-| [bgd_pedigree_founders.csv](#bgd_pedigree_founderscsv) | One ancestor line or variety | 244 |
+| [bgd_pedigree_founders.csv](#bgd_pedigree_founderscsv) | One ancestor line or variety | 240 |
 | [bgd_pedigree_ancestors.csv](#bgd_pedigree_ancestorscsv) | One ancestor of one variety along one path | 633 |
 | [bgd_variety_events.csv](#bgd_variety_eventscsv) | One NSB decision event for one variety | 538 |
 | [bgd_variety_status.csv](#bgd_variety_statuscsv) | One variety | 445 |
-| [bgd_evidence.csv](#bgd_evidencecsv) | One reading of one field for one variety from one source | 27,826 |
+| [bgd_evidence.csv](#bgd_evidencecsv) | One reading of one field for one variety from one source | 33,427 |
+| [bgd_variety_area.csv](#bgd_variety_areacsv) | One variety in one season and year from one source | 1,360 |
 
 ## bgd_rice_varieties.csv
 
@@ -97,7 +98,7 @@ explicitly; otherwise codes such as `0` flags and years are silently retyped and
 
 The register of rice varieties approved in Bangladesh: every variety released or registered by the National Seed Board (NSB) from its first meeting in 1974 to meeting 115 (5 February 2026), and the few varieties recommended before the Board existed. Each row gives the variety's names, developer, approval route and NSB decision, gazette notification, pedigree, agronomic traits, documented CGIAR link with its evidence, legal status in 2026, and the main source with quality flags. Values are chosen from long-format evidence by field-specific precedence rules; every competing value is kept in bgd_conflicts.csv. Columns after the source columns are derived in English for analysis (scripts/derive_covariates.py, feature_tags.py) or copied from the pedigree and status tables.
 
-The file has 444 rows and 113 columns.
+The file has 444 rows and 160 columns.
 
 | column | meaning | values | coverage |
 |---|---|---|---:|
@@ -110,7 +111,7 @@ The file has 444 rows and 113 columns.
 | `official_name_en` | English name of the variety as printed by the developing institute or another official source, with the source's own spacing and hyphenation (for example 'BAU dhan 2'). Blank means no English spelling was printed; most such rows are private hybrids registered under a Bangla name. | Free text as printed. | 0.90 |
 | `official_name_bn` | Bangla name of the variety as printed in the official record, kept exactly as printed, including Bangla digits and the source's own spacing and hyphens (for example 'বিনা ধান-১০'). | Bangla text (Unicode, NFC as extracted). Never blank in the register. | 1.00 |
 | `popular_name` | Popular or farmer name given by an official or institute source (for example চান্দিনা for BR1). Blank means no source states one; other names reported by surveys and markets are in bgd_local_names.csv. | Free text, usually Bangla. | 0.06 |
-| `aliases` | Other labels under which the variety appears in the sources: breeding-line labels that are not line codes (such as 'BR11-Sub1'), names used before renaming, trade names and codes printed by other sources. It is a record of labels seen in the sources, not a vetted list of local names. | Labels separated by ' \| ', in order of first appearance. | 0.64 |
+| `aliases` | Other labels under which the variety appears in the sources: breeding-line labels that are not line codes (such as 'BR11-Sub1'), names used before renaming, trade names and codes printed by other sources. It is a record of labels seen in the sources, not a vetted list of local names. | Labels separated by ' \| ', in order of first appearance. | 0.61 |
 | `breeding_line` | Pre-release designation of the line that became the variety (for example 'BR7671-37-2-2-3-7-3', 'IR91820-25BAY2-3-1'); for private hybrids, the company's trial or product code (for example 'Win301'). Blank means no line code was published. | Designation as printed. Where a source prints the code in both Bangla and Latin script the two forms are joined by '\|' without spaces (for example 'বাউ-১৬\|BAU-16'). | 0.70 |
 | `pedigree` | Parentage of the variety as printed, usually in Purdy notation ('/' a first-order cross, '//' a second-order cross, 'A*n/B' a backcross), or a statement of derivation such as 'mutant of BRRI dhan29' or 'line collected from IRRI, Philippines'. Blank means no pedigree has been published, which is the case for most private hybrids; it does not mean the variety has no known parents. | Free text as printed. Parsed parent-child links are in bgd_pedigree_edges.csv. | 0.38 |
 | `hybrid_parent_female` | Reserved for the female (cytoplasmic male-sterile A) parent of a hybrid. It is empty in the current release: registration records do not publish hybrid parent lines, and where a source prints them they are kept in pedigree. | Empty in every row. | 0.00 |
@@ -120,7 +121,7 @@ The file has 444 rows and 113 columns.
 | `developer_std` | Canonical English name of the developer or applicant. Bangla names and spelling variants map to one name; legally separate firms of one business group stay separate (ACI Limited, ACI Formulations, ACI Agrolink), and Gazipur Agricultural University is coded under its former name BSMRAU. | Names from the DEVELOPERS table in derive_covariates.py (e.g. BRRI, BINA, BAU, BSMRAU, BADC, BRAC, Supreme Seed Company); a name not in the table falls back to the cleaned original with legal suffixes removed. The pre-BRRI introductions are coded by breeding institution: IRRI (IR5, IR8, IR20), 'introduction (Malaysia)' (Pajam), 'introduction (China)' (Purbachi). | 1.00 |
 | `developer_type` | Institutional type of the standardised developer. | public research institute (BRRI, BINA); university; public seed agency (BADC); NGO (BRAC and its seed enterprise); foreign public (IRRI: IR5, IR8, IR20); introduction (Pajam, Purbachi); private company. | 1.00 |
 | `developer_country_of_origin` | Country from which the seed or germplasm came, as recorded in the register (mostly the import origin of hybrids stated in the NSB minutes). It is never inferred from the nationality of the company. Blank means not stated, which is the usual case for public inbreds. | China; India; Bangladesh; Philippines (IRRI); Vietnam; 'Bangladesh; China'. | 0.65 |
-| `developer_division` | Breeding division of the developing institute, where an institute page or the author affiliation of the key paper names it. It is a medium-confidence attribution, not an official statement of which division bred the variety. | Plant Breeding Division, BRRI; Plant Breeding Division, BINA. | 0.06 |
+| `developer_division` | Breeding division of the developing institute, where an institute page or the author affiliation of the key paper names it. It is a medium-confidence attribution, not an official statement of which division bred the variety. | Plant Breeding Division, BRRI; Plant Breeding Division, BINA. | 0.09 |
 | `origin_country` | Country of origin of the variety or its seed as recorded by the winning source, with any correction the source itself records. developer_country_of_origin is the cleaned version. | Country names (China, India, Bangladesh, Philippines, Vietnam); IRRI as 'Philippines (IRRI)'; two origins as 'China; Bangladesh'. Correction notes printed by the NSB are in notes since v1.2. | 0.65 |
 | `origin_statement` | Statements of origin found in the pedigree slot of a source (for example 'origin India', 'imported from China'), kept separately because they describe where seed came from, not parentage. | Statements separated by ' \| '. | 0.19 |
 | `trial_codes` | Seed Certification Agency trial entry numbers of a hybrid (for example 'H-101/127'), found in the pedigree or breeding-line slot of a source. They identify the entry in the SCA's VCU trials and are not pedigrees. | Codes separated by ' \| ' (several trial years may be listed). | 0.18 |
@@ -130,6 +131,8 @@ The file has 444 rows and 113 columns.
 | `approving_body` | Body that approved the variety, as the sources describe it. For varieties released after 1977 the NSB approves and the Ministry of Agriculture notifies the release in the Gazette. | Mostly 'NSB' or 'NSB (approval); Government/MoA (notification)'; some rows name the Technical Committee meeting that recommended the variety; 'none: recommended before the NSB was constituted (1974)' for pre-NSB varieties. | 1.00 |
 | `approval_date` | Date of the National Seed Board meeting that released or registered the variety. For the pre-NSB varieties it is the date or year of the recommendation. An earlier provisional release is in provisional_release_date, and later decisions (extensions, renamings, suspensions) are in bgd_variety_events.csv. This is a decision date, not the gazette date, the date of first sale or the date of first cultivation. | ISO date YYYY-MM-DD; year only (YYYY) when only the year is documented, which affects 12 rows (flag year_only). | 1.00 |
 | `approval_reference` | Meeting number and agenda item of the National Seed Board decision behind approval_date. | 'NSB &lt;n&gt;th meeting, agenda &lt;k&gt;' (agenda omitted where the source does not give it). | 0.98 |
+| `institute_release_year` | Year the breeding institute states it released the variety, where this differs from or precedes the National Seed Board approval (for example the BR series, released by BRRI before NSB approval). approval_year remains the NSB year. | Four-digit year; blank where no institute source states it. | 0.34 |
+| `institute_release_year_source` | File, page and locator of the institute source that states institute_release_year. | Free text. | 0.34 |
 | `provisional_release_date` | Date of an earlier provisional release by the NSB, for varieties whose full release came later (BRRI dhan40 and BRRI dhan41). Blank for all other varieties. | ISO date YYYY-MM-DD. | 0.00 |
 | `provisional_release_reference` | NSB meeting and agenda item of the provisional release. | 'NSB &lt;n&gt;th meeting, agenda &lt;k&gt;'. | 0.00 |
 | `gazette_date` | Date of the earliest Bangladesh Gazette notification of the release that was found in an archived copy of the Gazette. Later notifications of the same variety are listed in conflict_note. Blank means no archived gazette copy was found; see gazette_status for the reason. | ISO date YYYY-MM-DD. | 0.22 |
@@ -197,12 +200,57 @@ The file has 444 rows and 113 columns.
 | `retrieved_at` | Date on which the main source file was downloaded or the bibliographic record was retrieved. | ISO date YYYY-MM-DD. | 1.00 |
 | `n_sources` | Number of distinct source documents that supplied at least one usable (eligible) value for the row. It measures how well documented a row is, not how many sources agree. | Count, 1 or more. | 1.00 |
 | `validation_summary` | Summary of how the key values of the row were checked, written as field=check (extraction method) and separated by '; '. The fields reported are approval_date, breeding_line, gazette_date and cgiar_role when present. | Checks: key_check (a date or number matched the validated NSB meeting-date key); visual_check (read by eye on the page image or a crop of it); two_source (two independent sources give the same value); unvalidated (machine-readable text or OCR not checked by eye). 'text' means the value came from a machine-readable text layer and needed no check. Methods: html; pdf_text (the PDF's own Unicode text layer); bijoy2unicode (a legacy SutonnyMJ/Bijoy text layer converted to Unicode); api_json; xlsx; ocr (Tesseract 5 OCR of a 300-dpi render); visual_check (transcribed by eye from the page image). | 1.00 |
-| `flags` | Machine-readable quality flags for the row, separated by ';'. A flag marks something an analyst should know before using the row; the absence of flags does not certify a value. | year_only (only the year of the date is documented); date_single_source (one source, not cross-checked); has_conflicts:&lt;fields&gt; (sources disagree on a substantive field); &lt;field&gt;_unvalidated_only (the field had only unvalidated OCR values, which never enter the register, so it is blank); unvalidated_values=&lt;n&gt; (number of such values set aside); breeding_line_not_a_code_moved (descriptive text moved out of breeding_line); institute_claim_only (no official evidence); cgiar_role_default_unknown_no_pedigree, cgiar_role_5_pedigree_needs_review, cgiar_role_4_pedigree_documented_no_cgiar_element, cgiar_role_2_via_parent_variety, cgiar_center_missing (how cgiar_role was set); planned_not_released (fish). | 0.98 |
-| `quality_notes` | The flags of the row written out as sentences for readers: why the CGIAR code is what it is, which fields rest on readings that could not be confirmed and were left blank, where sources disagree. The machine-readable flags stay in flags. | Free text, one sentence per flag; blank when the row has no flag that needs explaining (unvalidated_values=&lt;n&gt; is not repeated). | 0.98 |
-| `conflict_fields` | Substantive fields on which the sources for this row disagree, separated by '; '. Only approval_date, gazette_date, breeding_line, pedigree, release_category, origin_country, release_date, generation and approval_or_release_mechanism are considered substantive. Blank means no substantive disagreement was found among eligible values. | Field names separated by '; '. | 0.59 |
+| `flags` | Machine-readable quality flags for the row, separated by ';'. A flag marks something an analyst should know before using the row; the absence of flags does not certify a value. | year_only (only the year of the date is documented); date_single_source (one source, not cross-checked); has_conflicts:&lt;fields&gt; (sources disagree on a substantive field); &lt;field&gt;_unvalidated_only (the field had only unvalidated OCR values, which never enter the register, so it is blank); unvalidated_values=&lt;n&gt; (number of such values set aside); breeding_line_not_a_code_moved (descriptive text moved out of breeding_line); institute_claim_only (no official evidence); cgiar_role_default_unknown_no_pedigree, cgiar_role_5_pedigree_needs_review, cgiar_role_4_pedigree_documented_no_cgiar_element, cgiar_role_2_via_parent_variety, cgiar_center_missing (how cgiar_role was set); planned_not_released (fish). | 1.00 |
+| `quality_notes` | The flags of the row written out as sentences for readers: why the CGIAR code is what it is, which fields rest on readings that could not be confirmed and were left blank, where sources disagree. The machine-readable flags stay in flags. | Free text, one sentence per flag; blank when the row has no flag that needs explaining (unvalidated_values=&lt;n&gt; is not repeated). | 0.96 |
+| `conflict_fields` | Substantive fields on which the sources for this row disagree, separated by '; '. Only approval_date, gazette_date, breeding_line, pedigree, release_category, origin_country, release_date, generation and approval_or_release_mechanism are considered substantive. Blank means no substantive disagreement was found among eligible values. | Field names separated by '; '. | 0.57 |
 | `conflict_note` | One short note per field on which sources disagree, of the form '&lt;field&gt;: chose &lt;value&gt;; also &lt;other value&gt; (&lt;source_id&gt;)', with notes for different fields separated by ' \| '. It covers every field, including formatting differences, and is a pointer to bgd_conflicts.csv, which holds every version with its file and page. | Free text; notes separated by ' \| '. Later gazette notifications are listed as 'later gazette(s): &lt;dates&gt;'. | 1.00 |
 | `notes` | Free-text notes added by the coordinator or reviewers about the row, such as a CGIAR record that was checked and not used. | Free text; blank for most rows. | 0.06 |
 | `gazette_status` | Gazette situation of every variety, stated explicitly so that a blank gazette_date can be interpreted. Hybrid registrations are not gazetted, and no weekly Gazette issues before 2013 are online, so a missing gazette date before 2013 is usually a gap in the archive, not evidence that no notification was made. | notified (gazette in archive); notified per NSB minutes (gazette copy not found); notified per NSB minutes (date not stated); sent to Government Press, publication not confirmed; not gazetted (hybrid registrations are not gazetted); not applicable (before the Seeds Ordinance 1977); not yet published (gazettes checked to 1 Oct 2026); not found (dpp.gov.bd holds no weekly gazettes before 2013). | 1.00 |
+| `variety_type` | Type of the variety in the vocabulary of the BAU stocktake column 'Type (e.g. OPV, Hybrid, HYV)'. Taken from the register's own type, which records how the official documents describe the variety. | hybrid; inbred; inbred (mutant). No archived source states HYV, local improved or OPV per variety in a form that could be attributed without inference, so those labels are not used. | 0.98 |
+| `variety_type_source` | Where each non-blank value of variety_type was read: file, page and locator of the chosen reading, prefixed by the column name and separated by ' \| '; 'other readings' lists different values in lower-ranked sources. | Free text; blank when the group is blank. | 0.98 |
+| `germplasm_origin` | Origin of the germplasm as printed in the official list (origin cell of SCA and MoA hybrid lists, gazettes) or in the NSB decision (germplasm source), with an English gloss in front of the printed Bangla, e.g. 'China (চীন)'. Where no list or decision states it, the register's origin_statement or origin_country. | Free text. | 0.68 |
+| `germplasm_origin_source` | Where each non-blank value of germplasm_origin was read: file, page and locator of the chosen reading, prefixed by the column name and separated by ' \| '; 'other readings' lists different values in lower-ranked sources. | Free text; blank when the group is blank. | 0.68 |
+| `yield_potential_aus_t_ha` | Yield stated for the variety in the Aus season, in t/ha as printed (ranges kept as 'a-b'). Sources in order: official lists (gazette, SCA, MoA 'average yield'), BRRI Adhunik Dhaner Chash 2025 Table 2, BRRI Rice Profile, BINA variety page, and last the Board's trial mean in the NSB decision. It is the yield the official and institute documents state, not a measured farm yield. A value goes to a season only when the same source names that season for it (a printed season label, or a source row for a single season). | Number or range 'a-b'; blank when not stated. | 0.09 |
+| `yield_potential_aman_t_ha` | Yield stated for the variety in the Aman season, in t/ha as printed (ranges kept as 'a-b'). Sources in order: official lists (gazette, SCA, MoA 'average yield'), BRRI Adhunik Dhaner Chash 2025 Table 2, BRRI Rice Profile, BINA variety page, and last the Board's trial mean in the NSB decision. It is the yield the official and institute documents state, not a measured farm yield. A value goes to a season only when the same source names that season for it (a printed season label, or a source row for a single season). | Number or range 'a-b'; blank when not stated. | 0.26 |
+| `yield_potential_boro_t_ha` | Yield stated for the variety in the Boro season, in t/ha as printed (ranges kept as 'a-b'). Sources in order: official lists (gazette, SCA, MoA 'average yield'), BRRI Adhunik Dhaner Chash 2025 Table 2, BRRI Rice Profile, BINA variety page, and last the Board's trial mean in the NSB decision. It is the yield the official and institute documents state, not a measured farm yield. A value goes to a season only when the same source names that season for it (a printed season label, or a source row for a single season). | Number or range 'a-b'; blank when not stated. | 0.68 |
+| `yield_potential_source` | Where each non-blank value of yield_potential_aus_t_ha, yield_potential_aman_t_ha, yield_potential_boro_t_ha was read: file, page and locator of the chosen reading, prefixed by the column name and separated by ' \| '; 'other readings' lists different values in lower-ranked sources. | Free text; blank when the group is blank. | 0.98 |
+| `on_farm_yield_aus_t_ha` | Yield in farmers' fields in the Aus season, filled only when a source labels a yield as on-farm. No archived source does so for any variety, so the column is blank (kept for the BAU column set). A value goes to a season only when the same source names that season for it (a printed season label, or a source row for a single season). | Number or range 'a-b'; blank when not stated. | 0.00 |
+| `on_farm_yield_aman_t_ha` | Yield in farmers' fields in the Aman season, filled only when a source labels a yield as on-farm. No archived source does so for any variety, so the column is blank (kept for the BAU column set). A value goes to a season only when the same source names that season for it (a printed season label, or a source row for a single season). | Number or range 'a-b'; blank when not stated. | 0.00 |
+| `on_farm_yield_boro_t_ha` | Yield in farmers' fields in the Boro season, filled only when a source labels a yield as on-farm. No archived source does so for any variety, so the column is blank (kept for the BAU column set). A value goes to a season only when the same source names that season for it (a printed season label, or a source row for a single season). | Number or range 'a-b'; blank when not stated. | 0.00 |
+| `on_farm_yield_source` | Where each non-blank value of on_farm_yield_aus_t_ha, on_farm_yield_aman_t_ha, on_farm_yield_boro_t_ha was read: file, page and locator of the chosen reading, prefixed by the column name and separated by ' \| '; 'other readings' lists different values in lower-ranked sources. | Free text; blank when the group is blank. | 0.00 |
+| `duration_aus_days` | Growth duration (seed to maturity) in days in the Aus season as printed. Same source order as yield_potential. A value goes to a season only when the same source names that season for it (a printed season label, or a source row for a single season). | Number or range 'a-b'; blank when not stated. | 0.09 |
+| `duration_aman_days` | Growth duration (seed to maturity) in days in the Aman season as printed. Same source order as yield_potential. A value goes to a season only when the same source names that season for it (a printed season label, or a source row for a single season). | Number or range 'a-b'; blank when not stated. | 0.26 |
+| `duration_boro_days` | Growth duration (seed to maturity) in days in the Boro season as printed. Same source order as yield_potential. A value goes to a season only when the same source names that season for it (a printed season label, or a source row for a single season). | Number or range 'a-b'; blank when not stated. | 0.69 |
+| `duration_source` | Where each non-blank value of duration_aus_days, duration_aman_days, duration_boro_days was read: file, page and locator of the chosen reading, prefixed by the column name and separated by ' \| '; 'other readings' lists different values in lower-ranked sources. | Free text; blank when the group is blank. | 0.98 |
+| `plant_height_aus_cm` | Plant height in cm in the Aus season as printed (official list identifying traits, ADC 2025 Table 2, Rice Profile, BINA page). A value goes to a season only when the same source names that season for it (a printed season label, or a source row for a single season). | Number or range 'a-b'; blank when not stated. | 0.06 |
+| `plant_height_aman_cm` | Plant height in cm in the Aman season as printed (official list identifying traits, ADC 2025 Table 2, Rice Profile, BINA page). A value goes to a season only when the same source names that season for it (a printed season label, or a source row for a single season). | Number or range 'a-b'; blank when not stated. | 0.11 |
+| `plant_height_boro_cm` | Plant height in cm in the Boro season as printed (official list identifying traits, ADC 2025 Table 2, Rice Profile, BINA page). A value goes to a season only when the same source names that season for it (a printed season label, or a source row for a single season). | Number or range 'a-b'; blank when not stated. | 0.13 |
+| `plant_height_source` | Where each non-blank value of plant_height_aus_cm, plant_height_aman_cm, plant_height_boro_cm was read: file, page and locator of the chosen reading, prefixed by the column name and separated by ' \| '; 'other readings' lists different values in lower-ranked sources. | Free text; blank when the group is blank. | 0.27 |
+| `grain_type` | English class of the printed grain description in grain_size_text. | long slender; medium slender; short bold; medium bold; long bold; short slender; '&lt;shape&gt; (length not stated)'; '&lt;length&gt; (shape not stated)'. | 0.56 |
+| `grain_length_mm` | Length of the milled grain in mm as printed ('চালের দৈর্ঘ্য'). | Number; blank when not stated. | 0.00 |
+| `grain_breadth_mm` | Breadth of the milled grain in mm as printed ('চালের প্রস্থ'). | Number; blank when not stated. | 0.00 |
+| `lb_ratio` | Length-to-breadth ratio of the grain as printed in the NSB decision or official list. | Number; blank when not stated. | 0.00 |
+| `grain_size_text` | The grain-size phrase as printed in the chosen source, in Bangla (e.g. 'চাল মাঝারি চিকন ও সাদা'). | Free text. | 0.56 |
+| `aleurone_colour` | Colour of the milled grain as stated (চাল সাদা = white, লাল = red, বাদামী = brown). A white belly (পেটে সাদা দাগ, chalkiness) is not a colour statement. The BAU column is 'Aleurone color'; Bangladeshi sources describe the milled grain, not the aleurone layer as such. | white; red; brown. | 0.21 |
+| `grain_source` | Where each non-blank value of grain_type, grain_length_mm, grain_breadth_mm, lb_ratio, grain_size_text, aleurone_colour was read: file, page and locator of the chosen reading, prefixed by the column name and separated by ' \| '; 'other readings' lists different values in lower-ranked sources. | Free text; blank when the group is blank. | 0.56 |
+| `amylose_pct` | Amylose content in percent as printed in the official list, the NSB decision (measurements reported to the Board), ADC 2025, Rice Profile or BINA page, in that order. A qualifier ('&gt;20') is kept. | Number, range or qualified number; blank when not stated. | 0.12 |
+| `protein_pct` | Protein content in percent as printed in the official list, the NSB decision (measurements reported to the Board), ADC 2025, Rice Profile or BINA page, in that order. A qualifier ('&gt;20') is kept. | Number, range or qualified number; blank when not stated. | 0.09 |
+| `zinc_mg_kg` | Zinc content in mg/kg as printed in the official list, the NSB decision (measurements reported to the Board), ADC 2025, Rice Profile or BINA page, in that order. A qualifier ('&gt;20') is kept. | Number, range or qualified number; blank when not stated. | 0.03 |
+| `iron_mg_kg` | Iron content in mg/kg as printed in the official list, the NSB decision (measurements reported to the Board), ADC 2025, Rice Profile or BINA page, in that order. A qualifier ('&gt;20') is kept. | Number, range or qualified number; blank when not stated. | 0.01 |
+| `glycemic_index` | Glycemic index as printed in the official list, the NSB decision (measurements reported to the Board), ADC 2025, Rice Profile or BINA page, in that order. A qualifier ('&gt;20') is kept. | Number, range or qualified number; blank when not stated. | 0.00 |
+| `grain_quality_source` | Where each non-blank value of amylose_pct, protein_pct, zinc_mg_kg, iron_mg_kg, glycemic_index was read: file, page and locator of the chosen reading, prefixed by the column name and separated by ' \| '; 'other readings' lists different values in lower-ranked sources. | Free text; blank when the group is blank. | 0.17 |
+| `target_ecosystem` | Target rice ecosystem, copied from ecosystem_std so that the BAU column set is complete. | As ecosystem_std. | 0.20 |
+| `target_ecosystem_source` | Where each non-blank value of target_ecosystem was read: file, page and locator of the chosen reading, prefixed by the column name and separated by ' \| '; 'other readings' lists different values in lower-ranked sources. | Free text; blank when the group is blank. | 0.20 |
+| `first_year_of_adoption` | First year farmers are recorded growing the variety, filled only when a source states it. No archived source does, so the column is blank. | Year; blank. | 0.00 |
+| `first_year_of_adoption_source` | Where each non-blank value of first_year_of_adoption was read: file, page and locator of the chosen reading, prefixed by the column name and separated by ' \| '; 'other readings' lists different values in lower-ranked sources. | Free text; blank when the group is blank. | 0.00 |
+| `cgiar_projects` | CGIAR projects or programmes that developed or disseminated the variety, filled by the round-3 coordinator from CGIAR records. | Free text; blank until filled. | 0.00 |
+| `cgiar_projects_source` | Where each non-blank value of cgiar_projects was read: file, page and locator of the chosen reading, prefixed by the column name and separated by ' \| '; 'other readings' lists different values in lower-ranked sources. | Free text; blank when the group is blank. | 0.00 |
+| `dissemination_notes` | Notes on dissemination pathways, filled only from an archived source. Blank at present. | Free text; blank. | 0.00 |
+| `dissemination_notes_source` | Where each non-blank value of dissemination_notes was read: file, page and locator of the chosen reading, prefixed by the column name and separated by ' \| '; 'other readings' lists different values in lower-ranked sources. | Free text; blank when the group is blank. | 0.00 |
+| `nars_institute` | The national institute behind the variety, standardised; for company and NGO varieties the developer's name. For lines bred abroad and released before the NSB (IR5, IR8, IR20, Pajam, Purbachi) the releasing institute named in the register's developer field. | BRRI, BINA, BAU, BSMRAU/GAU (BU dhan, BU aromatic hybrid and GAU dhan series), RU (University of Rajshahi), BADC, BRAC, or the company/NGO name as in developer_std. | 1.00 |
+| `nars_division` | Division or department of the institute credited with the variety. See nars_division_basis for whether a source names it or it is inferred. | e.g. 'Plant Breeding Division, BRRI', 'Hybrid Rice Division, BRRI', 'Biotechnology Division, BRRI' (contributing division), 'Plant Breeding Division, BINA', 'Department of Genetics and Plant Breeding, BSMRAU'. Blank where no source names one. | 0.35 |
+| `nars_division_basis` | Whether nars_division is stated by a source for this variety or inferred from the division's published mandate. | 'stated' (a source names the variety with the division: division page, key-paper affiliation, NSB minutes); 'inferred' (the division develops the institute's varieties of this kind but the variety is not named); 'not stated'; 'not applicable' (companies, NGOs, BADC). | 1.00 |
+| `proposer_as_printed` | The proposing or developing organisation as printed in the NSB minutes of the approval decision (the clause before 'কর্তৃক প্রস্তাবিত/উদ্ভাবিত' or 'এর প্রস্তাবিত'), OCR text with list numbering removed. Blank where the minutes do not name it in a form the script can attribute to this variety. | Bangla text as printed (OCR). | 0.58 |
 | `status_as_of_2026` | Legal status of the variety after the last NSB meeting in the archive (meeting 115, 5 February 2026). 'Active' is a legal status under the Seeds Ordinance and says nothing about whether seed is produced or sold. Status is never inferred from elapsed time; no registration is coded as expired. Kept for compatibility; legal_status_2026 states the same finding in words. | active; suspended; unknown (no NSB approval on record, a time-limited approval with no recorded renewal, or an approval made conditional with no recorded outcome); cancelled (defined, but no case found). | 1.00 |
 | `legal_status_2026` | Legal status after the last NSB meeting in the archive (meeting 115, 5 February 2026), in words. 'Active' means approved with no adverse decision on record; the 20 varieties the SCA proposed for denotification in 2021 are flagged. Legal status says nothing about whether seed is produced or the variety is grown. | active; active, withdrawal proposed 2021 and deferred; time-limited registration, renewal not recorded; provisional, re-evaluation outcome not recorded; seed multiplication suspended; suspended; recommended before the Board, no later decision; not approved (names outside the register, status file only). | 1.00 |
 | `status_basis` | Plain-English statement of the decision or absence of decisions behind status_as_of_2026, naming the meeting and date. | Free text. | 1.00 |
@@ -253,7 +301,7 @@ The file has 579 rows and 90 columns.
 | `germplasm_source` | Statement of where the seed or germplasm came from, as printed. | Free text, Bangla or English; equals origin_statements in the current build. | 0.28 |
 | `origin_country` | Country of origin of the seed or germplasm read from the minutes, with any correction noted. | Country names in English, sometimes with a correction note. | 0.25 |
 | `origin_statements` | Sentences that state the origin of the variety or its seed. | Verbatim sentences matched by keyword, joined by ' ‖ '. Keyword matching can pick up sentences about other matters in the same agenda item, so read them against variety_passage_verbatim. | 0.18 |
-| `developer_applicant` | Institute or company that proposed or imported the variety, as listed in the index and, where found, as printed in the passage ('as printed: ...'). | Free text; ' \| as printed: ' separates the index value from the printed one. | 0.90 |
+| `developer_applicant` | Institute or company that proposed or imported the variety, as listed in the index and, where found, as printed in the passage ('as printed: ...'). | Free text; ' \| as printed: ' separates the index value from the printed one. | 0.89 |
 | `season` | Season for which the decision approves the variety, in English. | Aus; Aman; Boro; Rope (transplanted) Aman or Aus; qualifiers as written. | 0.65 |
 | `region_scope` | Region for which the decision approves the variety, summarised in English. | 'nationwide' or a list of regions or towns. | 0.73 |
 | `region_text` | Sentences of the decision that name the approved area. | Verbatim sentences matched by keyword, joined by ' ‖ '. Keyword matching can pick up sentences about other matters in the same agenda item, so read them against variety_passage_verbatim. | 0.71 |
@@ -481,45 +529,69 @@ The file has 1,468 rows and 38 columns.
 
 *Unit of observation:* One person named for one variety.
 
-Authors of the key papers and breeders named in official or publication sources, with role, affiliation and ORCID as stated, and professional contact details only where the institution's official directory or the paper itself publishes them.
+People named for each variety: authors of the key and release papers, breeders thanked by name in National Seed Board minutes, the officer named on BINA's page for the variety, and the current head of the developing division; with role, affiliation and ORCID as stated, the developing institute and division, and professional contact details only where the institution's official directory or the paper itself publishes them.
 
-The file has 150 rows and 13 columns.
+The file has 335 rows and 20 columns.
 
 | column | meaning | values | coverage |
 |---|---|---|---:|
 | `variety_id` | Stable identifier of a rice variety in the register and the key for joining every table in the archive. The number inside the identifier is the official series number of the variety, not a running count. | 'RICE-' followed by a key built from the official name by lib_keys.make_key: BR&lt;n&gt; (BR series, 1970-1993), BRRI_DHAN&lt;n&gt;, BRRI_HYBRID&lt;n&gt;, BINADHAN&lt;n&gt;, IRATOM&lt;n&gt;, BINASHAIL, BU_, BAU_ and GAU_ (universities), BRAC_DHAN&lt;n&gt;, PVT_ (other private inbreds), HYB_&lt;trade name&gt; (private and BADC hybrids), IR&lt;n&gt; and OLD_ (pre-BRRI introductions and old names). | 1.00 |
 | `person_name` | Name of the author or breeder as printed in the source. | Free text. | 1.00 |
-| `author_position` | Position of the person in the author list of the key paper. | 1 = first author. | 1.00 |
-| `role_as_stated` | Role of the person with respect to the variety. | 'author of key paper (&lt;publication type&gt;)', with ' - corresponding author' where applicable; breeder roles from official sources. | 1.00 |
-| `affiliation_as_stated` | Affiliation printed for the person in the key paper. | Free text. | 0.64 |
-| `orcid` | ORCID iD of the person, where registered. | 0000-0000-0000-0000 form. | 0.24 |
+| `author_position` | Position of the person in the author list of the key paper. | 1 = first author. | 0.47 |
+| `role_as_stated` | Role of the person with respect to the variety. | 'author of key paper (&lt;publication type&gt;)', with ' - corresponding author' where applicable; for breeders, page officers and division heads, the statement of the source in words. | 1.00 |
+| `affiliation_as_stated` | Affiliation printed for the person in the key paper. | Free text. | 0.90 |
+| `orcid` | ORCID iD of the person, where registered. | 0000-0000-0000-0000 form. | 0.11 |
 | `source` | Publication or document that names the person. | 'doi:&lt;DOI&gt;' or a URL. | 1.00 |
-| `current_position_as_stated` | Current post of the person according to the institution's official staff directory, as printed (often Bangla). | Free text. | 0.24 |
-| `professional_email` | Institutional work e-mail from the official directory, or a corresponding-author e-mail printed in a paper. Only professional contacts are recorded. | E-mail address or addresses with their origin in parentheses. | 0.24 |
-| `professional_phone` | Office telephone and extension as printed in the official directory. | Free text. | 0.22 |
-| `contact_source_url` | Page from which the contact details were taken. | Absolute URL(s) joined by ' \| '. | 0.24 |
-| `contact_source_type` | Kind of page that supplied the contact. | 'official institutional directory (brri.gov.bd)', optionally with '; corresponding author ...'. | 0.24 |
-| `notes` | How the person was matched to the directory and how the author list was obtained. | Free text. | 0.34 |
+| `current_position_as_stated` | Current post of the person according to the institution's official staff directory, as printed (often Bangla). | Free text. | 0.58 |
+| `professional_email` | Institutional work e-mail of the person from the official directory, the division mailbox for division heads, or a corresponding-author address printed in a paper. Webmail (gmail, yahoo, ...) is never copied. Only professional contacts are recorded; dropped from the public edition. | E-mail address or addresses with their origin in parentheses. | 0.49 |
+| `professional_phone` | Office telephone and extension as printed in the official directory. | Free text. | 0.48 |
+| `contact_source_url` | Page from which the contact details were taken. | Absolute URL(s) joined by ' \| '. | 0.58 |
+| `contact_source_type` | Kind of page that supplied the contact. | 'official institutional directory (brri.gov.bd)', optionally with '; corresponding author ...'. | 0.58 |
+| `notes` | How the person was matched to the directory and how the author list was obtained. | Free text. | 0.96 |
+| `role` | Role of the person with respect to the variety, standardised. | 'breeder' (thanked by name in NSB minutes for developing the variety); 'release-paper author' (author of the variety's release/description paper, 04_working/PEOPLE/release_papers.csv, authors in printed order); 'corresponding author' (of a key paper that is not a release paper); 'key-paper author' (key paper that is not a release paper); 'division head (current)' (head in 2026 of the developing division, stated or inferred, as listed on the institution's site; not necessarily head when the variety was bred); 'variety page officer (BINA)' (officer in charge named on BINA's page for the variety, not a breeder). | 1.00 |
+| `is_corresponding_author` | Whether the person is marked as corresponding author of the paper named in source. | yes, no. | 1.00 |
+| `nars_institute` | Standardised national institute or developer of the variety (repeated from 04_working/PEOPLE/variety_nars.csv). | BRRI, BINA, BAU, BSMRAU/GAU, RU, BADC, BRAC, or the company name. | 1.00 |
+| `nars_division` | Division or department credited with the variety, with the institute; blank where no source names one. Whether the value is stated by a source or inferred from the division's mandate is in 04_working/PEOPLE/variety_nars.csv (nars_division_basis). | e.g. 'Plant Breeding Division, BRRI', 'Hybrid Rice Division, BRRI'. | 1.00 |
+| `source_locator` | Where the role statement is: archived file and page, or DOI. | '02_raw/... , p. N' or 'doi:...'. | 1.00 |
+| `record_source` | Which step produced the row. | 'L1: author list of the key paper (API metadata)'; 'PEOPLE: NSB minutes'; 'PEOPLE: BINA variety page'; 'PEOPLE: institution directory'; 'PEOPLE: release paper (04_working/PEOPLE/release_papers.csv)' (release paper not yet in the literature table). | 1.00 |
+| `is_first_author` | Whether the person is the first author of the variety's release/description paper. | yes, no; blank on rows that are not release-paper authors. | 0.42 |
 
 ## bgd_institutions.csv
 
-*Unit of observation:* One developing institution or division.
+*Unit of observation:* One developing institution, division or company.
 
-Developing institutes and their breeding divisions, with the official website and the public office contact taken from the institution's own contact page.
+Every developer in the register: public institutes, their breeding divisions and university departments with official names in Bangla and English, parent ministry, address, office telephone and fax, role mailboxes and the head of the unit from the institution's own pages; companies and NGOs are listed with their number of varieties, contacts collected only for some.
 
-The file has 14 rows and 9 columns.
+The file has 91 rows and 26 columns.
 
 | column | meaning | values | coverage |
 |---|---|---|---:|
 | `institution` | Name of the developing institution. | Free text with abbreviation. | 1.00 |
-| `division` | Division or department, with the Bangla name where printed. | Free text. | 1.00 |
-| `official_website` | Official website of the institution. | Absolute URL. | 0.93 |
-| `official_public_contact` | Public office contact (division mailbox, office phone) from the institution's own contact page. | Free text. | 0.93 |
-| `contact_person_as_listed` | Office holder listed on the contact page (post, and name where printed). | Free text. | 0.93 |
-| `source_url` | Web address from which the main source file of the row was downloaded. For the rice register this is the file that supplied the approval record (approval_date); for other tables it is the file that supplied the row. | Absolute http(s) URL. Many Government of Bangladesh files are served from an Oracle object-storage address rather than a portal page; that is the address the portal links to. | 0.93 |
-| `local_file` | Path of the source file inside the archive, relative to the archive root. Every value in the archive can be traced to a page of a file under 02_raw/. | Relative path beginning '02_raw/'; the SHA-256 of each file is in bgd_sources.csv. | 0.93 |
+| `division` | Division or department, with the Bangla name where printed. | Free text. | 0.19 |
+| `official_website` | Official website of the institution. | Absolute URL. | 0.18 |
+| `official_public_contact` | Public office contact (division mailbox, office phone) from the institution's own contact page. | Free text. | 0.18 |
+| `contact_person_as_listed` | Office holder listed on the contact page (post, and name where printed). | Free text. | 0.15 |
+| `source_url` | Web address from which the main source file of the row was downloaded. For the rice register this is the file that supplied the approval record (approval_date); for other tables it is the file that supplied the row. | Absolute http(s) URL. Many Government of Bangladesh files are served from an Oracle object-storage address rather than a portal page; that is the address the portal links to. | 0.16 |
+| `local_file` | Path of the source file inside the archive, relative to the archive root. Every value in the archive can be traced to a page of a file under 02_raw/. | Relative path beginning '02_raw/'; the SHA-256 of each file is in bgd_sources.csv. | 0.18 |
 | `retrieved_at` | Date on which the main source file was downloaded or the bibliographic record was retrieved. | ISO date YYYY-MM-DD. | 1.00 |
-| `notes` | What the division develops or why it is listed. | Free text. | 0.71 |
+| `notes` | What the division develops or why it is listed. | Free text. | 0.96 |
+| `institution_short` | Standardised short name, the value used in nars_institute. | BRRI, BINA, BAU, BSMRAU/GAU, RU, BADC, BRAC, or company name. | 1.00 |
+| `institution_name_en` | Official English name of the institution. | Free text. | 0.88 |
+| `institution_name_bn` | Official Bangla name of the institution, as printed on its own pages or in NSB minutes. | Bangla text. | 0.07 |
+| `division_name_en` | English name of the division or department; blank on institution-level rows. | Free text. | 0.09 |
+| `division_name_bn` | Bangla name of the division as printed, with the place where it is printed. | Bangla text. | 0.09 |
+| `developer_category` | Kind of developer. | NARS institute; public university; public seed corporation; NGO; private company. | 0.97 |
+| `parent_ministry` | Ministry under which the institution sits, as stated on its own pages; blank where the pages consulted do not state it. | Free text. | 0.09 |
+| `parent_ministry_source` | Archived file and quoted phrase that states the parent ministry, or 'not stated on the pages consulted'. | Free text. | 0.15 |
+| `address` | Office address as printed by the institution. | Free text. | 0.15 |
+| `office_phone` | Office landline, PABX and extension as printed (never mobile numbers). | Free text. | 0.10 |
+| `fax` | Office fax number as printed. | Free text. | 0.03 |
+| `role_email` | Office (role) e-mail addresses such as dg@ or head.breeding@, which name an office, not a person. Webmail is never copied. | Addresses joined by '; ' with the office in parentheses. | 0.11 |
+| `head_name_as_listed` | Head of the institution or division, name and post as listed on the institution's site. | Free text (often Bangla). | 0.13 |
+| `head_work_email` | Institutional work e-mail of the named head as published on the institution's official directory (personal webmail excluded). Individual contact: dropped from the public edition. | E-mail address. | 0.05 |
+| `head_source_url` | Page that lists the head. | Absolute URL. | 0.10 |
+| `n_varieties` | Number of register varieties credited to the institution (institution rows) or to the division, stated or inferred (division rows). | Count. | 1.00 |
+| `contact_status` | Whether office contact details were collected for the row. | 'collected from the institution's own site'; 'the unit publishes no contact; use the institution row'; 'not collected (...)'; 'no contact published or collected'. | 1.00 |
 
 ## bgd_local_names.csv
 
@@ -672,7 +744,7 @@ The file has 183 rows and 26 columns.
 
 Every value on which eligible sources disagree, in long format: one row per version, with its source, file, page, extraction method and validation, and a flag for the version used in the register. Formatting differences are included; bgd_conflicts_summary.csv separates them from substantive disagreements.
 
-The file has 9,932 rows and 13 columns.
+The file has 9,760 rows and 13 columns.
 
 | column | meaning | values | coverage |
 |---|---|---|---:|
@@ -696,7 +768,7 @@ The file has 9,932 rows and 13 columns.
 
 Disagreements between sources on the analytically important fields, one row per variety and field, classified as formatting only, compatible, a later decision or notification, a date difference, or substantive, with the value used and every alternative.
 
-The file has 559 rows and 10 columns.
+The file has 538 rows and 10 columns.
 
 | column | meaning | values | coverage |
 |---|---|---|---:|
@@ -717,7 +789,7 @@ The file has 559 rows and 10 columns.
 
 Every source file that supplied at least one eligible value: its identifier, title, authority rank, original and archived addresses, download date and SHA-256 checksum.
 
-The file has 386 rows and 10 columns.
+The file has 391 rows and 10 columns.
 
 | column | meaning | values | coverage |
 |---|---|---|---:|
@@ -726,11 +798,11 @@ The file has 386 rows and 10 columns.
 | `authority_rank` | Authority rank of the source, used to choose between disagreeing values. Lower numbers are more authoritative for legal facts such as approval dates; for descriptive fields (names, traits) assemble.py uses field-specific orders documented in the preface. | 1_primary_legal (NSB minutes, Bangladesh Gazette notifications, acts and rules); 2_official_list (SCA and MoA variety lists); 3_institute_page (BRRI, BINA, BFRI and university web pages, handbooks and fact sheets); 4_cgiar_record (CGIAR, IRRI, SPIA, HarvestPlus, WorldFish, ASTI/TRIVSA, GloMIP records); 5_peer_reviewed; 6_secondary (preprints, news, grey literature); 7_reviewer_synthesis (a value added by a reviewer with the file and page cited in the notes). | 1.00 |
 | `local_file` | Path of the source file inside the archive, relative to the archive root. Every value in the archive can be traced to a page of a file under 02_raw/. | Relative path beginning '02_raw/'; the SHA-256 of each file is in bgd_sources.csv. | 1.00 |
 | `source_url` | Web address from which the main source file of the row was downloaded. For the rice register this is the file that supplied the approval record (approval_date); for other tables it is the file that supplied the row. | Absolute http(s) URL. Many Government of Bangladesh files are served from an Oracle object-storage address rather than a portal page; that is the address the portal links to. | 1.00 |
-| `archived_url` | Address of a copy of the same file in the Internet Archive's Wayback Machine, so that the source can be consulted if the original address changes. Blank means no archived copy was made or found; it does not mean the original is unavailable. | https://web.archive.org/web/&lt;timestamp&gt;/&lt;original URL&gt;. | 0.71 |
+| `archived_url` | Address of a copy of the same file in the Internet Archive's Wayback Machine, so that the source can be consulted if the original address changes. Blank means no archived copy was made or found; it does not mean the original is unavailable. | https://web.archive.org/web/&lt;timestamp&gt;/&lt;original URL&gt;. | 0.74 |
 | `download_date` | Date the file was downloaded. | ISO date YYYY-MM-DD. | 1.00 |
 | `sha256` | SHA-256 hash of the archived file, which lets a user verify that the copy in 02_raw/ is the file that was downloaded. | 64 lowercase hexadecimal characters. | 1.00 |
 | `source_url_status` | Result of the most recent automated check of the address in source_url. A status other than ok does not mean the archived copy is missing: the file itself is kept under 02_raw/. | ok; blocked_to_bots (HTTP 403: the page exists but refuses automated checks); dead (404, 410 or a soft error page); unreachable (DNS, TLS or timeout failure); unchecked. Blank when the link column is blank. | 1.00 |
-| `archived_url_status` | Result of the most recent automated check of the address in archived_url. A status other than ok does not mean the archived copy is missing: the file itself is kept under 02_raw/. | ok; blocked_to_bots (HTTP 403: the page exists but refuses automated checks); dead (404, 410 or a soft error page); unreachable (DNS, TLS or timeout failure); unchecked. Blank when the link column is blank. | 0.71 |
+| `archived_url_status` | Result of the most recent automated check of the address in archived_url. A status other than ok does not mean the archived copy is missing: the file itself is kept under 02_raw/. | ok; blocked_to_bots (HTTP 403: the page exists but refuses automated checks); dead (404, 410 or a soft error page); unreachable (DNS, TLS or timeout failure); unchecked. Blank when the link column is blank. | 0.74 |
 
 ## bgd_ocr_pages.csv
 
@@ -787,7 +859,7 @@ The file has 166 rows and 10 columns.
 
 Names that appear in the sources as rice varieties but for which no eligible evidence records an approval event (for example Jirashail, refused in 2022, Iratom-38 and BU Aromatic dhan2). The columns are those of the register before the derived columns are added.
 
-The file has 8 rows and 74 columns.
+The file has 8 rows and 76 columns.
 
 | column | meaning | values | coverage |
 |---|---|---|---:|
@@ -812,6 +884,8 @@ The file has 8 rows and 74 columns.
 | `approving_body` | Body that approved the variety, as the sources describe it. For varieties released after 1977 the NSB approves and the Ministry of Agriculture notifies the release in the Gazette. | Mostly 'NSB' or 'NSB (approval); Government/MoA (notification)'; some rows name the Technical Committee meeting that recommended the variety; 'none: recommended before the NSB was constituted (1974)' for pre-NSB varieties. | 0.00 |
 | `approval_date` | Date or year of the event that the sources do record for the name (for example the year an institute lists it, or the NSB meeting that refused it). It is not an approval date. | ISO date YYYY-MM-DD, or year only. | 0.00 |
 | `approval_reference` | Meeting number and agenda item of the National Seed Board decision behind approval_date. | 'NSB &lt;n&gt;th meeting, agenda &lt;k&gt;' (agenda omitted where the source does not give it). | 0.00 |
+| `institute_release_year` | Year the breeding institute states it released the variety, where this differs from or precedes the National Seed Board approval (for example the BR series, released by BRRI before NSB approval). approval_year remains the NSB year. | Four-digit year; blank where no institute source states it. | 0.00 |
+| `institute_release_year_source` | File, page and locator of the institute source that states institute_release_year. | Free text. | 0.00 |
 | `provisional_release_date` | Date of an earlier provisional release by the NSB, for varieties whose full release came later (BRRI dhan40 and BRRI dhan41). Blank for all other varieties. | ISO date YYYY-MM-DD. | 0.00 |
 | `provisional_release_reference` | NSB meeting and agenda item of the provisional release. | 'NSB &lt;n&gt;th meeting, agenda &lt;k&gt;'. | 0.00 |
 | `gazette_date` | Date of the earliest Bangladesh Gazette notification of the release that was found in an archived copy of the Gazette. Later notifications of the same variety are listed in conflict_note. Blank means no archived gazette copy was found; see gazette_status for the reason. | ISO date YYYY-MM-DD. | 0.00 |
@@ -950,7 +1024,7 @@ The file has 17 rows and 16 columns.
 
 Parent-child links parsed from the published pedigrees in the register, with the parent's role, backcross dose, generation, whether the parent is a CGIAR line, and the register variety it resolves to where it does, and the register variety a sister-line parent shares its cross with.
 
-The file has 326 rows and 13 columns.
+The file has 326 rows and 14 columns.
 
 | column | meaning | values | coverage |
 |---|---|---|---:|
@@ -967,6 +1041,7 @@ The file has 326 rows and 13 columns.
 | `source_file` | File the edge was read from. | Paths joined by '; '. | 1.00 |
 | `note` | How the parent was resolved, or why not. | Free text. | 0.48 |
 | `generation` | Generation of the parent relative to the child: 1 for direct parents, 2 for parents of an unnamed F1 inside a composite cross, and so on; 0 for mutant, somaclone and selection sources, which share the child's generation. | Integer 0-4. | 1.00 |
+| `parent_type` | What kind of parent this is. A group name (for example 'Basmati (D)'), unnamed germplasm or a species without an accession is kept as printed but cannot be identified as one variety; spelling variants of one landrace share one node. | register variety; CGIAR line; breeding line or numbered variety; named variety; traditional variety (landrace); wild species accession; wild species (accession not stated); group name (not one variety); unnamed germplasm; local type name (not traceable to one line). | 1.00 |
 
 ## bgd_pedigree_summary.csv
 
@@ -1009,7 +1084,7 @@ The file has 444 rows and 24 columns.
 
 For every line or variety that has register descendants, the number of register varieties descending from it in any generation, by decade of approval, the generations involved and the list of descendants. The 12 ancestors with most descendants are marked; the lineage graph for the website is 05_output/final/bgd_lineage_graph.json (nodes and parent -&gt; child edges).
 
-The file has 244 rows and 23 columns.
+The file has 240 rows and 24 columns.
 
 | column | meaning | values | coverage |
 |---|---|---|---:|
@@ -1018,10 +1093,11 @@ The file has 244 rows and 23 columns.
 | `ancestor_node` | Identifier of the ancestor in bgd_lineage_graph.json: the variety_id, or 'L:' and the normalised designation of a line. | Text. | 1.00 |
 | `ancestor_label` | Name or designation of the ancestor. | Free text. | 1.00 |
 | `ancestor_kind` | What the ancestor is. | register variety; CGIAR line; other line. | 1.00 |
+| `ancestor_parent_type` | What kind of parent this is. A group name (for example 'Basmati (D)'), unnamed germplasm or a species without an accession is kept as printed but cannot be identified as one variety; spelling variants of one landrace share one node. | register variety; CGIAR line; breeding line or numbered variety; named variety; traditional variety (landrace); wild species accession; wild species (accession not stated); group name (not one variety); unnamed germplasm; local type name (not traceable to one line). | 1.00 |
 | `ancestor_is_cgiar_line` | Whether the ancestor is a CGIAR line (including register varieties that are CGIAR lines released directly). | Y; N. | 1.00 |
-| `ancestor_cgiar_center` | CGIAR centre of the ancestor. | IRRI; AfricaRice; blank. | 0.37 |
+| `ancestor_cgiar_center` | CGIAR centre of the ancestor. | IRRI; AfricaRice; blank. | 0.38 |
 | `ancestor_year` | Approval year when the ancestor is a register variety. | Year; blank. | 0.15 |
-| `cross_family` | Cross number at the head of the ancestor's line designation (BR1185, IR5); lines with the same cross number are sisters. | Text; blank. | 0.74 |
+| `cross_family` | Cross number at the head of the ancestor's line designation (BR1185, IR5); lines with the same cross number are sisters. | Text; blank. | 0.75 |
 | `n_descendants` | Number of register varieties descending from the ancestor in any generation, through printed pedigrees, sister lines and line designations (edges of bgd_lineage_graph.json). | Count. | 1.00 |
 | `n_children` | Number of register varieties whose printed pedigree names the ancestor directly (any generation inside one formula). | Count. | 1.00 |
 | `n_1960s` | Number of the register descendants approved in the 1960s (approval_year). | Count. | 1.00 |
@@ -1043,7 +1119,7 @@ The file has 244 rows and 23 columns.
 
 Every ancestor of every register variety with a parsed pedigree, traced through register parents and sister lines to the fifth generation, with the path, the ancestor's nominal genetic share under equal parental contribution (backcross doses respected) and whether it is a CGIAR line. It is the input for CGIAR attribution in the manner of Raitzer et al. (2015) and SPIA (2025); the per-variety measures are in bgd_pedigree_summary.csv.
 
-The file has 633 rows and 14 columns.
+The file has 633 rows and 15 columns.
 
 | column | meaning | values | coverage |
 |---|---|---|---:|
@@ -1052,6 +1128,7 @@ The file has 633 rows and 14 columns.
 | `ancestor_label` | The ancestor: the register name when it resolves to a register variety, otherwise the line or landrace as printed. | Free text. | 1.00 |
 | `ancestor_id` | Register variety the ancestor resolves to (bgd_pedigree_edges.csv parent_id). Blank for lines that are not register varieties. | variety_id; blank. | 0.32 |
 | `ancestor_kind` | What the ancestor is. | register variety; CGIAR line; other line (breeding lines and landraces outside the register). | 1.00 |
+| `ancestor_parent_type` | What kind of parent this is. A group name (for example 'Basmati (D)'), unnamed germplasm or a species without an accession is kept as printed but cannot be identified as one variety; spelling variants of one landrace share one node. | register variety; CGIAR line; breeding line or numbered variety; named variety; traditional variety (landrace); wild species accession; wild species (accession not stated); group name (not one variety); unnamed germplasm; local type name (not traceable to one line). | 1.00 |
 | `generation` | Generation of the ancestor relative to the variety: 1 parent, 2 grandparent (or parent of an unnamed F1 inside a composite cross), 3 great-grandparent, up to 5; 0 for the source of a mutant, somaclone or selection, which has the same genetic content as the variety. | Integer 0-5. | 1.00 |
 | `path` | Chain from the variety to the ancestor, for example 'BRRI dhan29 &gt; BR10 &gt; IR20'. '(unnamed F1)' marks the F1 inside a composite cross; '[sister of X]' marks a sister line whose parents are taken from register variety X. | Names joined by ' &gt; '. | 1.00 |
 | `parent_role` | Role of the ancestor in the cross or derivation that produced the next name on the path. | female; male (first and second parent of a cross); recurrent; donor (backcross); mutant_source; somaclone_source; selection_source; unknown. | 1.00 |
@@ -1107,21 +1184,48 @@ The file has 445 rows and 7 columns.
 
 The long-format evidence behind every value in the register: for each variety or fish strain and each field, every value read from every source, with the source file, page, locator, extraction method and validation, and a flag for the row that set the published value. Unvalidated OCR readings are kept here but never enter the register. Personal contact details are removed from the text columns.
 
-The file has 27,826 rows and 13 columns.
+The file has 33,427 rows and 13 columns.
 
 | column | meaning | values | coverage |
 |---|---|---|---:|
 | `variety_id` | Identifier of the rice variety or fish strain the evidence row is about, in the same form as the register: RICE-&lt;key&gt; for rice, FISH-&lt;key&gt; for fish strains and germplasm events. Rows for names that did not become register entries carry the identifier under which they were collected and match bgd_rice_not_approved_or_unresolved.csv instead. | 'RICE-' or 'FISH-' followed by the key. | 1.00 |
 | `field` | Register field (column) that the row gives a value for. Most fields are columns of bgd_rice_varieties.csv or bgd_fish_strains.csv; a few are evidence-only fields (local_name, trial_codes, origin_statement, nsb_context, station_no) that feed other tables or notes. | Column name of the register. | 1.00 |
-| `value` | The value that the source gives for the field, normalised for comparison (dates as ISO dates, codes in a standard spelling). Several rows for one variety and field are competing or confirming readings; the register keeps one of them (chosen = Y). | Free text; dates YYYY-MM-DD or YYYY. | 1.00 |
+| `value` | The value that the source gives for the field, normalised for comparison (dates as ISO dates, codes in a standard spelling). Several rows for one variety and field are competing or confirming readings; the register keeps one of them (chosen = Y). | Free text; dates YYYY-MM-DD or YYYY. | 0.99 |
 | `value_raw` | The same version as printed in the source (Bangla, ditto marks and all). | Verbatim text. | 0.98 |
 | `source_title` | Title of the source. | Free text. | 1.00 |
 | `authority_rank` | Authority rank of the source, used to choose between disagreeing values. Lower numbers are more authoritative for legal facts such as approval dates; for descriptive fields (names, traits) assemble.py uses field-specific orders documented in the preface. | 1_primary_legal (NSB minutes, Bangladesh Gazette notifications, acts and rules); 2_official_list (SCA and MoA variety lists); 3_institute_page (BRRI, BINA, BFRI and university web pages, handbooks and fact sheets); 4_cgiar_record (CGIAR, IRRI, SPIA, HarvestPlus, WorldFish, ASTI/TRIVSA, GloMIP records); 5_peer_reviewed; 6_secondary (preprints, news, grey literature); 7_reviewer_synthesis (a value added by a reviewer with the file and page cited in the notes). | 1.00 |
 | `local_file` | Path of the source file inside the archive, relative to the archive root. Every value in the archive can be traced to a page of a file under 02_raw/. | Relative path beginning '02_raw/'; its SHA-256, address and catalogue entry are in bgd_sources.csv and 02_raw/CATALOGUE.csv. | 1.00 |
-| `page` | Page of the source file on which the value is printed, counted as the PDF page (1 = first page of the file), not the number printed on the page. | Integer page number, or a range 'a-b' when the item spans pages. Blank for web pages, spreadsheets and API records. | 0.89 |
-| `locator` | Where on the page or in the file the value was found: a table and row, a sheet and cell, a quoted phrase, or the path of the image crop that was read by eye. | Free text. | 1.00 |
+| `page` | Page of the source file on which the value is printed, counted as the PDF page (1 = first page of the file), not the number printed on the page. | Integer page number, or a range 'a-b' when the item spans pages. Blank for web pages, spreadsheets and API records. | 0.87 |
+| `locator` | Where on the page or in the file the value was found: a table and row, a sheet and cell, a quoted phrase, or the path of the image crop that was read by eye. | Free text. | 0.99 |
 | `method` | How the value was read from the source file. | html; pdf_text (the PDF's own Unicode text layer); bijoy2unicode (a legacy SutonnyMJ/Bijoy text layer converted to Unicode); api_json; xlsx; ocr (Tesseract 5 OCR of a 300-dpi render); visual_check (transcribed by eye from the page image). | 1.00 |
 | `validation` | How the value was checked after extraction. Unvalidated OCR values are kept in the evidence but never enter the register. | key_check (a date or number matched the validated NSB meeting-date key); visual_check (read by eye on the page image or a crop of it); two_source (two independent sources give the same value); unvalidated (machine-readable text or OCR not checked by eye). | 1.00 |
 | `chosen` | Whether this row set the value published in the register for this variety and field. Where sources disagree, it is the row recorded as chosen in bgd_conflicts.csv; otherwise the eligible row (text layer or validated reading) whose value equals the published value, the highest-authority one if several do; for list fields (aliases, key_traits, cgiar_lineage and similar) every eligible row whose value appears in the published list. N for every other row, including unvalidated OCR readings, which never enter the register. A published value derived by rule rather than read from one source (for example cgiar_role 4 or 5 assigned from the pedigree) has no Y row. | Y; N. | 1.00 |
-| `notes` | Remarks of the extracting agent or reviewer: how the value was read, why it was corrected, or what the source says around it. | Free text. | 0.62 |
+| `notes` | Remarks of the extracting agent or reviewer: how the value was read, why it was corrected, or what the source says around it. | Free text. | 0.68 |
+
+## bgd_variety_area.csv
+
+*Unit of observation:* One variety in one season and year from one source.
+
+Variety-wise rice area coverage from the two public by-variety sources that could be archived: the BRRI Agricultural Economics Division table of the percent of the national seasonal rice area under each BRRI variety (sample survey; Aus 1990-91 to 2023-24, Aman 1991-92 to 2023-24, Boro 1990-91 to 2023-24 with a misprinted header), and the hectares under each BINA variety in 2022-23 and 2023-24 reported by DAE district offices and published by the BINA Agricultural Economics Division. No DAE or BBS publication giving area by named variety for all varieties was found online (06_validation/dae_area_search.md). Values are as printed; shares are never converted to hectares.
+
+The file has 1,360 rows and 16 columns.
+
+| column | meaning | values | coverage |
+|---|---|---|---:|
+| `variety_id` | Identifier of the variety in the register; every value is a register variety_id. | 'RICE-' followed by a key built from the official name by lib_keys.make_key: BR&lt;n&gt; (BR series, 1970-1993), BRRI_DHAN&lt;n&gt;, BRRI_HYBRID&lt;n&gt;, BINADHAN&lt;n&gt;, IRATOM&lt;n&gt;, BINASHAIL, BU_, BAU_ and GAU_ (universities), BRAC_DHAN&lt;n&gt;, PVT_ (other private inbreds), HYB_&lt;trade name&gt; (private and BADC hybrids), IR&lt;n&gt; and OLD_ (pre-BRRI introductions and old names). | 1.00 |
+| `variety_name_source` | Variety name exactly as printed in the source table. | Free text (e.g. BRRI dhan29, Binadhan-17, BR11). | 1.00 |
+| `season` | Rice season of the figure. | Aus; Aman; Boro. | 1.00 |
+| `year` | Agricultural (crop) year of the figure, as printed in the source. | YYYY-YY. BRRI Boro page: the first column is printed '2022-24' and is read as 2023-24; no 2021-22 column is printed there (see flag). | 1.00 |
+| `area_ha` | Area planted to the variety in the season, in hectares, where the source prints hectares. | Hectares; blank for the BRRI percentages (shares are never converted to hectares). | 0.03 |
+| `area_share_pct` | Percent of the national rice area of the season under the variety, as printed. | Percent, 0-100; blank where the printed number is flagged as implausible. | 1.00 |
+| `season_total_ha` | National rice area of the season used by the source as denominator, where printed. | Hectares; printed only in the 2023-24 BINA table (BBS 2023). | 0.02 |
+| `geography` | Area to which the figure refers. | Bangladesh (all rows are national). | 1.00 |
+| `measure` | What the figure measures. | percent of national seasonal rice area; hectares, and percent of national seasonal rice area. | 1.00 |
+| `data_origin` | Who collected the underlying data. | BRRI Agricultural Economics Division sample survey (BRRI varieties only); DAE district offices (64 districts), compiled by BINA Agricultural Economics Division (BINA varieties only). | 1.00 |
+| `value_printed` | The number(s) exactly as printed, before conversion. | Text. | 1.00 |
+| `flag` | Problem found in the printed source for this row, if any. | Free text; blank when none. | 0.29 |
+| `source_file` | Archived source file (path in 02_raw, listed in 02_raw/manifest.csv with URL and SHA-256). | Path. | 1.00 |
+| `source_page` | Page of the PDF file (1-based) holding the figure. | Integer. | 1.00 |
+| `source_table` | Title of the table holding the figure; for journal articles the printed page number is added. | Free text. | 1.00 |
+| `source_citation` | Citation of the source. | Free text. | 1.00 |
 

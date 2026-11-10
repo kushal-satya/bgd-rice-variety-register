@@ -84,6 +84,115 @@ ev["rank"] = ev["authority_rank"].str.extract(r"^(\d)")[0].fillna("9").astype(in
 TEXT_METHODS = {"html", "pdf_text", "bijoy2unicode", "api_json", "xlsx"}
 VAL_W = {"two_source": 0, "key_check": 1, "visual_check": 1}
 ev.loc[ev.method.eq("bijoy2unicode"), "value"] = ev.loc[ev.method.eq("bijoy2unicode"), "value"].map(fix_reph)
+# REV4 (E1, round-3 error sweep): OCR / Bijoy garble in identity fields is corrected where the reading is unambiguous and
+# otherwise rejected (made ineligible), and line codes printed in Bangla script are transliterated before they compete.
+BN_CH = re.compile(r"[ঀ-৿]")
+BN_LET = r"[ঀ-০৲-৿]"                          # Bangla letters and signs (not the digits ০-৯)
+BN_DIG = str.maketrans("০১২৩৪৫৬৭৮৯", "0123456789")
+# fixed Bijoy artefacts seen in the archive (applied to the identity fields only): 've' is the Bijoy key sequence for 'াব' (NSB 72: স্বর্ণা সাব-১ read as 'স্বর্ণা সve-১');
+# 'বর্যাক' is ব্র্যাক with the first hasanta lost in conversion (BRAC in NSB 64-75)
+GARBLE_FIX = {"সve": "সাব", "বর্যাক": "ব্র্যাক",
+              "ণড়ঁ": "You", "(ছ ১০৮)": "(Q 108)"}   # Latin typed in a Bijoy font: China King-2 'LE You5178', Nafco-108 'Q 108' (NSB 59-75)
+IDF = ["breeding_line", "pedigree", "official_name_en", "official_name_bn", "popular_name", "aliases", "hybrid_parent_female",
+       "hybrid_parent_male", "developer", "trial_codes", "station_no", "check_variety", "approval_reference"]
+
+
+def degarble(v):
+    """Return (value, status): status 'ok', 'fixed' (unambiguous repair) or 'garbled' (Latin letters inside a Bangla word)."""
+    s = re.sub(r"[\x00-\x08\x0b\x0c\x0e-\x1f�]", "", str(v))
+    for a, b in GARBLE_FIX.items():
+        s = s.replace(a, b)
+    # Bangla digits inside a Latin token ('RN-০০১', 'Win-৯০২', 'Shakti৫') are ASCII digits printed in a Bangla font
+    s = re.sub(r"[\w\-]*[A-Za-z][\w\-]*", lambda m: m.group(0).translate(BN_DIG), s)
+    s = re.sub(r"(?<=[0-9])(?=" + BN_LET + r"{2,})", " ", s)        # 'BR7166-4-5-3এবং' -> 'BR7166-4-5-3 এবং'
+    bad = (re.search(BN_LET + r"[A-Za-z]|[A-Za-z]" + BN_LET, s)
+           or re.search(r"[0-9][০-৯]|[০-৯][0-9]", s)                       # one digit run in two scripts ('1২67423')
+           or re.search(r"(?<![A-Za-z0-9])1[1Il][0-9০-৯]{5,}-", s))        # 'IR' read as '11' ('11২78581-12-3-2-2', Rabi dhan-1, NSB 99)
+    return s, ("garbled" if bad else ("fixed" if s != v else "ok"))
+
+
+ev["garbled"] = False
+_idf = ev.field.isin(IDF)
+_dg = ev.loc[_idf, "value"].map(degarble)
+_fixed = _dg.map(lambda t: t[1] == "fixed")
+ev.loc[_idf, "value"] = _dg.map(lambda t: t[0])
+ev.loc[_fixed[_fixed].index, "notes"] = ev.loc[_fixed[_fixed].index, "notes"] + " [REV4: OCR/Bijoy garble repaired]"
+_gb = _dg.map(lambda t: t[1] == "garbled")
+ev.loc[_gb[_gb].index, "garbled"] = True
+ev.loc[_gb[_gb].index, "notes"] = ev.loc[_gb[_gb].index, "notes"] + " [REV4: rejected, Latin letters inside a Bangla word (OCR garble)]"
+BN_LAT = [("টিএনডিবি", "TNDB"), ("বিএআরডিসি", "BARDC"), ("বিআর", "BR"), ("বি আর", "BR"), ("আইআর", "IR"), ("আই আর", "IR"),
+          ("বিজি", "BG"), ("বিইউ", "BU"), ("বাউ", "BAU"), ("এইচএইচজেড", "HHZ"), ("এইচআর", "HR"), ("এসসি", "SC"), ("এইচ", "H"),
+          ("এস", "S"), ("বি", "B"), ("এ", "A"), ("আর", "R"), ("পি", "P"), ("এল", "L"), ("টি", "T"), ("সি", "C"), ("ডি", "D"),
+          ("জি", "G"), ("এম", "M"), ("এন", "N"), ("কে", "K")]
+
+
+def translit_code(v):
+    """A Latin line code printed in Bangla script -> Latin ('বিআর ৫৮৭৭-২১-২-৩' -> 'BR 5877-21-2-3'); None if Bangla words remain."""
+    s = str(v).translate(BN_DIG).replace("‌", "").replace("‍", "")
+    for a, b in BN_LAT:
+        s = s.replace(a, b)
+    s = re.sub(r"^([A-Z]{2,4})\s+(?=\d)", r"\1", s.strip())       # 'বিআর ৫৮৭৭' -> BR5877 (the space is typographic)
+    return None if BN_CH.search(s) else s
+
+
+def code_norm(v):
+    """Normal form for comparing line codes and pedigrees across sources (script, spacing, hyphens, case, O/0, * backcross marks)."""
+    t = translit_code(v)
+    s = (t if t is not None else str(v)).replace("*", "").replace("×", "/").replace(" x ", "/").lower()
+    # letter and digit runs keep their boundaries, so BR5331-93-28-3 and BR5331-93-2-8-3 stay different while
+    # 'IR 63307-4-B-4-3' and 'IR63307-4B-4-3' are the same code; a lone letter O is the digit 0
+    return ".".join("0" if t == "o" else t for t in re.findall(r"[a-z]+|[0-9]+|[ঀ-৿]+|/+", s))
+
+
+def clean_breeding_line(v):
+    """Split a breeding_line reading into (code or '', [labels]): 'BR5331-93-28-3|বিআর৫৩৩১-৯৩-২৮-৩' -> code; 'IR-69690 (আইআর-৬৯৬৯০)'
+    -> 'IR-69690'; 'Qyou 12 (নাফকো-১১২)' -> 'Qyou 12' + label; 'বিআর ৫৮৭৭-২১-২-৩' -> 'BR 5877-21-2-3'; 'স্বর্ণা সাব-১' -> label only."""
+    parts, labels = [], []
+    for p in (p.strip() for p in str(v).split("|")):
+        m = re.fullmatch(r"(.*?)\s*\(([^()]*)\)\s*", p)
+        if m and m.group(1) and bool(BN_CH.search(m.group(1))) != bool(BN_CH.search(m.group(2))):
+            a, b = (m.group(1), m.group(2)) if not BN_CH.search(m.group(1)) else (m.group(2), m.group(1))
+            parts.append(a); labels.append(b)                      # 'IR-69690 (আইআর-৬৯৬৯০)', 'Qyou 12 (নাফকো-১১২)'
+        elif p:
+            parts.append(p)
+    lat = [p for p in parts if not BN_CH.search(p)]
+    main = lat[0] if lat else ""
+    for p in parts:
+        if p in lat:
+            continue
+        t = translit_code(p)
+        if t and re.search(r"[0-9]", t) and re.search(r"[A-Za-z]", t):
+            main = main or t
+            if code_norm(t) != code_norm(main):
+                labels.append(p)
+        else:
+            labels.append(p)
+    labels += [p for p in lat[1:]]
+    keep = []
+    for x in labels:
+        nx = code_norm(x)
+        if x and main and (nx in code_norm(main)):
+            continue                                                # a Bangla rendering or fragment of the same code
+        keep.append(x)
+    return main, keep
+
+
+_bl = ev[ev.field.eq("breeding_line") & ~ev.garbled]
+_new = []
+for i, r in _bl.iterrows():
+    code, labels = clean_breeding_line(r.value)
+    if code != r.value:
+        if code:
+            ev.at[i, "value"] = code
+            ev.at[i, "notes"] = r.notes + f" [REV4: breeding_line read as '{r.value}'; code kept, script/labels separated]"
+        else:   # a name or prose (e.g. 'স্বর্ণা সাব-১', NSB 72) is never a line code
+            ev.at[i, "field"] = "pedigree_note" if re.search(r"নং|সেশন|সারি|বাছাই|নির্বাচন|selection|accession", r.value, re.I) else "aliases"
+            ev.at[i, "notes"] = r.notes + " [REV4: not a line code (name or prose); moved out of breeding_line]"
+    for lab in labels if code else []:
+        _new.append({**r.to_dict(), "field": "aliases", "value": lab, "notes": r.notes + " [REV4: label printed with the line code]"})
+if _new:
+    ev = pd.concat([ev, pd.DataFrame(_new)], ignore_index=True).fillna("")
+    ev["garbled"] = ev["garbled"].astype(bool)
 # 'pedigree' values that are not pedigrees: origin statements, SCA trial code numbers, vague notes
 _ped = ev.field.eq("pedigree")
 _pb = ev.field.isin(["pedigree", "breeding_line"])
@@ -99,6 +208,7 @@ _named = ev.value.str.contains(r"/|\sx\s|×|\bA\b.*\bR\b", regex=True)
 ev.loc[ev.field.eq("pedigree") & _hyb & ~_named, "field"] = "pedigree_note"
 ev["eligible"] = ev["method"].isin(TEXT_METHODS) | ev["validation"].isin(VAL_W.keys())
 ev["eligible"] &= ev["value"].str.strip() != ""
+ev["eligible"] &= ~ev["garbled"].astype(bool)          # REV4: garbled readings never enter the register
 ev["vw"] = ev["validation"].map(VAL_W).fillna(2)
 ev["cw"] = ev["confidence"].map({"high": 0, "medium": 1, "low": 2}).fillna(3)
 
@@ -144,7 +254,8 @@ def is_code(v):
     if v in CODED_LINES:
         return True
     if not v or len(v) > 45 or len(v.split()) > 4: return False
-    if not (re.search(r"\d", v) and re.search(r"[A-Za-z]", v)): return False
+    if BN_CH.search(v): return False            # REV4: Bangla script is never a line code (its digits matched \d before)
+    if not (re.search(r"[0-9]", v) and re.search(r"[A-Za-z]", v)): return False
     if "/" in v or re.search(r"\sx\s|×", v) or PROSE.search(v): return False
     return not re.search(r"sub\d?$", v, re.I)
 
@@ -184,12 +295,109 @@ def trial_class(sid):
     return 4
 
 
+def family(sid):
+    """REV4: independent source families for support counts. NSB minutes and TC records are one body; SCA lists one; MoA lists
+    one; gazettes one; BRRI's handbook, fact sheets and Rice Profile one (institute); GloMIP product-catalogue entries are
+    supplied by the national programme, so they count with the institute; TRIVSA and SPIA Table 27 (which repeat each
+    other's readings, misprints included) one; every other source is its own family."""
+    if re.match(r"(NSB|TC)_", sid): return "NSB"
+    if re.match(r"SCA", sid): return "SCA"
+    if re.match(r"MOA", sid): return "MOA"
+    if re.match(r"GA?Z_", sid): return "GAZ"
+    if re.match(r"RB-S(0[1-9]|1[0-9]|2[01])$|DS-S07$|L2-S06$", sid): return "INST"
+    if sid in ("DS-S01", "DS-S04"): return "TRIVSA_SPIA"
+    return sid
+
+
+# REV4: reasoned choices between eligible readings that support counts cannot settle (file + page evidence in the reason)
+_ADJ = pd.read_csv(ROOT / "04_working/adjudications_rev4.csv", dtype=str).fillna("") if (ROOT / "04_working/adjudications_rev4.csv").exists() \
+    else pd.DataFrame(columns=["pilot_key", "field", "value", "reason"])
+ADJ = {(r.pilot_key, r.field): r.value for r in _ADJ.itertuples()}
+SUPPORT_LOG = []
+
+
+def parents(v):
+    return [code_norm(p) for p in re.split(r"\s*(?:/+|\sx\s|×)\s*", str(v)) if p.strip()]
+
+
+def variant_of(a, b):
+    """Two pedigree readings are variants of one pedigree when they name the same number of parents and differ only in
+    a few characters (BR24/BR21 vs BR14/BR21; IR515111-... vs IR51511-...)."""
+    import difflib
+    pa, pb = parents(a), parents(b)
+    return len(pa) == len(pb) >= 2 and difflib.SequenceMatcher(None, "/".join(pa), "/".join(pb)).ratio() >= 0.85
+
+
+def by_support(d, key, field, groupkey):
+    """Choose among readings by the number of independent source families behind each normal form; a reading carried by
+    the NSB minutes wins ties; then the field's authority order. Logs every choice that overrides the authority order."""
+    d = d.copy()
+    d["g"] = d["value"].map(groupkey)
+    sup = d.groupby("g").source_id.apply(lambda s: len({family(x) for x in s}))
+    prim = d.groupby("g")["rank"].min().eq(1)
+    d = d.sort_values(["ro", "vw", "cw"])
+    pos = {g: i for i, g in reversed(list(enumerate(d.g)))}          # position of each group's best reading in the authority order
+    gs = sorted(sup.index, key=lambda g: (-sup[g], -int(prim[g]), pos[g]))
+    win = gs[0]
+    first = d.iloc[0]
+    if first.g != win:
+        SUPPORT_LOG.append(dict(key=key, field=field, authority_choice=first.value, support_choice=d[d.g == win].sort_values(["ro", "vw", "cw"]).iloc[0].value,
+                                families_authority=sup[first.g], families_support=sup[win]))
+    d["gw"] = (d.g != win).astype(int)
+    d["tl"] = d.notes.str.contains("REV4: breeding_line read as", regex=False).astype(int)   # show the code as printed in Latin when a source does
+    d["sp"] = (d.value.str.contains(r"^[A-Za-z]+\s+\d|--|\s-|-\s")).astype(int)            # and 'BR5877-...' before 'BR 5877-...' or 'B--7'
+    return d.sort_values(["gw", "sp", "tl", "ro", "vw", "cw"]).drop(columns=["g", "gw", "tl", "sp"])
+
+
 def pick(df, field):
     order = ORDER.get(field, DEFAULT)
     d = df[df.eligible].copy()
     if d.empty:
         return None, d
     d["ro"] = d["rank"].map(lambda r: order.index(r) if r in order else 99)
+    key = str(df.pilot_key.iloc[0])
+    if (key, field) in ADJ:                      # REV4 adjudication (04_working/adjudications_rev4.csv)
+        hit = d.value.map(code_norm).eq(code_norm(ADJ[(key, field)]))
+        if hit.any():
+            d["adj"] = (~hit).astype(int)
+            d = d.sort_values(["adj", "ro", "vw", "cw"]).drop(columns="adj"); return d.iloc[0], d
+    if field == "breeding_line":
+        coded = d[d.value.map(is_code)]
+        if len(coded):                           # REV4: coded readings compete by independent support, NSB wins ties
+            d = pd.concat([by_support(coded, key, field, code_norm), d[~d.index.isin(coded.index)].sort_values(["ro", "vw", "cw"])])
+            return d.iloc[0], d
+    if field == "pedigree":
+        d = d.sort_values(["ro", "vw", "cw"])
+        w = d.iloc[0]
+        var = d[d.value.map(lambda v: not BN_CH.search(v) and (code_norm(v) == code_norm(w.value) or variant_of(v, w.value)))]
+        if not BN_CH.search(w.value) and var.value.map(code_norm).nunique() > 1:   # REV4: variant readings of one cross compete by independent support
+            d = pd.concat([by_support(var, key, field, code_norm), d[~d.index.isin(var.index)]])
+        return d.iloc[0], d
+    if field == "season" and re.search(r"^HYB_|HYBRID", key):
+        # REV4: a hybrid's seasons are those named by its NSB registration decision(s), plus any season that two independent
+        # official families (SCA, MoA, gazette) agree on. The MoA 2026 list's row cells and its p.12 seasonal summary
+        # disagree with NSB 86 (BADC hybrid dhan3: Boro) and NSB 113 (Bayer hybrid dhan9: Aman).
+        off = d[d["rank"] <= 2]
+        if (off.source_id.str.match(r"NSB_")).any():
+            S = {"Aus": r"aus|আউশ", "Aman": r"aman|আমন", "Boro": r"boro|বোরো"}
+            fam = {s: {family(x) for x, v in zip(off.source_id, off.value) if re.search(rx, v, re.I)} for s, rx in S.items()}
+            keep = [s for s in ("Boro", "Aus", "Aman") if "NSB" in fam[s] or len(fam[s] - {"NSB"}) >= 2]
+            if keep:
+                val = "; ".join(keep)
+                cur = d.sort_values(["ro", "vw", "cw"]).iloc[0]
+                d = d.sort_values(["ro", "vw", "cw"])
+                d["mv"] = d.value.map(lambda v: 0 if set(re.findall(r"Aus|Aman|Boro", v.title())) == set(keep) else 1)
+                d = d.sort_values(["mv", "ro", "vw", "cw"]).drop(columns="mv")
+                w = d.iloc[0].copy()
+                if set(re.findall(r"Aus|Aman|Boro", w.value.title())) != set(keep):
+                    w["value"] = val
+                if w.value != cur.value:
+                    SUPPORT_LOG.append(dict(key=key, field=field, authority_choice=cur.value, support_choice=w.value,
+                                            families_authority="", families_support="NSB decision"))
+                return w, d
+    if field in ("official_name_bn", "official_name_en"):
+        # REV4: an agent annotation ('(proposed)') is not part of the name when a clean reading exists
+        d["ann"] = d.value.str.contains(r"\bproposed\b", regex=True).astype(int)
     if field in TRIAL_NUM:
         d["tc"] = d["source_id"].map(trial_class)
         d = d.sort_values(["tc", "ro", "vw", "cw"]); return d.iloc[0], d
@@ -213,7 +421,7 @@ def pick(df, field):
     if field == "approval_date":
         d["prec"] = d["value"].str.len().map(lambda n: 0 if n >= 10 else (1 if n >= 7 else 2))
         d = d.sort_values(["ro", "prec", "value", "vw", "cw"]); return d.iloc[0], d
-    d = d.sort_values(["ro", "vw", "cw"])
+    d = d.sort_values((["ann"] if "ann" in d else []) + ["ro", "vw", "cw"])
     w = d.iloc[0]
     if w.method == "bijoy2unicode" and "র্" in w.value:      # prefer a hand-checked spelling of the same text
         alt = d[(d.method != "bijoy2unicode") & (d.value.map(no_reph) == no_reph(w.value)) & (d.value != w.value)]
@@ -227,6 +435,8 @@ def conflicts_for(key, field, d):
         return []
     if field in ("approval_date", "release_date", "gazette_date"):
         distinct = d["value"].str[:4].nunique() > 1 or d[d["value"].str.len() >= 10]["value"].nunique() > 1
+    elif field in ("breeding_line", "pedigree"):     # REV4: BR5331-93-28-3 and BR5331-93-2-8-3 are different readings
+        distinct = d["value"].map(code_norm).nunique() > 1
     else:
         distinct = d["value"].map(norm).nunique() > 1
     if not distinct:
@@ -238,7 +448,8 @@ def conflicts_for(key, field, d):
 
 
 def short_conflict(field, d, chosen):
-    others = d[d.value.map(norm) != norm(chosen)].drop_duplicates("value")
+    nf = code_norm if field in ("breeding_line", "pedigree") else norm
+    others = d[d.value.map(nf) != nf(chosen)].drop_duplicates("value")
     if others.empty:
         return ""
     alt = "; ".join(f"{r.value} ({r.source_id})" for r in others.head(4).itertuples())
@@ -476,6 +687,33 @@ def _gstat(r):
 
 rice_df["gazette_status"] = rice_df.apply(_gstat, axis=1)
 
+# REV4 (E1): the institute's own release year, kept beside the NSB approval date and never overwriting it. Only the
+# institutes' publications count: BRRI Adhunik Dhaner Chash 2025 Table 1 ('অবমুক্তির বছর'), BINA at a glance, BRRI Rice
+# Profile, BRRI fact sheets (in that order). The first that states a year is used; disagreements go to conflict_note.
+INST_SRC = ["RB-S01", "RB-S12", "DS-S07", "RB-S04", "RB-S08"]
+_iy = ev[ev.eligible & ev.field.eq("approval_date") & ev.source_id.isin(INST_SRC) & ev.value.str.match(r"^\d{4}")].copy()
+# only an institute's statement about its own variety, and from the handbook only Table 1 (pp. 9-12, 'অবমুক্তির বছর');
+# the handbook's prose on p.7 ('IR8 was first grown in 1968') is not a release year
+_brri = _iy.pilot_key.str.match(r"^(BR\d|BRRI_)"); _bina = _iy.pilot_key.str.match(r"^(BINA|IRATOM)")
+_iy = _iy[(_iy.source_id.isin(["RB-S01", "DS-S07", "RB-S04", "RB-S08"]) & _brri) | (_iy.source_id.eq("RB-S12") & _bina)]
+_iy = _iy[~_iy.source_id.eq("RB-S01") | _iy.page.isin(["9", "10", "11", "12"])]
+_iy["o"] = _iy.source_id.map(INST_SRC.index)
+_iy = _iy.sort_values(["pilot_key", "o"])
+_iyr, _iys, _iyc = {}, {}, {}
+for k, g in _iy.groupby("pilot_key"):
+    w = g.iloc[0]
+    _iyr[k] = w.value[:4]
+    _iys[k] = f"{w.source_title} ({w.source_id}{', p. ' + w.page if w.page else ''})"
+    oth = g[g.value.str[:4] != w.value[:4]].drop_duplicates("source_id")
+    if len(oth):
+        _iyc[k] = f"institute_release_year: chose {w.value[:4]} ({w.source_id}); also " + "; ".join(f"{r.value[:4]} ({r.source_id})" for r in oth.itertuples())
+_k = rice_df.variety_id.str[5:]
+_pos = rice_df.columns.get_loc("approval_reference") + 1
+rice_df.insert(_pos, "institute_release_year", _k.map(_iyr).fillna(""))
+rice_df.insert(_pos + 1, "institute_release_year_source", _k.map(_iys).fillna(""))
+_cn = _k.map(_iyc).fillna("")
+rice_df["conflict_note"] = [" | ".join(x for x in (a, b) if x) for a, b in zip(rice_df.conflict_note, _cn)]
+
 # parents that are register varieties: inherit CGIAR ancestry one generation (PI rule: grandparents count as code 2)
 sys.path.insert(0, str(ROOT / "scripts"))
 from lib_keys import make_key as _mk
@@ -514,5 +752,7 @@ used = used.merge(man[["file_path", "source_url", "archived_url", "download_date
                   left_on="local_file", right_on="file_path", how="left").drop(columns="file_path")
 used.to_csv(OUT / f"sources{SUF}.csv", index=False, encoding="utf-8-sig")
 ev.to_csv(OUT / f"evidence_all{SUF}.csv", index=False, encoding="utf-8-sig")
+if not SUF:   # REV4: every choice where independent support or an NSB decision overrode the authority order
+    pd.DataFrame(SUPPORT_LOG).drop_duplicates().to_csv(ROOT / "06_validation/precedence_support_log.csv", index=False, encoding="utf-8-sig")
 print(f"rice {len(rice_df)} (not approved/unresolved {int(na.sum())})  fish {len(fish)}  fish_events {len(events)}  conflicts {len(c1+c2)}  "
       f"failures {len(f1+f2)}  sources {len(used)}  unmatched {len(unmatched)}")

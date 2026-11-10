@@ -12,7 +12,9 @@ run scripts/phase3_fix_provisional.py
 run scripts/phase3_F5L_corpus.py        # OCR page corpus (from cached OCR; no network)
 run scripts/phase3_F5M_build.py         # NSB decisions table and evidence_F5M.csv
 run scripts/phase3_L1_build.py          # literature, people, institutions (from harvested files; no network)
+run scripts/build_institutes_people.py   # E3: NARS institute, division, NSB proposer, breeders, contacts (no network)
 run scripts/assemble.py --stage full
+run scripts/derive_attributes.py --build   # E2: evidence_ATTR.csv from archived official sources (picked up by assemble on the next pass)
 run scripts/phase2_LOC_local_names.py
 run scripts/phase3_LOC_codebook_names.py
 run scripts/phase2_local_names.py full
@@ -23,6 +25,7 @@ run scripts/make_final.py
 run scripts/build_pedigree.py
 run scripts/build_status_events.py
 run scripts/build_crosswalk.py
+run scripts/build_variety_area.py      # variety-wise area (BRRI adoption %, BINA/DAE hectares; no network)
 run scripts/conflicts_report.py
 run scripts/build_evidence_public.py
 run scripts/make_final.py

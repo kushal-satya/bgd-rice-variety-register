@@ -36,7 +36,7 @@ A pedigree is recorded for {{n_pedigree}} of the {{n_rice}} varieties, the exact
 The 115th meeting of the National Seed Board, 5 February 2026. Later meetings of the Board are outside this version.
 
 <!-- @meta-version -->
-1.2, built {{built_long}}. Variety identifiers do not change between versions.
+1.3, built {{built_long}}. Variety identifiers do not change between versions.
 
 <!-- @meta-unit -->
 One officially approved rice variety: a release or registration by the National Seed Board, or one of the 8 varieties recommended for cultivation in 1966–1973, before the Board's first meeting.
@@ -208,7 +208,7 @@ The primary documents and datasets on which the register rests. Links were check
 Data and citation
 
 <!-- @citation -->
-Kumar, K. (2026). *Bangladesh Rice Variety Register, {{year_min}}–{{year_max}}: officially approved rice varieties, with improved fish strains* (Version 1.2) [Data set]. Cornell University. https://kushal-satya.github.io/bgd-rice-variety-register/. Data as of the 115th meeting of the National Seed Board, 5 February 2026.
+Kumar, K. (2026). *Bangladesh Rice Variety Register, {{year_min}}–{{year_max}}: officially approved rice varieties, with improved fish strains* (Version 1.3) [Data set]. Cornell University. https://kushal-satya.github.io/bgd-rice-variety-register/. Data as of the 115th meeting of the National Seed Board, 5 February 2026.
 
 <!-- @cite-variety -->
 To cite a single variety, cite the register and give the variety's identifier, for example `RICE-BRRI_DHAN29`.
@@ -220,4 +220,4 @@ The register and its supporting tables are distributed as UTF-8 CSV files and as
 The data and documentation are released under the Creative Commons Attribution 4.0 International licence (CC BY 4.0), and the code under the MIT licence. Source documents remain the property of their publishers and are listed, not relicensed. Names and posts of officials appear as printed in public government records; telephone numbers and personal e-mail addresses of individuals are removed from every public file.
 
 <!-- @footer -->
-Bangladesh Rice Variety Register, version 1.2, built {{built_long}}.
+Bangladesh Rice Variety Register, version 1.3, built {{built_long}}.

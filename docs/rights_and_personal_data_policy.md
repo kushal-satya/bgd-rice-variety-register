@@ -74,6 +74,7 @@ breeders named in publications. The rule for the public edition is:
 | dg@fisheries.gov.bd, cfeo@fisheries.gov.bd, adaqua@fisheries.gov.bd, ddaqua@fisheries.gov.bd, ddchingri@fisheries.gov.bd, ddext@fisheries.gov.bd | Director General and wing offices, Department of Fisheries |
 | fisheries-5@mofl.gov.bd, fisheries-x@mofl.gov.bd | Fisheries sections, Ministry of Fisheries and Livestock |
 | registrar@gau.edu.bd, registrar@ru.ac.bd | Registrars, Gazipur Agricultural University and University of Rajshahi |
+| info@badc.gov.bd | Information desk, Bangladesh Agricultural Development Corporation (BADC) |
 | info@brac.net, info@aci-bd.com | General enquiry mailboxes, BRAC and ACI Limited |
 
 Any other address, including OCR fragments of addresses, is replaced by `[e-mail removed]`; mobile numbers by

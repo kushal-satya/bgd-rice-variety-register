@@ -43,10 +43,10 @@ OFFICE_EMAILS = {
     "dg@fisheries.gov.bd", "cfeo@fisheries.gov.bd", "adaqua@fisheries.gov.bd", "ddaqua@fisheries.gov.bd",
     "ddchingri@fisheries.gov.bd", "ddext@fisheries.gov.bd",
     "fisheries-5@mofl.gov.bd", "fisheries-x@mofl.gov.bd",
-    "registrar@gau.edu.bd", "registrar@ru.ac.bd", "info@brac.net", "info@aci-bd.com",
+    "registrar@gau.edu.bd", "info@badc.gov.bd", "registrar@ru.ac.bd", "info@brac.net", "info@aci-bd.com",
 }
 # columns that hold individuals' contact details, dropped from the public copy of each table
-DROP_COLUMNS = {"bgd_variety_people.csv": ["professional_email", "professional_phone"]}
+DROP_COLUMNS = {"bgd_variety_people.csv": ["professional_email", "professional_phone"], "bgd_institutions.csv": ["head_work_email"]}
 
 
 def _office(addr):

@@ -509,6 +509,7 @@ def main():
     E = E.rename(columns={"sibof": "sister_of_id"}).drop(columns=["_status"])
     E = E[[c for c in E.columns if c != "sister_of_id"][:4] + ["sister_of_id"] + [c for c in E.columns if c != "sister_of_id"][4:]]
     S = attribution(R, E, S, cgiar_line)
+    E["parent_type"] = [parent_type(l, c == "Y", p) for l, c, p in zip(E.parent_label_as_printed, E.parent_is_cgiar_line, E.parent_id)]
     E.to_csv(ROOT / "05_output/final/bgd_pedigree_edges.csv", index=False, encoding="utf-8-sig")
     S.to_csv(ROOT / "05_output/final/bgd_pedigree_summary.csv", index=False, encoding="utf-8-sig")
     print(f"edges: {len(E)} rows for {E.child_id.nunique()} varieties; summary: {len(S)} rows")
@@ -620,7 +621,32 @@ def _main_label(label):
     return re.sub(r"\s*\([^()]*\)\s*$", "", str(label)).strip() or str(label).strip()
 
 
+# v1.3: curated types and canonical names for parents that are not register varieties (04_working/pedigree_parent_types.csv).
+# A group name ('Basmati (D)'), unnamed germplasm or a species without an accession is kept as printed and labelled as such,
+# never shown as if it were one variety; spelling variants of one landrace share one node.
+_PT = ROOT / "04_working/pedigree_parent_types.csv"
+PARENT_TYPES = (pd.read_csv(_PT, dtype=str, keep_default_na=False).set_index("label_as_printed").to_dict("index") if _PT.exists() else {})
+
+
+def _canon(label):
+    t = PARENT_TYPES.get(str(label).strip())
+    return t["canonical_label"] if t else None
+
+
+def parent_type(label, is_cg=False, pid=""):
+    if pid:
+        return "register variety"
+    t = PARENT_TYPES.get(str(label).strip())
+    if t:
+        return t["parent_type"]
+    if is_cg:
+        return "CGIAR line"
+    return "breeding line or numbered variety" if re.search(r"\d", _main_label(label)) else "named variety"
+
+
 def _line_key(label):
+    if _canon(label):
+        return "L:" + _canon(label)
     lab = re.sub(r"^INGER line\s+", "", str(label), flags=re.I)
     lab = re.sub(r"\*\s*\d*\s*$", "", lab).strip()
     main = _main_label(lab)
@@ -668,6 +694,7 @@ def attribution(R, E, S, cgiar_line):
             untraced = (not is_cg) and (not traced_further) and bool(re.search(r"\d", _main_label(label)))
             anc.append(dict(variety_id=root, variety_name=vname[root], ancestor_label=label, ancestor_id=pid,
                             ancestor_kind="register variety" if pid else ("CGIAR line" if is_cg else "other line"),
+                            ancestor_parent_type=parent_type(label, is_cg, pid),
                             generation=g, path=" > ".join(p), parent_role=e.parent_role, contribution_share=sh,
                             ancestor_is_cgiar_line="Y" if is_cg else "N", ancestor_cgiar_center=e.parent_cgiar_center,
                             first_cgiar_on_path="Y" if is_cg and not below_cg else "N",
@@ -681,11 +708,11 @@ def attribution(R, E, S, cgiar_line):
     for vid in R.index:
         walk(vid, vid, 0, 1.0, [vname[vid]], frozenset({vid}), False)
     A = pd.DataFrame(anc)
-    keys = ["variety_id", "variety_name", "ancestor_label", "ancestor_id", "ancestor_kind", "generation", "path",
+    keys = ["variety_id", "variety_name", "ancestor_label", "ancestor_id", "ancestor_kind", "ancestor_parent_type", "generation", "path",
             "parent_role", "ancestor_is_cgiar_line", "ancestor_cgiar_center", "first_cgiar_on_path", "ancestry_untraced",
             "sister_of_id"]
     A = A.groupby(keys, as_index=False, sort=False)["contribution_share"].sum()
-    A = A[keys[:6] + ["path", "parent_role", "contribution_share"] + keys[8:]]
+    A = A[keys[:7] + ["path", "parent_role", "contribution_share"] + keys[9:]]
     A.assign(contribution_share=A.contribution_share.round(6)).to_csv(
         ROOT / "05_output/final/bgd_pedigree_ancestors.csv", index=False, encoding="utf-8-sig")
 
@@ -814,7 +841,8 @@ def attribution(R, E, S, cgiar_line):
     def line_node(e):
         k = _line_key(e.parent_label_as_printed)
         if k not in nodes:
-            nodes[k] = dict(id=k, label=_main_label(re.sub(r"^INGER line\s+", "", e.parent_label_as_printed, flags=re.I)),
+            nodes[k] = dict(id=k, label=_canon(e.parent_label_as_printed) or _main_label(re.sub(r"^INGER line\s+", "", e.parent_label_as_printed, flags=re.I)),
+                            parent_type=parent_type(e.parent_label_as_printed, e.parent_is_cgiar_line == "Y"),
                             kind="CGIAR line" if e.parent_is_cgiar_line == "Y" else "other line", year="",
                             developer_group="", cgiar_role="", cgiar_center=e.parent_cgiar_center,
                             cross_family=_cross_family(e.parent_label_as_printed), sister_of_id=e.sister_of_id)
@@ -869,7 +897,7 @@ def attribution(R, E, S, cgiar_line):
         if not desc:
             continue
         nd = nodes[n]
-        row = dict(ancestor_id=n if n in R.index else "", ancestor_node=n, ancestor_label=nd["label"], ancestor_kind=nd["kind"],
+        row = dict(ancestor_id=n if n in R.index else "", ancestor_node=n, ancestor_label=nd["label"], ancestor_kind=nd["kind"], ancestor_parent_type=nd.get("parent_type", "register variety"),
                    ancestor_is_cgiar_line="Y" if (nd["kind"] == "CGIAR line" or (n in R.index and cgiar_line(n))) else "N",
                    ancestor_cgiar_center=nd["cgiar_center"] if nd["kind"] == "CGIAR line" or (n in R.index and cgiar_line(n)) else "",
                    ancestor_year=nd["year"], cross_family=nd["cross_family"], n_descendants=len(desc),

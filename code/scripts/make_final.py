@@ -38,6 +38,10 @@ import feature_tags as FT
 r = FT.add(r)
 import derive_covariates as DC
 r = DC.add(r)
+import derive_attributes as DA   # E2 (v1.3): attribute columns from archived official sources only (never BAU)
+r = DA.add(r)
+import build_institutes_people as BIP   # E3 (v1.3): NARS institute, division (stated vs inferred), NSB proposer
+r = BIP.add(r)
 # REV2 (v1.2, A2-13): sector follows the standardised developer type, so a public body is never 'private'
 PUBLIC_TYPES = {"public research institute", "university", "public seed agency", "foreign public", "introduction"}
 r["sector"] = r.developer_type.map(lambda t: "public" if t in PUBLIC_TYPES else ("private" if t else "")).where(
@@ -271,7 +275,7 @@ keep = ["variety_id", "variety_name", "developer_group", "sector", "rice_type", 
         "yield_criterion_pct", "yield_basis", "check_variety", "ecosystem", "region_scope", "recommended_region", "special_traits_official",
         "identifying_traits_official", "quality_traits", "stress_tolerance", "dus_result", "vcu_sites", "gazette_status", "source_url", "archived_url", "local_file", "flags",
         "conflict_note", "trait_text_available", "season_std", "ecosystem_std", "grain_class", "breeding_method", "developer_std", "developer_type",
-        "duration_min_days", "duration_max_days", "status_as_of_2026", "legal_status_2026", "status_basis", "hybrid_seed_source", "cgiar_derivation", "depth_to_cgiar", "nearest_cgiar_ancestor", "photoperiod", "establishment", "region_divisions", "region_nationwide", "developer_country_of_origin", "aliases", "n_sources"]
+        "duration_min_days", "duration_max_days", "status_as_of_2026", "legal_status_2026", "status_basis", "hybrid_seed_source", "cgiar_derivation", "depth_to_cgiar", "nearest_cgiar_ancestor", "photoperiod", "establishment", "region_divisions", "region_nationwide", "developer_country_of_origin", "aliases", "n_sources", "institute_release_year"] + list(BIP.REGISTER_COLS) + list(DA.NEW_COLS)
 v = r[[c for c in keep if c in r]].copy()
 # key papers from the literature table (L1), if present
 if "literature" in tabs and len(tabs["literature"]):
@@ -360,7 +364,8 @@ FILES = [
  ("bgd_variety_status.csv", "Legal status of each variety at February 2026, with the basis", "Variety"),
  ("bgd_variety_crosswalk_long.csv", "The survey crosswalk in long form, one row per survey, instrument version, variable and code: the file to merge on", "Survey code"),
  ("bgd_non_register_names.csv", "Widely grown variety names with no approval record (Swarna, Miniket, Haridhan...), with origin and CGIAR code where documented", "Name"),
- ("bgd_evidence.csv", "Every reading behind every register value: source file, page, quotation, method and check", "Evidence row")]
+ ("bgd_evidence.csv", "Every reading behind every register value: source file, page, quotation, method and check", "Evidence row"),
+ ("bgd_variety_area.csv", "Variety-wise rice area coverage: BRRI adoption shares by season (1990-91 to 2023-24) and DAE-reported hectares of BINA varieties (2022-23, 2023-24)", "Variety-season-year-source")]
 files = []
 for fn, desc, unit in FILES:
     fp = F / fn

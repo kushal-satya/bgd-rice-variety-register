@@ -230,7 +230,7 @@ R.forEach(r => NODE[r.variety_id] = {key: r.variety_id, label: r.name || r.varie
 const PARENTS = {};
 if (D.lineage && (D.lineage.edges || []).length) {
   // the pedigree graph built by build_pedigree.py (printed pedigrees plus sister-line and designation links)
-  D.lineage.nodes.forEach(n => { if (!NODE[n.id]) NODE[n.id] = {key: n.id, label: n.label, year: +n.year || null, reg: n.kind === 'register variety', cg: n.kind === 'CGIAR line', centre: n.cgiar_center};
+  D.lineage.nodes.forEach(n => { if (!NODE[n.id]) NODE[n.id] = {key: n.id, label: n.label, year: +n.year || null, reg: n.kind === 'register variety', cg: n.kind === 'CGIAR line', centre: n.cgiar_center, ptype: n.parent_type || ''};
     else if (n.kind === 'CGIAR line') NODE[n.id].cg = true; });
   D.lineage.edges.forEach(e => { if (!NODE[e.source] || !NODE[e.target]) return;
     (PARENTS[e.target] = PARENTS[e.target] || []).push({key: e.source, role: e.role, basis: e.basis});
@@ -338,6 +338,14 @@ function fig6() {
 }
 // Lineage explorer: ancestors to the left, descendants to the right, generations as columns
 let LIN = null;
+const VAGUE = /group name|unnamed|accession not stated|local type/;
+const PTYPE = {'group name (not one variety)': 'The source prints a group or class name, not one variety; the exact parent cannot be identified.',
+  'unnamed germplasm': 'The source does not name this parent.', 'wild species (accession not stated)': 'The source names the species only, not the accession used.',
+  'local type name (not traceable to one line)': 'A local type name; it cannot be traced to one released variety.',
+  'traditional variety (landrace)': 'A traditional variety (landrace) used as a parent.', 'wild species accession': 'A genebank accession of a wild species.',
+  'named variety': 'A named variety from outside the register used as a parent.', 'breeding line or numbered variety': 'A breeding line or numbered variety from outside the register used as a parent.',
+  'CGIAR line': 'A CGIAR line used as a parent.'};
+const ptypeText = n => n.reg ? 'Select to centre the tree on it.' : (PTYPE[n.ptype] || 'A parent from outside the register.');
 function lineage(k) {
   const svg = $('#lin'); if (!svg) return;
   if (!NODE[k]) { $('#lininfo').textContent = `No variety or breeding line with the identifier ${k} is in the pedigree graph. Choose one from the list.`; svg.innerHTML = ''; return; }
@@ -366,16 +374,16 @@ function lineage(k) {
       'stroke-dasharray': /inferred|sister/.test(p.basis || '') ? '1 3' : /mutant|somaclone|selection/.test(p.role || '') ? '3 2' : ''}, edges); }));
   Object.entries(pos).forEach(([key, p]) => {
     const n = NODE[key], isC = key === k, a = el('a', {href: n.reg ? '#L-' + encodeURIComponent(key) : '#L-' + encodeURIComponent(key), class: 'lnode'}, svg);
-    el('rect', {x: p.x, y: p.y, width: boxW, height: boxH, rx: 2, fill: n.cg ? 'var(--d0)' : 'var(--surface)', stroke: n.cg ? 'none' : 'var(--ink-3)', 'stroke-dasharray': n.reg || n.cg ? '' : '3 2'}, a);
+    el('rect', {x: p.x, y: p.y, width: boxW, height: boxH, rx: 2, fill: n.cg ? 'var(--d0)' : 'var(--surface)', stroke: n.cg ? 'none' : 'var(--ink-3)', 'stroke-dasharray': n.reg || n.cg ? '' : VAGUE.test(n.ptype) ? '1 2' : '3 2'}, a);
     if (isC) el('rect', {x: p.x - 3, y: p.y - 3, width: boxW + 6, height: boxH + 6, rx: 3, fill: 'none', stroke: 'var(--warn)', 'stroke-width': 2.5}, a);
     const fg = n.cg ? 'var(--bg)' : 'var(--ink)';
-    el('text', {x: p.x + 7, y: p.y + 14, style: `fill:${fg};font-size:11.5px;font-weight:${isC ? 650 : 500}`}, a).textContent = clip(n.label, Math.floor(boxW / 6.6));
+    el('text', {x: p.x + 7, y: p.y + 14, style: `fill:${fg};font-size:11.5px;font-weight:${isC ? 650 : 500}${VAGUE.test(n.ptype) ? ';font-style:italic' : ''}`}, a).textContent = clip(n.label, Math.floor(boxW / 6.6));
     el('text', {x: p.x + 7, y: p.y + 27, style: `fill:${fg};font-size:10.5px;opacity:.85`}, a).textContent = [n.reg ? `approved ${n.year || ''}` : (n.cg ? '' : 'breeding line'), n.cg ? `CGIAR line${n.centre ? ' · ' + n.centre : ''}` : ''].filter(Boolean).join(' · ');
-    a.addEventListener('mousemove', ev => showTip(ev, `<b>${esc(n.label)}</b>${n.cg ? ' · CGIAR line' : ''}${n.reg ? ` · approved ${n.year || ''} · CGIAR link ${esc(BYID[key].cgiar_role || '5')}` : ' · not an approved variety'}<div class="k">${n.reg ? 'Select to centre the tree on it.' : 'A breeding line or foreign variety used as a parent.'}</div>`));
+    a.addEventListener('mousemove', ev => showTip(ev, `<b>${esc(n.label)}</b>${n.cg ? ' · CGIAR line' : ''}${n.reg ? ` · approved ${n.year || ''} · CGIAR link ${esc(BYID[key].cgiar_role || '5')}` : ' · not an approved variety'}<div class="k">${n.reg ? 'Select to centre the tree on it.' : ptypeText(n)}</div>`));
     a.addEventListener('mouseleave', hideTip);
   });
   const nA = seenA.size - 1, nD = [...seenD].filter(x => x !== k && NODE[x] && NODE[x].reg).length;
-  $('#lininfo').innerHTML = `<b>${T(n0.label)}</b>${r0 ? ` · approved ${esc(r0.approval_date)} · ${esc(r0.developer_group)} · CGIAR link ${esc(r0.cgiar_role || '5')} (${esc(CODES[r0.cgiar_role || '5'])})` : n0.cg ? ' · CGIAR line' : ' · breeding line, not an approved variety'}. ` +
+  $('#lininfo').innerHTML = `<b>${T(n0.label)}</b>${r0 ? ` · approved ${esc(r0.approval_date)} · ${esc(r0.developer_group)} · CGIAR link ${esc(r0.cgiar_role || '5')} (${esc(CODES[r0.cgiar_role || '5'])})` : n0.cg ? ' · CGIAR line' : ' · ' + esc(n0.ptype || 'not an approved variety') + '. ' + ptypeText(n0).replace(/\.$/, '')}. ` +
     `${nA ? `${nA} recorded ancestor${nA > 1 ? 's' : ''}` : 'No recorded parents'}${nD ? `; ${nD} approved descendant${nD > 1 ? 's' : ''}` : '; no approved descendants'}.` +
     (r0 ? ` <a href="#${esc(k)}">Open the full record</a>.` : '');
   $('#linq').value = n0.label;
@@ -450,7 +458,9 @@ function detail(r) {
   const dl = arr => `<dl class="dl">` + arr.filter(x => x[1]).map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('') + '</dl>';
   const ident = [['Name as printed', T(r.official_name_en)], ['Bangla name', T(r.official_name_bn)], ['Popular name', T(r.popular_name)], ['Other names', T(r.aliases)],
     ['Developer as printed in the source', T(r.developer)], ['Developer', esc([r.developer_std, r.developer_type].filter(Boolean).join(' · '))],
-    ['Approval route', T(ROUTE[r.release_category] || r.release_category)], ['Approving meeting', T(r.approval_reference)],
+    ['National research institute', esc(r.nars_institute)], ['Breeding division', r.nars_division ? esc(r.nars_division) + (r.nars_division_basis ? ` <span class="bn">${esc(r.nars_division_basis)}</span>` : '') : ''],
+    ['Proposer at the Board meeting (as printed)', T(r.proposer_as_printed)],
+    ['Approval route', T(ROUTE[r.release_category] || r.release_category)], ['Year released by the institute', esc(r.institute_release_year && r.institute_release_year !== r.approval_year ? r.institute_release_year + ' (the Board approval year is ' + r.approval_year + ')' : '')], ['Approving meeting', T(r.approval_reference)],
     ['Gazette notification', esc([r.gazette_date, r.gazette_status].filter(Boolean).join(' · '))],
     ['Legal status at the 115th meeting (5 Feb 2026)', status(r) ? esc(status(r)) + (r.status_basis ? `<div class="bn">${T(r.status_basis)}</div>` : '') : ''],
     ['Board decisions after approval', laterDecisions(r)], ['Hybrid seed source', esc(r.hybrid_seed_source && r.hybrid_seed_source !== 'unknown' ? r.hybrid_seed_source : '')],
@@ -465,6 +475,15 @@ function detail(r) {
     ['Duration (days)', T(r.duration_days)], ['Yield (t/ha)', T(r.yield_t_ha) + (r.yield_basis ? ` <span class="bn">${esc(r.yield_basis)}</span>` : '')],
     ['Yield criterion over the check variety (%)', esc(r.yield_criterion_pct || r.yield_advantage_pct)], ['Check variety', T(r.check_variety)], ['Recommended region', T(r.recommended_region || r.region_scope)],
     ['Grain and quality', T(r.quality_traits)], ['Stress tolerance', T(r.stress_tolerance)], ['DUS result', T(r.dus_result)], ['Trial sites (VCU)', T(r.vcu_sites)]];
+  const SEAS = ['aus', 'aman', 'boro'], ROWS = [['Yield potential (t/ha)', 'yield_potential', '_t_ha'], ['Duration (days)', 'duration', '_days'], ['Plant height (cm)', 'plant_height', '_cm']];
+  const sw = ROWS.filter(([, g, u]) => SEAS.some(x => r[`${g}_${x}${u}`]));
+  const seasonTable = sw.length ? `<table class="mini"><thead><tr><th></th>${SEAS.map(x => `<th>${x}</th>`).join('')}</tr></thead><tbody>` +
+    sw.map(([l, g, u]) => `<tr><th>${l}</th>${SEAS.map(x => `<td>${esc(r[`${g}_${x}${u}`] || '')}</td>`).join('')}</tr>`).join('') + '</tbody></table>' : '';
+  const att = [['By season, from official lists and handbooks', seasonTable], ['Variety type', esc(r.variety_type)], ['Germplasm origin', T(r.germplasm_origin)],
+    ['Grain type', esc(r.grain_type)], ['Grain size as printed', T(r.grain_size_text)], ['Aleurone colour', esc(r.aleurone_colour)], ['Length/breadth ratio', esc(r.lb_ratio)],
+    ['Amylose (%)', esc(r.amylose_pct)], ['Protein (%)', esc(r.protein_pct)], ['Zinc (mg/kg)', esc(r.zinc_mg_kg)], ['Iron (mg/kg)', esc(r.iron_mg_kg)], ['Glycemic index', esc(r.glycemic_index)],
+    ['Target ecosystem', T(r.target_ecosystem)],
+    ['Where these values are printed', esc(['yield_potential', 'duration', 'plant_height', 'grain', 'grain_quality', 'germplasm_origin', 'target_ecosystem'].map(g => r[g + '_source'] ? g.replace(/_/g, ' ') + ': ' + r[g + '_source'] : '').filter(Boolean).join(' · '))]];
   const evid = [['Codes in household surveys', esc((r.survey_codes || '').split(' | ').join('; '))], ['What CGIAR sources say', T(r.cgiar_independent)],
     ['CGIAR sources', links(r.cgiar_source_urls)], ['CGIAR evidence document', links(r.cgiar_evidence_url)], ['Key papers', links(r.key_papers)],
     ['Adoption (as reported)', T(r.adoption)], ['Market segment (GloMIP)', esc((r.market_segment || '').replace(/^[\s|]+|[\s|]+$/g, '').replace(/\s*\|\s*\|\s*/g, ' | '))], ['How the values were verified', esc(readable(r.validation_summary))],
@@ -478,7 +497,7 @@ function detail(r) {
     '<p class="note">Text as read from the minutes (OCR or text layer; numbers verified on page images). Full text and every attribute: bgd_nsb_decisions_full.csv.</p></details>' : '';
   return `<div class="rechead" id="rec-${esc(r.variety_id)}"><h3 class="rectitle">${esc(r.name)} <span lang="bn" class="bn">${esc(r.official_name_bn)}</span></h3>
       <p class="recsub">${esc(r.developer_group)} · ${esc(sector(r))} ${esc(r.rice_type)} · approved ${esc(r.approval_date)}${/NSB \d/.test(r.approval_reference || '') ? ' · ' + esc(nsbLong(r.approval_reference)) : ''}</p></div>
-    <h4>Identity and approval</h4>${dl(ident)}<h4>Pedigree and CGIAR link</h4>${dl(ped)}<h4>Traits and agronomy</h4>${dl(tr)}
+    <h4>Identity and approval</h4>${dl(ident)}<h4>Pedigree and CGIAR link</h4>${dl(ped)}<h4>Traits and agronomy</h4>${dl(tr)}${att.some(x => x[1]) ? `<h4>Attributes by season and grain quality</h4>${dl(att)}` : ''}
     <details class="sec"><summary>Evidence, sources and literature</summary>${dl(evid)}</details>${decHtml}`;
 }
 const nsbShort = ref => { const m = (ref || '').match(/NSB (\d+\w*) meeting/); return m ? m[1] : clip(ref, 30); };

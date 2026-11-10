@@ -23,7 +23,7 @@ THR = ROOT / "logs/.throttle"
 THROTTLE_S = 2.5
 HOST_THROTTLE = {"web.archive.org": 8.0, "archive.org": 8.0}  # Wayback rate-limits hard
 NO_VERIFY = {"sca.gov.bd", "www.sca.gov.bd", "brri.gov.bd", "www.brri.gov.bd", "bina.gov.bd", "www.bina.gov.bd", "fri.gov.bd", "www.fri.gov.bd", "fisheries.gov.bd", "www.fisheries.gov.bd",
-             "riceprofile.brri.gov.bd"}
+             "riceprofile.brri.gov.bd", "badc.gov.bd", "www.badc.gov.bd"}
 UA = "bgd-variety-archive/0.1 (academic research; contact via https://github.com/kushal-satya/bgd-rice-variety-register)"
 HEADER = ["file_path", "source_url", "archived_url", "download_date", "sha256",
           "file_type", "agent", "notes"]
