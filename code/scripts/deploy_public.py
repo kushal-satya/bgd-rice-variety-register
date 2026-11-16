@@ -19,6 +19,16 @@ import redact_personal as RP
 if not (DEP / ".git").exists():
     sys.exit("deploy_repo/ is not a git repository; clone https://github.com/kushal-satya/bgd-rice-variety-register there first")
 
+# 0. the page text (content/text.md) can be edited on GitHub by the PI. Pull first; if the GitHub copy was committed after
+#    the local site/content/text.md was last changed, it is the newer text and is copied back before the site is rebuilt.
+import subprocess
+subprocess.run(["git", "-C", str(DEP), "pull", "-q", "--ff-only"], check=False)
+_gh, _loc = DEP / "content/text.md", SITE / "content/text.md"
+_t = subprocess.run(["git", "-C", str(DEP), "log", "-1", "--format=%ct", "--", "content/text.md"], capture_output=True, text=True).stdout.strip()
+if _gh.exists() and _t and int(_t) > _loc.stat().st_mtime and _gh.read_bytes() != _loc.read_bytes():
+    shutil.copy2(_gh, _loc)
+    print("content/text.md: the copy edited on GitHub is newer; copied into site/content/text.md (rerun build_site.py for the standalone page)")
+
 # 1. clear everything except .git, then copy the public site
 for p in DEP.iterdir():
     if p.name != ".git":
@@ -61,7 +71,7 @@ The site is at https://kushal-satya.github.io/bgd-rice-variety-register/. The ta
 
 Data and documentation are released under CC BY 4.0 and code under the MIT licence (see `LICENSE` and `NOTICE.md`); source documents remain the property of their publishers. Telephone numbers and personal e-mail addresses of individuals are removed from every public file (`docs/rights_and_personal_data_policy.md`). Page text is in `content/text.md`; `EDITING.md` explains how to change it.
 
-Cite as: Kumar, K. (2026). *Bangladesh Rice Variety Register, 1966–2026: officially approved rice varieties, with improved fish strains* (Version 1.2) [Data set]. Cornell University. https://kushal-satya.github.io/bgd-rice-variety-register/
+Cite as: Kumar, K. (2026). *Bangladesh Rice Variety Register, 1966–2026: officially approved rice varieties, with improved fish strains* (Version 1.3) [Data set]. Cornell University. https://kushal-satya.github.io/bgd-rice-variety-register/
 """, encoding="utf-8")
 (DEP / ".nojekyll").write_text("", encoding="utf-8")
 

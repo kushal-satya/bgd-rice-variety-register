@@ -6,4 +6,4 @@ The site is at https://kushal-satya.github.io/bgd-rice-variety-register/. The ta
 
 Data and documentation are released under CC BY 4.0 and code under the MIT licence (see `LICENSE` and `NOTICE.md`); source documents remain the property of their publishers. Telephone numbers and personal e-mail addresses of individuals are removed from every public file (`docs/rights_and_personal_data_policy.md`). Page text is in `content/text.md`; `EDITING.md` explains how to change it.
 
-Cite as: Kumar, K. (2026). *Bangladesh Rice Variety Register, 1966–2026: officially approved rice varieties, with improved fish strains* (Version 1.2) [Data set]. Cornell University. https://kushal-satya.github.io/bgd-rice-variety-register/
+Cite as: Kumar, K. (2026). *Bangladesh Rice Variety Register, 1966–2026: officially approved rice varieties, with improved fish strains* (Version 1.3) [Data set]. Cornell University. https://kushal-satya.github.io/bgd-rice-variety-register/
