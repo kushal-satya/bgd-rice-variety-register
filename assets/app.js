@@ -378,11 +378,13 @@ function lineage(k) {
     if (isC) el('rect', {x: p.x - 3, y: p.y - 3, width: boxW + 6, height: boxH + 6, rx: 3, fill: 'none', stroke: 'var(--warn)', 'stroke-width': 2.5}, a);
     const fg = n.cg ? 'var(--bg)' : 'var(--ink)';
     el('text', {x: p.x + 7, y: p.y + 14, style: `fill:${fg};font-size:11.5px;font-weight:${isC ? 650 : 500}${VAGUE.test(n.ptype) ? ';font-style:italic' : ''}`}, a).textContent = clip(n.label, Math.floor(boxW / 6.6));
-    el('text', {x: p.x + 7, y: p.y + 27, style: `fill:${fg};font-size:10.5px;opacity:.85`}, a).textContent = [n.reg ? `approved ${n.year || ''}` : (n.cg ? '' : 'breeding line'), n.cg ? `CGIAR line${n.centre ? ' · ' + n.centre : ''}` : ''].filter(Boolean).join(' · ');
+    el('text', {x: p.x + 7, y: p.y + 28, style: `fill:${fg};font-size:10.5px;opacity:.85`}, a).textContent = [n.reg ? `approved ${n.year || ''}` : (n.cg ? '' : clip((n.ptype || 'breeding line').replace(/\s*\(.*\)\s*$/, ''), 24)), n.cg ? `CGIAR line${n.centre ? ' · ' + n.centre : ''}` : ''].filter(Boolean).join(' · ');
     a.addEventListener('mousemove', ev => showTip(ev, `<b>${esc(n.label)}</b>${n.cg ? ' · CGIAR line' : ''}${n.reg ? ` · approved ${n.year || ''} · CGIAR link ${esc(BYID[key].cgiar_role || '5')}` : ' · not an approved variety'}<div class="k">${n.reg ? 'Select to centre the tree on it.' : ptypeText(n)}</div>`));
     a.addEventListener('mouseleave', hideTip);
   });
   const nA = seenA.size - 1, nD = [...seenD].filter(x => x !== k && NODE[x] && NODE[x].reg).length;
+  { const tw = svg.parentElement;   // on a narrow screen, scroll the selected variety into the middle of the view
+    if (tw && pos[k] && tw.scrollWidth > tw.clientWidth + 4) { const sc = svg.getBoundingClientRect().width / W; tw.scrollLeft = Math.max(0, (pos[k].x + boxW / 2) * sc - tw.clientWidth / 2); } }
   $('#lininfo').innerHTML = `<b>${T(n0.label)}</b>${r0 ? ` · approved ${esc(r0.approval_date)} · ${esc(r0.developer_group)} · CGIAR link ${esc(r0.cgiar_role || '5')} (${esc(CODES[r0.cgiar_role || '5'])})` : n0.cg ? ' · CGIAR line' : ' · ' + esc(n0.ptype || 'not an approved variety') + '. ' + ptypeText(n0).replace(/\.$/, '')}. ` +
     `${nA ? `${nA} recorded ancestor${nA > 1 ? 's' : ''}` : 'No recorded parents'}${nD ? `; ${nD} approved descendant${nD > 1 ? 's' : ''}` : '; no approved descendants'}.` +
     (r0 ? ` <a href="#${esc(k)}">Open the full record</a>.` : '');
@@ -454,6 +456,10 @@ const depthHtml = r => r.depth_to_cgiar === '' || r.depth_to_cgiar == null ? '' 
 const links = s => (s || '').split(' | ').filter(u => /^https?:/.test(u)).map(u => link(u, u.replace(/^https?:\/\/(www\.)?/, '').slice(0, 70))).join('<br>');
 const ROUTE = {NSB_release: 'Release by the National Seed Board (ছাড়করণ)', NSB_registration: 'Registration by the National Seed Board (নিবন্ধন)', pre_NSB_recommended: 'Recommended before the National Seed Board existed'};
 const status = r => r.legal_status_2026 || r.status_as_of_2026 || '';
+const PROV = {yield_potential: 'Yield potential', duration: 'Duration', plant_height: 'Plant height', grain: 'Grain', grain_quality: 'Grain quality', germplasm_origin: 'Germplasm origin', target_ecosystem: 'Target ecosystem'};
+const provHtml = r => Object.keys(PROV).filter(g => r[g + '_source']).map(g => {   // file name and page only, one line per group
+  const docs = [...new Set((r[g + '_source'].match(/[\w.\-]+\.(?:pdf|html?|xlsx)(?:, p\. \d+)?/g) || []).filter(x => !/^cmp_|\.png/.test(x)))];
+  return `${PROV[g]}: ${esc(docs.join('; ') || r[g + '_source'].slice(0, 120))}`; }).join('<br>');
 function detail(r) {
   const dl = arr => `<dl class="dl">` + arr.filter(x => x[1]).map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('') + '</dl>';
   const ident = [['Name as printed', T(r.official_name_en)], ['Bangla name', T(r.official_name_bn)], ['Popular name', T(r.popular_name)], ['Other names', T(r.aliases)],
@@ -478,12 +484,12 @@ function detail(r) {
   const SEAS = ['aus', 'aman', 'boro'], ROWS = [['Yield potential (t/ha)', 'yield_potential', '_t_ha'], ['Duration (days)', 'duration', '_days'], ['Plant height (cm)', 'plant_height', '_cm']];
   const sw = ROWS.filter(([, g, u]) => SEAS.some(x => r[`${g}_${x}${u}`]));
   const seasonTable = sw.length ? `<table class="mini"><thead><tr><th></th>${SEAS.map(x => `<th>${x}</th>`).join('')}</tr></thead><tbody>` +
-    sw.map(([l, g, u]) => `<tr><th>${l}</th>${SEAS.map(x => `<td>${esc(r[`${g}_${x}${u}`] || '')}</td>`).join('')}</tr>`).join('') + '</tbody></table>' : '';
+    sw.map(([l, g, u]) => `<tr><th>${l}</th>${SEAS.map(x => `<td>${r[`${g}_${x}${u}`] ? esc(r[`${g}_${x}${u}`]) : '<span class="bn" title="not stated in the sources">—</span>'}</td>`).join('')}</tr>`).join('') + '</tbody></table>' : '';
   const att = [['By season, from official lists and handbooks', seasonTable], ['Variety type', esc(r.variety_type)], ['Germplasm origin', T(r.germplasm_origin)],
     ['Grain type', esc(r.grain_type)], ['Grain size as printed', T(r.grain_size_text)], ['Aleurone colour', esc(r.aleurone_colour)], ['Length/breadth ratio', esc(r.lb_ratio)],
     ['Amylose (%)', esc(r.amylose_pct)], ['Protein (%)', esc(r.protein_pct)], ['Zinc (mg/kg)', esc(r.zinc_mg_kg)], ['Iron (mg/kg)', esc(r.iron_mg_kg)], ['Glycemic index', esc(r.glycemic_index)],
     ['Target ecosystem', T(r.target_ecosystem)],
-    ['Where these values are printed', esc(['yield_potential', 'duration', 'plant_height', 'grain', 'grain_quality', 'germplasm_origin', 'target_ecosystem'].map(g => r[g + '_source'] ? g.replace(/_/g, ' ') + ': ' + r[g + '_source'] : '').filter(Boolean).join(' · '))]];
+    ['Where these values are printed', provHtml(r)]];
   const evid = [['Codes in household surveys', esc((r.survey_codes || '').split(' | ').join('; '))], ['What CGIAR sources say', T(r.cgiar_independent)],
     ['CGIAR sources', links(r.cgiar_source_urls)], ['CGIAR evidence document', links(r.cgiar_evidence_url)], ['Key papers', links(r.key_papers)],
     ['Adoption (as reported)', T(r.adoption)], ['Market segment (GloMIP)', esc((r.market_segment || '').replace(/^[\s|]+|[\s|]+$/g, '').replace(/\s*\|\s*\|\s*/g, ' | '))], ['How the values were verified', esc(readable(r.validation_summary))],
@@ -542,7 +548,7 @@ function setNavHeight() { document.documentElement.style.setProperty('--navh', (
 function showView(v, focus) {
   if (!VIEWS.includes(v) || (v === 'board' && !(D.attendance || []).length)) v = 'overview';
   document.querySelectorAll('main > section[data-view]').forEach(x => x.classList.toggle('active', x.dataset.view === v));
-  document.querySelectorAll('nav.views a').forEach(a => { const on = a.dataset.view === v; a.classList.toggle('active', on); if (on) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
+  document.querySelectorAll('nav.views a').forEach(a => { const on = a.dataset.view === v; a.classList.toggle('active', on); if (on) { a.setAttribute('aria-current', 'page'); try { a.scrollIntoView({inline: 'nearest', block: 'nearest'}); } catch (e) {} } else a.removeAttribute('aria-current'); });
   const h = $('#' + v + ' h2'); document.title = (v === 'overview' || !h ? '' : h.textContent + ' · ') + SITE_TITLE;
   if (focus && h) { h.tabIndex = -1; h.focus({preventScroll: true}); }
   setNavHeight(); drawFigures();

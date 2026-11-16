@@ -25,8 +25,15 @@ import subprocess
 subprocess.run(["git", "-C", str(DEP), "pull", "-q", "--ff-only"], check=False)
 _gh, _loc = DEP / "content/text.md", SITE / "content/text.md"
 _t = subprocess.run(["git", "-C", str(DEP), "log", "-1", "--format=%ct", "--", "content/text.md"], capture_output=True, text=True).stdout.strip()
-if _gh.exists() and _t and int(_t) > _loc.stat().st_mtime and _gh.read_bytes() != _loc.read_bytes():
-    shutil.copy2(_gh, _loc)
+_BOARD = re.compile(r"<!-- @board-title -->.*?(?=<!-- @)", re.S)   # internal-only block, stripped from the public copy (step 2)
+_g = _gh.read_text(encoding="utf-8").replace("\r\n", "\n") if _gh.exists() else ""
+_l = _loc.read_text(encoding="utf-8").replace("\r\n", "\n")
+if _g and _t and int(_t) > _loc.stat().st_mtime and _g != _BOARD.sub("", _l):
+    _b = _BOARD.search(_l)
+    if _b:   # put the internal block back where it was: before the marker that followed it locally
+        _nxt = re.match(r"<!-- @[\w-]+ -->", _l[_b.end():]).group(0)
+        _g = _g.replace(_nxt, _b.group(0) + _nxt, 1) if _nxt in _g else _g + "\n" + _b.group(0)
+    _loc.write_text(_g, encoding="utf-8")
     print("content/text.md: the copy edited on GitHub is newer; copied into site/content/text.md (rerun build_site.py for the standalone page)")
 
 # 1. clear everything except .git, then copy the public site

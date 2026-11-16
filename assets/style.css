@@ -236,3 +236,21 @@ table.mini{border-collapse:collapse;font-size:.9em;margin:.1em 0}
 table.mini th,table.mini td{padding:.15em .7em .15em 0;text-align:left;border-bottom:1px solid var(--rule,#ddd);font-weight:normal}
 table.mini thead th{color:var(--ink-3);text-transform:none}
 table.mini tbody th{color:var(--ink-3)}
+/* v1.4: accessibility and 375 px pass */
+html{scroll-padding-top:calc(var(--navh,46px) + 8px)}
+summary:focus-visible,.lnode:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+svg a.lnode:focus-visible rect:first-of-type{stroke:var(--accent);stroke-width:2}
+nav.views a:focus-visible{outline-offset:-2px}
+@media (max-width:800px){
+  nav.views{flex-wrap:nowrap;overflow-x:auto;gap:0 18px;scrollbar-width:thin}
+  nav.views a{white-space:nowrap;flex:none}
+}
+@media (max-width:600px){
+  nav.views a{padding:13px 0 11px}
+  button,#csv,.ovqrow button{min-height:40px}
+  .controls input,.controls select{min-height:40px}
+  details.filters>summary,details.sec>summary,.figdata>summary{padding:8px 0}
+  button.vname{padding:6px 0;display:inline-block}
+  .note,figcaption,.dsmeta dt{font-size:13px}
+  .lintw{-webkit-overflow-scrolling:touch}
+}

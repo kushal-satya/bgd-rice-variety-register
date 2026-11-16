@@ -3,8 +3,8 @@ RICE-BAU_DHAN2,BAU dhan2,Nizersail,,,female,,N,,pedigree,05_output/final/bgd_ric
 RICE-BAU_DHAN2,BAU dhan2,IR 578-175-2-2,,,male,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1,CGIAR line
 RICE-BINADHAN10,Binadhan-10,IR 42598-B-B-B-B-12,,,female,,Y,IRRI,cgiar_spia_flags (SPIA 2025 Table 27 'IRRI/INGER entry used as parents'),05_output/final/bgd_rice_varieties.csv,,1,CGIAR line
 RICE-BINADHAN10,Binadhan-10,NONA BOKRA,,,male,,N,,cgiar_spia_flags (SPIA 2025 Table 27 'IRRI/INGER entry used as parents'),05_output/final/bgd_rice_varieties.csv,,1,traditional variety (landrace)
-RICE-BINADHAN11,Binadhan-11,CIHERANG*2,,,recurrent,2,N,,cgiar_spia_flags (SPIA 2025 Table 27 'IRRI/INGER entry used as parents'),05_output/final/bgd_rice_varieties.csv,,1,breeding line or numbered variety
-RICE-BINADHAN11,Binadhan-11,IRRI 149,,,donor,,Y,IRRI,cgiar_spia_flags (SPIA 2025 Table 27 'IRRI/INGER entry used as parents'),05_output/final/bgd_rice_varieties.csv,,1,CGIAR line
+RICE-BINADHAN11,Binadhan-11,CIHERANG*2,,,recurrent,2,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1,breeding line or numbered variety
+RICE-BINADHAN11,Binadhan-11,IRRI 149,,,donor,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1,CGIAR line
 RICE-BINADHAN12,Binadhan-12,SAMBHA MAHSURI*4,,,recurrent,4,N,,pedigree,05_output/final/bgd_rice_varieties.csv,,1,breeding line or numbered variety
 RICE-BINADHAN12,Binadhan-12,IR 49830-7-1-2-3,,,donor,,Y,IRRI,pedigree,05_output/final/bgd_rice_varieties.csv,,1,CGIAR line
 RICE-BINADHAN13,Binadhan-13,Kalizira (local aromatic cultivar),,,mutant_source,,N,,pedigree,05_output/final/bgd_rice_varieties.csv,gamma ray 150 Gy + Datura extract,0,traditional variety (landrace)

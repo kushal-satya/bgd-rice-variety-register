@@ -1,6 +1,6 @@
 # Bangladesh Rice Variety Register: data dictionary
 
-Kushal Kumar, Cornell University. Generated 2026-11-10 by `scripts/write_dictionary.py`.
+Kushal Kumar, Cornell University. Generated 2026-11-16 by `scripts/write_dictionary.py`.
 
 This dictionary describes every column of every table in the Bangladesh Rice Variety Register and its companion tables on
 fish strains, sources and literature. Each table section gives the unit of observation, the number of rows, and for each
@@ -74,8 +74,8 @@ explicitly; otherwise codes such as `0` flags and years are silently retyped and
 | [bgd_fish_strains.csv](#bgd_fish_strainscsv) | One released improved fish strain | 9 |
 | [bgd_fish_events.csv](#bgd_fish_eventscsv) | One germplasm transfer, dissemination or planned release | 6 |
 | [bgd_fish_approvals.csv](#bgd_fish_approvalscsv) | One government act on a fish or shrimp species, strain or framework | 183 |
-| [bgd_conflicts.csv](#bgd_conflictscsv) | One version of one field for one variety from one source | 9,760 |
-| [bgd_conflicts_summary.csv](#bgd_conflicts_summarycsv) | One variety and field with more than one version | 538 |
+| [bgd_conflicts.csv](#bgd_conflictscsv) | One version of one field for one variety from one source | 9,755 |
+| [bgd_conflicts_summary.csv](#bgd_conflicts_summarycsv) | One variety and field with more than one version | 536 |
 | [bgd_sources.csv](#bgd_sourcescsv) | One archived source file | 391 |
 | [bgd_ocr_pages.csv](#bgd_ocr_pagescsv) | One page of an official document | 1,925 |
 | [bgd_ocr_audit.csv](#bgd_ocr_auditcsv) | One OCR'd page that supplied values | 166 |
@@ -89,7 +89,7 @@ explicitly; otherwise codes such as `0` flags and years are silently retyped and
 | [bgd_pedigree_ancestors.csv](#bgd_pedigree_ancestorscsv) | One ancestor of one variety along one path | 633 |
 | [bgd_variety_events.csv](#bgd_variety_eventscsv) | One NSB decision event for one variety | 538 |
 | [bgd_variety_status.csv](#bgd_variety_statuscsv) | One variety | 445 |
-| [bgd_evidence.csv](#bgd_evidencecsv) | One reading of one field for one variety from one source | 33,427 |
+| [bgd_evidence.csv](#bgd_evidencecsv) | One reading of one field for one variety from one source | 33,434 |
 | [bgd_variety_area.csv](#bgd_variety_areacsv) | One variety in one season and year from one source | 1,360 |
 
 ## bgd_rice_varieties.csv
@@ -108,7 +108,7 @@ The file has 444 rows and 160 columns.
 | `sector` | Whether the developer is a public body or a private firm or NGO. The sector is independent of rice_type: BRRI and BADC hybrids are public hybrids, and BRAC's inbreds are private inbreds. | public; private. | 1.00 |
 | `rice_type` | Whether the variety is an F1 hybrid or an inbred (open-pollinated) variety. Use this column rather than type for analysis. | hybrid; inbred. Never blank. | 1.00 |
 | `approval_year` | Calendar year of approval_date, the year of the National Seed Board decision that released or registered the variety (or the year of recommendation for the pre-NSB varieties). It is not the year of gazette notification or of first cultivation. | Four-digit year, 1966-2026. | 1.00 |
-| `official_name_en` | English name of the variety as printed by the developing institute or another official source, with the source's own spacing and hyphenation (for example 'BAU dhan 2'). Blank means no English spelling was printed; most such rows are private hybrids registered under a Bangla name. | Free text as printed. | 0.90 |
+| `official_name_en` | English name of the variety as printed by the developing institute or another official source, with the source's own spacing and hyphenation (for example 'BAU dhan 2'). Blank means no English spelling was printed; most such rows are private hybrids registered under a Bangla name. | Free text as printed. | 0.91 |
 | `official_name_bn` | Bangla name of the variety as printed in the official record, kept exactly as printed, including Bangla digits and the source's own spacing and hyphens (for example 'বিনা ধান-১০'). | Bangla text (Unicode, NFC as extracted). Never blank in the register. | 1.00 |
 | `popular_name` | Popular or farmer name given by an official or institute source (for example চান্দিনা for BR1). Blank means no source states one; other names reported by surveys and markets are in bgd_local_names.csv. | Free text, usually Bangla. | 0.06 |
 | `aliases` | Other labels under which the variety appears in the sources: breeding-line labels that are not line codes (such as 'BR11-Sub1'), names used before renaming, trade names and codes printed by other sources. It is a record of labels seen in the sources, not a vetted list of local names. | Labels separated by ' \| ', in order of first appearance. | 0.61 |
@@ -155,9 +155,9 @@ The file has 444 rows and 160 columns.
 | `duration_max_days` | Largest duration in days among all values in duration_days. | Days, 60-220. | 0.99 |
 | `duration_by_season` | Season-specific durations, filled only when a value in duration_days carries a season label. | 'season=min-max' pairs joined by '; ', e.g. 'aus=130-135; boro=150-155'. Days. | 0.04 |
 | `yield_t_ha` | Yield in tonnes per hectare as printed by the winning source (usually the average yield in trials or the yield the institute advertises). The cell may hold a range or season-specific values, so it is text. | t/ha as text; unit words printed in the source ('টন/হেঃ', 'মে.টন') are removed in v1.2; a per-acre figure keeps its text. | 0.99 |
-| `yield_min_t_ha` | Smallest yield among all values in yield_t_ha. | Tonnes per hectare, 1.5-15. | 0.98 |
-| `yield_max_t_ha` | Largest yield among all values in yield_t_ha. | Tonnes per hectare, 1.5-15. | 0.98 |
-| `yield_by_season` | Season-specific yields, filled only when a value in yield_t_ha carries a season label. | 'season=min-max' pairs joined by '; ', in t/ha. | 0.03 |
+| `yield_min_t_ha` | Smallest yield among all values in yield_t_ha. | Tonnes per hectare, 1.5-15. | 0.99 |
+| `yield_max_t_ha` | Largest yield among all values in yield_t_ha. | Tonnes per hectare, 1.5-15. | 0.99 |
+| `yield_by_season` | Season-specific yields, filled only when a value in yield_t_ha carries a season label. | 'season=min-max' pairs joined by '; ', in t/ha. | 0.04 |
 | `yield_basis` | What the yield figure in yield_t_ha is, judged from the source that supplied it. NSB decisions give the mean of the Board's multi-location trials; institute fact sheets give an average or potential yield as advertised. Yields of different bases, and in practice yields of hybrids and inbreds, are not comparable. | NSB trial mean; official list (SCA annual list, compendium or MoA hybrid list); gazette notice; institute (advertised); other; blank when yield_t_ha is blank. | 0.99 |
 | `yield_source_id` | Source identifier of the evidence row whose value is in yield_t_ha (see bgd_sources.csv and the evidence tables). | Source ids such as NSB_111, SCA_FY2023-24_INBRED, GZ_2025-07-19, RB-S01. | 0.99 |
 | `yield_criterion_pct` | Minimum yield advantage over the check variety, in percent, that the NSB decision says the variety met (renamed from yield_advantage_pct in version 1.2). For hybrid registrations it is the registration criterion (20 percent over the check in most decisions, 5 percent against a hybrid check in recent ones); for inbreds it records how many trial sites showed a 10 percent advantage. It is a criterion, not a measured yield gain. | Percent, sometimes with a qualifier such as '10 (at 6 of 10 sites)' or '20 (vs BRRI dhan28)'. | 0.39 |
@@ -744,7 +744,7 @@ The file has 183 rows and 26 columns.
 
 Every value on which eligible sources disagree, in long format: one row per version, with its source, file, page, extraction method and validation, and a flag for the version used in the register. Formatting differences are included; bgd_conflicts_summary.csv separates them from substantive disagreements.
 
-The file has 9,760 rows and 13 columns.
+The file has 9,755 rows and 13 columns.
 
 | column | meaning | values | coverage |
 |---|---|---|---:|
@@ -768,7 +768,7 @@ The file has 9,760 rows and 13 columns.
 
 Disagreements between sources on the analytically important fields, one row per variety and field, classified as formatting only, compatible, a later decision or notification, a date difference, or substantive, with the value used and every alternative.
 
-The file has 538 rows and 10 columns.
+The file has 536 rows and 10 columns.
 
 | column | meaning | values | coverage |
 |---|---|---|---:|
@@ -1184,7 +1184,7 @@ The file has 445 rows and 7 columns.
 
 The long-format evidence behind every value in the register: for each variety or fish strain and each field, every value read from every source, with the source file, page, locator, extraction method and validation, and a flag for the row that set the published value. Unvalidated OCR readings are kept here but never enter the register. Personal contact details are removed from the text columns.
 
-The file has 33,427 rows and 13 columns.
+The file has 33,434 rows and 13 columns.
 
 | column | meaning | values | coverage |
 |---|---|---|---:|
